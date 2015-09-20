@@ -1,0 +1,116 @@
+---
+title: "Mosquitoes of the Field and Forest: The scale of habitat segregation in a diverse mosquito assemblage"
+author: Randi H. Griffin
+output: html_document
+---
+
+<br>
+[<-- Back to Projects](../projects.html)
+<br>
+[Go to GitHub -->](https://github.com/rgriff23/btw)
+
+___
+
+[Michael H. Reiskind](http://www.cals.ncsu.edu/entomology/reiskind), [Randi H. Griffin](http://rgriff23.github.io/), M. Shawn Janairo, and Kristen A. Hopperstad
+
+* RHG authored this synopsis.
+
+* MHR designed the study and authored the manuscript. RHG and MSJ collected and identified mosquitoes. KAH collected landscape data and made the landscape figure. RHG analyzed the data, made data figures, and wrote the statistical methods and results portions of the manuscript. 
+
+___
+
+## Introduction
+
+Mosquitoes are notorious, irritating, blood-sucking, disease-spreading, summer-ruining little critters. Female mosquitoes acquire pathogens when they suck the blood of a infected host, and can then transmit the pathogen to a new host the next time they take a blood meal. In tropical regions worldwide, they transmit some of the most serious infectious diseases afflicting the human population, including malaria, dengue fever, filariasis, yellow fever, and chikungunya. In the United States, they are responsible for transmitting West Nile virus and dog heart worm. 
+
+Despite the importance of mosquito behavior for public health (and sanity), surprisingly little is known about mosquito habitat preferences on fine spatial scales. The goal of our study was to examine the strength of fine-grained habitat preferences in a wide variety of mosquito species. *Spoiler alert: it turns out that habitat preferences are really important predictors of mosquito community composition at fine spatial scales!*
+
+## Study design and data collection
+
+We conducted our study in the Raleigh-Durham metropolitan area of North Carolina. We chose 9 locations that spanned a field-forest habitat gradient. At each location, we set up a 200 meter transect with traps placed at the 0 m, 90 m, 100 m, 110 m, and 200 m marks. The 100 m mark corresponded to a clear boundary between the field and forest, or an "edge". By placing traps within 10 m of the edge, we could determine whether the abundance of different mosquito species changed abruptly at the field-forest boundary. Here is a figure depicting our study sites and transect design:
+
+![](./mosquitoes/Landscape.png)
+
+Using 6-inch ground resolution imagery from the [USGS Earth Explorer](http://earthexplorer.usgs.gov/), we digitally classified the landscape within 100 meters of each trap into 8 categories: grassland, deciduous tree canopy, evergreen tree canopy, mixed tree canopy, shrub, cultivated crops, barren land, pavement, and buildings. 
+
+To collect mosquitoes, [CDC light traps](http://johnwhock.com/products/mosquito-sandfly-traps/cdc-miniature-light-trap/) were hung on T-shaped structures built from PVC pipes. Traps were baited with dry ice because host-seeking mosquitoes are drawn to carbon dioxide. Here is what our trap set-up looked like:
+
+![](./mosquitoes/MosquitoTrap.jpg)
+
+Traps were set up at dusk and picked up at dawn. Once traps were collected, mosquitoes were taken back to a lab and killed in a freezer before being identified to species level and counted (we didn't even need IRB approval, that's how much everybody hates mosquitoes). Collection at each trap took place once every 2 weeks over a 5 month period from June 1 to October 15, 2014. 
+
+## Statistical analysis and results
+
+We caught a total of 8028 female mosquitoes, representing 23 different species. Data were analyzed in R, with the help of the `vegan` community ecology package (Oksanan et al., 2015) and the `glmmADMB` package for fitting generalized linear mixed models (Fournier et al., 2012). Here is a table summarizing our mosquito data:
+
+![](./mosquitoes/AbundanceTable.png)
+
+First, we explored how mosquito communities as a whole vary across habitat types. We computed three different measures of mosquito community diversity for each trap site:
+
+1. Richness, the total number of unique species found at a site
+2. Shannon-Weiner diversity, a common diversity index where species are weighted by abundance (Magurran 2004)
+3. Rarefied richness, or species richness estimated with a resampling procedure to control for variation in sample size (Hurlbert 1971; Heck et al. 1975)
+
+We then used ANOVA to compare these measures of mosquito community diversity across the five habitat types. Here are boxplots depicting our measures of mosquito community diversity across different habitats:
+
+![](./mosquitoes/Evenness.png)
+
+Our analysis revealed that mosquito community diversity is higher in forested habitat than field habitat. We found that species richness and rarefied richness were both significantly associated with habitat type (*p* < 0.05), while Shannon-Weiner diversity approached significance (*p* < 0.07).
+
+The next question we asked was whether the composition of mosquito communities tends to be similar within habitat types. Since groups of transects were separated by many miles, it is conceivable that mosquito communities would be more similar within transects than within habitat types. For example, it could be that the mosquito communities of adjacent field and forest habitats are more similar than the communities of two forest habitats that are spaced many miles apart. However, if habitat type strongly predicts which mosquito species are present, than mosquito communities in distant but similar habitats may be more similar than adjacent communities in different habitats.
+
+To address this question, we used partial canonical correspondence analysis (pCCA), which is a multivariate ordination technique that identifies major axes of variation in a multivariate dataset, with the contraint that those axes must be linear combinations of explanatory variables (Ter Braak 1987). A Site X Species matrix of abundance data was treated as the response variable, while landscape variables for sites were used as explanatory variables. An advantage of pCCA is that ecological variables that are not of direct interest can be "partialled out", allowing researchers to control for potentially influential factors while focusing on variables of interest. We focused on variables related to the extent to which habitats represented field or forest (percent of Deciduous Forest, Evergreen Forest, Mixed Forest, Grassland, and Shrub), and partialled out variables related to human land use (percent of BarrenLand, Buildings, Cultivated Crops, and Pavement). Here are pCCA plots depicting the positions of mosquito species and sites relative to the major axes of variation in our dataset:
+
+![](./mosquitoes/pCCA.png)
+
+Our pCCA results indicated that the major factor predicting mosquito community composition is a tree density gradient: landscapes with similar amounts of tree cover have similar mosquito communities (CCA 1). The second major factor predicting mosquito community composition reflected differences across transect locations, with Durham sites segregating from Lake Wheeler and Prarie Ridge sites (CCA 2). These differences may be related to the type of field (grassland vs. shrub) and forest (deciduous vs. evergreen) habitats that were prevalent at those sites. All together, our environmental variables explained 33.63% of total variation in mosquito community composition (*p* < 0.001), and the first two pCCA axes accounted for 84.08% of that variation. 
+
+Next, we asked whether individual mosquito species showed significant preferences for field, forest, or edge habitat. We fit generalized linear mixed models (GLMMs) with species abundance as the response variable, distance from the field as the explanatory variable, and transect as a random effect to control for transect-level differences in overall mosquito abundance. For each species, we used AIC to compared the fit of a linear model structure to a quadratic model structure, considering an AIC difference >2 to be significant. The linear model structure corresponds to either an increase or decrease in abundance along the entire transect, whereas the quadratic model structure corresponds to either a peak or a trough at the field-forest edge. A peak could occur if a species prefers edge habitat, whereas a trough could occur if species avoid the edge or if the thee traps near the edge are interfering with one another. We fit all models with negative binomial errors and a log link function. For each model, residuals were checked with diagnostic plots to determine whether model fit was adequate, and in some cases, the response variable was log transformed or a zero-inflated model was used to improve model fit. We found that we were able to adequately model all species with >18 non-zero abundance values across the 45 trap locations, which corresponded to 11 of our 23 species. Here are scatterplots of our data with curves depicting predicted values from the best-fitting model for each species:
+
+![](./mosquitoes/GLMMs.png)
+
+The only species for which a quadratic model was preferred was *Aedes albopictus*, a species that has been noted to prefer edge habitat in previous studies (Richards et al., 2006). The model predicted that abundance of *Aedes albopictus* peaks around 58 m inside the forest, indicating a preference for forested habitat near the forest edge. For all remaining species, the linear model was preferred. Four species preferred the field, 3 species preferred the forest, and 3 species showed no significant preference.
+
+For the 12 rare species that could not be adequately modeled with GLMMs, we took a conservative approach and used Mood's median test to determine whether there were significant differences in abundance across habitat types (Mood 1954). This non-parametric technique counts the number of observations within each group that fall above the global median of the data set, and then employs a Fisher’s exact test to determine whether one or more groups have a significantly different number of observations falling above or below the global median relative to what is expected based on the entire dataset. Although this test has low power compared to alternatives such as ANOVA and Kruskal-Wallis tests, it is robust to heteroskedasticity, non-normality, and outliers as we encountered with more rare species. Here are boxplots depicting the distributions of our 12 rare species across habitat types:
+
+![](./mosquitoes/Moods.png)
+
+Mood's median test results revealed that four additional species were significantly associated with forested habitat. The remaining 8 species showed no significant preference for any habitat, but this could be due to low statistical power rather than the true absence of preference. 
+
+## Conclusions
+
+We found that both habitat and transect predicted mosquito community composition, but habitat had a stronger influence than transect location. In other words, fine-scale habitat variation predicted mosquito community composition more strongly than broad-scale geographic location. 
+
+Forests tended to have greater mosquito species diversity than fields. Seven of the 23 species analyzed in our study showed significant preferences for forest habitat, while 4 species showed preferences for field habitat, and 3 species with adequate sample sizes in the GLMMs failed to demonstrate a significant preference. Another 8 species had non-significant habitat associations under Mood's median test, but given the low power of our test, those results should be considered preliminary. 
+
+Only 1 species, *Aedes albopictus*, showed a preference for habitat near the forest edge. *Aedes albopictus*, also known as the Asian tiger mosquito, is a common human-biting species that is known for inhabiting suburban environments and forest edges (Knudsen 1995). This species is invasive in the United States and transmits a number of major human infectious diseases in the tropics, including dengue fever, yellow fever, and chikungunya. It is possible that similarities between the forest edge ecotone and suburban environments can explain *Aedes albopictus'* preference for both suburban habitats and forest edge (Richards et al., 2006).
+
+Our findings have implications for future studies of mosquito-borne disease systems. Remotely sensed landscape data are often used to predict host-vector associations and pathogen transmission risk, but landscape data are often presented at 30 meter resolution (Cohen and Goward 2004). Our results indicate that many mosquito are faithful to habitats on scales less than 30 meters, necessitating higher resolution landscape data for making accurate predictions. 
+
+Additionally, more research is needed to understand the factors that determine mosquito distributions. Preferred larval habitats are likely to be important, as adult female mosquitoes are more likely to reproduce successfully if they blood feed near a good egg-laying site. Although a few mosquito species have been well studied because of their medical importance (e.g., the main vectors of malaria and dengue virus), little is known about the egg-laying behavior of most mosquito species. Many emerging mosquito-borne infections can be transmitted by a wide array of mosquito species, including West Nile virus and dog heart worm, the most important mosquito-borne diseases in the United States. Natural history studies on poorly known mosquito species will greatly improve our ability to understand and manage these and other emerging mosquito-borne disease systems.
+
+## References
+
+- Cohen, W., and S. Goward. 2004. Landsat's role in ecological applications of remote sensing. Bioscience 54:535-545.
+
+- Fournier, D. A., H. J. Skaug, J. Ancheta, J. Ianelli, A. Magnusson, M. N. Maunder, A. Nielsen, and J. Sibert. 2012. AD Model Builder: using automatic differentiation for statistical inference of highly parameterized complex nonlinear models. Optimization Methods & Software 27:233-249.
+
+- Heck, K.L., van Belle, G., and D. Simberloff. 1975. Explicit Calculation of the Rarefaction Diversity Measurement and the Determination of Sufficient Sample Size. Ecology 56(6):1459.
+
+- Hurlbert, S.H. 1971.The Nonconcept of Species Diversity: A Critique and Alternative Parameters. Ecology 52(4):577. 
+
+- Knudsen, A.B. 1995. Global distribution and continuing spread of Aedes albopictus. Parasitologia 37:91-97.
+
+- Magurran, A. E., 1955. 2004. Measuring biological diversity. Blackwell Pub, Maldan, MA.
+
+- Mood, A. M. 1954. On the Asymptotic Efficiency of Certain Nonparametric Two-Sample Tests. The Annals of Mathematical Statistics 25:514-522.
+
+- Oksanen, J., F. G. Blanchet, R. Kindt, P. Legendre, P. R. Minchin, R. B. O'Hara, G. L. Simpson, P. Solymos, M. H. S. Stevens, and H. Wagner. 2015. R-Package 'Vegan' Community Ecology Package. 2.3-0:.
+
+- Richards, S. L., C. S. Apperson, S. K. Ghosh, H. M. Cheshire, and B. C. Zeichner. 2006. Spatial analysis of Aedes albopictus (Diptera : Culicidae) oviposition in suburban neighborhoods of a piedmont community in North Carolina. Journal of Medical Entomology 43:976-989.
+
+- Ter Braak, C. 1987. The Analysis of Vegetation-Environment Relationships by Canonical Correspondence-Analysis. Vegetatio 69:69-77.
+
+___
+
+[<-- Back to Projects](http://rgriff23.github.io/projects.html)
