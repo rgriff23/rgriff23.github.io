@@ -29,13 +29,13 @@ install_github("rgriff23/btw")
 library(btw)
 ```
 
-Set the `.BayesTraitsPath` variable (this will likely be different on your machine).
+Before using any of the functions that call BayesTraitsV2, you have to download Version 2 of [BayesTraits](http://www.evolution.rdg.ac.uk/BayesTraits.html). You then have to tell `btw` where to find it on your computer by defining the hidden variable `.BayesTraitsPath`. You will have to define `.BayesTraitsPath` every time you start a new R session.
 
 ```{r, tidy=TRUE, message=FALSE, cache=TRUE}
 .BayesTraitsPath <- "~/Desktop/GitHub/btw/BayesTraitsV2"
 ```
 
-Load the primate data that comes with the package.
+The package includes some examples of tree and data files that will work with `btw` functions. You can load them into your R session after you load `btw`:
 
 ```{r, tidy=TRUE, message=FALSE, cache=TRUE}
 data(primates)

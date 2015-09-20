@@ -75,7 +75,7 @@ img {
 <p><br> <a target=“_blank” href="../projects.html">&lt;– Back to Projects</a> <br> <a href="https://github.com/rgriff23/btw">Go to GitHub –&gt;</a></p>
 <hr />
 <p>This is an R package for running BayesTraits from R (Mac OS only). The functions work by using <code>System</code> to run BayesTraits on your system and delete the output files after importing them into R.</p>
-<p>BayesTraits was developed by Mark Pagel and Andrew Meade, and is available from their <a href="http://www.evolution.rdg.ac.uk/BayesTraits.html">website</a> as an executable file that can be run from a command line program such as Terminal. Consult the BayesTraits documentation before using <code>btw</code>.</p>
+<p>BayesTraits was developed by Mark Pagel and Andrew Meade, and is available from their <a target=“_blank” href="http://www.evolution.rdg.ac.uk/BayesTraits.html">website</a> as an executable file that can be run from a command line program such as Terminal. Consult the BayesTraits documentation before using <code>btw</code>.</p>
 <p>Below, I demonstrate usage of <code>btw</code>.</p>
 <hr />
 <div id="set-up" class="section level2">
@@ -84,9 +84,9 @@ img {
 <pre class="r"><code>library(devtools)
 install_github(&quot;rgriff23/btw&quot;)
 library(btw)</code></pre>
-<p>Set the <code>.BayesTraitsPath</code> variable (this will likely be different on your machine).</p>
+<p>Before using any of the functions that call BayesTraitsV2, you have to download Version 2 of <a href="http://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraits</a>. You then have to tell <code>btw</code> where to find it on your computer by defining the hidden variable <code>.BayesTraitsPath</code>. You will have to define <code>.BayesTraitsPath</code> every time you start a new R session.</p>
 <pre class="r"><code>.BayesTraitsPath &lt;- &quot;~/Desktop/GitHub/btw/BayesTraitsV2&quot;</code></pre>
-<p>Load the primate data that comes with the package.</p>
+<p>The package includes some examples of tree and data files that will work with <code>btw</code> functions. You can load them into your R session after you load <code>btw</code>:</p>
 <pre class="r"><code>data(primates)</code></pre>
 <p>Some important formatting points that apply to the data for the <code>Discrete</code> and <code>Continuous</code> functions:</p>
 <ul>
