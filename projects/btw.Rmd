@@ -5,7 +5,7 @@ output: html_document
 ---
 
 <br>
-[<-- Back to Projects](http://rgriff23.github.io/projects.html)
+[<-- Back to Projects](../projects.html)
 <br>
 [Go to GitHub -->](https://github.com/rgriff23/btw)
 
