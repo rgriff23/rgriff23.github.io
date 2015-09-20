@@ -1,6 +1,6 @@
 ---
 title: "Mosquitoes of the Field and Forest: The scale of habitat segregation in a diverse mosquito assemblage"
-author: Randi H. Griffin
+author: Randi H. Griffin, M. Shawn Janairo, Kristen A. Hopperstad, and [Michael H. Reiskind](http://www.cals.ncsu.edu/entomology/reiskind)
 output: html_document
 ---
 
@@ -10,10 +10,6 @@ output: html_document
 [Go to GitHub -->](https://github.com/rgriff23/btw)
 
 ___
-
-[Michael H. Reiskind](http://www.cals.ncsu.edu/entomology/reiskind), [Randi H. Griffin](http://rgriff23.github.io/), M. Shawn Janairo, and Kristen A. Hopperstad
-
-* RHG authored this synopsis.
 
 * MHR designed the study and authored the manuscript. RHG and MSJ collected and identified mosquitoes. KAH collected landscape data and made the landscape figure. RHG analyzed the data, made data figures, and wrote the statistical methods and results portions of the manuscript. 
 
