@@ -10,7 +10,7 @@ output: html_document
 <br>
 [<-- Back to Projects](../projects.html)
 <br>
-[Go to GitHub -->](https://github.com/rgriff23/btw)
+[Go to GitHub -->](https://github.com/rgriff23/Evaluating_IE)
 
 ___
 
