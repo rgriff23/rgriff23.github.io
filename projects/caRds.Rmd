@@ -61,7 +61,7 @@ OneThousandHearts(to = "Samara")
 
 ![](./caRds/OneThousandHearts.png)
 
-Alternatively, you can use the `lines` arguments to include a personalized message up to 4 lines long:
+Alternatively, use `lines` to include a personalized message up to 4 lines long:
 
 ```
 OneThousandHearts(line1 = "Roses are red", 
