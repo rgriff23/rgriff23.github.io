@@ -24,7 +24,7 @@ TurkeyDay(from = "Randi", to = "America")
 Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 
 ```
-TurkeyDay(from = "Randi", to = "Canada", candian = TRUE)
+TurkeyDay(from = "Randi", to = "Canada", canadian = TRUE)
 ```
 
 ![](./caRds/TurkeyCanada.png)
