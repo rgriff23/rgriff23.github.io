@@ -7,7 +7,7 @@ output: html_document
 <br>
 [<-- Back to Projects](../projects.html)
 <br>
-[Go to GitHub -->](https://github.com/rgriff23/caRds)
+<a target="_blank" href="https://github.com/rgriff23/caRds">Go to GitHub --></a>
 
 ___
 

@@ -1,6 +1,6 @@
 ---
 title: "The Independent Evolution method is not a viable phylogenetic comparative method"
-author: Randi H. Griffin and [Gabriel S. Yapuncich](http://www.gabrielyapuncich.com/)
+author: Randi H. Griffin and <a target="_blank" href="http://www.gabrielyapuncich.com/">Gabriel S. Yapuncich</a>
 output: html_document
 ---
 
@@ -10,7 +10,7 @@ output: html_document
 <br>
 [<-- Back to Projects](../projects.html)
 <br>
-[Go to GitHub -->](https://github.com/rgriff23/Evaluating_IE)
+<a target="_blank" href="https://github.com/rgriff23/Evaluating_IE">Go to GitHub --></a>
 
 ___
 
