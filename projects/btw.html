@@ -84,9 +84,9 @@ img {
 <pre class="r"><code>library(devtools)
 install_github(&quot;rgriff23/btw&quot;)
 library(btw)</code></pre>
-<p>Before using any of the functions that call BayesTraitsV2, you have to download Version 2 of <a href="http://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraits</a>. You then have to tell <code>btw</code> where to find it on your computer by defining the hidden variable <code>.BayesTraitsPath</code>. You will have to define <code>.BayesTraitsPath</code> every time you start a new R session.</p>
+<p>Before using any of the functions that call BayesTraitsV2, you have to download Version 2 of <a href="http://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraits</a>. You then have to tell <code>btw</code> where to find it on your computer by defining the hidden variable <code>.BayesTraitsPath</code>. You have to do this every time you start a new R session.</p>
 <pre class="r"><code>.BayesTraitsPath &lt;- &quot;~/Desktop/GitHub/btw/BayesTraitsV2&quot;</code></pre>
-<p>The package includes some examples of tree and data files that will work with <code>btw</code> functions. You can load them into your R session after you load <code>btw</code>:</p>
+<p>The package includes some examples of tree and data files. You can load them into your R session after you load <code>btw</code>:</p>
 <pre class="r"><code>data(primates)</code></pre>
 <p>Some important formatting points that apply to the data for the <code>Discrete</code> and <code>Continuous</code> functions:</p>
 <ul>
@@ -99,7 +99,7 @@ library(btw)</code></pre>
 <li>An integer with more than 1 digit is interpreted as ambiguous (e.g., “01”) indicates that the species is equally likely to be in state “0” or “1”</li>
 <li>The only valid way to represent missing data is with a “-” character</li>
 </ul>
-<p>Now let use <code>btw</code> to run some BayesTraits analyses.</p>
+<p>Now let’s use <code>btw</code> to run some BayesTraits analyses.</p>
 </div>
 <div id="using-discrete-in-multistate-mode" class="section level2">
 <h2>Using Discrete in Multistate mode</h2>
@@ -109,7 +109,7 @@ library(btw)</code></pre>
 symmetric &lt;- Discrete(primate.tree1, primate.discrete1, &quot;ML&quot;, res = &quot;q01&quot;)
 lrtest(symmetric, asymmetric)</code></pre>
 <pre><code>##   model1.Lh model2.Lh LRstat      pval
-## 1 -4.572531 -4.572535  8e-06 0.9977432</code></pre>
+## 1 -4.572536 -4.572531  1e-05 0.9974769</code></pre>
 <p>The likelihood ratio test is not significant, indicating that we should favor the simpler model. In this case, the symmetric model is simpler because it only estimates one parameter, while the asymmetric model estimates six.</p>
 <div id="reversible-jump-hyper-prior-model" class="section level3">
 <h3>Reversible jump hyper-prior model</h3>
@@ -120,15 +120,15 @@ lrtest(symmetric, asymmetric)</code></pre>
 <pre class="r"><code>rjout &lt;- rjmodels(multirj)
 rjout</code></pre>
 <pre><code>## $NumModels
-## [1] 406
+## [1] 438
 ## 
 ## $TopTen
 ## 
-## '0 Z 0 0 0 0  '0 0 0 0 0 0  '0 0 0 Z 0 0  'Z 0 0 0 0 0  '0 Z 0 0 0 Z  
-##    0.04141414    0.02323232    0.02222222    0.01919192    0.01717172 
-## '0 Z Z 0 0 0  '0 Z 0 0 Z 0  'Z 0 Z 0 0 0  '0 0 0 0 0 Z  '0 0 0 Z 0 Z  
-##    0.01414141    0.01313131    0.01313131    0.01212121    0.01111111</code></pre>
-<p>Output indicates that an extremely large number of models were sampled in the posterior distribution (406!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 4% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal).</p>
+## '0 Z 0 0 0 0  '0 0 0 Z 0 0  '0 0 0 0 0 0  'Z 0 0 0 0 0  '0 Z 0 0 0 Z  
+##    0.03737374    0.02727273    0.02424242    0.02020202    0.01616162 
+## '0 Z 0 0 Z 0  'Z 0 Z 0 0 0  '0 0 0 Z 0 Z  '0 0 0 0 0 Z  '0 Z Z 0 0 0  
+##    0.01515152    0.01313131    0.01111111    0.01010101    0.01010101</code></pre>
+<p>Output indicates that an extremely large number of models were sampled in the posterior distribution (438!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 4% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal).</p>
 </div>
 <div id="fossilizing-and-reconstructing-an-ancestral-state" class="section level3">
 <h3>Fossilizing and reconstructing an ancestral state</h3>
@@ -138,14 +138,14 @@ nofossil &lt;- Discrete(primate.tree1, primate.discrete1, &quot;Bayesian&quot;)
 bf &lt;- bftest(fossilape, nofossil)
 bf</code></pre>
 <pre><code>##   BayesFactor BetterModel
-## 1    2.354312     Model 2</code></pre>
-<p>The Bayes factor is 2.354312 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the <em>Homo_sapiens</em>/<em>Hylobates_agilis</em> ancestor. Let’s use maximum likelihood this time (the default setting).</p>
+## 1    2.475078     Model 2</code></pre>
+<p>The Bayes factor is 2.475078 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the <em>Homo_sapiens</em>/<em>Hylobates_agilis</em> ancestor. Let’s use maximum likelihood this time (the default setting).</p>
 <pre class="r"><code>reconstruct &lt;- Discrete(primate.tree1, primate.discrete1, mrca = &quot;Homo_sapiens Hylobates_agilis&quot;)
 reconstruct</code></pre>
-<pre><code>##   Tree.No        Lh      q01 q02   q10      q12      q20     q21 Root.P.0.
-## 1       1 -4.572555 0.030748   0 1e-06 0.234442 0.144648 0.41642    0.3294
+<pre><code>##   Tree.No        Lh      q01 q02 q10      q12      q20      q21 Root.P.0.
+## 1       1 -4.572531 0.030726   0   0 0.229737 0.144527 0.406408  0.329561
 ##   Root.P.1. Root.P.2. mrcaNode1.P.0. mrcaNode1.P.1. mrcaNode1.P.2.
-## 1  0.334446  0.336154       0.439263       0.263691       0.297047</code></pre>
+## 1  0.334322  0.336117       0.439286       0.263299       0.297415</code></pre>
 <p>Results indicate that there is only a 29.7% chance that the <em>Homo_sapiens</em>/<em>Hylobates_agilis</em> ancestor was in state 2, which is consistent with our finding that the model where we fossilized that ancestor at 2 was significantly worse than the unconstrained model.</p>
 </div>
 </div>
@@ -159,7 +159,7 @@ reconstruct</code></pre>
 corrD &lt;- Discrete(primate.tree1, primate.discrete2, dependent = TRUE)
 lrtest(corrD, nocorrD)</code></pre>
 <pre><code>##   model1.Lh model2.Lh  LRstat      pval
-## 1 -5.675716 -6.786591 2.22175 0.1360787</code></pre>
+## 1 -5.682951 -6.786591 2.20728 0.1373607</code></pre>
 <p>The difference is not significant, indicating that the simpler model (no correlation) should be preferred. The output from these models can be a little confusing, but the <code>plot.discrete</code> function allows visualization of the results.</p>
 <pre class="r"><code>layout(matrix(1:2, 1, 2))
 plotdiscrete(nocorrD, main = &quot;Independent&quot;)

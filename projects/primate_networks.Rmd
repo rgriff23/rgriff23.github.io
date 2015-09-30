@@ -236,7 +236,7 @@ dimnames(tab.centz)[[2]] <- c("Degree", "Closeness", "Betweenness", "Eigenvector
 tab.centz
 ```
 
-One can also get an idea of how centralized a network is from looking at the distribution of centrality scores. Essentially, if there are many nodes with low centrality and very few nodes with high centrality, then the network is highly centralized. Here are what the degree distributions look like for different centrality measures on the two networks.
+One can also get an idea of how centralized a network is from looking at the distribution of centrality scores. Essentially, if there are many nodes with low centrality and very few nodes with high centrality, then the network is highly centralized. Here are what the centrality distributions look like for different centrality measures on the two networks.
 
 ```{r, eval=FALSE}
 # Plot histograms of centrality scores
