@@ -29,13 +29,13 @@ install_github("rgriff23/btw")
 library(btw)
 ```
 
-Before using any of the functions that call BayesTraitsV2, you have to download Version 2 of [BayesTraits](http://www.evolution.rdg.ac.uk/BayesTraits.html). You then have to tell `btw` where to find it on your computer by defining the hidden variable `.BayesTraitsPath`. You will have to define `.BayesTraitsPath` every time you start a new R session.
+Before using any of the functions that call BayesTraitsV2, you have to download Version 2 of [BayesTraits](http://www.evolution.rdg.ac.uk/BayesTraits.html). You then have to tell `btw` where to find it on your computer by defining the hidden variable `.BayesTraitsPath`. You have to do this every time you start a new R session.
 
 ```{r, tidy=TRUE, message=FALSE, cache=TRUE}
 .BayesTraitsPath <- "~/Desktop/GitHub/btw/BayesTraitsV2"
 ```
 
-The package includes some examples of tree and data files that will work with `btw` functions. You can load them into your R session after you load `btw`:
+The package includes some examples of tree and data files. You can load them into your R session after you load `btw`:
 
 ```{r, tidy=TRUE, message=FALSE, cache=TRUE}
 data(primates)
@@ -52,7 +52,7 @@ Some important formatting points that apply to the data for the `Discrete` and `
 * An integer with more than 1 digit is interpreted as ambiguous (e.g., "01") indicates that the species is equally likely to be in state "0" or "1"
 * The only valid way to represent missing data is with a "-" character
 
-Now let use `btw` to run some BayesTraits analyses. 
+Now let's use `btw` to run some BayesTraits analyses. 
 
 ## Using Discrete in Multistate mode
 
