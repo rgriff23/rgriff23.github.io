@@ -13,7 +13,7 @@ ___
 
 Years ago, as an undergrad, my first ever science project was a comparative study of primate social networks and parasite transmission. It was also my first experience coding: I used Matlab and Mathematica. Since then, I've transitioned to doing virtually all of my stats in R, and I decided it was time to learn how to do network anaysis in R. So I dug up a few primate social networks from my undergraduate thesis, installed `igraph` (Csardi & Nepusz, 2006), and started coding. The result is this tutorial! 
 
-Before beginning, install the `igraph` package and load it into R:
+You can find the data and source code on <a target="_blank" href="https://github.com/rgriff23/Primate_social_networks">Github</a>. Before beginning, install the `igraph` package and load it into R:
 
 ```{r, eval=TRUE, message=FALSE}
 library(igraph)
