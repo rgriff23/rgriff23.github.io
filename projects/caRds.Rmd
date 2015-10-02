@@ -9,6 +9,7 @@ output: html_document
 <br>
 <a target="_blank" href="https://github.com/rgriff23/caRds">Go to GitHub --></a>
 
+This is an R package for producing pretty caRds for special occasions. 
 ___
 
 ### Thanksgiving
