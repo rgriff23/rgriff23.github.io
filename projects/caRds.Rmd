@@ -9,7 +9,13 @@ output: html_document
 <br>
 <a target="_blank" href="https://github.com/rgriff23/caRds">Go to GitHub --></a>
 
-This is an R package for producing pretty caRds for special occasions. 
+This is an R package for producing pretty caRds for special occasions. If you have the devtools package installed, you can install `caRds` from GitHub:
+
+```
+library(devtools)
+install_github("rgriff23/caRds")
+library(caRds)
+```
 
 ___
 
@@ -73,6 +79,18 @@ OneThousandHearts(line1 = "Roses are red",
 ```
 
 ![](./caRds/OneThousandHeartsPoem.png)
+
+___
+
+### Easter
+
+`EasterEgg` lays an egg of any color with a baby chicken inside:
+
+```
+EasterEgg(shell = "skyblue")
+```
+
+![](./caRds/EasterEgg.png)
 
 ___
 
