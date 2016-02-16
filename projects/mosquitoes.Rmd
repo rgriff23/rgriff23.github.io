@@ -17,13 +17,11 @@ ___
 
 ## Introduction
 
-Mosquitoes are notorious, irritating, blood-sucking, disease-spreading, summer-ruining little critters. Female mosquitoes acquire pathogens when they suck the blood of a infected host, and can then transmit the pathogen to a new host the next time they take a blood meal. In tropical regions worldwide, they transmit some of the most serious infectious diseases afflicting the human population, including malaria, dengue fever, filariasis, yellow fever, and chikungunya. In the United States, they are responsible for transmitting West Nile virus and dog heart worm. 
-
-Despite the importance of mosquito behavior for public health (and sanity), surprisingly little is known about mosquito habitat preferences on fine spatial scales. The goal of our study was to examine the strength of fine-grained habitat preferences in a wide variety of mosquito species. *Spoiler alert: it turns out that habitat preferences are really important predictors of mosquito community composition at fine spatial scales!*
+Mosquitoes are notorious, irritating, blood-sucking, disease-spreading, summer-ruining little critters. Despite the importance of mosquito behavior for public health (and sanity), surprisingly little is known about mosquito habitat preferences on fine spatial scales. The goal of this study was to examine the fine-grained habitat preferences of a wide variety of mosquito species in the Raleigh-Durham area of North Carolina.
 
 ## Study design and data collection
 
-We conducted our study in the Raleigh-Durham metropolitan area of North Carolina. We chose 9 locations that spanned a field-forest habitat gradient. At each location, we set up a 200 meter transect with traps placed at the 0 m, 90 m, 100 m, 110 m, and 200 m marks. The 100 m mark corresponded to a clear boundary between the field and forest, or an "edge". By placing traps within 10 m of the edge, we could determine whether the abundance of different mosquito species changed abruptly at the field-forest boundary. Here is a figure depicting our study sites and transect design:
+We chose 9 locations that spanned a field-forest habitat gradient. At each location, we set up a 200 meter transect with traps placed at the 0 m, 90 m, 100 m, 110 m, and 200 m marks. The 100 m mark corresponded to a clear boundary between the field and forest, or an "edge". By placing traps within 10 m of the edge, we could determine whether the abundance of different mosquito species changed abruptly at the field-forest boundary. Here is a figure depicting our study sites and transect design:
 
 ![](./mosquitoes/Landscape.png)
 
@@ -33,7 +31,7 @@ To collect mosquitoes, <a target="_blank" href="http://johnwhock.com/products/mo
 
 ![](./mosquitoes/MosquitoTrap.jpg)
 
-Traps were set up at dusk and picked up at dawn. Once traps were collected, mosquitoes were taken back to a lab and killed in a freezer before being identified to species level and counted (we didn't even need IRB approval, that's how much everybody hates mosquitoes). Collection at each trap took place once every 2 weeks over a 5 month period from June 1 to October 15, 2014. 
+Traps were set up at dusk and picked up at dawn. Once traps were collected, mosquitoes were taken back to a lab and killed in a freezer before being identified to species level and counted. Collection at each trap took place once every 2 weeks over a 5 month period from June 1 to October 15, 2014. 
 
 ## Statistical analysis and results
 
@@ -75,7 +73,7 @@ Mood's median test results revealed that four additional species were significan
 
 ## Conclusions
 
-We found that both habitat and transect predicted mosquito community composition, but habitat had a stronger influence than transect location. In other words, fine-scale habitat variation predicted mosquito community composition more strongly than broad-scale geographic location. 
+We found that the dominant predictor of mosquito community composition was a tree density gradient, with site-level differences playing a secondary role. To put this another way, mosquito communities in forests separated by many miles are more similar than mosquito communities in adjacent field and forest habitats. 
 
 Forests tended to have greater mosquito species diversity than fields. Seven of the 23 species analyzed in our study showed significant preferences for forest habitat, while 4 species showed preferences for field habitat, and 3 species with adequate sample sizes in the GLMMs failed to demonstrate a significant preference. Another 8 species had non-significant habitat associations under Mood's median test, but given the low power of our test, those results should be considered preliminary. 
 
