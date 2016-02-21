@@ -11,7 +11,7 @@ output: html_document
 
 ___
 
-This is an R package for running BayesTraits from R (Mac OS only). The functions work by using `System` to run BayesTraits on your system and delete the output files after importing them into R.
+This is an R package for running BayesTraits from R (Mac OS only). The functions work by using `system` to run BayesTraits on your system and delete the output files after importing them into R.
 
 BayesTraits was developed by Mark Pagel and Andrew Meade, and is available from their <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">website</a> as an executable file that can be run from a command line program such as Terminal. Consult the BayesTraits documentation before using `btw`.
 
@@ -48,15 +48,21 @@ Some important formatting points that apply to the data for the `Discrete` and `
 * Species names must match exactly between the tree and data (but order doesn't matter)
 * You cannot have spaces in your species names
 * Discrete characters should be represented with characters or factors *(not integers!)* between 0 and 9
+* A discrete character/factor with more than 1 digit is interpreted as ambiguous (e.g., "01") indicates that the species is equally likely to be in state "0" or "1" (now you see why the discrete characters can't be of class 'integer', because 01 would just be seen as 1)
 * If testing for correlated evolution in discrete characters, use 0 and 1 as the character states
-* An integer with more than 1 digit is interpreted as ambiguous (e.g., "01") indicates that the species is equally likely to be in state "0" or "1"
 * The only valid way to represent missing data is with a "-" character
 
 Now let's use `btw` to run some BayesTraits analyses. 
 
-## Using Discrete in Multistate mode
+## Using Discrete in 'Multistate' mode
 
-Multistate is used when you have data on a single categorical trait. An example of this sort of data is `primate.discrete1', which contains data on trait that takes 3 discrete values (0, 1, and 2). Viewing the data reveals one missing value (*Colobus_polykomos*) and one ambiguous value (*Hylobates_agilis*). More than two character states can be modeled, but keep in mind that the number of model parameters increases rapidly with the number of character states. Specifically, for *n* states there are *$n^2$* - *n* rate parameters, such that by the time you get to 4 states, 12 rates must be estimated!
+Multistate is used when you have data on a single categorical trait. An example of this sort of data is `primate.discrete1', which contains data on trait that takes 3 discrete values (0, 1, and 2). Viewing the data reveals one missing value (*Colobus_polykomos*) and one ambiguous value (*Hylobates_agilis*). 
+
+```{r, tidy=TRUE, message=FALSE, cache=TRUE}
+primate.discrete1
+```
+
+More than two character states can be modeled, but keep in mind that the number of model parameters increases rapidly with the number of character states. Specifically, for *n* states there are *$n^2$* - *n* rate parameters, such that by the time you get to 4 states, 12 rates must be estimated!
 
 Let's fit a maximum likelihood model where we allow each of the 6 rates (0->1, 1->0, 1->2, 2->1, 0->2, 2->0) to be independent, and use a likelihood ratio test to compare it to a symmetric model where all rates must be equal to each other. 
 
@@ -104,7 +110,7 @@ reconstruct
 
 Results indicate that there is only a `r paste(round(reconstruct$mrcaNode1.P.2.*100,1), "%", sep="")` chance that the *Homo_sapiens*/*Hylobates_agilis* ancestor was in state 2, which is consistent with our finding that the model where we fossilized that ancestor at 2 was significantly worse than the unconstrained model.
 
-## Using Discrete in Discrete mode 
+## Using Discrete in 'Discrete' mode 
 
 Discrete can be used to test for correlated evolution between a pair of binary characters. An example of this data is `primate.discrete2`, which contains a pair of binary traits. 
 
