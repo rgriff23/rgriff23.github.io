@@ -124,7 +124,7 @@ corrD <- Discrete(primate.tree1, primate.discrete2, dependent=TRUE)
 lrtest(corrD, nocorrD)
 ```
 
-The difference is not significant, indicating that the simpler model (no correlation) should be preferred. The output from these models can be a little confusing, but the `plot.discrete` function allows visualization of the results. 
+The difference is not significant, indicating that the simpler model (no correlation) should be preferred. The output from these models can be a little confusing, but the `plotdiscrete` function allows visualization of the results. 
 
 ```{r, tidy=TRUE, eval=FALSE}
 layout(matrix(1:2,1,2))
