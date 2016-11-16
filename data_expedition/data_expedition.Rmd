@@ -177,7 +177,7 @@ This exercise is divided into 3 parts. For each part, you must develop a hypothe
 Before beginning the exercise, you must load the data into R. You can download the data directly into your R session by entering the following line of code:
 
 ```{r}
-data = source('')
+#data = source('')
 ```
 
 Use the `head` function to look at the first few rows of data, including the column names:
@@ -191,7 +191,7 @@ Use the `head` function to look at the first few rows of data, including the col
 Finally, let's attach the data as we did for the fake data we made before. Now you are ready to start the exercise!
 
 ```{r}
-attach(data)
+#attach(data)
 ```
 
 ### Part 1: Geladas reach adulthood around age 5. Do cysts tend to appear before or after geladas reach adulthood?
@@ -204,6 +204,10 @@ attach(data)
 
 1d. Describe your visualization in 2-3 sentences. Does it support your hypothesis?
 
+```{r setup, include=FALSE, echo=FALSE}
+hist(cyst_age)
+```
+
 ### Part 2: Do cysts appear earlier for males or females?
 
 1a. State a hypothesis for whether cysts appear earlier in males or females (you can state a hypothesis for *either* cysts appearing earlier in males *or* females, but choose one):
@@ -214,6 +218,10 @@ attach(data)
 
 1d. Describe your visualization in 2-3 sentences. Does it support your hypothesis?
 
+```{r setup, include=FALSE, echo=FALSE}
+boxplot(cyst_age ~ sex)
+```
+
 ### Part 3: Are monkeys with cysts more likely to die than monkeys without cysts?
 
 1a. State a hypothesis for why monkeys with cysts are more likely to die than monkeys without cysts:
@@ -223,6 +231,11 @@ attach(data)
 1c. Present a data visualization that tests your hypothesis (e.g., histogram, scatterplot, boxplot, or barplot).
 
 1d. Describe your visualization in 2-3 sentences. Does it support your hypothesis?
+
+```{r setup, include=FALSE, echo=FALSE}
+tab4 = table(cyst, death)
+barplot(cyst_age)
+```
 
 **IMPORTANT: A hard copy of your answers is due in class on Wednesday. For full credit, your visualizations must have clearly labeled axes and bars/boxes (i.e., it should be clear what you are showing us), and your visualizations must be relevant to the hypotheses in question. Also, remember the distinction between hypotheses and predictions!**
 
