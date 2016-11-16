@@ -253,5 +253,5 @@ legend(x=0.5, y=350, legend=c("Died", "Survived"), fill=c("darkred", "darkblue")
 1d. Describe your visualization in 2-3 sentences. Does it support your hypothesis?
 
 
-**IMPORTANT: For extra credit (), turn in a copy of your answers by midnight on Friday. For full credit, your visualizations must have clearly labeled axes and bars/boxes (including units such as "millimeters" or "days"),  your visualizations must be relevant to the hypotheses in question, and you must have valid hypotheses and predictions (e.g., there are no 'right' or 'wrong' hypotheses, they just have to be plausible and stated as hypotheses). If you run into any issues, just shoot me an e-mail at rgriff23@gmail.com **
+**IMPORTANT: For extra credit (1% towards your final grade), turn in a copy of your answers by midnight on Friday. For full credit, your visualizations must have clearly labeled axes and bars/boxes (including units such as "millimeters" or "days"),  your visualizations must be relevant to the hypotheses in question, and you must have valid hypotheses and predictions (e.g., there are no 'right' or 'wrong' hypotheses, they just have to be plausible and stated as hypotheses). If you run into any issues, just shoot me an e-mail at rgriff23@gmail.com **
 
