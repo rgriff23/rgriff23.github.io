@@ -11,7 +11,7 @@ output: html_document
 
 ___
 
-This is an R package for running BayesTraits from R (Mac OS only). The functions work by using `system` to run BayesTraits on your system and delete the output files after importing them into R.
+This is an R package for running BayesTraits from R (Mac OS only right now, but Windows compatibility is coming soon!). The functions work by using `system` to run BayesTraits on your system and delete the output files after importing them into R.
 
 BayesTraits was developed by Mark Pagel and Andrew Meade, and is available from their <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">website</a> as an executable file that can be run from a command line program such as Terminal. Consult the BayesTraits documentation before using `btw`.
 

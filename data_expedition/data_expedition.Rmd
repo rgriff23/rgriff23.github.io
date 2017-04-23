@@ -204,7 +204,7 @@ attach(data)
 
 ### Part 1: Geladas reach adulthood around age 5. Do cysts tend to appear before or after geladas reach adulthood?
 
-1a. State a hypothesis for whether cysts tend to appear in younger or older adults (you can state a hypothesis for *either* cysts appearing in younger *or* older adults, but choose one):
+1a. State a hypothesis for whether cysts tend to appear before or after adulthood (you can state a hypothesis for *either* cysts appearing before *or* after adulthood is reached, but choose one):
 
 1b. State the prediction that flows from your hypothesis.
 
