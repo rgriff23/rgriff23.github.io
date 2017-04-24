@@ -186,7 +186,7 @@ The difference is not significant, indicating that the simpler model (no correla
 plotdiscrete(nocorrD, main="Independent")
 ```
 
-![plot of chunk project_btw_discrete](figure/project_btw_discrete-1.png)
+![plot of chunk project_btw_discrete](/figure/project_btw_discrete-1.png)
 
 ```r
 plotdiscrete(corrD, main="Dependent")
@@ -282,7 +282,7 @@ Here is a density plot for the likelihood.
 densplot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk project_btw_dens](figure/project_btw_dens-1.png)
+![plot of chunk project_btw_dens](/figure/project_btw_dens-1.png)
 
 Here is a trace plot for the likelihood.
 
@@ -291,7 +291,7 @@ Here is a trace plot for the likelihood.
 traceplot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk project_btw_trace](figure/project_btw_trace-1.png)
+![plot of chunk project_btw_trace](/figure/project_btw_trace-1.png)
 
 Here is an autocorrelation plot for the likelihood.
 
@@ -300,7 +300,7 @@ Here is an autocorrelation plot for the likelihood.
 autocorr.plot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk project_btw_autocorr](figure/project_btw_autocorr-1.png)
+![plot of chunk project_btw_autocorr](/figure/project_btw_autocorr-1.png)
 
 This all just goes to say that `btw` makes it easy for you to use the tools provided by `coda` to do MCMC diagnostics. Check out the `coda` documentation for more info!
 
