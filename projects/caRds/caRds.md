@@ -23,7 +23,7 @@ ___
 TurkeyDay(from = "Randi", to = "America")
 ```
 
-![plot of chunk project_caRds_usturkey](figure/project_caRds_usturkey-1.png)
+![plot of chunk project_caRds_usturkey](/figure/project_caRds_usturkey-1.png)
 
 Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 
@@ -32,7 +32,7 @@ Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 TurkeyDay(from = "Randi", to = "Canada", canadian = TRUE)
 ```
 
-![plot of chunk project_caRds_canturkey](figure/project_caRds_canturkey-1.png)
+![plot of chunk project_caRds_canturkey](/figure/project_caRds_canturkey-1.png)
 
 
 ___
@@ -46,7 +46,7 @@ ___
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10)
 ```
 
-![plot of chunk project_caRds_xmastree](figure/project_caRds_xmastree-1.png)
+![plot of chunk project_caRds_xmastree](/figure/project_caRds_xmastree-1.png)
 
 
 Add tinsel with `tinsel = TRUE`. 
@@ -56,7 +56,7 @@ Add tinsel with `tinsel = TRUE`.
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10, tinsel = TRUE)
 ```
 
-![plot of chunk project_caRds_xmastreetins](figure/project_caRds_xmastreetins-1.png)
+![plot of chunk project_caRds_xmastreetins](/figure/project_caRds_xmastreetins-1.png)
 
 
 ___
@@ -70,7 +70,7 @@ ___
 OneThousandHearts(to = "Samara")
 ```
 
-![plot of chunk project_caRds_hearts](figure/project_caRds_hearts-1.png)
+![plot of chunk project_caRds_hearts](/figure/project_caRds_hearts-1.png)
 
 
 Alternatively, use `lines` to include a personalized message up to 4 lines long:
@@ -83,7 +83,7 @@ OneThousandHearts(line1 = "Roses are red",
   line4 = "I would choose you!")
 ```
 
-![plot of chunk project_caRds_heartspoem](figure/project_caRds_heartspoem-1.png)
+![plot of chunk project_caRds_heartspoem](/figure/project_caRds_heartspoem-1.png)
 
 ___
 
@@ -96,6 +96,6 @@ ___
 EasterEgg(shell = "skyblue")
 ```
 
-![plot of chunk project_caRds_egg](figure/project_caRds_egg-1.png)
+![plot of chunk project_caRds_egg](/figure/project_caRds_egg-1.png)
 
 ___

@@ -186,13 +186,13 @@ The difference is not significant, indicating that the simpler model (no correla
 plotdiscrete(nocorrD, main="Independent")
 ```
 
-![plot of chunk project_btw_discrete](figure/project_btw_discrete-1.png)
+![plot of chunk project_btw_discrete](/figure/project_btw_discrete-1.png)
 
 ```r
 plotdiscrete(corrD, main="Dependent")
 ```
 
-![plot of chunk project_btw_discrete](figure/project_btw_discrete-2.png)
+![plot of chunk project_btw_discrete](/figure/project_btw_discrete-2.png)
 
 In this analysis, each *pair* of states for the two traits is treated as a separate state (00, 01, 10, 11). The independent model forces some pairs of rate parameters to be identical, because the idea is that transition rates for each trait should be the same, indepent of what state the other trait is in (this leads to 4 overall parameters). By contrast, the dependent model assumes that transition rates for each trait depend on the state of the other trait, such that different rates need to be estimated (leading to 8 overall parameters). Due to the different constraints imposed on the two models, their transition rate matrices look very different, but as the likelihood ratio test demonstrates, the difference is not significant.
 
@@ -282,7 +282,7 @@ Here is a density plot for the likelihood.
 densplot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk project_btw_dens](figure/project_btw_dens-1.png)
+![plot of chunk project_btw_dens](/figure/project_btw_dens-1.png)
 
 Here is a trace plot for the likelihood.
 
@@ -291,7 +291,7 @@ Here is a trace plot for the likelihood.
 traceplot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk project_btw_trace](figure/project_btw_trace-1.png)
+![plot of chunk project_btw_trace](/figure/project_btw_trace-1.png)
 
 Here is an autocorrelation plot for the likelihood.
 
@@ -300,7 +300,7 @@ Here is an autocorrelation plot for the likelihood.
 autocorr.plot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk project_btw_autocorr](figure/project_btw_autocorr-1.png)
+![plot of chunk project_btw_autocorr](/figure/project_btw_autocorr-1.png)
 
 This all just goes to say that `btw` makes it easy for you to use the tools provided by `coda` to do MCMC diagnostics. Check out the `coda` documentation for more info!
 
