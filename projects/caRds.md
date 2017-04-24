@@ -23,7 +23,13 @@ ___
 TurkeyDay(from = "Randi", to = "America")
 ```
 
+![squirrel with tortilla 1](figure/squirrel.jpg)
+![squirrel with tortilla 2](./figure/squirrel.jpg)
+![squirrel with tortilla 3](/projects/figure/squirrel.jpg)
+
+![](figure/project_caRds_usturkey-1.png)
 ![](/figure/project_caRds_usturkey-1.png)
+![](/projects/figure/project_caRds_usturkey-1.png)
 
 ![plot of chunk project_caRds_usturkey](/assets/Rfigs/project_caRds_usturkey-1.png)
 
