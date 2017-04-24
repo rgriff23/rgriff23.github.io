@@ -1,6 +1,6 @@
 ---
-title: "BayesTraits Wrapper (btw)"
 layout: project
+title: "BayesTraits Wrapper (btw)"
 author: Randi H. Griffin
 ---
 
@@ -84,7 +84,7 @@ lrtest(symmetric, asymmetric)
 
 ```
 ##   model1.Lh model2.Lh LRstat      pval
-## 1  -4.57254  -4.57253  2e-05 0.9964318
+## 1 -4.572535 -4.572555  4e-05 0.9949538
 ```
 
 The likelihood ratio test is not significant, indicating that we should favor the simpler model. In this case, the symmetric model is simpler because it only estimates one parameter, while the asymmetric model estimates six. 
@@ -108,17 +108,17 @@ rjout
 
 ```
 ## $NumModels
-## [1] 412
+## [1] 408
 ## 
 ## $TopTen
 ## 
-## '0 Z 0 0 0 0  '0 0 0 Z 0 0  '0 0 0 0 0 0  'Z 0 0 0 0 0  '0 0 0 Z 0 Z  
-##   0.040404040   0.026262626   0.022222222   0.020202020   0.016161616 
-## '0 Z 0 0 0 Z  '0 Z 0 0 Z 0  '0 Z Z 0 0 0  '0 Z 0 0 0 1  '1 1 1 Z 1 0  
-##   0.015151515   0.015151515   0.014141414   0.013131313   0.009090909
+## '0 Z 0 0 0 0  '0 0 0 0 0 0  'Z 0 Z 0 0 0  '0 0 0 Z 0 0  '0 Z 0 0 0 Z  
+##   0.048484848   0.037373737   0.019191919   0.018181818   0.014141414 
+## 'Z 0 0 0 0 0  '0 Z 0 0 Z 0  '0 Z Z 0 0 0  '0 Z 0 0 0 1  '0 0 0 0 0 Z  
+##   0.014141414   0.012121212   0.012121212   0.010101010   0.009090909
 ```
 
-Output indicates that an extremely large number of models were sampled in the posterior distribution (412!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 4% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal). 
+Output indicates that an extremely large number of models were sampled in the posterior distribution (408!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 5% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal). 
 
 ### Fossilizing and reconstructing an ancestral state
 
@@ -134,9 +134,9 @@ bf
 
 ```
 ##   BayesFactor BetterModel
-## 1     2.43905     Model 2
+## 1    2.750174     Model 2
 ```
-The Bayes factor is 2.43905 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the *Homo_sapiens*/*Hylobates_agilis* ancestor. Let's use maximum likelihood this time (the default setting).
+The Bayes factor is 2.750174 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the *Homo_sapiens*/*Hylobates_agilis* ancestor. Let's use maximum likelihood this time (the default setting).
 
 
 ```r
@@ -145,13 +145,13 @@ reconstruct
 ```
 
 ```
-##   Tree.No        Lh      q01 q02 q10     q12      q20      q21 Root.P.0.
-## 1       1 -4.572531 0.030695   0   0 0.22963 0.144332 0.405843  0.329543
+##   Tree.No        Lh      q01 q02 q10      q12      q20      q21 Root.P.0.
+## 1       1 -4.572621 0.030636   0   0 0.237545 0.144526 0.427153  0.329389
 ##   Root.P.1. Root.P.2. mrcaNode1.P.0. mrcaNode1.P.1. mrcaNode1.P.2.
-## 1  0.334327  0.336129        0.43944       0.263204       0.297357
+## 1  0.334433  0.336178       0.440256       0.263419       0.296325
 ```
 
-Results indicate that there is only a 29.7% chance that the *Homo_sapiens*/*Hylobates_agilis* ancestor was in state 2, which is consistent with our finding that the model where we fossilized that ancestor at 2 was significantly worse than the unconstrained model.
+Results indicate that there is only a 29.6% chance that the *Homo_sapiens*/*Hylobates_agilis* ancestor was in state 2, which is consistent with our finding that the model where we fossilized that ancestor at 2 was significantly worse than the unconstrained model.
 
 ## Using Discrete in 'Discrete' mode 
 
@@ -170,7 +170,7 @@ lrtest(corrD, nocorrD)
 
 ```
 ##   model1.Lh model2.Lh   LRstat      pval
-## 1 -5.692753 -6.786591 2.187676 0.1391191
+## 1 -5.682102 -6.786591 2.208978 0.1372095
 ```
 
 The difference is not significant, indicating that the simpler model (no correlation) should be preferred. The output from these models can be a little confusing, but the `plotdiscrete` function allows visualization of the results. 
@@ -180,13 +180,13 @@ The difference is not significant, indicating that the simpler model (no correla
 plotdiscrete(nocorrD, main="Independent")
 ```
 
-![plot of chunk unnamed-chunk-11](/projects/btw/figure/unnamed-chunk-11-1.png)
+![plot of chunk project_btw_discrete](figure/project_btw_discrete-1.png)
 
 ```r
 plotdiscrete(corrD, main="Dependent")
 ```
 
-![plot of chunk unnamed-chunk-11](/projects/btw/figure/unnamed-chunk-11-2.png)
+![plot of chunk project_btw_discrete](figure/project_btw_discrete-2.png)
 
 In this analysis, each *pair* of states for the two traits is treated as a separate state (00, 01, 10, 11). The independent model forces some pairs of rate parameters to be identical, because the idea is that transition rates for each trait should be the same, indepent of what state the other trait is in (this leads to 4 overall parameters). By contrast, the dependent model assumes that transition rates for each trait depend on the state of the other trait, such that different rates need to be estimated (leading to 8 overall parameters). Due to the different constraints imposed on the two models, their transition rate matrices look very different, but as the likelihood ratio test demonstrates, the difference is not significant.
 
@@ -276,7 +276,7 @@ Here is a density plot for the likelihood.
 densplot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk unnamed-chunk-17](/projects/btw/figure/unnamed-chunk-17-1.png)
+![plot of chunk project_btw_dens](figure/project_btw_dens-1.png)
 
 Here is a trace plot for the likelihood.
 
@@ -285,7 +285,7 @@ Here is a trace plot for the likelihood.
 traceplot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk unnamed-chunk-18](/projects/btw/figure/unnamed-chunk-18-1.png)
+![plot of chunk project_btw_trace](figure/project_btw_trace-1.png)
 
 Here is an autocorrelation plot for the likelihood.
 
@@ -294,7 +294,7 @@ Here is an autocorrelation plot for the likelihood.
 autocorr.plot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk unnamed-chunk-19](/projects/btw/figure/unnamed-chunk-19-1.png)
+![plot of chunk project_btw_autocorr](figure/project_btw_autocorr-1.png)
 
 This all just goes to say that `btw` makes it easy for you to use the tools provided by `coda` to do MCMC diagnostics. Check out the `coda` documentation for more info!
 

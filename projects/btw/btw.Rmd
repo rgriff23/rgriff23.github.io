@@ -1,6 +1,6 @@
 ---
-title: "BayesTraits Wrapper (btw)"
 layout: project
+title: "BayesTraits Wrapper (btw)"
 author: Randi H. Griffin
 ---
 
@@ -119,7 +119,7 @@ lrtest(corrD, nocorrD)
 
 The difference is not significant, indicating that the simpler model (no correlation) should be preferred. The output from these models can be a little confusing, but the `plotdiscrete` function allows visualization of the results. 
 
-```{r}
+```{r project_btw_discrete}
 plotdiscrete(nocorrD, main="Independent")
 plotdiscrete(corrD, main="Dependent")
 ```
@@ -183,19 +183,19 @@ In one easy step, we can prepare the MCMC output for analysis in `coda`. The key
 
 Here is a density plot for the likelihood.
 
-```{r}
+```{r project_btw_dens}
 densplot(mcmc(coda.demo$Lh))
 ```
 
 Here is a trace plot for the likelihood.
 
-```{r}
+```{r project_btw_trace}
 traceplot(mcmc(coda.demo$Lh))
 ```
 
 Here is an autocorrelation plot for the likelihood.
 
-```{r}
+```{r project_btw_autocorr}
 autocorr.plot(mcmc(coda.demo$Lh))
 ```
 

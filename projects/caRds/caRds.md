@@ -2,7 +2,6 @@
 layout: project
 title: "caRds"
 author: Randi H. Griffin
-output: html_document
 ---
 
 This is an R package for producing pretty caRds for special occasions. If you have the devtools package installed, you can install `caRds` from GitHub:
@@ -24,7 +23,7 @@ ___
 TurkeyDay(from = "Randi", to = "America")
 ```
 
-![plot of chunk unnamed-chunk-2](/projects/caRds/figure/unnamed-chunk-2-1.png)
+![plot of chunk project_caRds_usturkey](figure/project_caRds_usturkey-1.png)
 
 Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 
@@ -33,7 +32,7 @@ Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 TurkeyDay(from = "Randi", to = "Canada", canadian = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-3](/projects/caRds/figure/unnamed-chunk-3-1.png)
+![plot of chunk project_caRds_canturkey](figure/project_caRds_canturkey-1.png)
 
 
 ___
@@ -47,7 +46,7 @@ ___
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10)
 ```
 
-![plot of chunk unnamed-chunk-4](/projects/caRds/figure/unnamed-chunk-4-1.png)
+![plot of chunk project_caRds_xmastree](figure/project_caRds_xmastree-1.png)
 
 
 Add tinsel with `tinsel = TRUE`. 
@@ -57,7 +56,7 @@ Add tinsel with `tinsel = TRUE`.
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10, tinsel = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-5](/projects/caRds/figure/unnamed-chunk-5-1.png)
+![plot of chunk project_caRds_xmastreetins](figure/project_caRds_xmastreetins-1.png)
 
 
 ___
@@ -71,7 +70,7 @@ ___
 OneThousandHearts(to = "Samara")
 ```
 
-![plot of chunk unnamed-chunk-6](/projects/caRds/figure/unnamed-chunk-6-1.png)
+![plot of chunk project_caRds_hearts](figure/project_caRds_hearts-1.png)
 
 
 Alternatively, use `lines` to include a personalized message up to 4 lines long:
@@ -84,7 +83,7 @@ OneThousandHearts(line1 = "Roses are red",
   line4 = "I would choose you!")
 ```
 
-![plot of chunk unnamed-chunk-7](/projects/caRds/figure/unnamed-chunk-7-1.png)
+![plot of chunk project_caRds_heartspoem](figure/project_caRds_heartspoem-1.png)
 
 ___
 
@@ -97,6 +96,6 @@ ___
 EasterEgg(shell = "skyblue")
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![plot of chunk project_caRds_egg](figure/project_caRds_egg-1.png)
 
 ___
