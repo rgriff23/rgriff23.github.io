@@ -97,6 +97,6 @@ ___
 EasterEgg(shell = "skyblue")
 ```
 
-![plot of chunk unnamed-chunk-8](/projects/caRds/figure/unnamed-chunk-8-1.png)
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
 
 ___
