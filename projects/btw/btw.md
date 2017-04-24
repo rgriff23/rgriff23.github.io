@@ -91,8 +91,8 @@ lrtest(symmetric, asymmetric)
 ```
 
 ```
-##   model1.Lh model2.Lh   LRstat      pval
-## 1 -4.572539 -4.572757 0.000436 0.9833409
+##   model1.Lh model2.Lh  LRstat      pval
+## 1  -4.57253 -4.572548 3.6e-05 0.9952127
 ```
 
 The likelihood ratio test is not significant, indicating that we should favor the simpler model. In this case, the symmetric model is simpler because it only estimates one parameter, while the asymmetric model estimates six. 
@@ -116,17 +116,17 @@ rjout
 
 ```
 ## $NumModels
-## [1] 417
+## [1] 416
 ## 
 ## $TopTen
 ## 
-## '0 0 0 Z 0 0  '0 Z 0 0 0 0  '0 0 0 0 0 0  '0 Z 0 0 Z 0  'Z 0 0 0 0 0  
-##   0.040404040   0.036363636   0.029292929   0.017171717   0.017171717 
-## '0 Z 0 0 0 Z  '0 0 0 Z 0 Z  '0 Z 0 0 0 1  'Z 0 Z 0 0 0  '0 Z Z 0 0 0  
-##   0.015151515   0.013131313   0.011111111   0.011111111   0.009090909
+## '0 0 0 Z 0 0  '0 Z 0 0 0 0  '0 0 0 0 0 0  '0 Z 0 0 Z 0  '0 Z Z 0 0 0  
+##   0.039393939   0.035353535   0.030303030   0.019191919   0.018181818 
+## '0 Z 0 0 0 1  '0 0 0 Z 0 Z  '0 Z 0 0 0 Z  '1 Z 1 1 1 0  'Z 0 Z 0 0 0  
+##   0.016161616   0.015151515   0.012121212   0.012121212   0.009090909
 ```
 
-Output indicates that an extremely large number of models were sampled in the posterior distribution (417!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 4% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal). 
+Output indicates that an extremely large number of models were sampled in the posterior distribution (416!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 4% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal). 
 
 ### Fossilizing and reconstructing an ancestral state
 
@@ -142,9 +142,9 @@ bf
 
 ```
 ##   BayesFactor BetterModel
-## 1     2.40295     Model 2
+## 1    2.795542     Model 2
 ```
-The Bayes factor is 2.40295 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the *Homo_sapiens*/*Hylobates_agilis* ancestor. Let's use maximum likelihood this time (the default setting).
+The Bayes factor is 2.795542 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the *Homo_sapiens*/*Hylobates_agilis* ancestor. Let's use maximum likelihood this time (the default setting).
 
 
 ```r
@@ -153,10 +153,10 @@ reconstruct
 ```
 
 ```
-##   Tree.No       Lh      q01 q02 q10      q12      q20      q21 Root.P.0.
-## 1       1 -4.57253 0.030712   0   0 0.230038 0.144491 0.407152  0.329537
+##   Tree.No       Lh      q01 q02 q10      q12      q20    q21 Root.P.0.
+## 1       1 -4.57253 0.030713   0   0 0.230198 0.144508 0.4075  0.329525
 ##   Root.P.1. Root.P.2. mrcaNode1.P.0. mrcaNode1.P.1. mrcaNode1.P.2.
-## 1  0.334336  0.336127        0.43936       0.263284       0.297356
+## 1  0.334344   0.33613       0.439351       0.263302       0.297348
 ```
 
 Results indicate that there is only a 29.7% chance that the *Homo_sapiens*/*Hylobates_agilis* ancestor was in state 2, which is consistent with our finding that the model where we fossilized that ancestor at 2 was significantly worse than the unconstrained model.
@@ -178,7 +178,7 @@ lrtest(corrD, nocorrD)
 
 ```
 ##   model1.Lh model2.Lh   LRstat      pval
-## 1 -5.683085 -6.786591 2.207012 0.1373845
+## 1 -5.680059 -6.786591 2.213064 0.1368466
 ```
 
 The difference is not significant, indicating that the simpler model (no correlation) should be preferred. The output from these models can be a little confusing, but the `plotdiscrete` function allows visualization of the results. 
