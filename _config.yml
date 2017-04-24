@@ -34,9 +34,6 @@ facebook_username:    rgriff23
 linkedin_username:    randigriffin
 #gplus_username: 112245393392023660495
 
-# Build settings
-markdown: redcarpet
-
 gems:
   - jekyll-feed
 exclude:
