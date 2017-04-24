@@ -33,7 +33,7 @@ Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 TurkeyDay(from = "Randi", to = "Canada", canadian = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-3](/projects/caRds/figure/unnamed-chunk-3-1.png)
 
 
 ___
@@ -47,7 +47,7 @@ ___
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10)
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](/projects/caRds/figure/unnamed-chunk-4-1.png)
 
 
 Add tinsel with `tinsel = TRUE`. 
@@ -57,7 +57,7 @@ Add tinsel with `tinsel = TRUE`.
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10, tinsel = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](/projects/caRds/figure/unnamed-chunk-5-1.png)
 
 
 ___
@@ -71,7 +71,7 @@ ___
 OneThousandHearts(to = "Samara")
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
+![plot of chunk unnamed-chunk-6](/projects/caRds/figure/unnamed-chunk-6-1.png)
 
 
 Alternatively, use `lines` to include a personalized message up to 4 lines long:
@@ -84,7 +84,7 @@ OneThousandHearts(line1 = "Roses are red",
   line4 = "I would choose you!")
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-7](/projects/caRds/figure/unnamed-chunk-7-1.png)
 
 ___
 
@@ -97,6 +97,6 @@ ___
 EasterEgg(shell = "skyblue")
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![plot of chunk unnamed-chunk-8](/projects/caRds/figure/unnamed-chunk-8-1.png)
 
 ___
