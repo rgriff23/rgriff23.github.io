@@ -4,7 +4,7 @@ title: "BayesTraits Wrapper (btw)"
 author: Randi H. Griffin
 ---
 
-IMPORTANT NOTE: this package is currently a bit out of date. There are two major updates coming up. **First**, `btw` is designed to work with BayesTraits Version 2, but I realize there is now a Version 3 that has some new features to support. **Second**, `btw` user named Peter Ranacher was kind enough to send me some code for running `btw` on Windows, so I plan to incorporate that as well.
+IMPORTANT NOTE: this package is currently a bit out of date. There are two major updates coming up. **First**, `btw` is designed to work with BayesTraits Version 2, but I realize there is now a Version 3 that has some new features to support. **Second**, `btw` user Peter Ranacher was kind enough to send me some code for running `btw` on Windows, so I plan to incorporate that as well.
 
 ---
 
@@ -12,7 +12,7 @@ This is an R package for running BayesTraits from R (Mac OS and BayesTraits V2 o
 
 BayesTraits was developed by Mark Pagel and Andrew Meade, and is available from their <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">website</a> as an executable file that can be run from a command line program such as Terminal. Consult the BayesTraits documentation before using `btw`.
 
-The major advantage of using `btw`
+I think there are two major advantages to using `btw` rather than running BayesTraits from the command line. First, if you are comfortable with R, `btw` makes it easy to incorporate BayesTraits into R scripts. Second, `btw` automatically pulls the output of `btw` into R in a ready-to-use format, which greatly simplifies your workflow if you want to analyze your BayesTraits output in R.
 
 Below, I demonstrate usage of `btw`. 
 
