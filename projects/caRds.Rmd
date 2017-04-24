@@ -27,7 +27,6 @@ Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 TurkeyDay(from = "Randi", to = "Canada", canadian = TRUE)
 ```
 
-
 ___
 
 ### Christmas
@@ -38,14 +37,11 @@ ___
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10)
 ```
 
-
 Add tinsel with `tinsel = TRUE`. 
 
 ```{r project_caRds_xmastreetins}
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10, tinsel = TRUE)
 ```
-
-
 ___
 
 ### Valentine's Day
@@ -55,7 +51,6 @@ ___
 ```{r project_caRds_hearts}
 OneThousandHearts(to = "Samara")
 ```
-
 
 Alternatively, use `lines` to include a personalized message up to 4 lines long:
 
@@ -75,5 +70,4 @@ ___
 ```{r project_caRds_egg}
 EasterEgg(shell = "skyblue")
 ```
-
 ___

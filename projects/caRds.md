@@ -23,15 +23,7 @@ ___
 TurkeyDay(from = "Randi", to = "America")
 ```
 
-![squirrel with tortilla 1](figure/squirrel.jpg)
-![squirrel with tortilla 2](./figure/squirrel.jpg)
-![squirrel with tortilla 3](/projects/figure/squirrel.jpg)
-
-![](figure/project_caRds_usturkey-1.png)
-![](/figure/project_caRds_usturkey-1.png)
-![](/projects/figure/project_caRds_usturkey-1.png)
-
-![plot of chunk project_caRds_usturkey](/assets/Rfigs/project_caRds_usturkey-1.png)
+![plot of chunk project_caRds_usturkey](/projects/figure/project_caRds_usturkey-1.png)
 
 Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 
@@ -40,8 +32,7 @@ Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 TurkeyDay(from = "Randi", to = "Canada", canadian = TRUE)
 ```
 
-![plot of chunk project_caRds_canturkey](/assets/Rfigs/project_caRds_canturkey-1.png)
-
+![plot of chunk project_caRds_canturkey](/projects/figure/project_caRds_canturkey-1.png)
 
 ___
 
@@ -54,8 +45,7 @@ ___
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10)
 ```
 
-![plot of chunk project_caRds_xmastree](/assets/Rfigs/project_caRds_xmastree-1.png)
-
+![plot of chunk project_caRds_xmastree](/projects/figure/project_caRds_xmastree-1.png)
 
 Add tinsel with `tinsel = TRUE`. 
 
@@ -64,9 +54,7 @@ Add tinsel with `tinsel = TRUE`.
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10, tinsel = TRUE)
 ```
 
-![plot of chunk project_caRds_xmastreetins](/assets/Rfigs/project_caRds_xmastreetins-1.png)
-
-
+![plot of chunk project_caRds_xmastreetins](/projects/figure/project_caRds_xmastreetins-1.png)
 ___
 
 ### Valentine's Day
@@ -78,8 +66,7 @@ ___
 OneThousandHearts(to = "Samara")
 ```
 
-![plot of chunk project_caRds_hearts](/assets/Rfigs/project_caRds_hearts-1.png)
-
+![plot of chunk project_caRds_hearts](/projects/figure/project_caRds_hearts-1.png)
 
 Alternatively, use `lines` to include a personalized message up to 4 lines long:
 
@@ -91,7 +78,7 @@ OneThousandHearts(line1 = "Roses are red",
   line4 = "I would choose you!")
 ```
 
-![plot of chunk project_caRds_heartspoem](/assets/Rfigs/project_caRds_heartspoem-1.png)
+![plot of chunk project_caRds_heartspoem](/projects/figure/project_caRds_heartspoem-1.png)
 
 ___
 
@@ -104,6 +91,5 @@ ___
 EasterEgg(shell = "skyblue")
 ```
 
-![plot of chunk project_caRds_egg](/assets/Rfigs/project_caRds_egg-1.png)
-
+![plot of chunk project_caRds_egg](/projects/figure/project_caRds_egg-1.png)
 ___
