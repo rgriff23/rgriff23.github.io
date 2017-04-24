@@ -9,9 +9,9 @@ Section in progress... for now, see my publications for a look at some stuff I'v
 
 ### R packages
 
-[**btw**](/projects/btw/btw)- Wrapper for <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraitsV2</a>
+[**btw**](/projects/btw)- Wrapper for <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraitsV2</a>
 
-[**caRds**](/projects/caRds/caRds)- The most important work I've ever done
+[**caRds**](/projects/caRds)- The most important work I've ever done
 
 ### Other
 
