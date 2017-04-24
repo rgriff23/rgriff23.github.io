@@ -4,9 +4,15 @@ title: "BayesTraits Wrapper (btw)"
 author: Randi H. Griffin
 ---
 
-This is an R package for running BayesTraits from R (Mac OS only right now, but Windows compatibility is coming soon!). The functions work by using `system` to run BayesTraits on your system and delete the output files after importing them into R.
+IMPORTANT NOTE: this package is currently a bit out of date. There are two major updates coming up. **First**, `btw` is designed to work with BayesTraits Version 2, but I realize there is now a Version 3 that has some new features to support. **Second**, `btw` user named Peter Ranacher was kind enough to send me some code for running `btw` on Windows, so I plan to incorporate that as well.
+
+---
+
+This is an R package for running BayesTraits from R (Mac OS and BayesTraits V2 only). The functions work by using `system` to run BayesTraits on your system and delete the output files after importing them into R.
 
 BayesTraits was developed by Mark Pagel and Andrew Meade, and is available from their <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">website</a> as an executable file that can be run from a command line program such as Terminal. Consult the BayesTraits documentation before using `btw`.
+
+The major advantage of using `btw`
 
 Below, I demonstrate usage of `btw`. 
 

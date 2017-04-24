@@ -4,9 +4,15 @@ title: "BayesTraits Wrapper (btw)"
 author: Randi H. Griffin
 ---
 
-This is an R package for running BayesTraits from R (Mac OS only right now, but Windows compatibility is coming soon!). The functions work by using `system` to run BayesTraits on your system and delete the output files after importing them into R.
+IMPORTANT NOTE: this package is currently a bit out of date. There are two major updates coming up. **First**, `btw` is designed to work with BayesTraits Version 2, but I realize there is now a Version 3 that has some new features to support. **Second**, `btw` user named Peter Ranacher was kind enough to send me some code for running `btw` on Windows, so I plan to incorporate that as well.
+
+---
+
+This is an R package for running BayesTraits from R (Mac OS and BayesTraits V2 only). The functions work by using `system` to run BayesTraits on your system and delete the output files after importing them into R.
 
 BayesTraits was developed by Mark Pagel and Andrew Meade, and is available from their <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">website</a> as an executable file that can be run from a command line program such as Terminal. Consult the BayesTraits documentation before using `btw`.
+
+The major advantage of using `btw`
 
 Below, I demonstrate usage of `btw`. 
 
@@ -83,8 +89,8 @@ lrtest(symmetric, asymmetric)
 ```
 
 ```
-##   model1.Lh model2.Lh LRstat      pval
-## 1 -4.572535 -4.572555  4e-05 0.9949538
+##   model1.Lh model2.Lh LRstat pval
+## 1 -4.572532 -4.572532      0    1
 ```
 
 The likelihood ratio test is not significant, indicating that we should favor the simpler model. In this case, the symmetric model is simpler because it only estimates one parameter, while the asymmetric model estimates six. 
@@ -108,17 +114,17 @@ rjout
 
 ```
 ## $NumModels
-## [1] 408
+## [1] 404
 ## 
 ## $TopTen
 ## 
-## '0 Z 0 0 0 0  '0 0 0 0 0 0  'Z 0 Z 0 0 0  '0 0 0 Z 0 0  '0 Z 0 0 0 Z  
-##   0.048484848   0.037373737   0.019191919   0.018181818   0.014141414 
-## 'Z 0 0 0 0 0  '0 Z 0 0 Z 0  '0 Z Z 0 0 0  '0 Z 0 0 0 1  '0 0 0 0 0 Z  
-##   0.014141414   0.012121212   0.012121212   0.010101010   0.009090909
+## '0 Z 0 0 0 0  '0 0 0 0 0 0  '0 0 0 Z 0 0  'Z 0 0 0 0 0  '0 Z 0 0 0 Z  
+##   0.048484848   0.026262626   0.022222222   0.019191919   0.015151515 
+## '0 Z 0 0 Z 0  'Z 0 Z 0 0 0  '0 0 0 Z 0 Z  '0 0 0 Z Z 0  '0 Z 0 0 1 0  
+##   0.015151515   0.013131313   0.011111111   0.009090909   0.009090909
 ```
 
-Output indicates that an extremely large number of models were sampled in the posterior distribution (408!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 5% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal). 
+Output indicates that an extremely large number of models were sampled in the posterior distribution (404!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 5% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal). 
 
 ### Fossilizing and reconstructing an ancestral state
 
@@ -134,9 +140,9 @@ bf
 
 ```
 ##   BayesFactor BetterModel
-## 1    2.750174     Model 2
+## 1    2.159806     Model 2
 ```
-The Bayes factor is 2.750174 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the *Homo_sapiens*/*Hylobates_agilis* ancestor. Let's use maximum likelihood this time (the default setting).
+The Bayes factor is 2.159806 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the *Homo_sapiens*/*Hylobates_agilis* ancestor. Let's use maximum likelihood this time (the default setting).
 
 
 ```r
@@ -145,13 +151,13 @@ reconstruct
 ```
 
 ```
-##   Tree.No        Lh      q01 q02 q10      q12      q20      q21 Root.P.0.
-## 1       1 -4.572621 0.030636   0   0 0.237545 0.144526 0.427153  0.329389
+##   Tree.No        Lh      q01 q02 q10      q12     q20      q21 Root.P.0.
+## 1       1 -4.572533 0.030718   0   0 0.229436 0.14437 0.404785   0.32954
 ##   Root.P.1. Root.P.2. mrcaNode1.P.0. mrcaNode1.P.1. mrcaNode1.P.2.
-## 1  0.334433  0.336178       0.440256       0.263419       0.296325
+## 1  0.334335  0.336125       0.439263       0.263279       0.297458
 ```
 
-Results indicate that there is only a 29.6% chance that the *Homo_sapiens*/*Hylobates_agilis* ancestor was in state 2, which is consistent with our finding that the model where we fossilized that ancestor at 2 was significantly worse than the unconstrained model.
+Results indicate that there is only a 29.7% chance that the *Homo_sapiens*/*Hylobates_agilis* ancestor was in state 2, which is consistent with our finding that the model where we fossilized that ancestor at 2 was significantly worse than the unconstrained model.
 
 ## Using Discrete in 'Discrete' mode 
 
@@ -170,7 +176,7 @@ lrtest(corrD, nocorrD)
 
 ```
 ##   model1.Lh model2.Lh   LRstat      pval
-## 1 -5.682102 -6.786591 2.208978 0.1372095
+## 1 -5.695209 -6.786591 2.182764 0.1395636
 ```
 
 The difference is not significant, indicating that the simpler model (no correlation) should be preferred. The output from these models can be a little confusing, but the `plotdiscrete` function allows visualization of the results. 
