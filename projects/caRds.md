@@ -23,6 +23,8 @@ ___
 TurkeyDay(from = "Randi", to = "America")
 ```
 
+![](figure/project_caRds_usturkey-1.png)
+
 ![plot of chunk project_caRds_usturkey](/assets/Rfigs/project_caRds_usturkey-1.png)
 
 Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
