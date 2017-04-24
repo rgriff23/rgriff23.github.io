@@ -4,6 +4,8 @@ title: "BayesTraits Wrapper (btw)"
 author: Randi H. Griffin
 ---
 
+
+
 IMPORTANT NOTE: this package is currently a bit out of date. There are two major updates coming up. **First**, `btw` is designed to work with BayesTraits Version 2, but I realize there is now a Version 3 that has some new features to support. **Second**, `btw` user Peter Ranacher was kind enough to send me some code for running `btw` on Windows, so I plan to incorporate that as well.
 
 ---
@@ -89,8 +91,8 @@ lrtest(symmetric, asymmetric)
 ```
 
 ```
-##   model1.Lh model2.Lh LRstat      pval
-## 1 -4.572533  -4.57253  6e-06 0.9980456
+##   model1.Lh model2.Lh   LRstat      pval
+## 1 -4.572539 -4.572757 0.000436 0.9833409
 ```
 
 The likelihood ratio test is not significant, indicating that we should favor the simpler model. In this case, the symmetric model is simpler because it only estimates one parameter, while the asymmetric model estimates six. 
@@ -114,17 +116,17 @@ rjout
 
 ```
 ## $NumModels
-## [1] 433
+## [1] 417
 ## 
 ## $TopTen
 ## 
-## '0 Z 0 0 0 0  '0 0 0 Z 0 0  '0 0 0 0 0 0  '0 Z 0 0 0 Z  '0 0 0 Z 0 Z  
-##    0.03434343    0.02929293    0.02222222    0.02222222    0.02020202 
-## 'Z 0 0 0 0 0  '1 Z 1 1 0 1  '0 Z 0 0 0 1  'Z 0 Z 0 0 0  '1 0 1 1 1 1  
-##    0.01616162    0.01414141    0.01313131    0.01313131    0.01111111
+## '0 0 0 Z 0 0  '0 Z 0 0 0 0  '0 0 0 0 0 0  '0 Z 0 0 Z 0  'Z 0 0 0 0 0  
+##   0.040404040   0.036363636   0.029292929   0.017171717   0.017171717 
+## '0 Z 0 0 0 Z  '0 0 0 Z 0 Z  '0 Z 0 0 0 1  'Z 0 Z 0 0 0  '0 Z Z 0 0 0  
+##   0.015151515   0.013131313   0.011111111   0.011111111   0.009090909
 ```
 
-Output indicates that an extremely large number of models were sampled in the posterior distribution (433!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 3% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal). 
+Output indicates that an extremely large number of models were sampled in the posterior distribution (417!) and the top ten models represented an extremely small proportion of the total sample of models (the best model represented about 4% of all the models). This indicates that support for any one model over other possible models is weak, and in light of this, the simplest model should be chosen (i.e., all rates equal). 
 
 ### Fossilizing and reconstructing an ancestral state
 
@@ -140,9 +142,9 @@ bf
 
 ```
 ##   BayesFactor BetterModel
-## 1    2.645684     Model 2
+## 1     2.40295     Model 2
 ```
-The Bayes factor is 2.645684 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the *Homo_sapiens*/*Hylobates_agilis* ancestor. Let's use maximum likelihood this time (the default setting).
+The Bayes factor is 2.40295 and the unconstrained model is preferred. We can also estimate the probabilities of different ancestral states for the *Homo_sapiens*/*Hylobates_agilis* ancestor. Let's use maximum likelihood this time (the default setting).
 
 
 ```r
@@ -151,13 +153,13 @@ reconstruct
 ```
 
 ```
-##   Tree.No        Lh      q01 q02 q10      q12      q20      q21 Root.P.0.
-## 1       1 -4.572687 0.030729   0   0 0.239955 0.145414 0.433487  0.329236
+##   Tree.No       Lh      q01 q02 q10      q12      q20      q21 Root.P.0.
+## 1       1 -4.57253 0.030712   0   0 0.230038 0.144491 0.407152  0.329537
 ##   Root.P.1. Root.P.2. mrcaNode1.P.0. mrcaNode1.P.1. mrcaNode1.P.2.
-## 1  0.334561  0.336203       0.439589       0.263967       0.296444
+## 1  0.334336  0.336127        0.43936       0.263284       0.297356
 ```
 
-Results indicate that there is only a 29.6% chance that the *Homo_sapiens*/*Hylobates_agilis* ancestor was in state 2, which is consistent with our finding that the model where we fossilized that ancestor at 2 was significantly worse than the unconstrained model.
+Results indicate that there is only a 29.7% chance that the *Homo_sapiens*/*Hylobates_agilis* ancestor was in state 2, which is consistent with our finding that the model where we fossilized that ancestor at 2 was significantly worse than the unconstrained model.
 
 ## Using Discrete in 'Discrete' mode 
 
@@ -176,7 +178,7 @@ lrtest(corrD, nocorrD)
 
 ```
 ##   model1.Lh model2.Lh   LRstat      pval
-## 1 -5.684847 -6.786591 2.203488 0.1376988
+## 1 -5.683085 -6.786591 2.207012 0.1373845
 ```
 
 The difference is not significant, indicating that the simpler model (no correlation) should be preferred. The output from these models can be a little confusing, but the `plotdiscrete` function allows visualization of the results. 
@@ -186,7 +188,7 @@ The difference is not significant, indicating that the simpler model (no correla
 plotdiscrete(nocorrD, main="Independent")
 ```
 
-![plot of chunk project_btw_discrete](/figure/project_btw_discrete-1.png)
+![plot of chunk project_btw_discrete](figure/project_btw_discrete-1.png)
 
 ```r
 plotdiscrete(corrD, main="Dependent")
@@ -282,7 +284,7 @@ Here is a density plot for the likelihood.
 densplot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk project_btw_dens](/figure/project_btw_dens-1.png)
+![plot of chunk project_btw_dens](figure/project_btw_dens-1.png)
 
 Here is a trace plot for the likelihood.
 
@@ -291,7 +293,7 @@ Here is a trace plot for the likelihood.
 traceplot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk project_btw_trace](/figure/project_btw_trace-1.png)
+![plot of chunk project_btw_trace](figure/project_btw_trace-1.png)
 
 Here is an autocorrelation plot for the likelihood.
 
@@ -300,7 +302,7 @@ Here is an autocorrelation plot for the likelihood.
 autocorr.plot(mcmc(coda.demo$Lh))
 ```
 
-![plot of chunk project_btw_autocorr](/figure/project_btw_autocorr-1.png)
+![plot of chunk project_btw_autocorr](figure/project_btw_autocorr-1.png)
 
 This all just goes to say that `btw` makes it easy for you to use the tools provided by `coda` to do MCMC diagnostics. Check out the `coda` documentation for more info!
 
