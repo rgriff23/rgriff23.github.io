@@ -7,7 +7,7 @@ tags: R blog hack
 
 Thanks largely to [this awesome blog post](http://programminghistorian.org/lessons/building-static-sites-with-jekyll-github-pages), it took me less than an hour to set up a local [jekyll](https://jekyllrb.com/) site on my machine and familiarize myself with the structure. Next, I started pulling and modifying files from the [hyde](https://github.com/poole/hyde) theme until I had the basic look I wanted (a minimalist black-and-white theme with a permanent sidebar and blog). I added some basic content (About Me, publications, etc), and by nightfall I was happy enough with my new site to go live on [GitHub Pages](https://pages.github.com/). Not bad for a day's work. 
 
-But the smooth sailing ended the next day when I started trying to incorporate R Markdown documents with R code and graphical output. I read several blog posts on using R Markdown and `knitr` to create pages for your jekyll/GitHub site (e.g., here, here, and here). The basic idea is this: 
+But the smooth sailing ended the next day when I started trying to incorporate R Markdown documents with R code and graphical output. I read several blog posts on using R Markdown and `knitr` to create pages for your jekyll/GitHub site (e.g., [here](https://rgriff23.github.io/) and [here](https://nicolewhite.github.io/2015/02/07/r-blogging-with-rmarkdown-knitr-jekyll.html)). The basic idea is this: 
 
 1. Write your page in an [R Markdown](http://rmarkdown.rstudio.com/) document, including chunks of R code
 2. Use [`knitr`](https://yihui.name/knitr/) to "knit" the `*.Rmd` file, which produces a simple [Markdown](http://www.markdowntutorial.com/) `*.md` file and output files, including any figures produced by your R code
