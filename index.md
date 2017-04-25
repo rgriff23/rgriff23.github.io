@@ -13,5 +13,5 @@ I have served as a TA for three undergraduate courses, an instructor at multiple
 
 *Ice hockey*
 
-I grew up playing in NC, then <a target="_blank" href="http://www.thecrimson.com/article/2010/2/23/whockey-aotw-griffin-022310/">played at Harvard</a> from 2006-10. After graduating, I hung up my player skates and got into coaching youth hockey. That is until 2015, when I made a surprise comeback to <a target="_blank" href="http://english.yonhapnews.co.kr/interview/2017/04/07/16/0800000000AEN20170407003200315F.html">play for Team Korea</a> (I am half Korean)! Luckily, being in the writing phase of my dissertation has given me the flexibility to spend a lot of time in Seoul.
+I grew up playing in NC, then <a target="_blank" href="http://www.thecrimson.com/article/2010/2/23/whockey-aotw-griffin-022310/">played at Harvard</a> from 2006-10. After graduating, I hung up my player skates and got into coaching youth hockey. That is until 2015, when I made a surprise comeback to <a target="_blank" href="http://english.yonhapnews.co.kr/interview/2017/04/07/16/0800000000AEN20170407003200315F.html">play for Team Korea</a>! Luckily, being in the writing phase of my dissertation has given me the flexibility to spend a lot of time in Seoul.
 
