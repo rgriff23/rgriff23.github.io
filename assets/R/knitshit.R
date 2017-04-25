@@ -32,4 +32,7 @@ knitshit <- function (site, file, figs) {
 }
 
 # example usage
-# knitshit(file = "projects/file.Rmd", site = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", figs = "assets/Rfigs/")
+# file = "projects/file.Rmd"
+# site = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/"
+# figs = "assets/Rfigs/"
+# knitshit(file = file, site = site, figs = figs)
