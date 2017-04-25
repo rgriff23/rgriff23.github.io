@@ -1,8 +1,8 @@
 ---
-output: 
-  html_document:
-    theme: united
-    highlight: kate
+title: "Team USA women vs NHL hockey players on Twitter (twitteR)"
+layout: post
+date: 2017-04-xx
+tags: R hockey society
 ---
 
 ```{r data, include=FALSE}
