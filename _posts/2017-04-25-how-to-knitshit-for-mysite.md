@@ -1,5 +1,5 @@
 ---
-title: "File path nightmare with R Markdown/knitr/jekyll/GitHub"
+title: "Figure path nightmare with R Markdown/knitr/jekyll/GitHub"
 layout: post
 date: 2017-04-25
 tags: R blog hack
