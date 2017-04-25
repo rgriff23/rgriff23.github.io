@@ -18,7 +18,7 @@ nhl.data$log.Followers <- log(nhl.data$Followers)
 uswnt.data$log.Followers <- log(uswnt.data$Followers)
 ```
 
-It was a good month for the US Women's Ice Hockey National Team (USWNT). In addition to winning their [7th title in 8 years](https://www.usatoday.com/story/sports/hockey/2017/04/07/uswnht-wins-iihf-world-championships-canada/100197176/) at the IIHF World Championships, they negotiated with USA Hockey [to secure](https://www.nytimes.com/2017/03/28/sports/hockey/usa-hockey-uswnt-boycott.html?_r=0) a \$2000 year-round monthly stipend, increased bonuses, a committee for promoting the growth of women’s ice hockey, and the same travel and insurance accommodations as the men’s team. Previously, players received only [$1000 per month](http://www.espn.com/espnw/voices/article/18908360/time-usa-hockey-wake-support-women-team) from USA Hockey during the 6 months leading up to the Olympics, despite the fact that players were expected to train year-round. The deal was a direct result of the USWNT boycott of the World Championship tournament, and represents a historic victory for women’s sports. 
+April was a good month for the US Women's Ice Hockey National Team (USWNT). In addition to winning their [7th title in 8 years](https://www.usatoday.com/story/sports/hockey/2017/04/07/uswnht-wins-iihf-world-championships-canada/100197176/) at the IIHF World Championships, they negotiated with USA Hockey [to secure](https://www.nytimes.com/2017/03/28/sports/hockey/usa-hockey-uswnt-boycott.html?_r=0) a \$2000 year-round monthly stipend, increased bonuses, a committee for promoting the growth of women’s ice hockey, and the same travel and insurance accommodations as the men’s team. Previously, players received only [$1000 per month](http://www.espn.com/espnw/voices/article/18908360/time-usa-hockey-wake-support-women-team) from USA Hockey during the 6 months leading up to the Olympics, despite the fact that players were expected to train year-round. The deal was a direct result of the USWNT boycott of the World Championship tournament, and represents a historic victory for women’s sports. 
 
 But some hockey fans just can’t handle it. They lash out in the comment sections of articles, littering them with comments such as these:  
 
@@ -84,6 +84,6 @@ As a final thought, it is worth remembering that NHL salaries were not always wh
 
 **Footnotes:** 
 
-*Twitter data was compiled in April, 2017.*
+*Twitter data was compiled in mid-April, 2017.*
 
 *Data and R code is on [GitHub](https://github.com/rgriff23/NHL_on_twitter).*
