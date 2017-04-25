@@ -18,7 +18,7 @@ Unfortunately, none of the blogs prepared me for the file path nightmare I was a
 
 I checked the `html` source code for the page and discovered the immediate problem: the file paths to the figures had an extra forward slash appended to the beginning of the path, e.g., `<img src="//project/figure/fig.png" />` rather than `<img src="/project/figure/fig.png" />`. Apparently the offending slash was being added when my `*.md` files were rendered into `*.html` by GitHub/jekyll. 
 
-I am not even going to attempt to figure out what sorcery caused this extra slash to appear in my `html`- I'm sure there is a reason why GitHub/jekyll behave this way, and it is probably a good one. What I AM going to do is explain what exactly I did that seemed caused the problem, and how I fixed it with a few lines of R code.  
+I am not even going to attempt to figure out what sorcery caused this extra slash to appear in my `html`- I'm sure there is a reason why GitHub/jekyll behave this way, and it is probably a good one. What I AM going to do is explain what exactly I did that seemed to cause the problem, and how I fixed it with a few lines of R code.  
 
 ### The problem
 
