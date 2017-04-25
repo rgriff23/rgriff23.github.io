@@ -14,7 +14,7 @@ title: Blog
 *
 {% endcomment %}
 <ul>
-    {% assign sorted = (site.collection_name | sort: 'date') | reverse %}
+    {% assign sorted = (site.posts | sort: 'date') | reverse %}
     {% for item in sorted %}
     <li>{{ item.title }}</li>
     {% endfor %}
