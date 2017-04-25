@@ -1,13 +1,9 @@
 ---
 title: "File path nightmare with R Markdown/knitr/jekyll/GitHub"
 layout: post
-date: 2017-04-24
+date: 2017-04-25
 tags: R blog hack
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(eval=FALSE)
-```
 
 Thanks largely to [this awesome blog post](http://programminghistorian.org/lessons/building-static-sites-with-jekyll-github-pages), it took me less than an hour to set up a local [jekyll](https://jekyllrb.com/) site on my machine and familiarize myself with the structure. Next, I started pulling and modifying files from the [hyde](https://github.com/poole/hyde) theme until I had the basic look I wanted (a minimalist black-and-white theme with a permanent sidebar and blog). I added some basic content (About Me, publications, etc), and by nightfall I was happy enough with my new site to go live on [GitHub Pages](https://pages.github.com/). Not bad for a day's work. 
 
@@ -28,7 +24,8 @@ I am not even going to attempt to figure out what sorcery caused this extra slas
 
 Locally, my website lives in the directory `/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/`. After creating my `caRds.Rmd` file, I added it to my website's `projects` folder, and then ran `knit` like so:
 
-```{r}
+
+```r
 # load knitr
 library(knitr)
 
@@ -76,7 +73,8 @@ However, in order for the paths to be specified correctly when GitHub/jekyll bui
 
 Here is how this can work in R:
 
-```{r, eval=TRUE}
+
+```r
 # define paths
 base.dir <- "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/"
 base.url <- "/"
@@ -84,14 +82,25 @@ fig.path <- "projects/figure/"
 
 # this is where figures will be sent
 paste0(base.dir, fig.path)
+```
 
+```
+## [1] "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/projects/figure/"
+```
+
+```r
 # this is where markdown will point for figures
 paste0(base.url, fig.path)
 ```
 
+```
+## [1] "/projects/figure/"
+```
+
 Okay, that looks like what I want! Now, set the parameters using `opts_knit` and `opts_chunk`.
 
-```{r}
+
+```r
 # set knitr parameters
 opts_knit$set(base.dir = base.dir, base.url = base.url)
 opts_chunk$set(fig.path = fig.path) 
@@ -99,7 +108,8 @@ opts_chunk$set(fig.path = fig.path)
 
 And finally, navigate to the `project` directory containing `caRds.Rmd` and run `knit` (this ensures that `knit` sends `caRds.md` to the same directory as `caRds.Rmd`, which is what I want)
 
-```{r}
+
+```r
 # change directory
 setwd("/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/projects/")
 
@@ -111,7 +121,8 @@ And that does the trick! The resulting Markdown file now points towards figures 
 
 Now, there are a couple ways to clean this up so I don't have to type all these lines of code every time I use `knit`. One way would be to set the `knit` options within the `*.Rmd` file itself. For instance, if I add the following lines of code to an R chunk placed right after the front matter in `caRds.Rmd`:
 
-```{r}
+
+```r
 opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 opts_chunk$set(fig.path = "projects/figure/")
 ```
@@ -120,7 +131,8 @@ Then I can just navigate to the `project` directory and run `knit` without setti
 
 Instead, it is probably better to write a function to automate this. The following function identifies your current directory, moves you to the same directory as the `*.Rmd` file you want to knit, sets the `knitr` options, runs `knit`, returns the `knitr` options to their default settings, and finally returns you to your original directory. 
 
-```{r}
+
+```r
 # arguments:
 ## site: path from MACHINE ROOT to site (include final slash)
 ## file: path from SITE ROOT to the *.Rmd you are knitting
@@ -152,12 +164,12 @@ knitshit <- function (site, file, figs) {
   # return to original directory
   setwd(current)
 }
-
 ```
 
 So to use this function for my `caRds.Rmd` example, I would do
 
-```{r}
+
+```r
 knitshit(site = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/",
          file = "projects/caRds.Rmd",
          figs = "projects/figure/")
