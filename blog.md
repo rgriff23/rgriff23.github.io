@@ -3,19 +3,14 @@ layout: page
 title: Blog
 ---
 
-{% comment %}
-*
-*  This loop loops through a collection called `collection_name`
-*  and sorts it by the front matter variable `date` and than filters
-*  the collection with `reverse` in reverse order
-*
-*  To make it work you first have to assign the data to a new string
-*  called `sorted`.
-*
-{% endcomment %}
-<ul>
-    {% assign sorted = (site.posts | sort: 'date') | reverse %}
-    {% for item in sorted %}
-    <li>{{ item.title }}</li>
-    {% endfor %}
-</ul>
+{% for post in site.posts %}
+  {% assign currentdate = post.date | date: "%B %Y" %}
+  {% if currentdate != date %}
+    {% unless forloop.first %}</ul>{% endunless %}
+    <h1 id="y{{post.date | date: "%Y"}}">{{ currentdate }}</h1>
+    <ul>
+    {% assign date = currentdate %}
+  {% endif %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+  {% if forloop.last %}</ul>{% endif %}
+{% endfor %}
