@@ -2,7 +2,7 @@
 title: "File path nightmare with R Markdown/knitr/jekyll/GitHub"
 layout: post
 date: 2017-04-24
-tags: R, blog, hack
+tags: R blog hack
 ---
 
 ```{r setup, include=FALSE}
