@@ -5,7 +5,7 @@ date: 2017-04-25
 tags: blog
 ---
 
-Like many who spend a lot of time in front of an R console, I possess a junkyard of code that sprawls across multiple hard drives, Dropbox, GitHub, and probably a few other places. With every passing year, I spend less time writing fresh code and more time searching through old source files muttering, "I KNOW I wrote a function for that somewhere...". My junkyard has saved me from countless hours of reinventing the wheel.
+Like many who spend a lot of time in front of an R console, I possess a junkyard of code that sprawls across multiple hard drives, Dropbox, GitHub, and probably a few other places. With every passing year, I spend less time writing fresh code and more time searching through old source files muttering, "I KNOW I wrote a function for that somewhere...". My old code has saved me from countless hours of reinventing the wheel.
 
 But something that has saved me even more time is the growing community of R users who share their code and knowledge online. Whenever a problem has me bamboozled, there is a good chance the solution will come from an unassuming post on a forum, listserve, or personal blog. Occasionally I am familiar with the person who helped me solve my problem, but most of the time I am the anonymous recipient of an anonymous gift. 
 
