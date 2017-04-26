@@ -2,7 +2,7 @@
 title: "Team USA women vs NHL hockey players on Twitter (twitteR)"
 layout: post
 date: 2017-04-30
-tags: R hockey society
+tags: R hockey Twitter twitteR
 ---
 
 ```{r setup, include=FALSE}
