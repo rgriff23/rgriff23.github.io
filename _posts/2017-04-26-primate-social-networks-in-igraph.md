@@ -5,19 +5,12 @@ date: 2017-04-26
 tags: R ecology tutorial
 ---
 
-```{r setup, include=FALSE, message=FALSE}
-# knitr
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE)
-opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 
-# load packages
-library(igraph)
-library(data.table)
-```
 
 This tutorial (which I'm just migrating from my old site) covers the basics of importing, visualizing, and analyzing social networks in R using the [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html) package. As an example, I use data on primate social networks from my undergraduate honors thesis. Before we start, install and load the packages `igraph` and `data.table` (the latter is just for reading the data directly from GitHub).
 
-```{r, eval=FALSE}
+
+```r
 # install packages
 install.packages("igraph")
 install.packages("data.table")
@@ -31,7 +24,8 @@ library("data.table")
 
 I provide two primate social networks: one for baboons (*Papio papio*) and one for chimpanzees (*Pan troglodytes*). Both networks come from field studies on grooming interactions among troop members over a period of a few months (Boese 1975; Arnold & Whiten, unpublished data). The networks are weighted and undirected, and the node labels indicate whether individuals are male or female (the chimpanzee data also indicates whether individuals are adults, but we are going to ignore that information). The data are currently in the form of adjacency matrices in `*.csv` files on this [GitHub repo](https://github.com/rgriff23/Primate_social_networks), so we can read them into R like this:
 
-```{r, message=FALSE}
+
+```r
 # import Papio data from GitHub
 Papio.adj <- data.frame(fread('https://raw.githubusercontent.com/rgriff23/Primate_social_networks/master/data/Papio.csv'), row.names=1)
 
@@ -41,7 +35,8 @@ Pan.adj <- data.frame(fread('https://raw.githubusercontent.com/rgriff23/Primate_
 
 The imported `*.csv` data are now in dataframes. We can convert them into weighted `igraph` edgelists like this:
 
-```{r}
+
+```r
 # convert Papio to edgelist
 Papio.edges <- graph_from_adjacency_matrix(as.matrix(Papio.adj), mode="undirected", weighted=TRUE)
 
@@ -57,13 +52,17 @@ Network visualization tools in `igraph` are very flexible. Here, I'll demonstrat
 
 We'll begin by focusing on the *Papio* network. Let's look at the most basic plot with all the default settings:
 
-```{r post_2017-04_primate-sna_papio-default, fig.width=5, fig.height=5}
+
+```r
 plot(Papio.edges, main="Papio")
 ```
 
+![plot of chunk post_2017-04_primate-sna_papio-default](/assets/Rfigs/post_2017-04_primate-sna_papio-default-1.png)
+
 But we can do better. Let's add colors to represent males and females, and edge weights to represent the strength of interactions among individuals. I'm going to be super gender normative and use blue for males and pink for females. In addition to coloring the vertices, I'll make a number of other aesthetic adjustments to the graph: reduce the size of vertices and vertex labels, and color edges black:
 
-```{r post_2017-04_primate-sna_papio-pretty, fig.width=5, fig.height=5}
+
+```r
 # Define vector of colors based on sex for Papio
 pap.sexes <- V(Papio.edges)$name
 pap.sexes <- gsub("M[0-9]*", "skyblue", pap.sexes)
@@ -73,9 +72,12 @@ pap.sexes <- gsub("F[0-9]*", "hotpink", pap.sexes)
 plot(Papio.edges, main="Papio- pretty version", vertex.color=pap.sexes, vertex.size=10, vertex.label.cex=0.5, edge.width=edge_attr(Papio.edges)$weight*0.25, edge.color="black")
 ```
 
+![plot of chunk post_2017-04_primate-sna_papio-pretty](/assets/Rfigs/post_2017-04_primate-sna_papio-pretty-1.png)
+
 There are many algorithms for placing nodes in the plot, some of which force the nodes into particular patterns, and others that try to spread nodes out in a meaningful, visually appealing way. The following 3 X 3 plot shows examples of many layout options available in `igraph`, and also illustrates how to add attributes to the graph object that will lead to automatically generated graphical parameters such as node and edge colors or weights. 
 
-```{r post_2017-04_primate-sna_papio-layouts, fig.width=7, fig.height=7}
+
+```r
 # Add attributes to new network, Papio.edges2
 Papio.edges2 <- set.vertex.attribute(Papio.edges, "color", value=pap.sexes)
 Papio.edges2 <- set.vertex.attribute(Papio.edges2, "size", value=10)
@@ -98,6 +100,8 @@ plot(Papio.edges2, main="Randomly", layout=layout_randomly, vertex.label=NA)
 plot(Papio.edges2, main="Nicely", layout=layout_nicely, vertex.label=NA)
 ```
 
+![plot of chunk post_2017-04_primate-sna_papio-layouts](/assets/Rfigs/post_2017-04_primate-sna_papio-layouts-1.png)
+
 The default option is "nicely", which will apply a force-directed layout and usually works pretty well. It attempts to do 5 things:
 
 1. Distribute vertices evenly in the frame
@@ -110,7 +114,8 @@ This method generally makes the nodes and edges easy to see, although a potentia
 
 Now, let's do a comparison between the *Pan* and *Papio* networks (we'll have to define the color coding for sexes for *Pan*):
 
-```{r post_2017-04_primate-sna_papio-pan, fig.width=6, fig.height=3}
+
+```r
 # Define vector of colors based on sex for Pan
 pan.sexes <- vertex_attr(Pan.edges)$name
 pan.sexes <- gsub("[A-D]M[0-9]*", "skyblue", pan.sexes)
@@ -131,6 +136,8 @@ plot(Papio.edges2, main="Papio", vertex.label=NA)
 plot(Pan.edges2, main="Pan", vertex.label=NA)
 ```
 
+![plot of chunk post_2017-04_primate-sna_papio-pan](/assets/Rfigs/post_2017-04_primate-sna_papio-pan-1.png)
+
 This plot reveals exactly what any primatologist would expect. The matriarchal baboons, *Papio*, have females at the center of the network, and females have numerous interactions with other females. Meanwhile, the relatively small number of *Papio* males are more peripheral, and there are few relationships between male baboons- rather, male grooming interactions are primarily with females. In contrast, the patriarchal chimpanzees, *Pan*, have males at the center of the network. Males chimps have many interactions among themselves, while females are peripheral and appear to interact exclusively with males rather than with each other. 
 
 ## Analysis
@@ -141,7 +148,8 @@ Network metrics fall into two major categories: 1) node or individual-level metr
 
 Individual-level metrics capture the relative "importance" of nodes in a network. There are many different metrics that have different properties, and their appropriateness depends on the research question. The simplest metric is "degree centrality", which is defined as the number of connections for a given node.
 
-```{r}
+
+```r
 # Compute degree
 pan.degree <- degree(Pan.edges)
 papio.degree <- degree(Papio.edges)
@@ -149,7 +157,8 @@ papio.degree <- degree(Papio.edges)
 
 A slightly more nuanced metric is "strength centrality", which is defined as the sum of the weights of all the connections for a given node. This is also sometimes called "weighted degree centrality".
 
-```{r}
+
+```r
 # Compute strength
 pan.strength <- strength(Pan.edges)
 papio.strength <- strength(Papio.edges)
@@ -157,7 +166,8 @@ papio.strength <- strength(Papio.edges)
 
 Closeness centrality is a measure of how far other nodes are from the node in question. Nodes with high closeness centrality are likely to be relatively efficient in receiving or transmitting information to/from distant parts of the social network.
 
-```{r}
+
+```r
 # Weighted closeness
 pan.closeness <- closeness(Pan.edges)
 papio.closeness <- closeness(Papio.edges)
@@ -165,7 +175,8 @@ papio.closeness <- closeness(Papio.edges)
 
 Betweenness measures the number of shortest paths between nodes in the network that go through the node in question. Nodes with relatively high betweenness are likely to be key conduits of information flow across a network, and their removal may have a large impact on spreading phenomena. 
 
-```{r}
+
+```r
 # Weighted betweenness
 pan.betweenness <- betweenness(Pan.edges)
 papio.betweenness <- betweenness(Papio.edges)
@@ -173,7 +184,8 @@ papio.betweenness <- betweenness(Papio.edges)
 
 Eigenvector centrality is defined as the values of the principal eigenvector for the network when represented as a matrix. Under this metric, a node's centrality score is proportional to the centrality scores of it's connections. 
 
-```{r}
+
+```r
 # Eigenvector centrality
 pan.eigencent <- eigen_centrality(Pan.edges)
 papio.eigencent <- eigen_centrality(Papio.edges)
@@ -183,7 +195,8 @@ papio.eigencent <- papio.eigencent$vector
 
 We can now compare how these different measures of centrality differ from each other and between our two primate networks. I'm going to use the grid layout for these plots because it has a consistent structure that maximizes space between the nodes, and I am plotting node sizes proportional to their centrality scores (normalizing them so that the largest centrality score always corresponds to a node size of 30). 
 
-```{r post_2017-04_primate-sna_centrality, fig.width=8, fig.height=3.2}
+
+```r
 # Set grid layout attribute
 Papio.edges3 <- set.graph.attribute(Papio.edges2, "layout", layout.grid)
 Pan.edges3 <- set.graph.attribute(Pan.edges2, "layout", layout.grid)
@@ -205,6 +218,8 @@ plot(Pan.edges3, vertex.label=NA, vertex.size=(30*pan.betweenness)/max(pan.betwe
 plot(Pan.edges3, vertex.label=NA, vertex.size=(30*pan.eigencent)/max(pan.eigencent))
 ```
 
+![plot of chunk post_2017-04_primate-sna_centrality](/assets/Rfigs/post_2017-04_primate-sna_centrality-1.png)
+
 These plots show that in general, females tend to occupy more central positions in the *Papio* network, while males tend to occupy more central positions in the *Pan* network. These plots also make it clear that the different measures of centrality capture different features of network connectivity. Degree, strength, and eigenvector centrality paint fairly similar pictures of "importance" in these networks, while closeness and betweenness are very different. Closeness does not vary much across either the *Pan* or *Papio* networks, reflecting the fact that in such small, dense networks, all nodes are close to all other nodes. On the other hand, betweenness centrality identifies a small number of individuals as being important "stepping stones" connecting different individuals in the network. In particular, one male in the *Pan* network stands out as having the highest betweenness centrality, even though that individual does not have very high degree, strength, or eigenvector centrality. 
 
 ### Network level metrics
@@ -221,7 +236,8 @@ Measures of network centralization correspond to individual-level centrality mea
 
 There are `igraph` functions for computing the centralization index for all of the centrality metrics we considered in the previous section, except for strength centrality.
 
-```{r}
+
+```r
 # Centralization scores for Papio
 pap.centz <- centr_degree(Papio.edges)$centralization
 pap.centz[2] <- centr_clo(Papio.edges)$centralization
@@ -240,9 +256,16 @@ dimnames(tab.centz)[[2]] <- c("Degree", "Closeness", "Betweenness", "Eigenvector
 tab.centz
 ```
 
+```
+##          Degree Closeness Betweenness Eigenvector
+## Papio 0.3433333 0.3494808  0.10884700   0.5372668
+## Pan   0.3320158 0.3870215  0.09206458   0.4410753
+```
+
 One can also get an idea of how centralized a network is from looking at the distribution of centrality scores. Essentially, if there are many nodes with low centrality and very few nodes with high centrality, then the network is highly centralized. Here are what the centrality distributions look like for different centrality measures on the two networks.
 
-```{r post_2017-04_primate-sna_histograms, fig.width=8, fig.height=3.2}
+
+```r
 # Plot histograms of centrality scores
 layout(matrix(1:10, 2, 5, byrow = TRUE))
 par(mar=c(3,5,3,1))
@@ -260,6 +283,8 @@ hist(pan.betweenness, main="", col="gray", xlab="", ylab="")
 hist(pan.eigencent, main="", col="gray", xlab="", ylab="")
 ```
 
+![plot of chunk post_2017-04_primate-sna_histograms](/assets/Rfigs/post_2017-04_primate-sna_histograms-1.png)
+
 The *Papio* network shows moderate centralization for all metrics except closeness centrality, which is consistently high across individuals (indicating that everyone is close to everyone else, as expected in a small densely connected network). The *Pan* network shows moderate centralization for strength, betweenness, and eigenvector centrality, but lower centralization for degree and closeness. 
 
 ### *Modularity*
@@ -268,7 +293,8 @@ Modularity analysis can either be hypothesis driven or exploratory. Hypothesis d
 
 With small, densely connected networks such as ours, I would not expect modularity to be strong. Baboon troops are united by a core group of bonded females, while chimpanzee troops are united by a core group of bonded males. However, there may be subtle subdivisions within these groups. Let's run a clustering algorithm and see what it finds:  
 
-```{r}
+
+```r
 # Clustering algorithm for baboons
 Papio.clust <- cluster_spinglass(Papio.edges)
 
@@ -278,7 +304,8 @@ Pan.clust <- cluster_spinglass(Pan.edges)
 
 We can use the output from the clustering analysis to make a nifty plot that depicts the modules in the network:
 
-```{r, eval=FALSE}
+
+```r
 # Overlay modules on network plots
 layout(matrix(1:2, 1, 2))
 par(mar=c(1,1,2,1))
