@@ -1,9 +1,15 @@
 ---
 title: "Mosquito community diversity analysis (vegan)"
 layout: post
-date: 2017-04-xx
+date: 2017-04-28
 tags: R ecology tutorial
 ---
+
+```{r setup, include=FALSE, message=FALSE}
+# knitr settings
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE)
+opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+```
 
 In this tutorial, I demonstrate how to use the R package [`vegan`](https://cran.r-project.org/web/packages/vegan/index.html) to analyze an original dataset on the abundance of mosquito species in the Raleigh-Durham area of North Carolina. This tutorial is based on the analysis I performed for [this paper](/assets/pdfs/Reiskind_etal_2016.pdf) in collaboration with the [Reiskind lab](http://vectorecology.org/) at NC State University. 
 
