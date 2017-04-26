@@ -3,7 +3,7 @@ title: "First post!"
 layout: post
 date: 2017-04-24
 tags: blog
-comment: true
+comments: true
 ---
 
 Like many who spend a lot of time in front of an R console, I possess a junkyard of code that sprawls across multiple hard drives, Dropbox, GitHub, and probably a few other places. With every passing year, I spend less time writing fresh code and more time searching through old source files muttering, "I KNOW I wrote a function for that somewhere...". My old code has saved me from countless hours of reinventing the wheel.
