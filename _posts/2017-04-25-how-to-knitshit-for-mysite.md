@@ -3,6 +3,7 @@ title: "Figure path nightmare with R Markdown/knitr/jekyll/GitHub"
 layout: post
 date: 2017-04-25
 tags: R blog hack knitr
+comments: true
 ---
 
 Thanks largely to [this awesome blog post](http://programminghistorian.org/lessons/building-static-sites-with-jekyll-github-pages), it took me less than an hour to set up a local [jekyll](https://jekyllrb.com/) site on my machine and familiarize myself with the structure. Next, I started pulling and modifying files from the [hyde](https://github.com/poole/hyde) theme until I had the basic look I wanted (a minimalist black-and-white theme with a permanent sidebar and blog). I added some basic content (About Me, publications, etc), and by nightfall I was happy enough with my new site to go live on [GitHub Pages](https://pages.github.com/). Not bad for a day's work. 

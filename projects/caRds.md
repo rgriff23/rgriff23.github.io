@@ -2,6 +2,7 @@
 layout: project
 title: "caRds"
 author: Randi H. Griffin
+comments: true
 ---
 
 This is an R package for producing pretty caRds for special occasions. If you have the devtools package installed, you can install `caRds` from GitHub:
