@@ -7,95 +7,358 @@ tags: R ecology tutorial mosquitoes vegan
 
 ```{r setup, include=FALSE, message=FALSE}
 # knitr settings
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE)
-opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ")
+#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+knitr::opts_chunk$set(message=FALSE, comment=" ", cache=TRUE)
+
+# load packages 
+library(vegan)
+library(data.table)
+library(ggplot2)
+
+data <- read.csv("~/Desktop/GitHub/Mosquito_ecology/Analysis/FinalData.csv", row.names=1)
+data$Habitat <- ordered(data$Habitat, c("Field", "NearField","Edge","NearForest","Forest"))
 ```
 
-In this tutorial, I demonstrate how to use the R package [`vegan`](https://cran.r-project.org/web/packages/vegan/index.html) to analyze an original dataset on the abundance of mosquito species in the Raleigh-Durham area of North Carolina. This tutorial is based on the analysis I performed for [this paper](/assets/pdfs/Reiskind_etal_2016.pdf) in collaboration with the [Reiskind lab](http://vectorecology.org/) at NC State University. 
+*This tutorial is based on the data and analyses from [this paper](/assets/pdfs/Reiskind_etal_2016.pdf) I wrote in collaboration with the [Reiskind lab](http://vectorecology.org/) at NC State University.*
+
+___
+
+In this tutorial, I demonstrate how to use the R package [`vegan`](https://cran.r-project.org/web/packages/vegan/index.html) to analyze an original dataset on the abundance of mosquito species in the Raleigh-Durham area of North Carolina. I cover the calculation of diversity measures, comparison of diversity measures across habitat types using linear models, and visualization of patterns in community composition using multivariate ordination methods (both constrained and unconstrained correspondence analysis). 
 
 ## Study design
 
-We selected three regions in the Raleigh-Durham area of NC. Within each region, we identified 3 200m transects that spanned a field-forest habitat gradient. At each site we set up 5 traps along the transect, with the field-forest boundary located at the 100m mark. Altogether, this study design resulted in 45 trap locations (3 regions x 3 transects x 5 trap locations). Each trap was labeled based on it's position along the transect: far-field, near-field, edge, near-forest, or far-forest. 
+We selected three regions in the Raleigh-Durham area of NC (denoted DU, LW, and PR). Within each region, we identified three 200m transects that spanned a field-forest habitat gradient. We set up 5 traps along each transect, with the field-forest boundary located at the 100m mark. Altogether, this study design resulted in 45 trap locations (3 regions x 3 transects x 5 trap locations). 
 
-Using 6-inch ground resolution imagery from the <a target="_blank" href="http://earthexplorer.usgs.gov/">USGS Earth Explorer</a>, we digitally classified the landscape within 100 meters of each trap into 8 categories: grassland, deciduous tree canopy, evergreen tree canopy, mixed tree canopy, shrub, cultivated crops, barren land, pavement, and buildings. 
+Using 6-inch ground resolution imagery from the <a target="_blank" href="http://earthexplorer.usgs.gov/">USGS Earth Explorer</a>, we digitally classified the landscape within a 100 meter radius of each trap into 9 categories and computed the proportion of the landscape that fell into each category: grassland, deciduous tree canopy, evergreen tree canopy, mixed tree canopy, shrub, cultivated crops, barren land, pavement, and buildings. 
 
-To collect mosquitoes, <a target="_blank" href="http://johnwhock.com/products/mosquito-sandfly-traps/cdc-miniature-light-trap/">CDC light traps</a> were hung on T-shaped structures built from PVC pipes. Traps were baited with dry ice because host-seeking mosquitoes are drawn to carbon dioxide. Here is what our trap set-up looked like:
+To collect mosquitoes, <a target="_blank" href="http://johnwhock.com/products/mosquito-sandfly-traps/cdc-miniature-light-trap/">CDC light traps</a> were hung on T-shaped structures built from PVC pipes. Traps were baited with dry ice because host-seeking mosquitoes are drawn to carbon dioxide. Here is a schematic of our study design and a photo of our trap set-up:
 
-![](./mosquitoes/MosquitoTrap.jpg)
+![](http://i.imgur.com/8o6SHPE.jpg)
 
-Traps were set up at dusk and picked up at dawn. Once traps were collected, mosquitoes were taken back to the lab and killed in a freezer before being identified to species level and counted. Collection at each trap took place once every 2 weeks over a 5 month period from June 1 to October 15, 2014. 
+Traps were set up at dusk and picked up at dawn. Mosquitoes were taken back to the lab and killed in a freezer before being identified to species level and counted. Collections took place once every 2 weeks over a 5 month period from June 1 to October 15, 2014. 
 
-## The data
+# The data
 
-Two separate data files are needed for this analysis: 
+Let's open R and load the packages we will need for this analysis, installing them first if you haven't already:
 
-1) **Species abundance** in the form of a site x species matrix, where each cell of the matrix corresponds to the number of specimens that were captured for a given species at a given trap location For example, in the following site x species matrix, 2340 specimens of species A were captured at trap A:
-```{r, include=FALSE}
-# make up a site x species matrix
-```
-2) **Environmental variables** in the form of a data frame, where each column corresponds to an environmental variable and each row corresponds to a trap location, like this:
-```{r, include=FALSE}
-# make up an environmental variable dataframe 
-```
-
-Let's open R and load the packages we will need for this analysis (please install them first if you haven't already):
-
-```{r, message=FALSE}
+```{r, eval=FALSE}
 # load packages
-library(vegan)
-library(data.table) # for reading in data from GitHub
+library("data.table") # for importing data from GitHub
+library("vegan") # community ecology package
+library("ggplot2") # for boxplots and barplots
 ```
 
-Using the `read?` function from the `data.table` package, read the two data files into R.
+Using the `fread` function from the `data.table` package, import the data into R. Let's also specify that `Habitat` is an ordered factor, which will be important for boxplots and linear models. 
 
-```{r}
-# read abundance data
-# read environmental data
+```{r, eval=FALSE}
+# read data from GitHub
+data <- data.frame(fread("https://raw.githubusercontent.com/rgriff23/Mosquito_ecology/master/Analysis/FinalData.csv"), row.names = 1)
+
+# make Habitat an ordered variable
+data$Habitat <- ordered(data$Habitat, c("Field", "NearField","Edge","NearForest","Forest"))
 ```
 
-Take a few minutes to familiarize yourself with the data. The abundance data is a 45 x 23 matrix, with the 45 rows corresponding to the 45 trap locations, and the 23 columns corresponding to 23 different species that were caught over the course of the summer. The environmental data frame also contains 45 rows corresponding to the 45 trap locations, and X columns corresponding the the X environemntal variables that were collected from each trap location. 
+Take a few minutes to familiarize yourself with the data. There are 45 rows corresponding to 45 traps, with row names indicating the trap ID (DU/PR/LW are the regions, followed by the transect and trap numbers). There are 36 columns, which can be broken down as follows: 
 
-Before starting our analysis, we will make one modification to the data. It is recommended to [square root transform]() species abundance data to reduce the impact of the occasional very large count on our results. So let's apply a square root transformation to our abundance matrix:
+1. columns 1-3: trap characteristics (region, transect, habitat)
+2. columns 4-8: landscape variables related to vegetation cover
+3. columns 9-12: landscape variables related to man-made structures
+4. column 13: number of trap-nights
+5. columns 14-36: abundance of mosquito species
 
-```{r}
-abundance <- sqrt(matrix)
-```
- 
-Now on to analysis!
- 
-## Comparing community diversity measures across habitat types
+I refer to these column numbers when subsetting the data for different analyses. 
 
-To begin, we will compute three different measures of community diversity for each trap site:
+## Does species diversity vary across habitats?
+
+This first question requires us to compute mosquito [species diversity](https://en.wikipedia.org/wiki/Species_diversity) indices for each trap location. We will compute three measures of species diversity (although there are many others- the `vegan` package documentation is a helpful resource):
 
 1. Richness, the total number of unique species found at a site
-2. Shannon-Weiner diversity, a common diversity index where species are weighted by abundance (Magurran 2004)
-3. Rarefied richness, or species richness estimated with a resampling procedure to control for variation in sample size (Hurlbert 1971; Heck et al. 1975)
+2. Shannon-Weiner diversity, a common diversity index where species are weighted by abundance
+3. Rarefied richness, or species richness estimated with a resampling procedure to control for variation in sample size
 
-Some thoughts about these metrics
+Here is code to compute these metrics for each trap site:
 
-We then used ANOVA to assess whether community diversity metrics change along transects. In other words, does community diversity vary along the field-forest habitat gradient? Here are boxplots depicting our measures of mosquito community diversity across different habitats:
+```{r}
+# mosquito abundance matrix
+abundance.matrix <- data[,14:36]
 
-![](./mosquitoes/Evenness.png)
+# compute indices and add to new 'indices' data frame
+indices <- data[,c("Region","Transect","Habitat")]
+indices$Richness <- rowSums(abundance.matrix>0)
+indices$Shannon <- diversity(abundance.matrix, index="shannon")
+indices$Rarefied <- c(rarefy(abundance.matrix[1:45,], sample=15))
+```
 
-Our analysis reveals that mosquito community diversity is higher in forested habitat than field habitat. We found that species richness and rarefied richness were both significantly associated with habitat type (*p* < 0.05), while Shannon-Weiner diversity approached significance (*p* < 0.07).
+We can use boxplots to visualize differences in species diversity along our field-forest habitat gradient:
+
+```{r post_2017-04_mosquito-ecology_boxplots, fig.width=7, fig.height=5}
+# boxplots
+data.box <- cbind(Habitat=rep(data$Habitat,3), stack(indices[,4:6]))
+boxplot <- ggplot(data.box, aes(x = Habitat, y = values)) + 
+  geom_boxplot(fill=rep(terrain.colors(6)[5:1],3)) +
+  facet_wrap(~as.factor(ind), nrow=2, scales="free_y")
+plot(boxplot)
+```
+
+It certainly appears that species diversity increases as we move from the field to the forest. We can test for differences among habitats statistically using a linear model, with `Habitat` as a predictor of species diversity:
+
+```{r ANOVA}
+# fit linear models
+mod.richness <- lm(Richness~Habitat, data=indices)
+mod.shannon <- lm(Shannon~Habitat, data=indices)
+mod.rarefied <- lm(Rarefied~Habitat, data=indices)
+
+# ANOVA 
+anova(mod.richness)
+anova(mod.shannon)
+anova(mod.rarefied)
+```
+
+The results support the conclusion that diversity is higher in forest habitat than field habitat. Species richness and rarefied richness are both significantly associated with habitat type (*p* < 0.05), while Shannon-Weiner diversity is close (*p* < 0.07).
+
+The estimated coefficients of the linear models tell us something about *how* species diversity is associated with habitat. Since `Habitat` is coded as an ordered variable (Field -> NearField -> Edge -> NearForest -> Forest), the output might look a little different than what you are used to. Look at the estimated coefficients for the richness model:
+
+```{r}
+summary(mod.richness)
+```
+ 
+There are four estimated coefficients: `Habitat.L`, `Habitat.Q`, `Habitat.C`, and `Habitat^4`. This is because ordered categories are modeled with a polynomial of order *c* - 1, where *c* is the number of levels in the category. In our case, our ordered category `Habitat` has 5 levels, so it will be modeled with a polynomial of order 5 - 1 = 4, e.g., `y = a + bx + cx^2 + dx^3 + ex^4`. In the model output, `Habitat.L` is the linear coefficient in the polynomial, `b`, `Habitat.Q` is the quadratic coefficient `c`, `Habitat.C` is the cubic coefficient `d`, and `Habitat.^4` is of course `e`. Only the linear coefficient is significant in our models and the coefficient is positive, indicating that our mosquito diversity indices increase linearly as one moves from trap to trap along our field-forest transects.
+
+The model above could be improved in various ways. For instance, we could include `Region` and `Transect` as nested random effects in a mixed effects model:
+
+```{r ANOVA2, eval=FALSE}
+# load package for mixed effects models
+library(lme4)
+
+# fit random effects model for Richness
+mixed.model <- lmer(Richness~ Habitat + (1 | Region / Transect), data=indices)
+```
+
+If you experiment with some models, you will find that region and transect do account for a significant amount of variation in the data (region moreso than transect), but the estimated relationship between habitat and species diversity is consistent. 
+
 
 ## Identifying major axes of variation in community composition
 
-In this section we will perform an exploratory [ordination analysis](https://en.wikipedia.org/wiki/Ordination_(statistics)), which will help us identify 1) which collection sites are most similar in terms of their composition of mosquito species, and 2) which mosquito species are most similar in terms of their distribution across collection sites. 
+In this section we will perform some exploratory [ordination analyses](https://en.wikipedia.org/wiki/Ordination_(statistics)), which can help us identify 1) which collection sites are most similar in terms of their composition of mosquito species, and 2) which mosquito species are most similar in terms of their distribution across collection sites. Ordination methods are generally more useful for visualization and data exploration than for hypothesis testing, but that is an important role. A community diversity study like this would feel incomplete without some sort of ordination plot.  
 
-## Closing thoughts
+Ordination techniques fall into two major categories: *unconstrained* and *constrained*. The most widely used *unconstrained* ordination method is principal components analysis (PCA), which takes a dataset and identifies the axes that optimally account for variation in the data. PCA is agnostic about what factors underly those axes of variation. In contrast, *constrained* ordination is like a mashup of PCA and regression analysis, in which the axes of variation are constrained to be linear combinations of a set of predictor variables. 
 
-Our analysis shows that forests tended to have greater mosquito species diversity than fields. In addition, the dominant predictor of mosquito community composition is a tree density gradient, with regional differences playing a secondary role. Thus, mosquito communities within 100m of each other in adjacent field and forest habitats are more dissimilar than mosquito communities occupying similar habitats that are separated by many miles. 
+The `vegan` package provides functions for performing two popular families of ordination methods: `cca` for 'correspondence analysis', and `rda` for 'redundancy analysis'. Which of these functions you should use depends on your data and what you are interested in. If you want differences in absolute abundance to matter then `rda` is better, but if you want to focus on relative abundances then `cca` is better. For example, if you have the following data:
 
-# ####################################################################################
-# ####################################################################################
-# ####################################################################################
+```{r}
+data.frame(Sp.a=c(5,50), Sp.b=c(10,100), row.names=c("Site A", "Site B"))
+```
 
-The next question we asked was whether the composition of mosquito communities tends to be similar within habitat types. Since groups of transects were separated by many miles, it is conceivable that mosquito communities would be more similar within transects than within habitat types. For example, it could be that the mosquito communities of adjacent field and forest habitats are more similar than the communities of two forest habitats that are spaced many miles apart. However, if local habitat type strongly predicts which mosquito species are present, than mosquito communities in distant but similar habitats may be more similar than adjacent communities in different habitats.
+If you want Sites A and B to be considered very similar because the proportions of species are the same, then you want `cca`, but if you want those sites to be considered very different because of the absolute abundances are quite different, then you want `rda`. Generally, if you have raw species abundance data then you will choose `cca`. 
 
-To address this question, we used partial canonical correspondence analysis (pCCA), which is a multivariate ordination technique that identifies major axes of variation in a multivariate dataset, with the contraint that those axes must be linear combinations of explanatory variables (Ter Braak 1987). A Site X Species matrix of abundance data was treated as the response variable, while landscape variables for sites were used as explanatory variables. An advantage of pCCA is that ecological variables that are not of direct interest can be "partialled out", allowing researchers to control for potentially influential factors while focusing on variables of interest. We focused on variables related to the extent to which habitats represented field or forest (percent of Deciduous Forest, Evergreen Forest, Mixed Forest, Grassland, and Shrub), and partialled out variables related to human land use (percent of BarrenLand, Buildings, Cultivated Crops, and Pavement). Here are pCCA plots depicting the positions of mosquito species and sites relative to the major axes of variation in our dataset:
+The following table summarizes how you can do both unconstrained and constrained ordination analyses using `cca` and `rda`:
 
-![](./mosquitoes/pCCA.png)
+![](http://i.imgur.com/qQrjWBB.jpg?1)
 
-Our pCCA results indicated that the major factor predicting mosquito community composition is a tree density gradient: landscapes with similar amounts of tree cover have similar mosquito communities (CCA 1). The second major factor predicting mosquito community composition reflected differences across transect locations, with Durham sites segregating from Lake Wheeler and Prarie Ridge sites (CCA 2). These differences may be related to the type of field (grassland vs. shrub) and forest (deciduous vs. evergreen) habitats that were prevalent at those sites. All together, our environmental variables explained 33.63% of total variation in mosquito community composition (*p* < 0.001), and the first two pCCA axes accounted for 84.08% of that variation. 
+Note that PCA is just an RDA without any explanatory variables, which is why you would run a PCA in `vegan` like this: `rda(abundance.matrix)`.
 
+In this tutorial, we will walk through the three ordination methods on the bottom row of the table, since our species abundance data has not been 'relativized'. First, we will apply correspondence analysis (CA) to the mosquito abundance matrix and visualize the major axes of variation in mosquito community composition. Next, we will perform a constrained CA, also known as canonical CA (CCA), bringing the environmental data into play as predictors of mosquito community composition. Finally, we will perform an extension of CCA called *partial* CCA (pCCA), in which predictor variables are separated into effects you are interested in (i.e., fixed effects) and effects you want to control for (i.e., random effects).  
+
+Before beginning, let's make a couple of small adjustments to our mosquito abundance matrix. First, implement a square root transformation to dampen the influence of large counts on the results. Second, divide counts by the variable `TrapNights` to normalize for the variable number of trap nights due to trap failures. 
+
+```{r}
+abundance.matrix2 <- sqrt(abundance.matrix)/data$TrapNights
+```
+
+### Correspondence analysis (CA)
+
+For the CA, all we need is the abundance matrix. 
+
+```{r}
+# pca
+my.ca <- cca(abundance.matrix2)
+```
+
+Let's use a barplot to visualize how much of the variance is explained by each CA axes:
+
+```{r post_2017-04_mosquito-ecology_ca_bar, fig.height=4, fig.width=4}
+# barchart for variance of CA explained
+ca.bar <- data.frame(prop=my.ca$CA$eig/my.ca$CA$tot.chi, pc=as.factor(1:my.ca$CA$rank))
+ggplot(ca.bar, aes(x=pc, y=prop)) +
+  geom_col() + 
+  xlab("CA axis") +
+  ylab("Proportion of variance explained")
+```
+
+We can see that the first CA axis explains a little over 30% of variation in the data. We can pull this information directly from the CA object like this:
+
+```{r}
+# CA proportions of variance explained
+head(my.ca$CA$eig/my.ca$CA$tot.chi)
+```
+
+The fact that the first 2 axes only explain a combined ~44% of variation in the data suggests that mosquito community composition is not easily reduced to just one or two axes of variation. Let's look at a scatterplot of our data with respect to the first two CAs:
+
+```{r post_2017-04_mosquito-ecology_ca_biplot, fig.height=4, fig.width=4}
+# plot
+plot(my.ca)
+```
+
+It is a bit difficult to see what is going on here. Let's see if we can make a visualization that is a little easier to see. One thing we can do is add colors to represent the different habitats, as we did for the boxplots. Additionally, we can make more space by plotting the sites and species in separate panels. 
+
+```{r post_2017-04_mosquito-ecology_ca_biplot_pretty, fig.width=8, fig.height=4}
+# 2 panels
+layout(matrix(1:2,1,2))
+
+# plot sites
+site.cols <- rep(terrain.colors(6)[5:1],9)
+plot(my.ca, display=c("sites", "bp"), type="n", xlim=c(-2.5, 2.5), ylim=c(-2, 2.5), main="Sites")
+text(my.ca, display="sites", col=site.cols, cex=0.5)
+
+# plot species
+plot(my.ca, display=c("species", "bp"), type="n", ylab="", xlim=c(-1.5, 1.5), ylim=c(-1.5, 1.5), main="Species")
+text(my.ca, display="species", col="black", cex=0.5)
+
+```
+
+That's better. The color coding helps reveal that the first CA axis appears to reflect a forest-field gradient, which suggests that this habitat gradient is the most important factor structuring mosquito community composition. It seems like there might be some differentiation among regions, with DU sites clustering near the top of the graph and PR/LW clustering near the bottom. 
+
+With the sites and species separated out, it is now much easier to see the differentiation among species as well. Given that CA1 appears to be a forest-field gradient, we can see that some mosquito species tend to be found in the forest (e.g. *Ae.can*), while others tend to be found in the field (e.g. *Ps.col*). And if we are correct that CA2 corresponds to a regional axis, then *Ae.jap* appears to have an affinity for the DU region (but not much preference for field or forest), while *Ps.cyan* has an affinity for the PR/LW regions (and similarly little preference for field or forest). Species near the center of the graph do not show much differentiation among either regions or habitats. 
+
+### Canonincal correspondence analysis (CCA)
+
+Now we will bring in the landscape variables. Let's make a subset of the data for the landscape variables related to vegetation cover- these will be our predictor variables:
+
+```{r}
+# predictor variables
+fixed <- data[,4:8]
+```
+
+Now we can run the CCA. Let's also compute variance inflation factors (VIF) to check for redundancy in the data. As a rule of thumb, VIF > 10 indicates redundancy.
+
+```{r}
+# cca 
+my.cca <- cca(abundance.matrix2, Y=fixed)
+
+# VIFs
+vif.cca(my.cca)
+```
+
+Clearly, we have some problematic redundancy in our predictor variables. This should not be surprising considering our landscape data correspond to proportions of a 100m radius circle around each trap, such that adding up the different landscape variables for a given trap sums to nearly the same number. Thus, the entire landscape can be fully characterized by specifying *N* - 1 of the *N* landscape types. Let us drop the environmental variable with the largest VIF, Grassland, and see if that fixes the problem:
+
+```{r}
+# new fixed effects, without Grassland
+fixed <- fixed[,-3]
+
+# cca 
+my.cca <- cca(abundance.matrix2, Y=fixed)
+
+# VIFs
+vif.cca(my.cca)
+```
+
+It seems like that did the trick- all our VIFs are now reasonable. Let's visualize the proportion of variance explained by each CCA axis with a barplot:
+
+```{r post_2017-04_mosquito-ecology_cca_bar, fig.height=4, fig.width=4}
+# barchart for variance of CCA explained
+cca.bar <- data.frame(prop=my.cca$CA$eig/my.cca$CA$tot.chi, pc=as.factor(1:my.cca$CA$rank))
+ggplot(cca.bar, aes(x=pc, y=prop)) +
+  geom_col() + 
+  xlab("CCA axis") +
+  ylab("Proportion of variance explained")
+```
+
+Let's look at CCA plots:
+
+```{r post_2017-04_mosquito-ecology_cca_biplot, fig.width=8, fig.height=4}
+# 2 panels
+layout(matrix(1:2,1,2))
+
+# plot sites
+plot(my.cca, display=c("sites", "bp"), type="n", main="Sites")
+text(my.cca, display="sites", col=site.cols, cex=0.5)
+
+# plot species
+plot(my.cca, display=c("species", "bp"), type="n", ylab="", main="Species")
+text(my.cca, display="species", col="black", cex=0.5)
+```
+
+As in the CA, we can clearly see the field-forest gradient reflected along the first axis of variation (note that the direction of the gradient is arbitrary, so it is irrelevant that the direction is flipped compared to the CA analysis).
+
+Now extract the percent of variance explained by our predictor variables and test for a significant effect of our predictor variables on mosquito community composition:
+
+```{r}
+# proportion of variance explained
+my.cca$CCA$tot.chi/my.cca$tot.chi
+
+# significance test
+anova(my.cca)
+```
+
+The vegetation cover variables explain about 39% of variance in mosquito community composition, which is statistically significant (*p* < 0.001). 
+
+### Partial canonincal correspondence analysis (pCCA)
+
+For our final ordination example, we will build on our CCA by incorporating a matrix of landscape variables related to man-made structures as a  "random effect". This matrix is called the 'conditioning matrix' in the `vegan` documentation. The effects of these variables will be 'partialled out' of the abundance matrix prior to estimating the effects of the 'fixed effects', which in our case are the landscape variables related to vegetation that we used in the CCA. Let's make a subset of the data for the random effects:
+
+```{r}
+# random effects
+random <- data[,9:12]
+```
+
+Now run the pCCA and check the VIFs.
+
+```{r}
+# pcca 
+my.pcca <- cca(X=abundance.matrix2, Y=fixed, Z=random)
+
+# VIFs
+vif.cca(my.pcca)
+```
+
+The VIFs look okay, so let's look at our barchart of variance explained:
+
+```{r post_2017-04_mosquito-ecology_pcca_bar, fig.height=4, fig.width=4}
+
+# barchart for variance of pCCA explained
+pcca.bar <- data.frame(prop=my.pcca$CA$eig/my.pcca$CA$tot.chi, pc=as.factor(1:my.pcca$CA$rank))
+ggplot(pcca.bar, aes(x=pc, y=prop)) +
+  geom_col() + 
+  xlab("CA axis") +
+  ylab("Proportion of variance explained")
+```
+
+And now let's make the pCCA plots:
+
+```{r post_2017-04_mosquito-ecology_pcca_biplot, fig.width=8, fig.height=4}
+# 2 panels
+layout(matrix(1:2,1,2))
+
+# plot sites
+plot(my.pcca, display=c("sites", "bp"), type="n", main="Sites")
+text(my.pcca, display="sites", col=site.cols, cex=0.5)
+
+# plot species
+plot(my.pcca, display=c("species", "bp"), type="n", ylab="", main="Species")
+text(my.pcca, display="species", col="black", cex=0.5)
+```
+
+Not a whole lot has changed compared to the CCA. Let's look at the percent of variation explained by our predictors and test for signficance. 
+
+```{r}
+# proportion of variance explained
+my.pcca$CCA$tot.chi/my.pcca$tot.chi
+
+# significance test
+anova(my.pcca)
+```
+
+Recall that our CCA predictors explained 39% of variation. Since our pCCA random effects account for some additional variation in our data, our predictor variables explain a slightly smaller overall proportion of the variance in the pCCA, about 32%. However, man-made structures accounted for a small overall proportion of the landscapes we sampled and these variables did not have a big impact on the results.
+
+## Conclusions
+
+Our analyses showed that both mosquito community diversity and mosquito community composition vary along a field-forest gradient, with the forest having greater diversity than the field. Our visualizations allowed us to identify mosquito species that strongly prefer either the forest (e.g., *Ae.can* and *Ae.dup*) or the field (e.g., *Ps.cil* and *Ps.col*).
+
+The three ordination methods produced similar visual results, and it is informative to consider them together. The fact that the leading axes of the CA and CCA ordinations both represent a field-forest gradient suggests that the predictor variables being included in the CCA represent the dominant axis of variation in the abundance data. If the leading CA and CCA axes had been different, it would have suggested instead that the dominant axis of variation in our abundance data (i.e., the leading CA axis) is due to factors that are not captured by the predictor variables in our CCA.
+
+**Footnotes:**
+
+*For more information on species diversity indices, the `vegan` documentation is great and will point you toward any more specific literature you might want to look at. Try `?diversity`, `?rarefy`, `?renyi`, `?tsallis`, and `?betadiver`.* 
+
+*For more information on ordination methods, the `vegan` package provides a simple introduction in this [vignette](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFggnMAA&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fvegan%2Fvignettes%2Fintro-vegan.pdf&usg=AFQjCNHp03BO8RXf4FdIuhAZbD_q0cLk6w&sig2=cKxb2fsAOL4Zkurcf6-68g), and the package author provides a more thorough introduction in this [tutorial](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFgg-MAI&url=http%3A%2F%2Fcc.oulu.fi%2F~jarioksa%2Fopetus%2Fmetodi%2Fvegantutor.pdf&usg=AFQjCNHsvyIZ380_KPgiGMqah_gA5V2jLQ&sig2=POfHX13ym8lEOQhLWZtmDg).*
