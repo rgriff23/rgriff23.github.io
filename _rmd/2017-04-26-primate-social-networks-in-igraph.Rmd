@@ -57,13 +57,13 @@ Network visualization tools in `igraph` are very flexible. Here, I'll demonstrat
 
 We'll begin by focusing on the *Papio* network. Let's look at the most basic plot with all the default settings:
 
-```{r post_2017-04_primate-sna_papio-default, fig.width=5, fig.height=5}
+```{r post_2017-04_primate-sna_papio-default, fig.width=6, fig.height=6}
 plot(Papio.edges, main="Papio")
 ```
 
 But we can do better. Let's add colors to represent males and females, and edge weights to represent the strength of interactions among individuals. I'm going to be super gender normative and use blue for males and pink for females. In addition to coloring the vertices, I'll make a number of other aesthetic adjustments to the graph: reduce the size of vertices and vertex labels, and color edges black:
 
-```{r post_2017-04_primate-sna_papio-pretty, fig.width=5, fig.height=5}
+```{r post_2017-04_primate-sna_papio-pretty, fig.width=6, fig.height=6}
 # Define vector of colors based on sex for Papio
 pap.sexes <- V(Papio.edges)$name
 pap.sexes <- gsub("M[0-9]*", "skyblue", pap.sexes)
@@ -75,7 +75,7 @@ plot(Papio.edges, main="Papio- pretty version", vertex.color=pap.sexes, vertex.s
 
 There are many algorithms for placing nodes in the plot, some of which force the nodes into particular patterns, and others that try to spread nodes out in a meaningful, visually appealing way. The following 3 X 3 plot shows examples of many layout options available in `igraph`, and also illustrates how to add attributes to the graph object that will lead to automatically generated graphical parameters such as node and edge colors or weights. 
 
-```{r post_2017-04_primate-sna_papio-layouts, fig.width=7, fig.height=7}
+```{r post_2017-04_primate-sna_papio-layouts, fig.width=8, fig.height=8}
 # Add attributes to new network, Papio.edges2
 Papio.edges2 <- set.vertex.attribute(Papio.edges, "color", value=pap.sexes)
 Papio.edges2 <- set.vertex.attribute(Papio.edges2, "size", value=10)
@@ -110,7 +110,7 @@ This method generally makes the nodes and edges easy to see, although a potentia
 
 Now, let's do a comparison between the *Pan* and *Papio* networks (we'll have to define the color coding for sexes for *Pan*):
 
-```{r post_2017-04_primate-sna_papio-pan, fig.width=6, fig.height=3}
+```{r post_2017-04_primate-sna_papio-pan, fig.width=8, fig.height=4}
 # Define vector of colors based on sex for Pan
 pan.sexes <- vertex_attr(Pan.edges)$name
 pan.sexes <- gsub("[A-D]M[0-9]*", "skyblue", pan.sexes)
@@ -183,7 +183,7 @@ papio.eigencent <- papio.eigencent$vector
 
 We can now compare how these different measures of centrality differ from each other and between our two primate networks. I'm going to use the grid layout for these plots because it has a consistent structure that maximizes space between the nodes, and I am plotting node sizes proportional to their centrality scores (normalizing them so that the largest centrality score always corresponds to a node size of 30). 
 
-```{r post_2017-04_primate-sna_centrality, fig.width=8, fig.height=3.2}
+```{r post_2017-04_primate-sna_centrality, fig.width=9, fig.height=4}
 # Set grid layout attribute
 Papio.edges3 <- set.graph.attribute(Papio.edges2, "layout", layout.grid)
 Pan.edges3 <- set.graph.attribute(Pan.edges2, "layout", layout.grid)
