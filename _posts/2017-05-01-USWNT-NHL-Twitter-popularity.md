@@ -3,6 +3,7 @@ title: "Team USA women vs NHL hockey players on Twitter (twitteR)"
 layout: post
 date: 2017-05-01
 tags: R hockey twitteR
+comments: true
 ---
 
 
