@@ -221,6 +221,7 @@ Now we can run the CCA. Let's also compute variance inflation factors (VIF) to c
 ```{r}
 # cca 
 #my.cca <- cca(abundance.matrix2, Y=fixed)
+fixed=data[,4:8]
 
 # test for significance of individual variables/axes
 my.cca <- cca(abundance.matrix2 ~ ., data=fixed)
@@ -229,7 +230,9 @@ my.cca <- cca(abundance.matrix2 ~ ., data=fixed)
 #anova(my.cca,by="margin") # type 3 test (marginal effects)
 #anova(my.cca,by="axis") # marginal test for axes
 mod0 <- cca(abundance.matrix2 ~ 1, fixed)
-> mod <- step(mod0, scope = formula(my.cca), test = "perm")
+mod <- step(mod0, scope = formula(my.cca), test = "perm")
+mod2 <- step(my.cca, scope = formula(mod0), test = "perm")
+# maybe only keep evergreen, grassland, and deciduous?
 
 # VIFs
 vif.cca(my.cca)
