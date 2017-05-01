@@ -13,4 +13,4 @@ I play and coach ice hockey- an interest that pops up on my blog from time to ti
 
 These are my pets- Mr. Spock and Mr. Cody:
 
-![](http://i.imgur.com/MEkiyHC.jpg) | ![](http://i.imgur.com/CkMlGDj.jpg)
+![](http://i.imgur.com/Sz7P5wb.jpg) | ![](http://i.imgur.com/74U2w0i.jpg)
