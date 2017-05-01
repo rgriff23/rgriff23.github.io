@@ -5,7 +5,7 @@ title: Projects
 
 ### Research
 
-Section in progress... for now, see my publications for a look at some stuff I've worked on.
+Section in progress... for now, see my publications.
 
 ### R packages
 
@@ -15,5 +15,5 @@ Section in progress... for now, see my publications for a look at some stuff I'v
 
 ### Other
 
-**This website**- My site is powered by <a target="_blank" href="https://jekyllrb.com/">jekyll</a> and hosted by <a target="_blank" href="https://pages.github.com/">GitHub Pages</a>. It's nothing fancy, but it serves a purpose and I enjoy tinkering with it. Check out the source on <a target="_blank" href="https://github.com/rgriff23/rgriff23.github.io">GitHub</a>!
+<a target="_blank" href="https://github.com/rgriff23/rgriff23.github.io">This website</a>!- My site is powered by <a target="_blank" href="https://jekyllrb.com/">jekyll</a> and hosted by <a target="_blank" href="https://pages.github.com/">GitHub Pages</a>. 
 
