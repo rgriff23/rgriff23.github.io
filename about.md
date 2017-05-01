@@ -13,6 +13,6 @@ I play and coach ice hockey- an interest that may pop up in my blog posts from t
 
 I live with these animals:
 
-![](http://i.imgur.com/MEkiyHC.jpg) ![](http://i.imgur.com/CkMlGDj.jpg)
+![](http://i.imgur.com/MEkiyHC.jpg) | ![](http://i.imgur.com/CkMlGDj.jpg)
 
 
