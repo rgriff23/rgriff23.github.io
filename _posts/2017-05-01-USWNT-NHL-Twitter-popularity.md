@@ -40,28 +40,26 @@ Now let's look at how NHL salaries are related to popularity. A fitted sigmoidal
 
 We can use the fitted curve to estimate the average salary of NHL players with the same level of popularity as the USWNT players. To avoid the dangers of extrapolating beyond the range of the data, I focus on the 14 USWNT players with follower counts within the NHL range. Here are the estimated salaries- all 7 digit figures:   
 
-<!-- html table generated in R 3.3.3 by xtable 1.8-2 package -->
-<!-- Mon May  1 12:52:22 2017 -->
-<table border=1>
-<tr> <th> Player </th> <th> Followers </th> <th> Estimated_salary </th>  </tr>
-  <tr> <td> Hilary Knight </td> <td align="center"> 68142 </td> <td align="center"> $3760018 </td> </tr>
-  <tr> <td> Amanda Kessel </td> <td align="center"> 32501 </td> <td align="center"> $2815678 </td> </tr>
-  <tr> <td> Meghan Duggan </td> <td align="center"> 17535 </td> <td align="center"> $2193679 </td> </tr>
-  <tr> <td> Monique Lamoureux-M </td> <td align="center"> 14217 </td> <td align="center"> $2012260 </td> </tr>
-  <tr> <td> Kelli Stack </td> <td align="center"> 13754 </td> <td align="center"> $1984908 </td> </tr>
-  <tr> <td> Jocelyne Lamoureux-D </td> <td align="center"> 13413 </td> <td align="center"> $1964394 </td> </tr>
-  <tr> <td> Brianna Decker </td> <td align="center"> 10820 </td> <td align="center"> $1796648 </td> </tr>
-  <tr> <td> Megan Bozek </td> <td align="center"> 9447 </td> <td align="center"> $1697605 </td> </tr>
-  <tr> <td> Gigi Marvin </td> <td align="center"> 8374 </td> <td align="center"> $1613879 </td> </tr>
-  <tr> <td> Alex Carpenter </td> <td align="center"> 7498 </td> <td align="center"> $1540539 </td> </tr>
-  <tr> <td> Kacey Bellamy </td> <td align="center"> 6460 </td> <td align="center"> $1446564 </td> </tr>
-  <tr> <td> Kendall Coyne </td> <td align="center"> 6280 </td> <td align="center"> $1429359 </td> </tr>
-  <tr> <td> Nicole Hensley </td> <td align="center"> 3754 </td> <td align="center"> $1147922 </td> </tr>
-  <tr> <td> Lee Stecklein </td> <td align="center"> 3021 </td> <td align="center"> $1045663 </td> </tr>
-   </table>
 
-<br />
-To be clear, I am not suggesting that popularity on Twitter should determine anyone's salary. My point is simply this: if there is any validity to the argument that the USWNT doesn't deserve better because they aren't popular, then the data should show that USWNT players are much less popular than male ice hockey players who are making millions. Clearly, that is far from the case.
+```
+                    Player Followers Estimated_salary
+   1:        Hilary Knight     68142         $3760018
+   2:        Amanda Kessel     32501         $2815678
+   3:        Meghan Duggan     17535         $2193679
+   4:  Monique Lamoureux-M     14217         $2012260
+   5:          Kelli Stack     13754         $1984908
+   6: Jocelyne Lamoureux-D     13413         $1964394
+   7:       Brianna Decker     10820         $1796648
+   8:          Megan Bozek      9447         $1697605
+   9:          Gigi Marvin      8374         $1613879
+  10:       Alex Carpenter      7498         $1540539
+  11:        Kacey Bellamy      6460         $1446564
+  12:        Kendall Coyne      6280         $1429359
+  13:       Nicole Hensley      3754         $1147922
+  14:        Lee Stecklein      3021         $1045663
+```
+
+I am not suggesting that popularity on Twitter should determine anyone's salary. My point is simply this: if there is any validity to the argument that the USWNT doesn't deserve better because they aren't popular, then the data should show that USWNT players are much less popular than male ice hockey players who are making millions. Clearly, that is far from the case.
 
 As a final thought, it is worth remembering that NHL salaries were not always what they are today. After adjusting for inflation, Gordie Howe earned just ~\$630,000 playing for the Red Wings in 1970, a salary that is barely above the current [minimum wage](http://www.puckreport.com/2009/07/nhl-minimum-wage-maximum-wage-by-year.html) in the NHL. Growing a professional sport takes time and investment. It doesn't happen overnight. Women's sports is increasingly recognized as an [untapped market](http://www.abc.net.au/news/2015-06-23/maasdorp-womens-sport-is-a-seriously-untapped-market/6566244), and I'd say the Twitter data supports that conclusion for women's ice hockey. 
 

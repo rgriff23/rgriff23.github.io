@@ -12,7 +12,6 @@ knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.i
 
 # load packages
 library(data.table)
-library(xtable)
 
 # read clean data from GitHub
 nhl.data <-  fread('https://raw.githubusercontent.com/rgriff23/NHL_on_twitter/master/data/nhl_clean.csv')
@@ -70,17 +69,16 @@ abline(v=uswnt.data[uswnt.data$Player=="Hilary Knight","log.Followers"], col="re
 
 We can use the fitted curve to estimate the average salary of NHL players with the same level of popularity as the USWNT players. To avoid the dangers of extrapolating beyond the range of the data, I focus on the 14 USWNT players with follower counts within the NHL range. Here are the estimated salaries- all 7 digit figures:   
 
-```{r prediction, echo=FALSE, results='asis'}
+```{r prediction, echo=FALSE, comment=" "}
 # use model to make salary preditions for USWNT
 predictions <- predict(fit, list(log.Followers=uswnt.data$log.Followers))
 uswnt.data$Estimated_salary <- paste("$", round(predictions*1000000,0), sep="")
 
-# sort USWNT data and print with xtable
-print(xtable(uswnt.data[sort.int(predictions, index.return=T, decreasing=T)$ix,][1:14,-c(2,4)], align="llcc"), type="html", include.rownames = F, table.placement=)
+# sort USWNT data 
+uswnt.data[sort.int(predictions, index.return=T, decreasing=T)$ix,][1:14,-c(2,4)]
 ```
 
-<br />
-To be clear, I am not suggesting that popularity on Twitter should determine anyone's salary. My point is simply this: if there is any validity to the argument that the USWNT doesn't deserve better because they aren't popular, then the data should show that USWNT players are much less popular than male ice hockey players who are making millions. Clearly, that is far from the case.
+I am not suggesting that popularity on Twitter should determine anyone's salary. My point is simply this: if there is any validity to the argument that the USWNT doesn't deserve better because they aren't popular, then the data should show that USWNT players are much less popular than male ice hockey players who are making millions. Clearly, that is far from the case.
 
 As a final thought, it is worth remembering that NHL salaries were not always what they are today. After adjusting for inflation, Gordie Howe earned just ~\$630,000 playing for the Red Wings in 1970, a salary that is barely above the current [minimum wage](http://www.puckreport.com/2009/07/nhl-minimum-wage-maximum-wage-by-year.html) in the NHL. Growing a professional sport takes time and investment. It doesn't happen overnight. Women's sports is increasingly recognized as an [untapped market](http://www.abc.net.au/news/2015-06-23/maasdorp-womens-sport-is-a-seriously-untapped-market/6566244), and I'd say the Twitter data supports that conclusion for women's ice hockey. 
 
