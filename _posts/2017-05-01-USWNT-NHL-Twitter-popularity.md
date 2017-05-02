@@ -10,7 +10,7 @@ comments: true
 
 April was a good month for the US Women's Ice Hockey National Team (USWNT). In addition to winning their [7th title in 8 years](https://www.usatoday.com/story/sports/hockey/2017/04/07/uswnht-wins-iihf-world-championships-canada/100197176/) at the IIHF World Championships, they negotiated with USA Hockey [to secure](https://www.nytimes.com/2017/03/28/sports/hockey/usa-hockey-uswnt-boycott.html?_r=0) a \$2000 year-round monthly stipend, increased bonuses, a committee for promoting the growth of women’s ice hockey, and the same travel and insurance accommodations as the men’s team. Previously, players received only [$1000 per month](http://www.espn.com/espnw/voices/article/18908360/time-usa-hockey-wake-support-women-team) from USA Hockey during the 6 months leading up to the Olympics, despite the fact that players were expected to train year-round. The deal was a direct result of the USWNT boycott of the World Championship tournament, and represents a historic victory for women’s sports. 
 
-But some hockey fans just can’t handle it. They lash out in the comment sections of articles, littering them with comments such as these:  
+But some hockey fans are not impressed. They lash out in the comment sections of articles, arguing that the USWNT does not deserve a living wage because they don’t generate enough revenue because people don’t care enough about women’s hockey. 
 
 ___
 
@@ -23,7 +23,7 @@ ___
 
 ___
 
-Their arguments boil down to this: the USWNT does not deserve more financial support because they don’t generate enough revenue because people don’t care enough about women’s hockey. They are correct to say that women's hockey does not generate much revenue, but the reasons for this are complex, and there is a chicken and egg problem when it comes to the relationship between monetary input and output. The USWNT recognizes that the women's game requires more exposure and publicity, which is why establishing a committee to promote the women's game was part of their deal with USA Hockey. 
+It is true that women's hockey does not generate much revenue, but the reasons for this are complex, and there is a chicken and egg problem when it comes to the relationship between monetary input and output. The USWNT recognizes that the women's game requires more exposure and opportunities to play, and that is why establishing a committee to promote the women's game was part of their deal with USA Hockey. 
 
 What I want to focus on is the claim that people just don't care about women's hockey. How popular are top female players compared to professional male ice hockey players? To address this question, I turned to Twitter, where the number of followers for Twitter users provides a measure of popularity. I decided to compare the number of Twitter followers for members of the USWNT to NHL players. In addition, I used data on [2016-17 NHL salaries](http://www.hockey-reference.com/friv/current_nhl_salaries.cgi) to estimate the average salary of NHL players at a similar level of popularity as USWNT players. 
 
@@ -61,8 +61,6 @@ We can use the fitted curve to estimate the average salary of NHL players with t
 ```
 
 I am not suggesting that popularity on Twitter should determine anyone's salary. My point is simply this: if there is any validity to the argument that the USWNT doesn't deserve better because they aren't popular, then the data should show that USWNT players are much less popular than male ice hockey players who are making millions. Clearly, that is far from the case.
-
-As a final thought, it is worth remembering that NHL salaries were not always what they are today. After adjusting for inflation, Gordie Howe earned just ~\$630,000 playing for the Red Wings in 1970, a salary that is barely above the current [minimum wage](http://www.puckreport.com/2009/07/nhl-minimum-wage-maximum-wage-by-year.html) in the NHL. Growing a professional sport takes time and investment. It doesn't happen overnight. Women's sports is increasingly recognized as an [untapped market](http://www.abc.net.au/news/2015-06-23/maasdorp-womens-sport-is-a-seriously-untapped-market/6566244), and I'd say the Twitter data supports that conclusion for women's ice hockey. 
 
 **Footnotes:** 
 
