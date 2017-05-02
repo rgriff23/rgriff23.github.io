@@ -8,7 +8,7 @@ comments: true
 
 
 
-This tutorial (which I'm just migrating from my old site) covers the basics of importing, visualizing, and analyzing social networks in R using the [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html) package. As an example, I use data on primate social networks from my undergraduate honors thesis. Before we start, install and load the packages `igraph` and `data.table` (the latter is just for reading the data directly from GitHub).
+This tutorial (which I'm just migrating from my old site) covers the basics of importing, visualizing, and analyzing social networks in R using the [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html) package. As an example, I use data on primate social networks from my undergraduate senior thesis. Before we start, install and load the packages `igraph` and `data.table` (the latter is just for reading the data directly from GitHub).
 
 
 ```r
@@ -318,7 +318,7 @@ plot(Pan.edges2, vertex.label=NA, mark.groups=communities(Pan.clust), main="Pan"
 
 Interestingly, the *Papio* modules reveal a structure in which individual males tend to be associated with one or more females. Inspection of the plot reveals that there are six modules corresponding to each of the six males in the *Papio* group. Thus, even though the baboons form a cohesive social group, subdivisions within the group reflect a one-male unit structure.
 
-In contrast, the *Pan* modules have more variable composition. There is one large module (green) composed entirely of males, another module (red) composed of several central males and over half of the females in the troop, and finally there are three small modules composed of a single male and female each. This likely reflects different mating strategies of individuals in the troop: the red module likely represents high ranking males and females that preferentially associate with them, the green all-male module likely represents younger/low ranking males with little access to females, and the three modules with pairs likely represents males pursuing a "consortship" strategy, where they focus on maintaining mating priority over a single female rather than competing with high-ranking males for access to many females. 
+In contrast, the *Pan* modules have more variable composition. There is one large module (green) composed entirely of males, another module (red) composed of several central males and over half of the females in the troop, and finally there are three small modules composed of a single male and female each. 
 
 ## References
 
