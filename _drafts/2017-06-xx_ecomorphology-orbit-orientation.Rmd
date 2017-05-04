@@ -1,0 +1,75 @@
+---
+title: "Orbit orientation isn't correlated with anything: a reanalysis of Heesy 2005 (ape, caper)"
+layout: post
+date: 2017-06-xx
+tags: R evolution morphology phylogeny GLMM 
+comments: true
+---
+
+```{r setup, include=FALSE, message=FALSE}
+# knitr settings
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ")
+#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+knitr::opts_chunk$set(message=FALSE, comment=" ", cache=TRUE)
+
+# load packages 
+library(ape)
+library(caper)
+```
+
+## The ecomorphology of orbit orientation (Heesy 2005)
+
+"Convergent orbits", or the tendancy for the orbits of the skull to face forwards, have long been included in the suite of characteristics that differentiate the first primates from other mammals of the early Cretaceous. Moreover, several theories have popularized the notion that orbit convergence was functionally important for early primates...
+
+In recent years, the nocturnal visual predation (NVP) hypothesis has seemed to pull out ahead of the other hypotheses in terms of widespread support. One study that helped make NVP a popular front-runner was Heesy's (2005) paper, "Ecomorphology of orbit orientation". 
+
+## Problem of phylogenetic autocorrelation
+
+Phylogenetic autocorrelation, also called phylogenetic pseudoreplication or phylogenetic non-independence, is a fairly well-known problem in comparative evolutionary biology. The problem arises when researchers attempt to apply statistical methods that assume independent observations (e.g., linear regression) to evolutionary data that is not statistically independent. For example, a human, a chimpanzee, and a tuna cannot be considered 3 independent entities because a human and a chimpanzee are much more closely related to each other than they are to a tuna, thus they will be more similar to each other based on chance alone. Failure to account for phylogenetic autocorrelation in statistical models leads to elevated risk of Type I error, or false positives, because relationships that are driven by phylogenetic patterns may be incorrectly attributed to predictor variables in the model. 
+
+The need to incorporate phylogenetic relationships into statistical models of evolution has spawned an entire subfield at the intersection of evolutionary biology and statistics: phylogenetic comparative methods (PCM). One of the most commonly used PCMs is phylogenetic generalized least squares (PGLS), which is simply a linear regression that incorporates a phylogenetic distance matrix into the variance-covariance structure of the model. In the following section, we will see how using PGLS to correct for phylogenetic autocorrelation in Heesy's (2005) regression models eliminates the significant associations between orbit orientation and ecological variables. 
+
+## Reanalysis
+
+I copied data from Heesy (2005) and made it available for download on GitHub:
+
+```{r}
+```
+
+To add phylogenetic data, I used Bininda-Emonds...
+
+```{r}
+```
+
+Analyze without phylogeny:
+
+```{r}
+```
+
+Visualize the phylogenetic autocorrelation
+
+```{r post_2017-06_heesy-reanalysis}
+```
+
+PGLS:
+
+```{r}
+```
+
+Discuss...
+
+## Concluding remarks
+
+It is important to keep in mind what these results do *not* tell us... specifically, these results do *not* imply that shifts in orbit orientation were *not* driven by the ecological variables in question. It could be that any or all of these variables played a role in directing the evolution of early primate orbits, but unless our data captures numerous instances of correlated shifts in orbit orientation and ecology, we are unlikely to find statistical associations between these variables after controlling for phylogenetic autocorrelation. Inferences about such rare or singular events in evolutionary history may have to depend more on circumstantial rather than statistical evidence. 
+
+However, I do think there is room to do more comparative statistical work on the evolution of orbit orientation. I can see two major directions for advancing this project. 
+
+-First is improving the data. There is room for much more complete sampling, and the addition of fossils. It would also be good to incorporate data on other aspects of skull morphology, particularly relative brain size, which has been [hypothesized]() to explain much of the variation in mammalian orbit orientation.
+
+-Second is improving the statistical model. We could fit much more [sophisticated models]() that allow us to detect shifts in the tempo or mode of orbit evolution. For instance, it would be interesting to know if there even *is* a statistically significant 'shift' in the model for orbit orientation at the base of the primate clade. If there isn't, then perhaps there is nothing to explain about primate orbit convergence.
+
+These two directions for advancement are complementary. Adding more data, [especially fossils](), will increase the power of more complex statistical models to detect deviations from Brownian motion.
+
+
+
+

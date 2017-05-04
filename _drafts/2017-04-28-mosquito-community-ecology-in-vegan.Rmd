@@ -14,14 +14,13 @@ knitr::opts_chunk$set(message=FALSE, comment=" ", cache=TRUE)
 # load packages 
 library(vegan)
 library(data.table)
-library(ggplot2)
 ```
 
 *This tutorial is based on the data from [this paper](/assets/pdfs/Reiskind_etal_2016.pdf).*
 
 ___
 
-In this tutorial, I demonstrate how to use the R package [`vegan`](https://cran.r-project.org/web/packages/vegan/index.html) to analyze an original dataset on the abundance of mosquito species in the Raleigh-Durham area of North Carolina. I cover the calculation of common diversity indices, comparison of diversity measures across habitat types using linear models, and visualization of patterns in community composition using multivariate ordination methods (both constrained and unconstrained correspondence analysis). 
+In this tutorial, I demonstrate how to use the R package [`vegan`](https://cran.r-project.org/web/packages/vegan/index.html) to analyze an original dataset on the abundance of mosquito species in the Raleigh-Durham area of North Carolina. I cover the calculation of common diversity indices, comparison of diversity measures across habitat types using linear models, and visualization of patterns in community composition using multivariate ordination methods (constrained and unconstrained correspondence analysis). 
 
 ## Study design
 
@@ -37,29 +36,27 @@ Traps were set up at dusk and picked up at dawn. Mosquitoes were taken back to t
 
 # The data
 
-Let's open R and load the packages we will need for this analysis, installing them first if you haven't already:
+Open R and load the packages we will need for this analysis, installing them first if you haven't already:
 
 ```{r, eval=FALSE}
 # install if needed
-install.packages("data.table") # for importing data from GitHub
 install.packages("vegan") # community ecology package
 
 # load packages
-library("data.table")
 library("vegan")
 ```
 
-Using the `fread` function from the `data.table` package, import the data into R. Let's also specify that `Habitat` is an ordered factor, which will be important for boxplots and linear models. 
+Import the data into R using the `fread` function from the `data.table` package. Let's also specify that `Habitat` is an ordered factor, which will be important for boxplots and linear models. 
 
 ```{r}
 # read data from GitHub
-data <- data.frame(fread("https://raw.githubusercontent.com/rgriff23/Mosquito_ecology/master/Analysis/data.csv"), row.names = 1)
+data <- read.csv("https://raw.githubusercontent.com/rgriff23/Mosquito_ecology/master/Analysis/data.csv", row.names=1)
 
 # make Habitat an ordered variable
 data$Habitat <- ordered(data$Habitat, c("Field", "NearField", "Edge", "NearForest", "Forest"))
 ```
 
-Take a few minutes to familiarize yourself with the data. There are 45 rows corresponding to 45 traps, with row names indicating the trap ID (DU/PR/LW are the regions, followed by the transect and trap numbers). There are 36 columns, which can be broken down as follows: 
+Take a few minutes to familiarize yourself with the data. There are 45 rows corresponding to 45 traps, and 36 columns which can be broken down as follows: 
 
 1. columns 1-3: trap characteristics (region, transect, habitat)
 2. columns 4-8: landscape variables related to vegetation cover
@@ -103,7 +100,7 @@ boxplot(Rarefied~Habitat, data=indices, boxwex=0.5, col=colors,
         cex.axis=0.5, ylab="Rarefied richness")
 ```
 
-It appears that species diversity increases as we move from the field to the forest. We can test for differences among habitats statistically using a linear model, with `Habitat` as a predictor of species diversity:
+It appears that species diversity increases as we move from the field to the forest. We can test for differences among habitats statistically using a linear model, with `Habitat` as an ordered categorical predictor of species diversity:
 
 ```{r ANOVA}
 # fit linear models
@@ -216,7 +213,7 @@ Now we will bring in the landscape variables. Let's make a subset of the data fo
 fixed <- data[,4:8]
 ```
 
-Now we can run the CCA. Let's also compute variance inflation factors (VIF) to check for redundancy in the data. As a rule of thumb, VIF > 10 indicates high levels of redundancy.
+Now run the CCA and compute variance inflation factors (VIF) to check for redundancy in the data. As a rule of thumb, VIF > 10 indicates high levels of redundancy.
 
 ```{r}
 # cca 
@@ -351,6 +348,6 @@ The three ordination methods produced similar visual results. The fact that the 
 
 **Footnotes:**
 
-*For more information on species diversity indices, the `vegan` documentation is great and will point you toward any more specific literature you might want to look at. Try `?diversity`, `?rarefy`, `?renyi`, `?tsallis`, and `?betadiver`.* 
+*For more information on species diversity indices, the `vegan` documentation is great and will point you toward any more specific literature you might want to look at. Try `?diversity`, `?rarefy`, `?renyi`.* 
 
 *For more information on ordination methods, the `vegan` package provides a simple introduction in this [vignette](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFggnMAA&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fvegan%2Fvignettes%2Fintro-vegan.pdf&usg=AFQjCNHp03BO8RXf4FdIuhAZbD_q0cLk6w&sig2=cKxb2fsAOL4Zkurcf6-68g), and the package author provides a more thorough introduction in this [tutorial](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFgg-MAI&url=http%3A%2F%2Fcc.oulu.fi%2F~jarioksa%2Fopetus%2Fmetodi%2Fvegantutor.pdf&usg=AFQjCNHsvyIZ380_KPgiGMqah_gA5V2jLQ&sig2=POfHX13ym8lEOQhLWZtmDg).*

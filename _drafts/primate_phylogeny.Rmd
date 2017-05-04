@@ -1,0 +1,114 @@
+---
+title: "Plotting the primate phylogeny with ggtree (tutorial)"
+output: html_document
+---
+
+The second chapter of my dissertation includes a primate phylogeny, and since it is the only visual in the chapter, I wanted to do a little something extra. This lead me to `ggtree`, an R package on [Bioconductor](https://bioconductor.org/packages/release/bioc/html/ggtree.html) for visualizing and annotating phylogenies. It basically does for phylogeny plots what `ggplot2` does for most other kinds of plots. It gives you better control over the aesthetics. 
+
+Here, I will demonstrate how I made a fancy figure for my dissertation by using `ggtree` with `xxx` to annotate clades with images. 
+
+###Tutorial
+
+Install `ggtree` from Bioconductor and `ape` from CRAN.
+
+```{r eval=FALSE}
+# install from Bioconductor
+# try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite("ggtree")
+
+# install from CRAN
+install.packages("ape")
+```
+
+Load the packages. Import the primate phylogeny and some tip data from GitHub.
+
+```{r}
+# load packages
+library(ggtree)
+library(ape) # for 'read.nexus'
+
+# read phylogeny
+tree <- ("https://raw.githubusercontent.com/rgriff23/Dissertation/master/Chapter_2/data/tree.nex")
+
+# read tip data
+data <- read.csv("")
+```
+
+```{r}
+	#source("https://bioconductor.org/biocLite.R")
+	#biocLite("ggtree")
+	#biocLite("EBImage")
+library(ggtree)
+library(EBImage)
+
+# read data and tree
+data <- read.csv("C:/GitHub/Dissertation/Chapter_2/data/table1.csv")
+tree <- read.nexus("C:/GitHub/Dissertation/Chapter_2/data/tree.nex")
+
+# check that names all match up
+test <- paste(data$Genus, data$Species, sep="_")
+test[!test %in% tree$tip.label]
+tree$tip.label[!tree$tip.label %in% test]
+rm(test)
+
+# Set tree labels to genus name only
+tree$tip.label <- sapply(strsplit(tree$tip.label, "_"), "[[", 1)
+
+# Create table for heatmap
+tab <- ddply(data, .(Genus), function(x) {
+  m <- ifelse("M" %in% x$SexDat | "B" %in% x$SexDat, 1, 0)
+  f <- ifelse("F" %in% x$SexDat | "B" %in% x$SexDat, 1, 0)
+  data.frame(M=m, F=f)
+})
+row.names(tab) <- tab$Genus
+tab <- tab[,-1]
+
+# plot tree
+fig <- ggplot(tree) + 
+  geom_tree() + 
+  theme_tree() + 
+  geom_tiplab(list(tree$tip.label), size=2.5, offset=5) + 
+  xlim(0,95) +
+  geom_cladelabel(96, "Ceboidea", offset= 18, barsize=2, angle=90, offset.text = 1.2, hjust=0.5) +
+  geom_cladelabel(70, "Cercopithecoidea", offset= 18, barsize=2, angle=90, offset.text = 1, hjust=0.5) +
+  geom_cladelabel(113, "Lemuroidea", offset= 18, barsize=2, angle=90, offset.text = 1.2, hjust=0.5) +
+  geom_cladelabel(124, "Galagoidea", offset= 18, barsize=2, angle=90, offset.text = 1.2, hjust=0.5) +
+  geom_cladelabel(89, "Hominoidea", offset= 18, barsize=2, angle=90, offset.text = 1.2, hjust=0.5) +
+  geom_cladelabel(110, "Tarsioidea", offset= 18, barsize=2, angle=90, offset.text = 1.2, hjust=0.5, fontsize = 3)
+fig <- gheatmap(fig, tab, offset=0.1, width=0.05, low="white", high="black", colnames_position = "top", font.size=2.5)
+fig <- phylopic(fig, "f598fb39-facf-43ea-a576-1861304b2fe4", node=110) # tarsiers
+fig <- phylopic(fig, "aceb287d-84cf-46f1-868c-4797c4ac54a8", node=96) # nwm
+fig <- phylopic(fig, "bac25f49-97a4-4aec-beb6-f542158ebd23", node=113) # lemurs
+fig <- phylopic(fig, "7fb9bea8-e758-4986-afb2-95a2c3bf983d", node=124) # galagoids
+fig <- phylopic(fig, "72f2f854-f3cd-4666-887c-35d5c256ab0f", node=70) # owm
+fig <- phylopic(fig, "0174801d-15a6-4668-bfe0-4c421fbe51e8", node=89) # hominoids
+fig + theme(legend.position="none")
+
+```
+
+Let's start with a basic plot.
+
+You can tinker with the usual graphical parameters.
+
+You can annotate.
+
+Now, let's annotate the tree with the color-coded tip data, and add a legend for the tip data. 
+
+To annotate nodes with images, first find the number of each node you want to annotate, then match each node with a link to an image on XXX. Here are the node numbers and images for the major primate superfamilies:
+
+
+
+Now we can add these images to the plot.
+
+```{r}
+
+```
+
+And that's how I made a nice phylogeny for my dissertation. 
+
+Overall, I find that `ggtree` increases the ease and flexibility of adding features to trees, and I think the trees generally look nicer. If you're in the business of plotting trees, I'd say learning `ggtree` is worth the effort. 
+
+**Footnotes**
+
+Yu G, Smith D, Zhu H, Guan Y and Lam TT (2017). “ggtree: an R package for visualization and annotation of phylogenetic trees with their covariates and other associated data.” *Methods in Ecology and Evolution*, 8, pp. 28-36. doi: [10.1111/2041-210X.12628](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12628/abstract). 

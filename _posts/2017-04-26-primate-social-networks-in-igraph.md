@@ -2,23 +2,21 @@
 title: "Primate social networks: basics of visualization and analysis (igraph)"
 layout: post
 date: 2017-04-26
-tags: R ecology tutorial
+tags: R ecology social-network tutorial
 comments: true
 ---
 
 
 
-This tutorial (which I'm just migrating from my old site) covers the basics of importing, visualizing, and analyzing social networks in R using the [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html) package. As an example, I use data on primate social networks from my undergraduate senior thesis. Before we start, install and load the packages `igraph` and `data.table` (the latter is just for reading the data directly from GitHub).
+This tutorial (which I'm just migrating from my old site) covers the basics of importing, visualizing, and analyzing social networks in R using the [`igraph`](https://cran.r-project.org/web/packages/igraph/index.html) package. As an example, I use data on primate social networks from my undergraduate senior thesis. Before we start, install and load `igraph`.
 
 
 ```r
 # install packages
 install.packages("igraph")
-install.packages("data.table")
 
 # load packages
 library("igraph")
-library("data.table")
 ```
 
 ## Importing social network data into R
@@ -28,10 +26,10 @@ I provide two primate social networks: one for baboons (*Papio papio*) and one f
 
 ```r
 # import Papio data from GitHub
-Papio.adj <- data.frame(fread('https://raw.githubusercontent.com/rgriff23/Primate_social_networks/master/data/Papio.csv'), row.names=1)
+Papio.adj <- read.csv('https://raw.githubusercontent.com/rgriff23/Primate_social_networks/master/data/Papio.csv', row.names=1)
 
 # import Pan data from GitHub
-Pan.adj <- data.frame(fread('https://raw.githubusercontent.com/rgriff23/Primate_social_networks/master/data/Pan.csv'), row.names=1)
+Pan.adj <- read.csv('https://raw.githubusercontent.com/rgriff23/Primate_social_networks/master/data/Pan.csv', row.names=1)
 ```
 
 The imported `*.csv` data are now in dataframes. We can convert them into weighted `igraph` edgelists like this:
