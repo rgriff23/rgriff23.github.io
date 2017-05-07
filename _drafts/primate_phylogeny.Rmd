@@ -1,69 +1,70 @@
 ---
 title: "Plotting the primate phylogeny with ggtree (tutorial)"
-output: html_document
+layout: post
+date: 2017-05-21
+tags: R tutorial phylogeny primates visualization ggtree
+comments: true
 ---
 
-The second chapter of my dissertation includes a primate phylogeny, and since it is the only visual in the chapter, I wanted to do a little something extra. This lead me to `ggtree`, an R package on [Bioconductor](https://bioconductor.org/packages/release/bioc/html/ggtree.html) for visualizing and annotating phylogenies. It basically does for phylogeny plots what `ggplot2` does for most other kinds of plots. It gives you better control over the aesthetics. 
+The second chapter of my dissertation includes a primate phylogeny, and since it is the only visual in the chapter, I wanted to do a little something extra. This lead me to `ggtree`, an R package on [Bioconductor](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/ggtree.html) for visualizing and annotating phylogenies. It basically does for phylogeny plots what `ggplot2` does for most other kinds of plots- it gives you a more sophisticated baseline appearance and better control over aesthetic features. 
 
-Here, I will demonstrate how I made a fancy figure for my dissertation by using `ggtree` with `xxx` to annotate clades with images. 
+Below, I demonstrate how to make a fancy primate phylogeny using `ggtree` with `phylopic` to annotate clades with images. 
 
-###Tutorial
+### Preparations
 
-Install `ggtree` from Bioconductor and `ape` from CRAN.
+If necessary, install `ape` from CRAN, and `ggtree` and `EBImage` from Bioconductor, and load the packages:
 
 ```{r eval=FALSE}
-# install from Bioconductor
-# try http:// if https:// URLs are not supported
-source("https://bioconductor.org/biocLite.R")
-biocLite("ggtree")
-
 # install from CRAN
 install.packages("ape")
-```
 
-Load the packages. Import the primate phylogeny and some tip data from GitHub.
+# install from Bioconductor
+source("https://bioconductor.org/biocLite.R")
+biocLite("ggtree")
+biocLite("EBImage")
 
-```{r}
 # load packages
-library(ggtree)
 library(ape) # for 'read.nexus'
-
-# read phylogeny
-tree <- ("https://raw.githubusercontent.com/rgriff23/Dissertation/master/Chapter_2/data/tree.nex")
-
-# read tip data
-data <- read.csv("")
+library(ggtree)
+library(EBImage) # for images
 ```
 
+Import the primate phylogeny from GitHub (it originally came from [10kTrees]()):
+
+```{r, message=FALSE}
+# read the tree from GitHub
+tree <- read.nexus("https://raw.githubusercontent.com/rgriff23/Dissertation/master/Chapter_2/data/tree.nex")
+```
+
+This tree has full species names in the form `Genus_species`. Since there is just one representative species for each genus in this tree, I want to shorten the tip labels to just the genus name:
+
 ```{r}
-	#source("https://bioconductor.org/biocLite.R")
-	#biocLite("ggtree")
-	#biocLite("EBImage")
-library(ggtree)
-library(EBImage)
-
-# read data and tree
-data <- read.csv("C:/GitHub/Dissertation/Chapter_2/data/table1.csv")
-tree <- read.nexus("C:/GitHub/Dissertation/Chapter_2/data/tree.nex")
-
-# check that names all match up
-test <- paste(data$Genus, data$Species, sep="_")
-test[!test %in% tree$tip.label]
-tree$tip.label[!tree$tip.label %in% test]
-rm(test)
-
-# Set tree labels to genus name only
+# set tree labels to genus name only
 tree$tip.label <- sapply(strsplit(tree$tip.label, "_"), "[[", 1)
+```
 
-# Create table for heatmap
-tab <- ddply(data, .(Genus), function(x) {
-  m <- ifelse("M" %in% x$SexDat | "B" %in% x$SexDat, 1, 0)
-  f <- ifelse("F" %in% x$SexDat | "B" %in% x$SexDat, 1, 0)
-  data.frame(M=m, F=f)
-})
-row.names(tab) <- tab$Genus
-tab <- tab[,-1]
+And as our final preparation step, let's create some fake data to plot on the tips of the tree: 3 continuous variables, and 3 binary variables.
 
+```{r}
+# make reproducible
+set.seed(23)
+
+# 3 continuous variables
+tip.data <- data.frame(var1=rnorm(length(tree$tip.label)))
+tip.data$var2 <- rnorm(length(tree$tip.label))
+tip.data$var3 <- rnorm(length(tree$tip.label))
+
+# 3 binary variables
+tip.data$var4 <- sample(c(0,1), length(tree$tip.label), replace=TRUE)
+tip.data$var5 <- sample(c(0,1), length(tree$tip.label), replace=TRUE)
+tip.data$var6 <- sample(c(0,1), length(tree$tip.label), replace=TRUE)
+```
+
+Now we can start plotting! I will note that there is a perfectly lovely tutorial from the `ggtree` package author [here](), which is how I learned to do all of this. Nothing I am demonstrating here goes beyond what is covered in that tutorial. But my tutorial IS about primates, so...
+
+### Plots?
+
+```{r}
 # plot tree
 fig <- ggplot(tree) + 
   geom_tree() + 
@@ -84,14 +85,15 @@ fig <- phylopic(fig, "7fb9bea8-e758-4986-afb2-95a2c3bf983d", node=124) # galagoi
 fig <- phylopic(fig, "72f2f854-f3cd-4666-887c-35d5c256ab0f", node=70) # owm
 fig <- phylopic(fig, "0174801d-15a6-4668-bfe0-4c421fbe51e8", node=89) # hominoids
 fig + theme(legend.position="none")
-
 ```
 
-Let's start with a basic plot.
+Let's start with a basic plot with different layouts.
 
-You can tinker with the usual graphical parameters.
+You can tinker with the usual graphical parameters (node/tip labels/colors/symbols, branch labels/colors, tip data).
 
-You can annotate.
+You can annotate clades.
+
+You can add more features like a legend, scale bar, other stuff?
 
 Now, let's annotate the tree with the color-coded tip data, and add a legend for the tip data. 
 
@@ -105,9 +107,7 @@ Now we can add these images to the plot.
 
 ```
 
-And that's how I made a nice phylogeny for my dissertation. 
-
-Overall, I find that `ggtree` increases the ease and flexibility of adding features to trees, and I think the trees generally look nicer. If you're in the business of plotting trees, I'd say learning `ggtree` is worth the effort. 
+And that's it! Overall, I find that `ggtree` greatly increases the ease and flexibility of adding features to trees, and I think the trees generally look nicer. If you're in the business of plotting trees, I'd say learning `ggtree` is worth the effort. 
 
 **Footnotes**
 

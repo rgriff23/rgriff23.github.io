@@ -1,8 +1,8 @@
 ---
 title: "Mosquito community diversity analysis (vegan)"
 layout: post
-date: 2017-04-28
-tags: R ecology tutorial mosquitoes vegan
+date: 2017-05-07
+tags: R tutorial ecology mosquitoes vegan
 ---
 
 ```{r setup, include=FALSE, message=FALSE}
@@ -13,7 +13,6 @@ knitr::opts_chunk$set(message=FALSE, comment=" ", cache=TRUE)
 
 # load packages 
 library(vegan)
-library(data.table)
 ```
 
 *This tutorial is based on the data from [this paper](/assets/pdfs/Reiskind_etal_2016.pdf).*
@@ -36,7 +35,7 @@ Traps were set up at dusk and picked up at dawn. Mosquitoes were taken back to t
 
 # The data
 
-Open R and load the packages we will need for this analysis, installing them first if you haven't already:
+Open R and load `vegan`, installing it first if necessary:
 
 ```{r, eval=FALSE}
 # install if needed
@@ -83,7 +82,7 @@ abundance.matrix <- data[,14:36]
 # compute indices and add to new 'indices' data frame
 indices <- data[,c("Region","Transect","Habitat")]
 indices$Richness <- rowSums(abundance.matrix>0)
-indices$Shannon <- diversity(abundance.matrix, index="shannon")
+indices$Shannon <- diversity(abundance.matrix) # shannon is default
 indices$Rarefied <- c(rarefy(abundance.matrix[1:45,], sample=15))
 ```
 
@@ -114,9 +113,7 @@ anova(mod.shannon)
 anova(mod.rarefied)
 ```
 
-The results support the conclusion that diversity is higher in forest habitat than field habitat. Species richness and rarefied richness are both significantly associated with habitat type (*p* < 0.05), while Shannon-Weiner diversity is close (*p* < 0.07).
-
-The estimated coefficients of the linear models tell us something about *how* species diversity is associated with habitat. Since `Habitat` is coded as an ordered variable (Field -> NearField -> Edge -> NearForest -> Forest), the output might look a little different than what you are used to. Look at the estimated coefficients for the richness model:
+Species richness and rarefied richness are both significantly associated with habitat type (*p* < 0.05), while Shannon-Weiner diversity is close (*p* < 0.07). The estimated coefficients of the linear models tell us something about *how* species diversity is associated with habitat. Since `Habitat` is coded as an ordered variable (Field < NearField < Edge < NearForest < Forest), the output might look a little different than what you are used to. Look at the estimated coefficients for the richness model:
 
 ```{r}
 summary(mod.richness)
@@ -127,27 +124,27 @@ There are four estimated coefficients: `Habitat.L`, `Habitat.Q`, `Habitat.C`, an
 
 ## Identifying major axes of variation in community composition
 
-In this section we will perform some exploratory [ordination analyses](https://en.wikipedia.org/wiki/Ordination_(statistics)), which can help us identify 1) which collection sites are most similar in terms of their composition of mosquito species, and 2) which mosquito species are most similar in terms of their distribution across collection sites. Ordination methods are generally more useful for visualization and data exploration than for hypothesis testing, but that is an important role. A community diversity study like this would feel incomplete without some sort of ordination plot.  
+In this section we will perform some exploratory [ordination analyses](https://en.wikipedia.org/wiki/Ordination_(statistics)), which can help us identify 1) which collection sites are most similar in terms of their composition of mosquito species, 2) which mosquito species are most similar in terms of their distribution across collection sites, and 3) whether our environmental variables explain a significant amount of variation in mosquito communities. Ordination methods are generally more useful for visualization and data exploration than for hypothesis testing, but they serve an important role by allowing us to visualize structure in our high-dimensional data. A community diversity study like this would feel incomplete without some sort of ordination plot.  
 
-Ordination techniques fall into two major categories: *unconstrained* and *constrained*. The most widely used *unconstrained* ordination method is principal components analysis (PCA), which takes a dataset and identifies the axes that optimally account for variation in the data. PCA is agnostic about what factors underly those axes of variation. In contrast, *constrained* ordination is like a mashup of PCA and regression analysis, in which the axes of variation are constrained to be linear combinations of a set of predictor variables. 
+Ordination techniques fall into two major categories: *unconstrained* and *constrained*. Unconstrained methods (e.g., principal components and correspondence analysis) take a species abundance matrix and identify the axes that optimally account for variation in the data. Unconstrained methods are agnostic about what factors underly those axes of variation. In contrast, constrained ordination methods essentially combine unconstrained ordination with regression analysis, with the axes of variation being constrained to linear combinations of a set of predictor variables. 
 
 The `vegan` package provides functions for performing two popular families of ordination methods: `cca` for 'correspondence analysis', and `rda` for 'redundancy analysis'. Which function you should use depends on your data and what you are interested in. If you want differences in absolute abundance to matter then `rda` is better, but if you want to focus on relative abundances then `cca` is better. For example, if you have the following data:
 
-```{r}
+```{r, echo=FALSE}
 data.frame(Sp.a=c(5,50), Sp.b=c(10,100), row.names=c("Site A", "Site B"))
 ```
 
-If you want Sites A and B to be considered very similar because the proportions of species are the same, then you want `cca`, but if you want those sites to be considered very different because of the absolute abundances are quite different, then you want `rda`. Generally, if you have raw species abundance data then you will choose `cca`. 
+If you want Sites A and B to be considered very similar because the proportions of species are the same, then you want `cca`, but if you want those sites to be considered very different because of the absolute abundances are quite different, then you want `rda`. Generally, if you have raw species abundance data then you will choose `cca`.
 
 The following table summarizes how you can do both unconstrained and constrained ordination analyses using `cca` and `rda`:
 
 ![](http://i.imgur.com/qQrjWBB.jpg?1)
 
-Note that PCA is just an RDA without any explanatory variables, which is why you would run a PCA in `vegan` like this: `rda(abundance.matrix)`.
+Note that PCA is just an RDA without any explanatory variables, which is why you can run a PCA in `vegan` like this: `rda(abundance.matrix)`.
 
-In this tutorial, we will walk through the three ordination methods on the bottom row of the table, since our species abundance data has not been 'relativized'. First, we will apply correspondence analysis (CA) to the mosquito abundance matrix and visualize the major axes of variation in mosquito community composition. Next, we will perform a constrained CA, also known as canonical CA (CCA), bringing the environmental data into play as predictors of mosquito community composition. Finally, we will perform an extension of CCA called *partial* CCA (pCCA), in which predictor variables are separated into effects you are interested in (i.e., fixed effects) and effects you want to control for (i.e., random effects).  
+In this tutorial, we will walk through the three ordination methods on the bottom row of the table since we have raw species abundance data. First, we will apply correspondence analysis (CA) to the mosquito abundance matrix and visualize the major axes of variation in mosquito community composition. Next, we will perform a constrained CA, also known as canonical CA (CCA), bringing the environmental data into play as predictors of mosquito community composition. Finally, we will perform an extension of CCA called *partial* CCA (pCCA), in which predictor variables are separated into effects you are interested in (i.e., fixed effects) and effects you want to control for (i.e., random effects).  
 
-Before beginning, let's make a couple of small adjustments to our mosquito abundance matrix. First, implement a square root transformation to dampen the influence of large counts on the results. Second, divide counts by the variable `TrapNights` to normalize for the variable number of trap nights due to trap failures. 
+Before beginning, let's make a couple of small adjustments to our abundance matrix. First, implement a square root transformation to dampen the influence of large counts on the results. Second, divide counts by the variable `TrapNights` to normalize for the variable number of trap nights due to trap failures. 
 
 ```{r}
 abundance.matrix2 <- sqrt(abundance.matrix)/data$TrapNights
@@ -200,9 +197,9 @@ text(my.ca, display="species", col="black", cex=0.5)
 
 ```
 
-That's better. The color coding helps reveal that the first CA axis appears to reflect a forest-field gradient, which suggests that this habitat gradient is the most important factor structuring mosquito community composition. It also seems like there might be some differentiation among regions, with DU sites clustering near the top of the graph and PR/LW clustering near the bottom. 
+That's better. The color coding helps reveal that the first CA axis reflects a forest-field gradient, suggesting that this habitat gradient is the most important factor structuring mosquito community composition. It also seems like there might be some differentiation among regions, with DU sites clustering near the top of the graph and PR/LW clustering near the bottom. 
 
-With the sites and species separated out, it is now much easier to see the differentiation among species as well. Given that CA1 appears to be a forest-field gradient, we can see that some mosquito species tend to be found in the forest (e.g. *Ae.can*), while others tend to be found in the field (e.g. *Ps.col*). And if we are correct that CA2 corresponds to a regional axis, then *Ae.jap* appears to have an affinity for the DU region (but not much preference for field or forest), while *Ps.cyan* has an affinity for the PR/LW regions (and similarly little preference for field or forest). Species near the center of the graph do not show much differentiation among either regions or habitats. 
+With the sites and species separated out, it is also much easier to see the differentiation among species as well. Given that CA1 appears to be a forest-field gradient, we can see that some mosquito species tend to be found in the forest (e.g. *Ae.can* and *Ae.dup*), while others tend to be found in the field (e.g. *Ps.col* and *Ps.cil*). And if we are correct that CA2 corresponds to a regional axis, then *Ae.jap* appears to have an affinity for the DU region (but not much preference for field or forest), while *Ps.cyan* has an affinity for the PR/LW regions (and similarly little preference for field or forest). Species near the center of the graph do not show much differentiation among either regions or habitats. 
 
 ### Canonincal correspondence analysis (CCA)
 
@@ -213,36 +210,30 @@ Now we will bring in the landscape variables. Let's make a subset of the data fo
 fixed <- data[,4:8]
 ```
 
-Now run the CCA and compute variance inflation factors (VIF) to check for redundancy in the data. As a rule of thumb, VIF > 10 indicates high levels of redundancy.
+Now run the CCA and compute [variance inflation factors](https://en.wikipedia.org/wiki/Variance_inflation_factor) (VIF) to check for redundancy in the predictor variables. As a rule of thumb, VIF > 10 indicates problematic levels of redundancy. Redundant predictor variables do not adversely effect model fit, but it does make it difficult to interpret the estimated effects of individual predictor variables.
 
 ```{r}
-# cca 
-#my.cca <- cca(abundance.matrix2, Y=fixed)
-fixed=data[,4:8]
-
-# test for significance of individual variables/axes
+# the formula notation y ~ . means that all variables in 'fixed' should be included
 my.cca <- cca(abundance.matrix2 ~ ., data=fixed)
-#anova(my.cca)
-#anova(my.cca,by="terms") # type 1 test (sequential)
-#anova(my.cca,by="margin") # type 3 test (marginal effects)
-#anova(my.cca,by="axis") # marginal test for axes
-mod0 <- cca(abundance.matrix2 ~ 1, fixed)
-mod <- step(mod0, scope = formula(my.cca), test = "perm")
-mod2 <- step(my.cca, scope = formula(mod0), test = "perm")
-# maybe only keep evergreen, grassland, and deciduous?
 
 # VIFs
 vif.cca(my.cca)
 ```
 
-Clearly, we have some problematic redundancy in our predictor variables. Let us drop the environmental variable with the largest VIF, Grassland, and see if that fixes the problem:
+It seems we have some problematic redundancy in our predictor variables. A principled way to choose which variable(s) to drop would be using the `drop1` function, which compares the change in AIC the results from dropping each variable from the full model:
+
+```{r, message=FALSE}
+drop1(my.cca, test="perm")
+```
+
+It looks like dropping `MixedForest` would have the least negative effect on the AIC. Let's try dropping it and refitting the CCA:
 
 ```{r}
-# new fixed effects, without Grassland
+# drop MixedForest from the fixed effects
 fixed <- fixed[,-4]
 
-# cca 
-my.cca <- cca(abundance.matrix2, Y=fixed)
+# rerun the cca 
+my.cca <- cca(abundance.matrix2 ~ ., data=fixed)
 
 # VIFs
 vif.cca(my.cca)
@@ -254,7 +245,9 @@ It seems like that did the trick- all our VIFs are now reasonable. Let's visuali
 barplot(my.cca$CA$eig/my.cca$tot.chi, names.arg = 1:my.cca$CA$rank, cex.names = 0.5, ylab="Proportion of variance explained", xlab="CCA axis")
 ```
 
-The first axis explains over 10% of the variance. Look at CCA plots:
+The first axis explains over 10% of the variance. Contrast this with the CA, for which the first axis explained ~31% of the variation in the data. It is expected that the CCA axes will explain less variation than the CA axes because they are now constrained to be linear combinations of the predictors, whereas CA did not have any constraints. 
+
+Look at CCA plots:
 
 ```{r post_2017-04_mosquito-ecology_cca_biplot, fig.width=8, fig.height=4}
 # 2 panels
@@ -271,7 +264,7 @@ text(my.cca, display="species", col="black", cex=0.5)
 text(my.cca, display="bp", col="red", cex=0.5)
 ```
 
-As in the CA, we can see the field-forest gradient reflected along the first axis of variation (note that the direction of the gradient is arbitrary).
+As in the CA, we can see the field-forest gradient reflected along the first axis of variation (note that the direction of the gradient is arbitrary, so it doesn't matter that it has flipped compared to the CA).
 
 Now extract the percent of variance explained by our predictor variables and test for a significant effect of our predictor variables on mosquito community composition:
 
@@ -279,11 +272,14 @@ Now extract the percent of variance explained by our predictor variables and tes
 # proportion of variance explained
 my.cca$CCA$tot.chi/my.cca$tot.chi
 
-# significance test
+# significance test for individual predictors (type 3 test)
+anova(my.cca, by="margin") 
+
+# significance test for entire model
 anova(my.cca)
 ```
 
-The vegetation cover variables explain about 39% of variance in mosquito community composition, and this is statistically significant (*p* < 0.001). 
+The vegetation cover variables explain about 36% of variance in mosquito community composition, and the strongest predictor variable is `Grassland`. The full model is statistically significant (*p* < 0.001). 
 
 ### Partial canonincal correspondence analysis (pCCA)
 
@@ -304,31 +300,9 @@ my.pcca <- cca(X=abundance.matrix2, Y=fixed, Z=random)
 vif.cca(my.pcca)
 ```
 
-The VIFs look okay, so let's look at our barchart of variance explained:
+The VIFs are acceptable.
 
-```{r post_2017-04_mosquito-ecology_pcca_bar, fig.height=4, fig.width=6}
-# barchart for variance of pCCA explained
-barplot(my.pcca$CA$eig/my.pcca$tot.chi, names.arg = 1:22, cex.names = 0.5, ylab="Proportion of variance explained", xlab="pCCA axis")
-```
-
-The first axis explains just over 9% of the variance. Make the pCCA plots:
-
-```{r post_2017-04_mosquito-ecology_pcca_biplot, fig.width=8, fig.height=4}
-# 2 panels
-layout(matrix(1:2,1,2))
-
-# plot sites
-plot(my.pcca, display=c("sites", "bp"), type="n", main="Sites")
-text(my.pcca, display="sites", col=site.cols, cex=0.5)
-text(my.pcca, display="bp", col="red", cex=0.5)
-
-# plot species
-plot(my.pcca, display=c("species", "bp"), type="n", ylab="", main="Species")
-text(my.pcca, display="species", col="black", cex=0.5)
-text(my.pcca, display="bp", col="red", cex=0.5)
-```
-
-Not a whole lot has changed compared to the CCA. Compute the percent of variation explained by the predictors and test for signficance:
+I will not make the figures for the pCCA, which can be produced using the same code that we used for the CCA. If you do this on your own, you will find that not a whole lot has changed compared to the CCA. Compute the percent of variation explained by the predictors and test for signficance:
 
 ```{r}
 # proportion of variance explained
@@ -338,16 +312,16 @@ my.pcca$CCA$tot.chi/my.pcca$tot.chi
 anova(my.pcca)
 ```
 
-Recall that in our CCA, the predictors explained 39% of variation. Since the pCCA random effects account for some additional variation in the data, the predictor variables explain a slightly smaller overall proportion of the variance in the pCCA, about 32%. 
+Recall that in our CCA, the predictors explained 36% of variation. Since the pCCA random effects account for some additional variation in the data, the predictor variables explain a slightly smaller overall proportion, about 32%. 
 
-## Conclusions
+## Concluding remarks
 
-Our analyses showed that both mosquito community diversity and mosquito community composition vary along a field-forest gradient, with the forest having greater diversity than the field. Our visualizations allowed us to identify mosquito species that strongly prefer either the forest (e.g., *Ae.can* and *Ae.dup*) or the field (e.g., *Ps.cil* and *Ps.col*).
+Our analyses showed that both mosquito community diversity and mosquito community composition vary along a field-forest gradient, with the forest having greater diversity than the field. Our visualizations allowed us to identify mosquito species that strongly prefer either the forest (e.g., *Ae.can* and *Ae.dup*) or the field (e.g., *Ps.cil* and *Ps.col*). The fact that the leading axes of the CA and CCA ordinations both represent a field-forest gradient suggests that the vegetation variables being included in the CCA represent the dominant axis of variation in the abundance data. 
 
-The three ordination methods produced similar visual results. The fact that the leading axes of the CA and CCA ordinations both represent a field-forest gradient suggests that the predictor variables being included in the CCA represent the dominant axis of variation in the abundance data. 
+One of the most confusing things about ordination is figuring out how the different methods relate to one another and which one to use. The good news is that all of these methods tend to produce comparable results for a given dataset. You can always try running both `rda` and `cca` and see which approach yields better visualizations of your data. When I applied the `rda` family of methods to this mosquito data, I found that the ordination plots were difficult to read because they were very clumped in the middle with a few outliers. This makes sense since a few sites have very large abundances, and `rda` is sensitive to that. In contrast, `cca` works on relative values and produces ordination plots that are more spread out, so `cca` seemed like a better approach for this dataset. 
 
 **Footnotes:**
 
-*For more information on species diversity indices, the `vegan` documentation is great and will point you toward any more specific literature you might want to look at. Try `?diversity`, `?rarefy`, `?renyi`.* 
+*For more information on species diversity indices, the `vegan` documentation is great and will point you toward any more specific literature you might want to look at. Try `?diversity` and `?rarefy`.*
 
 *For more information on ordination methods, the `vegan` package provides a simple introduction in this [vignette](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFggnMAA&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fvegan%2Fvignettes%2Fintro-vegan.pdf&usg=AFQjCNHp03BO8RXf4FdIuhAZbD_q0cLk6w&sig2=cKxb2fsAOL4Zkurcf6-68g), and the package author provides a more thorough introduction in this [tutorial](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFgg-MAI&url=http%3A%2F%2Fcc.oulu.fi%2F~jarioksa%2Fopetus%2Fmetodi%2Fvegantutor.pdf&usg=AFQjCNHsvyIZ380_KPgiGMqah_gA5V2jLQ&sig2=POfHX13ym8lEOQhLWZtmDg).*

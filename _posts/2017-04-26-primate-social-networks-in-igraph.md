@@ -2,7 +2,7 @@
 title: "Primate social networks: basics of visualization and analysis (igraph)"
 layout: post
 date: 2017-04-26
-tags: R ecology social-network tutorial
+tags: R tutorial ecology social-network visualization igraph
 comments: true
 ---
 

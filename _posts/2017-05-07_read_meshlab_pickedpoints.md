@@ -1,20 +1,17 @@
 ---
 title: "Function to import Meshlab picked points (*.pp) into R"
 layout: post
-date: 2017-05-3
+date: 2017-05-07
 tags: R geometric-morphometrics Meshlab 
 comments: true
 ---
 
-```{r setup, include=FALSE}
-# knitr settings
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ")
-knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
-```
 
-Recently, I've been using the 'PickPoints' feature of  [Meshlab](http://www.meshlab.net/) to collect landmarks from 3D surface models of primate skulls. Meshlab exports landmark coordinates in uniquely formatted 'PickedPoints' files, which I want to read into R as coordinate matrices. Here is an example of the files I am working with- this one decribes 3 points, or landmarks, named "p1", "p2", and "p3":
 
-```{r eval=FALSE}
+Recently, I've been using the 'PickPoints' feature of  [Meshlab](http://www.meshlab.net/) to collect landmarks from 3D surface models of primate skulls. Meshlab exports landmark coordinates in uniquely formatted 'PickedPoints' files, which I want to read into R as 3D coordinate matrices. Here is an example of the files I am working with- this one decribes 3 points, or landmarks, named "p1", "p2", and "p3":
+
+
+```r
 <!DOCTYPE PickedPoints>
 <PickedPoints>
   <DocumentData>
@@ -29,7 +26,8 @@ Recently, I've been using the 'PickPoints' feature of  [Meshlab](http://www.mesh
 
 For some reason, the order of the `<point/>` parameters, `x`, `y`, `z`, `name`, and `active`, varies unpredictably in saved `*.pp` files. Failure to recognize this quirk doomed my first attempt at writing an import function. Below is the successful version of the function,`read.pp`, for reading `*.pp` files into R.
 
-```{r eval=FALSE}
+
+```r
 # function to read Meshlab *.pp files into R
 read.pp <- function (file) {
 	file <- readLines(file)
@@ -54,14 +52,16 @@ read.pp <- function (file) {
 
 Import a single `*.pp` file like this:
 
-```{r eval=FALSE}
+
+```r
 # import a single file
 coords <- read.pp("~/path/to/file.pp")
 ```
 
 To import a set of `*.pp` files from a directory and format them as a 3D array, use `read.pp` and `abind` in a loop: 
 
-```{r eval=FALSE}
+
+```r
 # load abind package
 library(abind)
 
@@ -76,8 +76,8 @@ for (i in 1:length(files)) {
 }
 ```
 
-And that's how I transport my Meshlab Picked Points into R.
+And that's how you can pull your Meshlab landmarks into R!
 
 **Footnotes:**
 
-*The [`Morpho`](https://cran.r-project.org/web/packages/Morpho/index.html) package has the function [`read.mpp`](https://rdrr.io/cran/Morpho/man/read.mpp.html) for reading Meshlab picked points files into R, but it didn't work for me. Maybe the "picked points" output changed under more recent versions of Meshlab? I generated files using Meshlab 2016, and the files produced had the extension `\*.pp`, not `\*.mpp`. *
+*The [`Morpho`](https://cran.r-project.org/web/packages/Morpho/index.html) package has the function [`read.mpp`](https://rdrr.io/cran/Morpho/man/read.mpp.html) for reading Meshlab picked points files into R, but it didn't work for me. Maybe the "picked points" output changed under more recent versions of Meshlab? I am currently using Meshlab 2016, which produces files with the extension `\*.pp`, not `\*.mpp`. *
