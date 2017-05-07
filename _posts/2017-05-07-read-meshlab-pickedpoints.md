@@ -80,4 +80,4 @@ And that's how you can pull your Meshlab landmarks into R!
 
 **Footnotes:**
 
-*The [`Morpho`](https://cran.r-project.org/web/packages/Morpho/index.html) package has the function [`read.mpp`](https://rdrr.io/cran/Morpho/man/read.mpp.html) for reading Meshlab picked points files into R, but it didn't work for me. Maybe the "picked points" output changed under more recent versions of Meshlab? I am currently using Meshlab 2016, which produces files with the extension `\*.pp`, not `\*.mpp`. *
+*The [`Morpho`](https://cran.r-project.org/web/packages/Morpho/index.html) package has the function [`read.mpp`](https://rdrr.io/cran/Morpho/man/read.mpp.html) for reading Meshlab picked points files into R, but it didn't work for me. Maybe the "picked points" output changed under more recent versions of Meshlab? I am currently using Meshlab 2016, which produces files with the extension `\*.pp`, not `\*.mpp`.*
