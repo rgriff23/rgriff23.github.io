@@ -1,70 +1,204 @@
 ---
-title: "Plotting the primate phylogeny with ggtree (tutorial)"
+title: "Visualizing the primate phylogeny with ggtree"
 layout: post
 date: 2017-05-21
-tags: R tutorial phylogeny primates visualization ggtree
+tags: R tutorial phylogeny primates ggtree phytools 
 comments: true
 ---
 
-The second chapter of my dissertation includes a primate phylogeny, and since it is the only visual in the chapter, I wanted to do a little something extra. This lead me to `ggtree`, an R package on [Bioconductor](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/ggtree.html) for visualizing and annotating phylogenies. It basically does for phylogeny plots what `ggplot2` does for most other kinds of plots- it gives you a more sophisticated baseline appearance and better control over aesthetic features. 
+```{r setup, include=FALSE, message=FALSE}
+# knitr settings
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ")
+#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+knitr::opts_chunk$set(message=FALSE, comment=" ", cache=TRUE)
 
-Below, I demonstrate how to make a fancy primate phylogeny using `ggtree` with `phylopic` to annotate clades with images. 
+# load packages 
+library("phytools")
+library("ggtree")
+library("EBImage")
+```
+
+The `ggtree` package on [Bioconductor](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/ggtree.html) is a welcome extension of `ggplot2` for visualizing and annotating phylogenies. Its best feature is the ability to easily annotate trees with text, labels, images, and most excitingly, plots within plots (i., 'subplots'). For example, you can annotate internal nodes with histograms to display posterior distributions of continuous ancestral state estimates, or you can annotate tips with scatterplots depicting within-speies allometric relationships. In this tutorial, I build some fancy primate phylogeny plots that demonstrate the features of `ggtree` I have found most useful for displaying comparative data and ancestral state reconstructions (ASRs). I also cover how to add images to the phylogeny. A thorough overview of `ggtree` capabilities can be found in the package [vignette](http://www.bioconductor.org/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html).
 
 ### Preparations
 
-If necessary, install `ape` from CRAN, and `ggtree` and `EBImage` from Bioconductor, and load the packages:
+Install `phytools` from CRAN, and  `EBImage` and `ggtree` from Bioconductor. Then load the packages:
 
 ```{r eval=FALSE}
 # install from CRAN
-install.packages("ape")
+install.packages("phytools")
 
 # install from Bioconductor
 source("https://bioconductor.org/biocLite.R")
-biocLite("ggtree")
 biocLite("EBImage")
+biocLite("ggtree")
 
 # load packages
-library(ape) # for 'read.nexus'
-library(ggtree)
-library(EBImage) # for images
+library("phytools") # for sims and ASRs
+library("EBImage") # for images
+library("ggtree")
 ```
 
-Import the primate phylogeny from GitHub (it originally came from [10kTrees]()):
+Import the primate phylogeny from GitHub (this tree originally came from [10kTrees](https://10ktrees.fas.harvard.edu/)):
 
 ```{r, message=FALSE}
 # read the tree from GitHub
 tree <- read.nexus("https://raw.githubusercontent.com/rgriff23/Dissertation/master/Chapter_2/data/tree.nex")
 ```
 
-This tree has full species names in the form `Genus_species`. Since there is just one representative species for each genus in this tree, I want to shorten the tip labels to just the genus name:
+### Basics
 
-```{r}
-# set tree labels to genus name only
-tree$tip.label <- sapply(strsplit(tree$tip.label, "_"), "[[", 1)
+The simplest `ggtree` plot displays only branches:
+
+```{r post_2017-05_ggtree_basic}
+# basic plot
+p1 <- ggtree(tree)
+plot(p1)
 ```
 
-And as our final preparation step, let's create some fake data to plot on the tips of the tree: 3 continuous variables, and 3 binary variables.
+The layout options available in `ggtree` are basically the same as those available in `ape`'s `plot.phylo` function, although the layout names are a bit different. Here are all the layouts, and also a demonstration of how easy it is to put multiple phylogenies in one plot using the `multiplot` function:
+
+```{r post_2017-05_ggtree_basic2, fig.width=7.5, fig.height=5}
+# show different layouts in multiplot
+p2a <- ggtree(tree, layout="rectangular") + ggtitle("rectangular")
+p2b <- ggtree(tree, layout="slanted") + ggtitle("slanted")
+p2c <- ggtree(tree, layout="fan") + ggtitle("fan")
+p2d <- ggtree(tree, layout="circular") + ggtitle("circular")
+p2e <- ggtree(tree, layout="radial") + ggtitle("radial")
+p2f <- ggtree(tree, layout="unrooted") + ggtitle("unrooted")
+multiplot(p2a, p2b, p2c, p2d, p2e, p2f, ncol=3)
+```
+
+We have to add all other features related to the nodes, tips, and branches. This can be done by adding layers to the basic plot:
+
+```{r post_2017-05_ggtree_basic3, fig.width=7, fig.height=7}
+# add tip labels (making room with xlim first), node labels, background color, 
+# branch colors (based on branch legths), and a legend for the branch colors
+p3 <- ggtree(tree, aes(color=branch.length)) +
+  xlim(0, 90) + 
+  geom_tiplab(size=2, color="purple") +
+  geom_label2(aes(subset=!isTip, label=node), size=2, color="darkred", alpha=0.5) +
+  theme_tree2("black") +
+  scale_color_continuous(low='white', high='hotpink', name="Branch length (my)") +
+  theme(legend.position="bottom")
+plot(p3)
+```
+
+This plot will be useful for identifying the node numbers necessary to label or draw attention to clades in the next section.
+
+### Annotating clades
+
+Using the last plot, we can see that these are the internal node numbers corresponding to the primate superfamilies:
+
+- Node U: Galagoidea
+- Node V: Lemuroidea
+- Node W: Tarsioidea
+- Node X: Ceboidea
+- Node Y: Cercopithecoidea
+- Node Z: Hominoidea
+
+We can add information about these clades to the tree itself using the `groupClade` function, which will allow us to automatically add certain aesthetics across clades. Add the clades to the tree, and then use this to color the branches of the tree based on clade.
+
+```{r}
+# group clades
+
+# plot tree with color coded clades
+
+```
+
+Perhaps the most obvious thing we can try is adding text labels to the nodes:
+
+```{r post_2017-05_ggtree_clades1}
+
+```
+
+I think these labels are too long to be placed inside the tree like this. There are a couple of other approaches we can take. One would be to add a colorful shaded region around the clades:
+
+```{r post_2017-05_ggtree_clades2}
+
+```
+
+Another would be to add bars near the tips of the tree that show the extent of each clade (note how I adjust the text size and position for the small Tarsiidae family):
+
+```{r post_2017-05_ggtree_clades3}
+
+```
+
+Finally, we can label our clades with images. These can be any images that we choose, for example:
+
+```{r post_2017-05_ggtree_clades4}
+
+```
+
+We can also use images from the `phylopic` database, which `ggtree` is designed to play well with. To annotate nodes with `phylopic`, first find the number of each node you want to annotate, then match each node with a link to an image on XXX. Here are the images I want to use for the major primate superfamilies:
+
+-
+-
+-
+-
+-
+-
+
+Now add the images to the plot.
+
+```{r post_2017-05_ggtree_clades5}
+
+```
+
+Next, we learn how to visualize data on the tips of the tree. 
+
+### Annotating tips with comparative data
+
+First, simulate some comparative data with `phytools`. For now, let's simulate one continuous and one binary trait.
 
 ```{r}
 # make reproducible
 set.seed(23)
 
-# 3 continuous variables
-tip.data <- data.frame(var1=rnorm(length(tree$tip.label)))
-tip.data$var2 <- rnorm(length(tree$tip.label))
-tip.data$var3 <- rnorm(length(tree$tip.label))
+# simulate continous trait
+continuous.trait <- fastBM(tree)
 
-# 3 binary variables
-tip.data$var4 <- sample(c(0,1), length(tree$tip.label), replace=TRUE)
-tip.data$var5 <- sample(c(0,1), length(tree$tip.label), replace=TRUE)
-tip.data$var6 <- sample(c(0,1), length(tree$tip.label), replace=TRUE)
+# simulate binary trait 
+binary.trait <- fastBM(tree)
+binary.trait <- ifelse(binary.trait > mean(binary.trait), 1, 0)
+
 ```
 
-Now we can start plotting! I will note that there is a perfectly lovely tutorial from the `ggtree` package author [here](), which is how I learned to do all of this. Nothing I am demonstrating here goes beyond what is covered in that tutorial. But my tutorial IS about primates, so...
+Use symbols or bars to show a continuous character
 
-### Plots?
+The heatmap function for large data matrices
+
+If you have multiple within-species samples, you can also use subplots to display the within-species distributions on the tips of the tree:
 
 ```{r}
+
+```
+
+### Displaying ASRs with subplots
+
+Now we will perform some ancestral state reconstructions (ASRs) and visualize the results across nodes. First, estimate ASRs for one continuous and one binary trait:
+
+```{r}
+# continuous trait ASRs
+
+# binary trait ASRs
+```
+
+For the continuous trait, ancestral states are represented by a continuous posterior distribution that can be visualized with a histogram. We can annotate our nodes with the histograms of the posterior distributions:
+
+```{r}
+# add continuous posterior distribution histograms
+```
+
+For the discrete trait, ancestral states can be represented by a pie chart or bar chart depicting the relative probability of each state. Here are both options:
+
+```{r}
+# add binary posterior distribution pies and bars
+```
+
+
+
+```{r, eval=FALSE}
 # plot tree
 fig <- ggplot(tree) + 
   geom_tree() + 
@@ -87,27 +221,11 @@ fig <- phylopic(fig, "0174801d-15a6-4668-bfe0-4c421fbe51e8", node=89) # hominoid
 fig + theme(legend.position="none")
 ```
 
-Let's start with a basic plot with different layouts.
-
-You can tinker with the usual graphical parameters (node/tip labels/colors/symbols, branch labels/colors, tip data).
-
-You can annotate clades.
-
-You can add more features like a legend, scale bar, other stuff?
-
-Now, let's annotate the tree with the color-coded tip data, and add a legend for the tip data. 
-
-To annotate nodes with images, first find the number of each node you want to annotate, then match each node with a link to an image on XXX. Here are the node numbers and images for the major primate superfamilies:
 
 
+### Concluding remarks
 
-Now we can add these images to the plot.
-
-```{r}
-
-```
-
-And that's it! Overall, I find that `ggtree` greatly increases the ease and flexibility of adding features to trees, and I think the trees generally look nicer. If you're in the business of plotting trees, I'd say learning `ggtree` is worth the effort. 
+If you are in the business of plotting phylogenies, I think mastering `ggtree` is well worth the effort. I would also note that [`phytools`](http://blog.phytools.org/) (which we used here to simulate data and reconstruct ancestral states) also has some interesting functions for visualizing phylogenetic comparative data and ancestral state reconstructions- see this [demo](https://lukejharmon.github.io/ilhabela/instruction/2015/07/05/plotting-methods/). However, as a general toolkit for annotating phylogenies, `ggtree` is currently the most powerful and flexible R tool I am aware of.
 
 **Footnotes**
 
