@@ -7,7 +7,7 @@ title: Projects
 
 *Active*
 
-[**Primate skull evolution**]- this is my dissertation
+[**Primate skull evolution**](/projects/skull)- this is my dissertation
 
 [**Gelada monkey parasites**](/projects/gelada)- this is a collaboration with the <a target="_blank" href="https://sites.lsa.umich.edu/gelada/">Gelada research project</a>.
 
