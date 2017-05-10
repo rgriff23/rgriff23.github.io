@@ -1,0 +1,9 @@
+---
+layout: post
+title: "btw update: BayesTraitsV3 and Windows compatibility"
+date: 2017-06-xx
+tags: R BayesTraits btw 
+comment: true
+---
+
+I have finally updated <a target="_blank" href="https://github.com/rgriff23/btw">`btw`</a> to run <a target="_blank" href="https://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraitsV3</a> from R on both Mac OS and Windows systems. Shout out to <a target="_blank" href="http://dk-giscience.zgis.net/index.php/37-website/256-ranacher-peter">Peter Ranacher</a> for contributing code to run `btw` functions on Windows. The updated [tutorial](/projects/btw) on my projects page shows how to access the functionality of BayesTraitsV3 with `btw`. 
