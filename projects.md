@@ -5,13 +5,13 @@ title: Projects
 
 ### Research
 
-*ONGOING*
+*Active*
 
-**<a target="_blank" href="https://github.com/rgriff23/Dissertation">Evolution of primate skull shape</a>**- this is my dissertation
+[**Primate skull evolution**]- this is my dissertation
 
 [**Gelada monkey parasites**](/projects/gelada)- this is a collaboration with the <a target="_blank" href="https://sites.lsa.umich.edu/gelada/">Gelada research project</a>.
 
-*RECENT PAST* 
+*Recently active* 
 
 [**Phylogenetic comparative methods**](/projects/pcm)- I assessed the validity of two recently developed statistical methods 
 

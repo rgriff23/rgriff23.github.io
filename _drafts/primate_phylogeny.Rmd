@@ -254,28 +254,39 @@ psub <- ggtree(sub) +
 inset(psub, bx, width=0.2, height=0.15, hjust=-1)
 ``` 
 
-Note that we used the `inset` function to add the subplots, which is the same function we used earlier to add external images to nodes. We will use `inset` again when we display the results of ancestral state reconstructions at internal nodes. In general, `inset` accepts a list of `ggplot` graphic objects (they need not be the same type of object) and adds them to a `ggtree` plot. You can add any `ggplot` object you wish to your plot using this function!
+Note that we used the `inset` function to add the subplots, which is the same function we used earlier to add external images to nodes. We will use `inset` again when we display the results of ancestral state reconstructions at internal nodes. In general, `inset` accepts a list of `ggplot` graphic objects (they need not be the same type of object) and adds them to a `ggtree` plot. You can add any `ggplot` object you wish to your plot using this function.
 
 ### Displaying ASRs with subplots
 
-Now we will perform ancestral state reconstructions (ASRs) and visualize the results across nodes. First, estimate the ASRs for the first continuous trait in our original data, using... 
-```{r}
-# estimate continuous ASRs
+Now we will simulate a single continuous trait and perform ancestral state reconstructions (ASRs) and visualize the results across nodes. First, estimate the ASRs for the first continuous trait in our original data, using the `anc.Bayes` function from `phytools`:
 
+```{r}
+# simulate single trait
+set.seed(23) # reproducible
+trait <- fastBM(tree)
+
+# estimate continuous ASRs with Bayesian Brownian motion model
+asr.cont <- anc.Bayes(tree, trait)
 ```
 
 For the continuous trait, ancestral states are represented by continuous posterior distributions that can be visualized with histograms. We can annotate our nodes of interest with histograms of the corresponding posterior distributions:
 
 ```{r  post_2017-05_ggtree_asr1}
 # plot continuous ASR posterior distributions with histograms
+
 ```
 
 If we have ancestral state reconstructions for a discrete trait, ancestral states can be represented by a pie chart or bar chart depicting the relative probability of each state. Let's use XXX to reconstruct ancestral states for our first discrete character, and visualize the results with both pie charts and bar charts:
 
 ```{r post_2017-05_ggtree_asr2}
-# estimate discrete ASRs
+# make trait binary
+trait.bi <- ifelse(trait > mean(trait), 1, 0)
+
+# estimate discrete ASRs with stochastic character mapping
+
 
 # plot discrete ASRs with pie charts and bar charts
+
 ```
 
 ### Concluding remarks
