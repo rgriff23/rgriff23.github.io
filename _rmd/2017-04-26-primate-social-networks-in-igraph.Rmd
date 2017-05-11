@@ -7,7 +7,7 @@ tags: R ecology tutorial
 
 ```{r setup, include=FALSE, message=FALSE}
 # knitr
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE)
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, fig.align = 'center')
 knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages

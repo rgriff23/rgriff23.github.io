@@ -7,7 +7,7 @@ tags: R hockey twitteR
 
 ```{r setup, include=FALSE}
 # knitr settings
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE)
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ", fig.align = 'center')
 knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages

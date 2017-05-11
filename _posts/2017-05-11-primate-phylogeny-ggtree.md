@@ -52,7 +52,7 @@ p1 <- ggtree(tree)
 plot(p1)
 ```
 
-![plot of chunk post_2017-05_ggtree_basic1](/assets/Rfigs/post_2017-05_ggtree_basic1-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_basic1-1.png" title="plot of chunk post_2017-05_ggtree_basic1" alt="plot of chunk post_2017-05_ggtree_basic1" style="display: block; margin: auto;" />
 
 The layouts available in `ggtree` are the same as those available in `ape`'s `plot.phylo` function, although the names are different. Here are all the layouts, and also a demonstration of how to put multiple phylogenies in one plot using the `multiplot` function:
 
@@ -67,7 +67,7 @@ p2e <- ggtree(tree, layout="unrooted") + ggtitle("unrooted")
 multiplot(p2a, p2b, p2c, p2d, p2e, ncol=3)
 ```
 
-![plot of chunk post_2017-05_ggtree_basic2](/assets/Rfigs/post_2017-05_ggtree_basic2-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_basic2-1.png" title="plot of chunk post_2017-05_ggtree_basic2" alt="plot of chunk post_2017-05_ggtree_basic2" style="display: block; margin: auto;" />
 
 We have to add all other features related to the nodes, tips, and branches. This can be done by adding layers to the basic plot. Here are some layers demonstrating a few more aesthetic options:
 
@@ -85,7 +85,7 @@ p3 <- ggtree(tree, aes(color=branch.length)) +
 plot(p3)
 ```
 
-![plot of chunk post_2017-05_ggtree_basic3](/assets/Rfigs/post_2017-05_ggtree_basic3-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_basic3-1.png" title="plot of chunk post_2017-05_ggtree_basic3" alt="plot of chunk post_2017-05_ggtree_basic3" style="display: block; margin: auto;" />
 
 This plot will be useful for identifying the node numbers necessary to label or draw attention to clades in the next section.
 
@@ -117,7 +117,7 @@ p4 <- ggtree(tree) +
 plot(p4)
 ```
 
-![plot of chunk post_2017-05_ggtree_clades1](/assets/Rfigs/post_2017-05_ggtree_clades1-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_clades1-1.png" title="plot of chunk post_2017-05_ggtree_clades1" alt="plot of chunk post_2017-05_ggtree_clades1" style="display: block; margin: auto;" />
 
 Another would be to add labeled bars near the tips of the tree that show the extent of each clade (note how I adjust the text size and position for the small Tarsiidae superfamily):
 
@@ -134,7 +134,7 @@ p5 <- p4 +
 plot(p5)
 ```
 
-![plot of chunk post_2017-05_ggtree_clades2](/assets/Rfigs/post_2017-05_ggtree_clades2-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_clades2-1.png" title="plot of chunk post_2017-05_ggtree_clades2" alt="plot of chunk post_2017-05_ggtree_clades2" style="display: block; margin: auto;" />
 
 Finally, we can label our clades with images. For an elegant look, we can import images from the phylopic.org database, which `ggtree` is designed to work with using the `phylopic` function. To annotate nodes with `phylopic`, first find the number of each node you want to annotate, then match each node with a link to an image on [phylopic.org](http://phylopic.org/). It is a bit strange, but to point to the images, you have to provide the 'phylopic_id' argument, which is the string of letters and numbers that comes after the `http://phylopic.org/image/` part of the url for the image you want. So for example, if I want to use the image of a chimpanzee at this url:
 
@@ -165,7 +165,7 @@ p6 <- phylopic(p6, "72f2f854-f3cd-4666-887c-35d5c256ab0f", node=70) # cercopithe
 plot(p6)
 ```
 
-![plot of chunk post_2017-05_ggtree_clades3](/assets/Rfigs/post_2017-05_ggtree_clades3-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_clades3-1.png" title="plot of chunk post_2017-05_ggtree_clades3" alt="plot of chunk post_2017-05_ggtree_clades3" style="display: block; margin: auto;" />
 
 Adding images from sources other than `phylopic` is a bit annoying to code, but it is possible. There is some code in the package author's ["Advance Tree Annotation" tutorial](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/advanceTreeAnnotation.html) that shows how to add a single external image to multiple nodes, but the code does not make it easy to add multiple different images to different at once. I managed to do it by writing a function that loops over vectors node numbers and urls of the images you want to add, and iteratively adds them to a plot using the `inset` function. Here is how I added Pokemon node labels from images on `imgur`:
 
@@ -201,7 +201,7 @@ p7 <- add.images(p5, nodes, images)
 plot(p7)
 ```
 
-![plot of chunk post_2017-05_ggtree_clades4](/assets/Rfigs/post_2017-05_ggtree_clades4-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_clades4-1.png" title="plot of chunk post_2017-05_ggtree_clades4" alt="plot of chunk post_2017-05_ggtree_clades4" style="display: block; margin: auto;" />
 
 (In case you are wondering, that is my winning Blue Version team from the early 2000s)
 
@@ -232,7 +232,7 @@ p9 <-  gheatmap(p8, traits, offset=0.2, width=0.2, low="white", high="black", co
 plot(p9)
 ```
 
-![plot of chunk post_2017-05_ggtree_tips1](/assets/Rfigs/post_2017-05_ggtree_tips1-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_tips1-1.png" title="plot of chunk post_2017-05_ggtree_tips1" alt="plot of chunk post_2017-05_ggtree_tips1" style="display: block; margin: auto;" />
 
 This works just as well if our traits are binary, e.g., presence-absence data. 
 
@@ -250,7 +250,7 @@ p10 <-  gheatmap(p8, traits.binary, offset=0.2, width=0.2, low="white", high="bl
 plot(p10)
 ```
 
-![plot of chunk post_2017-05_ggtree_tips2](/assets/Rfigs/post_2017-05_ggtree_tips2-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_tips2-1.png" title="plot of chunk post_2017-05_ggtree_tips2" alt="plot of chunk post_2017-05_ggtree_tips2" style="display: block; margin: auto;" />
 
 What if instead of having multiple variables per species, we have within-species samples for a single variable (e.g., multiple body mass measures for each species), and we want to display the distribution of that variable for each species? This brings us to the biggest advantage of `ggtree`: the ability to create plots within your phylogeny plots, or 'subplots'. 
 
@@ -281,7 +281,7 @@ psub <- ggtree(sub) +
 inset(psub, bx, width=0.2, height=0.15, hjust=-1)
 ```
 
-![plot of chunk post_2017-05_ggtree_tips3](/assets/Rfigs/post_2017-05_ggtree_tips3-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_tips3-1.png" title="plot of chunk post_2017-05_ggtree_tips3" alt="plot of chunk post_2017-05_ggtree_tips3" style="display: block; margin: auto;" />
 
 Note that we used the `inset` function to add the subplots, which is the same function we used earlier to add external images to nodes. We will use `inset` again when we display the results of ancestral state reconstructions at internal nodes. In general, `inset` accepts a list of `ggplot` graphic objects (they need not be the same type of object) and adds them to a `ggtree` plot. You can add any `ggplot` object you wish to your plot using this function.
 
@@ -337,7 +337,7 @@ pdplots <- apply(pd, 2, function(y) {
 inset(p11, pdplots, width=0.15, height=0.15, vjust=-1)
 ```
 
-![plot of chunk post_2017-05_ggtree_asr1](/assets/Rfigs/post_2017-05_ggtree_asr1-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_asr1-1.png" title="plot of chunk post_2017-05_ggtree_asr1" alt="plot of chunk post_2017-05_ggtree_asr1" style="display: block; margin: auto;" />
 
 Setting the aesthetic `fill=..x..` and using `scale_fill_gradient` with the same low and high colors as our `gheatmap` allows us to plot minimalistic histograms that use color shading to achieve what we usually achieve with an x-axis.  
 
@@ -369,7 +369,7 @@ p12 <- inset(p12, pies)
 plot(p12)
 ```
 
-![plot of chunk post_2017-05_ggtree_asr2](/assets/Rfigs/post_2017-05_ggtree_asr2-1.png)
+<img src="/assets/Rfigs/post_2017-05_ggtree_asr2-1.png" title="plot of chunk post_2017-05_ggtree_asr2" alt="plot of chunk post_2017-05_ggtree_asr2" style="display: block; margin: auto;" />
 
 The function `nodebar` works similarly to `nodepie`, but produces stacked or unstacked barcharts. 
 

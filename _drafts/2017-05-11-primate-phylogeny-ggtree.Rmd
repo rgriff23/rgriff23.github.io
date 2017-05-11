@@ -9,7 +9,7 @@ comments: true
 
 ```{r setup, include=FALSE, message=FALSE}
 # knitr settings
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ", message=FALSE, warning=FALSE, comment=" ")
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ", message=FALSE, warning=FALSE, comment=" ", fig.align='center')
 knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages 
