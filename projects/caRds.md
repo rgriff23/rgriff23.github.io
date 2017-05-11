@@ -2,8 +2,8 @@
 layout: project
 title: "caRds"
 author: Randi H. Griffin
-comments: true
 ---
+
 
 ___
 
@@ -26,7 +26,7 @@ ___
 TurkeyDay(from = "Randi", to = "America")
 ```
 
-![plot of chunk project_caRds_usturkey](/assets/Rfigs/project_caRds_usturkey-1.png)
+<img src="/assets/Rfigs/project_caRds_usturkey-1.png" title="plot of chunk project_caRds_usturkey" alt="plot of chunk project_caRds_usturkey" style="display: block; margin: auto;" />
 
 Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 
@@ -35,7 +35,7 @@ Wish Canada a happy Canadian Thanksgiving with `canadian = TRUE`:
 TurkeyDay(from = "Randi", to = "Canada", canadian = TRUE)
 ```
 
-![plot of chunk project_caRds_canturkey](/assets/Rfigs/project_caRds_canturkey-1.png)
+<img src="/assets/Rfigs/project_caRds_canturkey-1.png" title="plot of chunk project_caRds_canturkey" alt="plot of chunk project_caRds_canturkey" style="display: block; margin: auto;" />
 
 ___
 
@@ -48,7 +48,7 @@ ___
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10)
 ```
 
-![plot of chunk project_caRds_xmastree](/assets/Rfigs/project_caRds_xmastree-1.png)
+<img src="/assets/Rfigs/project_caRds_xmastree-1.png" title="plot of chunk project_caRds_xmastree" alt="plot of chunk project_caRds_xmastree" style="display: block; margin: auto;" />
 
 Add tinsel with `tinsel = TRUE`. 
 
@@ -57,7 +57,7 @@ Add tinsel with `tinsel = TRUE`.
 ChristmasTree(from = "Randi", to = "Chase", numPresents = 10, tinsel = TRUE)
 ```
 
-![plot of chunk project_caRds_xmastreetins](/assets/Rfigs/project_caRds_xmastreetins-1.png)
+<img src="/assets/Rfigs/project_caRds_xmastreetins-1.png" title="plot of chunk project_caRds_xmastreetins" alt="plot of chunk project_caRds_xmastreetins" style="display: block; margin: auto;" />
 ___
 
 ### Valentine's Day
@@ -69,7 +69,7 @@ ___
 OneThousandHearts(to = "Samara")
 ```
 
-![plot of chunk project_caRds_hearts](/assets/Rfigs/project_caRds_hearts-1.png)
+<img src="/assets/Rfigs/project_caRds_hearts-1.png" title="plot of chunk project_caRds_hearts" alt="plot of chunk project_caRds_hearts" style="display: block; margin: auto;" />
 
 Alternatively, use `lines` to include a personalized message up to 4 lines long:
 
@@ -81,7 +81,7 @@ OneThousandHearts(line1 = "Roses are red",
   line4 = "I would choose you!")
 ```
 
-![plot of chunk project_caRds_heartspoem](/assets/Rfigs/project_caRds_heartspoem-1.png)
+<img src="/assets/Rfigs/project_caRds_heartspoem-1.png" title="plot of chunk project_caRds_heartspoem" alt="plot of chunk project_caRds_heartspoem" style="display: block; margin: auto;" />
 
 ___
 
@@ -94,5 +94,5 @@ ___
 EasterEgg(shell = "skyblue")
 ```
 
-![plot of chunk project_caRds_egg](/assets/Rfigs/project_caRds_egg-1.png)
+<img src="/assets/Rfigs/project_caRds_egg-1.png" title="plot of chunk project_caRds_egg" alt="plot of chunk project_caRds_egg" style="display: block; margin: auto;" />
 ___
