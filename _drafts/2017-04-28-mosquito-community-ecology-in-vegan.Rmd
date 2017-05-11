@@ -19,7 +19,7 @@ library(vegan)
 
 ___
 
-In this tutorial, I demonstrate how to use the R package [`vegan`](https://cran.r-project.org/web/packages/vegan/index.html) to analyze an original dataset on the abundance of mosquito species in the Raleigh-Durham area of North Carolina. I cover the calculation of common diversity indices, comparison of diversity measures across habitat types using linear models, and visualization of patterns in community composition using multivariate ordination methods (constrained and unconstrained correspondence analysis). 
+In this tutorial, I show how to use the R package [`vegan`](https://cran.r-project.org/web/packages/vegan/index.html) to analyze an original dataset on the abundance of mosquito species in the Raleigh-Durham area of North Carolina. I cover the calculation of common diversity indices, analysis of diversity measures with linear models, and visualization of patterns in community composition using multivariate ordination methods (constrained and unconstrained correspondence analysis). 
 
 ## Study design
 
@@ -45,7 +45,7 @@ install.packages("vegan") # community ecology package
 library("vegan")
 ```
 
-Import the data into R using the `fread` function from the `data.table` package. Let's also specify that `Habitat` is an ordered factor, which will be important for boxplots and linear models. 
+Import the data from GitHub and specify that `Habitat` is an ordered factor (this will be important for boxplots and linear models). 
 
 ```{r}
 # read data from GitHub
@@ -128,7 +128,7 @@ In this section we will perform some exploratory [ordination analyses](https://e
 
 Ordination techniques fall into two major categories: *unconstrained* and *constrained*. Unconstrained methods (e.g., principal components and correspondence analysis) take a species abundance matrix and identify the axes that optimally account for variation in the data. Unconstrained methods are agnostic about what factors underly those axes of variation. In contrast, constrained ordination methods essentially combine unconstrained ordination with regression analysis, with the axes of variation being constrained to linear combinations of a set of predictor variables. 
 
-The `vegan` package provides functions for performing two popular families of ordination methods: `cca` for 'correspondence analysis', and `rda` for 'redundancy analysis'. Which function you should use depends on your data and what you are interested in. If you want differences in absolute abundance to matter then `rda` is better, but if you want to focus on relative abundances then `cca` is better. For example, if you have the following data:
+The `vegan` package provides functions for performing two popular families of ordination methods: `cca` for 'correspondence analysis', and `rda` for 'redundancy analysis'. Which function you should use depends on your data. If you want differences in absolute abundance to matter then `rda` is better, but if you want to focus on relative abundances then `cca` is better. For example, if you have the following data:
 
 ```{r, echo=FALSE}
 data.frame(Sp.a=c(5,50), Sp.b=c(10,100), row.names=c("Site A", "Site B"))
@@ -264,7 +264,7 @@ text(my.cca, display="species", col="black", cex=0.5)
 text(my.cca, display="bp", col="red", cex=0.5)
 ```
 
-As in the CA, we can see the field-forest gradient reflected along the first axis of variation (note that the direction of the gradient is arbitrary, so it doesn't matter that it has flipped compared to the CA).
+As in the CA, we can see the field-forest gradient reflected along the first axis of variation (note that the direction of the gradient is arbitrary).
 
 Now extract the percent of variance explained by our predictor variables and test for a significant effect of our predictor variables on mosquito community composition:
 
@@ -283,7 +283,7 @@ The vegetation cover variables explain about 36% of variance in mosquito communi
 
 ### Partial canonincal correspondence analysis (pCCA)
 
-For our final ordination example, we will build on our CCA by incorporating a matrix of landscape variables related to man-made structures as a  'random effect'. This matrix is called the 'conditioning matrix' in the `vegan` documentation. The effects of these variables will be partialled out of the abundance matrix prior to estimating the effects of the 'fixed effects', which in our case are the landscape variables related to vegetation that we used in the CCA. Let's make a subset of the data for the random effects:
+For our final ordination example, we will build on our CCA by incorporating a second matrix of landscape variables related to man-made structures as a  'random effect'. This matrix is called the 'conditioning matrix' in the `vegan` documentation. The effects of these variables will be partialled out of the abundance matrix prior to estimating the effects of the 'fixed effects', which in our case are the landscape variables related to vegetation that we used in the CCA. Let's make a subset of the data for the random effects:
 
 ```{r}
 # random effects
@@ -318,7 +318,7 @@ Recall that in our CCA, the predictors explained 36% of variation. Since the pCC
 
 Our analyses showed that both mosquito community diversity and mosquito community composition vary along a field-forest gradient, with the forest having greater diversity than the field. Our visualizations allowed us to identify mosquito species that strongly prefer either the forest (e.g., *Ae.can* and *Ae.dup*) or the field (e.g., *Ps.cil* and *Ps.col*). The fact that the leading axes of the CA and CCA ordinations both represent a field-forest gradient suggests that the vegetation variables being included in the CCA represent the dominant axis of variation in the abundance data. 
 
-One of the most confusing things about ordination is figuring out how the different methods relate to one another and which one to use. The good news is that all of these methods tend to produce comparable results for a given dataset. You can always try running both `rda` and `cca` and see which approach yields better visualizations of your data. When I applied the `rda` family of methods to this mosquito data, I found that the ordination plots were difficult to read because they were very clumped in the middle with a few outliers. This makes sense since a few sites have very large abundances, and `rda` is sensitive to that. In contrast, `cca` works on relative values and produces ordination plots that are more spread out, so `cca` seemed like a better approach for this dataset. 
+One of the most confusing things about ordination is figuring out how the different methods relate to one another and which one to use. The good news is that all of these methods tend to produce comparable results for a given dataset. You can always try running both `rda` and `cca` and see which approach yields better visualizations of your data. When I applied the `rda` family of methods to this data, I found that the ordination plots were clumped and difficult to read. This makes sense since a few sites have very large abundances, and `rda` is sensitive to that (unlike `cca`, which works on relative values). 
 
 **Footnotes:**
 
