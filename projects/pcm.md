@@ -2,12 +2,12 @@
 layout: project
 title: "Phylogenetic comparative methods"
 author: Randi H. Griffin
-comments: false
+comments: true
 ---
 
 ___
 
-This project includes my methodological research on a pair of phylogenetic comparative methods that aim to estimate ancestral states for continuous traits. These methods were recently developed by <a target="_blank" href="https://sites.google.com/a/stonybrook.edu/smaerslab/">JBS</a>, and they have gained some traction over the last few years, appearing in 11 combined publications as of May 10, 2017 (they are listed in the Appendix at the bottom of this page).
+This project includes my methodological research on a pair of phylogenetic comparative methods that aim to estimate ancestral states for continuous traits. These methods were recently developed by <a target="_blank" href="https://sites.google.com/a/stonybrook.edu/smaerslab/">Jeroen B Smaers</a> (JBS), and they have gained some traction over the last few years, appearing in 11 combined publications as of May 10, 2017 (they are listed in the Appendix at the bottom of this page).
 
 I have found that these methods are highly unprincipled. In both cases, there is a large discrepancy between what JBS claims the methods do and what they actually do. Also in both cases, the mechanics of the methods are problematic and difficult to justify. 
 
@@ -30,7 +30,7 @@ JBS had an opportunity to respond to this critique, but he declined.
 
 ### Second method: 'multiple variance Brownian motion'
 
-**Smaers et al., (2016)** - [download](/assets/pdfs/Smaers_etal_2016.pdf)
+**Smaers, Mongle, & Kandler (2016)** - [download](/assets/pdfs/Smaers_etal_2016.pdf)
 
 This new method was published shortly after our critique of the first method was published. It claims to present a 'multiple variance Brownian motion model' that can reconstruct ancestral states more accurately than existing methods when a few large bursts of evolution have occurred throughout the phylogeny. A simulation study is conducted in which the accuracy of the method is only evaluated relative to Brownian motion, i.e., they present *ratios* of the average error under the two methods, but never absolute measures of error for their method. They also do not consider any more appropriate models for the evolutionary burst scenario they simulated, such as Brownian motion models that allow for abrupt shifts in the mean value of a trait. 
 
