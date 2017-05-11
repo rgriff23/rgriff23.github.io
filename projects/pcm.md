@@ -2,8 +2,10 @@
 layout: project
 title: "Phylogenetic comparative methods"
 author: Randi H. Griffin
-comments: true
+comments: false
 ---
+
+___
 
 This project includes my methodological research on a pair of phylogenetic comparative methods that aim to estimate ancestral states for continuous traits. These methods were recently developed by <a target="_blank" href="https://sites.google.com/a/stonybrook.edu/smaerslab/">JBS</a>, and they have gained some traction over the last few years, appearing in 11 combined publications as of May 10, 2017 (they are listed in the Appendix at the bottom of this page).
 
@@ -72,3 +74,4 @@ ___
 
 3. Smaers JB, Gómez-Robles A, Parks AN, Sherwood CC. 2017. Exceptional evolutionary expansion of prefrontal cortex in great apes and humans. *Current Biology* 27(5): 714-720. <a target="_blank" href="http://www.cell.com/current-biology/fulltext/S0960-9822(17)30020-9?_returnURL=http%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0960982217300209%3Fshowall%3Dtrue&cc=y=">link</a>
 
+___

@@ -2,8 +2,10 @@
 layout: project
 title: "Mosquito community ecology"
 author: Randi H. Griffin
-comments: true
+comments: false
 ---
+
+___
 
 ### Overview
 

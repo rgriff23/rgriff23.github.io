@@ -4,6 +4,7 @@ title: "Gelada monkey parasites"
 author: Randi H. Griffin
 comments: true
 ---
+___
 
 This multifaceted project centers on the ecology of a tapeworm parasite that infects wild gelada monkeys in Ethiopia. Basic questions remain to be answered, including how the parasites impact gelada health and physiology, and how prevalent infections are. The project is lead by my labmate, Dr. India Schneider-Crease, who has done the hard work of applying for grants, collecting field data, and analyzing samples in the lab. We also draw from a decades worth of field data collected by research technicians and graduate students at the <a target="_blank" href="https://sites.lsa.umich.edu/gelada/">Gelada research project</a> field site in Ethiopia. My job is to help clean up and make sense of this hard-earned data. 
 

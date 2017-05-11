@@ -2,8 +2,10 @@
 layout: project
 title: "Primate skull evolution"
 author: Randi H. Griffin
-comments: true
+comments: false
 ---
+
+___
 
 This is my dissertation research. The code is on **<a target="_blank" href="https://github.com/rgriff23/Dissertation">GitHub</a>**, but it is a work in progress. These are my chapters:
 
@@ -14,3 +16,5 @@ This is my dissertation research. The code is on **<a target="_blank" href="http
 5. Ecomorphology and evolution of primate skull shape
 6. Integration and modularity in primate skull evolution
 7. Conclusions
+
+___
