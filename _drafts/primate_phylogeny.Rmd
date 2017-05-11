@@ -21,7 +21,7 @@ library("EBImage")
 
 The `ggtree` package on [Bioconductor](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/ggtree.html) is a welcome extension of `ggplot2` for visualizing and annotating phylogenies. Its best feature is the ability to easily annotate trees with text, labels, images, and most excitingly, plots within plots (i.e., *subplots*). For example, you can annotate internal nodes with histograms to display posterior distributions of continuous ancestral state estimates, or you can annotate tips with scatterplots depicting within-speies allometric relationships. 
 
-In this tutorial, I build some fancy primate phylogeny plots that demonstrate the features of `ggtree` I have found most useful for displaying comparative data and the results of ancestral state reconstructions (ASRs). Although I don't cover the full breadth of the `ggtree` vignette, I do go a bit beyond what is covered in the vignette in a couple of places (e.g., I provide a function to annotate multiple nodes with different external images in one line of code). A thorough overview of `ggtree` capabilities can be found in the package [vignette](http://www.bioconductor.org/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html), and tutorials written by the package author [here](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/treeAnnotation.html#color-tree) and [here](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/advanceTreeAnnotation.html). 
+In this tutorial, I build some fancy primate phylogeny plots that demonstrate the features of `ggtree` I have found most useful for displaying comparative data and the results of ancestral state reconstructions (ASRs). Although I don't cover the full breadth of the `ggtree` vignette, I do go a bit beyond the vignette in a couple of places (e.g., providing a function to annotate multiple nodes with different external images). A thorough overview of `ggtree` capabilities can be found in the package [vignette](http://www.bioconductor.org/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html), and tutorials written by the package author [here](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/treeAnnotation.html#color-tree) and [here](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/advanceTreeAnnotation.html). 
 
 ### Preparations
 
@@ -222,7 +222,7 @@ row.names(traits.binary) <- row.names(traits)
 
 # add heatmap
 p10 <-  gheatmap(p8, traits.binary, offset=0.2, width=0.2, low="white", high="black", colnames_position = "top", font.size=2, color="black") + 
-    scale_fill_manual(values=c("black", "white"))
+    scale_fill_manual(values=c("white", "black"))
 
 # plot
 plot(p10)
@@ -245,6 +245,8 @@ bx <- lapply(d, function(y) {
     xlim(range(unlist(d))) +
     theme_inset()
 })
+
+# names need to be node/tip numbers
 names(bx) <- 1:length(means)
 
 # plot trees with continuous and discrete tip data
@@ -271,27 +273,62 @@ asr.cont <- anc.Bayes(tree, trait)
 
 For the continuous trait, ancestral states are represented by continuous posterior distributions that can be visualized with histograms. We can annotate our nodes of interest with histograms of the corresponding posterior distributions:
 
-```{r  post_2017-05_ggtree_asr1}
-# plot continuous ASR posterior distributions with histograms
+```{r  post_2017-05_ggtree_asr1, fig.width=7, fig.height=7}
+# basic plot
+p11 <- ggtree(tree) +
+  xlim(0,100) +
+  geom_tiplab(offset=2.5, size=2)
+p11 <-  gheatmap(p11, data.frame(trait), width=0.02, low="blue", high="red", colnames = FALSE)
 
+# define vector with node numbers as character strings
+nodes <- c("70","89","96","110","113","124")
+
+# add continuous ASR posterior distributions for selected nodes
+pd <- asr.cont[,nodes]
+pdplots <- apply(pd, 2, function(y) {
+    ggplot(data.frame(y=y), aes(y, fill=..x..)) +
+    geom_histogram(binwidth = 0.5, alpha=0.75) +
+    xlim(range(unlist(pd))) +
+    scale_fill_gradient(low = "blue", high = "red") +
+    theme_inset()
+})
+
+# plot
+inset(p11, pdplots, width=0.15, height=0.15, vjust=-1)
 ```
 
-If we have ancestral state reconstructions for a discrete trait, ancestral states can be represented by a pie chart or bar chart depicting the relative probability of each state. Let's use XXX to reconstruct ancestral states for our first discrete character, and visualize the results with both pie charts and bar charts:
+Note that setting the aesthetic `fill=..x..` and using `scale_fill_gradient` with the same low and high colors as our `gheatmap` allows us to plot minimalistic histograms that use color shading to achieve what we usually achieve with an x-axis.  
 
-```{r post_2017-05_ggtree_asr2}
+If we have ancestral state reconstructions for a discrete trait, ancestral states can be represented by a pie chart or bar chart depicting the relative probability of each state. Let's use a continuous time Markov model to reconstruct ancestral states for our first discrete character, and visualize the results with pie charts at each internal node:
+
+```{r post_2017-05_ggtree_asr2, fig.width=7, fig.height=7}
 # make trait binary
 trait.bi <- ifelse(trait > mean(trait), 1, 0)
 
-# estimate discrete ASRs with stochastic character mapping
+# estimate discrete ASRs with 
+asr.bi <- data.frame(rerootingMethod(tree, trait.bi)$marginal.anc)
 
+# add column of node numbers
+asr.bi$node <- row.names(asr.bi)
 
-# plot discrete ASRs with pie charts and bar charts
+# basic tree
+p12 <- ggtree(tree) +
+  xlim(0,100) +
+  geom_tiplab(offset=2.5, size=2)
 
+# add heatmap
+p12 <- gheatmap(p12, data.frame(factor(trait.bi)), offset=0.02, width=0.02, low="darkorange1", high="blue", colnames = FALSE, font.size=2, color="black") +
+  scale_fill_manual(values=c("darkorange1","blue"))
+
+# plot discrete ASRs with pie charts
+pies <- nodepie(asr.bi, cols=1:2, color=c("darkorange1","blue"), alpha=0.8)
+p12 <- inset(p12, pies)
+plot(p12)
 ```
 
 ### Concluding remarks
 
-If you are in the business of plotting phylogenies, mastering `ggtree` is well worth the effort. The downsides are that there is a steeper learning curve if you are not already familiar with `ggplot`, and it can be a little harder to find help online just because it isn't as widely used alternatives (e.g., `plot.phylo` from the `ape` package). I note that [`phytools`](http://blog.phytools.org/) (which we used here to simulate data and reconstruct ancestral states) also has some interesting functions for visualizing phylogenetic comparative data and ancestral state reconstructions- see this [demo](https://lukejharmon.github.io/ilhabela/instruction/2015/07/05/plotting-methods/). However, as a general R toolkit for annotating phylogenies, `ggtree` is by far the most powerful and flexible option I am aware of.
+If you are in the business of plotting phylogenies, mastering `ggtree` is well worth the effort. The downsides are that there is a learning curve if you are not familiar with `ggplot`, and it can be a little harder to find help because it isn't as widely used alternatives (e.g., `plot.phylo` from the `ape` package). I note that [`phytools`](http://blog.phytools.org/) (which we used here to simulate data and reconstruct ancestral states) also has some interesting functions for visualizing phylogenetic comparative data and ancestral state reconstructions- see this [demo](https://lukejharmon.github.io/ilhabela/instruction/2015/07/05/plotting-methods/). However, as a general R toolkit for annotating phylogenies, `ggtree` is by far the most powerful and flexible option I am aware of.
 
 **Footnotes**
 
