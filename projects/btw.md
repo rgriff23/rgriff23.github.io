@@ -5,6 +5,8 @@ author: Randi H. Griffin
 comments: true
 ---
 
+___
+
 IMPORTANT NOTE: this package is currently a bit out of date. There are two major updates coming up. **First**, `btw` is designed to work with BayesTraits Version 2, but I realize there is now a Version 3 that has some new features to support. **Second**, `btw` user Peter Ranacher was kind enough to send me some code for running `btw` on Windows, so I plan to incorporate that as well.
 
 ---
