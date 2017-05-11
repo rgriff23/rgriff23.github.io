@@ -2,6 +2,7 @@
 layout: project
 title: "BayesTraits Wrapper (btw)"
 author: Randi H. Griffin
+comments: true
 ---
 
 

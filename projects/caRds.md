@@ -2,6 +2,7 @@
 layout: project
 title: "caRds"
 author: Randi H. Griffin
+comments: true
 ---
 
 
