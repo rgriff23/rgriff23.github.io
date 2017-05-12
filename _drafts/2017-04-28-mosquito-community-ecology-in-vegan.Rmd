@@ -1,13 +1,14 @@
 ---
 title: "Mosquito community diversity analysis (vegan)"
 layout: post
-date: 2017-05-27
+date: 2017-05-21
 tags: R tutorial ecology mosquitoes vegan
+comments: true
 ---
 
 ```{r setup, include=FALSE, message=FALSE}
 # knitr settings
-#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ")
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ", fig.align = 'center')
 #knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 knitr::opts_chunk$set(message=FALSE, comment=" ", cache=TRUE)
 
@@ -124,7 +125,7 @@ There are four estimated coefficients: `Habitat.L`, `Habitat.Q`, `Habitat.C`, an
 
 ## Identifying major axes of variation in community composition
 
-In this section we will perform some exploratory [ordination analyses](https://en.wikipedia.org/wiki/Ordination_(statistics)), which can help us identify 1) which collection sites are most similar in terms of their composition of mosquito species, 2) which mosquito species are most similar in terms of their distribution across collection sites, and 3) whether our environmental variables explain a significant amount of variation in mosquito communities. Ordination methods are generally more useful for visualization and data exploration than for hypothesis testing, but they serve an important role by allowing us to visualize structure in our high-dimensional data. A community diversity study like this would feel incomplete without some sort of ordination plot.  
+In this section we will perform some exploratory [ordination analyses](https://en.wikipedia.org/wiki/Ordination_(statistics)), which can help us identify 1) which collection sites are most similar in terms of their composition of mosquito species, 2) which mosquito species are most similar in terms of their distribution across collection sites, and 3) whether our environmental variables explain a significant amount of variation in mosquito communities. Ordination methods are generally used more for exploration and visualization than for hypothesis testing (although as I will demonstrate, hypothesis testing is possible with these models). A community diversity study like this would feel incomplete without some sort of ordination plot to visualize structure in our high dimensional data.  
 
 Ordination techniques fall into two major categories: *unconstrained* and *constrained*. Unconstrained methods (e.g., principal components and correspondence analysis) take a species abundance matrix and identify the axes that optimally account for variation in the data. Unconstrained methods are agnostic about what factors underly those axes of variation. In contrast, constrained ordination methods essentially combine unconstrained ordination with regression analysis, with the axes of variation being constrained to linear combinations of a set of predictor variables. 
 
@@ -180,7 +181,20 @@ The fact that the first 2 axes only explain a combined ~44% of variation in the 
 plot(my.ca)
 ```
 
-It is a bit difficult to see what is going on here. Let's see if we can make a visualization that is a little easier to see. One thing we can do is add colors to represent the different habitats, as we did for the boxplots. Additionally, we can make more space by plotting the sites and species in separate panels. 
+It is a bit difficult to see what is going on here. Let's see if we can make a visualization that is a little easier to see. One thing we can try is adjusting the scaling of the site and species scores in our plot. The `plot.cca` function (which is called when you use `plot` on a `cca` results) has an argument `scaling` that takes four values: 0 = no scaling, 1 = sites scores are scaled by eigenvalues, 2 = species scores are scaled by eigenvalues (the default), and 3 = both species and site scores are scaled by eigenvalues (alternatively, options 0-3 can be specified less cryptically with the character strings "none", "sites", "species", and "symmetric"). Under option 1 site scores are weighted averages of species scores, and under option 2 species scores are weighted averages of site scores. Option 3 is a compromise between options 1 and 2, and is generally a [good option](https://academic.oup.com/biomet/article-abstract/89/2/423/255280/Goodness-of-fit-of-biplots-and-correspondence?redirectedFrom=fulltext) for displaying sites and species in one plot. 
+
+Here is the effect these different options have on our plot:
+
+```{r post_2017-04_mosquito-ecology_ca_4biplot, fig.width=8, fig.height=8}
+# 4x4 PCA plots with different scaling options
+layout(matrix(1:4,2,2,byrow=TRUE))
+plot(my.ca, scaling="none", main="scaling = 0, raw")
+plot(my.ca, scaling="sites", main="scaling = 1, sites")
+plot(my.ca, scaling="species", main="scaling = 2, species (default)")
+plot(my.ca, scaling="symmetric", main="scaling = 3, both")
+```
+
+An alternative way to make more space on our plot is to display the sites and species on separate panels. Let's also add colors to our site labels to represent different habitats, as we did for the boxplots. 
 
 ```{r post_2017-04_mosquito-ecology_ca_biplot_pretty, fig.width=8, fig.height=4}
 # 2 panels
@@ -188,18 +202,18 @@ layout(matrix(1:2,1,2))
 
 # plot sites
 site.cols <- rep(terrain.colors(6)[5:1],9)
-plot(my.ca, display=c("sites", "bp"), type="n", xlim=c(-2.5, 2.5), ylim=c(-2, 2.5), main="Sites")
-text(my.ca, display="sites", col=site.cols, cex=0.5)
+plot(my.ca, display="sites", type="n", main="Sites", scaling="sites")
+text(my.ca, display="sites", col=site.cols, cex=0.5, scaling="sites")
 
 # plot species
-plot(my.ca, display=c("species", "bp"), type="n", ylab="", xlim=c(-1.5, 1.5), ylim=c(-1.5, 1.5), main="Species")
-text(my.ca, display="species", col="black", cex=0.5)
+plot(my.ca, display="species", type="n", ylab="", main="Species", scaling="species")
+text(my.ca, display="species", col="black", cex=0.5, scaling="species")
 
 ```
 
 That's better. The color coding helps reveal that the first CA axis reflects a forest-field gradient, suggesting that this habitat gradient is the most important factor structuring mosquito community composition. It also seems like there might be some differentiation among regions, with DU sites clustering near the top of the graph and PR/LW clustering near the bottom. 
 
-With the sites and species separated out, it is also much easier to see the differentiation among species as well. Given that CA1 appears to be a forest-field gradient, we can see that some mosquito species tend to be found in the forest (e.g. *Ae.can* and *Ae.dup*), while others tend to be found in the field (e.g. *Ps.col* and *Ps.cil*). And if we are correct that CA2 corresponds to a regional axis, then *Ae.jap* appears to have an affinity for the DU region (but not much preference for field or forest), while *Ps.cyan* has an affinity for the PR/LW regions (and similarly little preference for field or forest). Species near the center of the graph do not show much differentiation among either regions or habitats. 
+With the sites and species separated out, it is easier to see the differentiation among species as well. Given that CA1 appears to be a forest-field gradient, we can see that some mosquito species tend to be found in the forest (e.g. *Ae.can* and *Ae.dup*), while others tend to be found in the field (e.g. *Ps.col* and *Ps.cil*). And if we are correct that CA2 corresponds to a regional axis, then *Ae.jap* appears to have an affinity for the DU region (but not much preference for field or forest), while *Ps.cyan* has an affinity for the PR/LW regions (and similarly little preference for field or forest). Species near the center of the graph do not show much differentiation among either regions or habitats. 
 
 ### Canonincal correspondence analysis (CCA)
 
@@ -210,7 +224,7 @@ Now we will bring in the landscape variables. Let's make a subset of the data fo
 fixed <- data[,4:8]
 ```
 
-Now run the CCA and compute [variance inflation factors](https://en.wikipedia.org/wiki/Variance_inflation_factor) (VIF) to check for redundancy in the predictor variables. As a rule of thumb, VIF > 10 indicates problematic levels of redundancy. Redundant predictor variables do not adversely effect model fit, but it does make it difficult to interpret the estimated effects of individual predictor variables.
+Run the CCA and compute [variance inflation factors](https://en.wikipedia.org/wiki/Variance_inflation_factor) (VIF) to check for redundancy in the predictor variables. As a rule of thumb, VIF > 10 indicates problematic levels of redundancy. Redundant predictor variables do not adversely effect model fit, but it does make it difficult to interpret the estimated effects of individual predictor variables.
 
 ```{r}
 # the formula notation y ~ . means that all variables in 'fixed' should be included
@@ -220,7 +234,7 @@ my.cca <- cca(abundance.matrix2 ~ ., data=fixed)
 vif.cca(my.cca)
 ```
 
-It seems we have some problematic redundancy in our predictor variables. A principled way to choose which variable(s) to drop would be using the `drop1` function, which compares the change in AIC the results from dropping each variable from the full model:
+It seems we have some problematic redundancy in our predictor variables. A principled way to choose which variable(s) to drop is to use the `drop1` function, which compares the change in AIC the results from dropping each variable from the full model:
 
 ```{r, message=FALSE}
 drop1(my.cca, test="perm")
@@ -254,13 +268,13 @@ Look at CCA plots:
 layout(matrix(1:2,1,2))
 
 # plot sites
-plot(my.cca, display=c("sites", "bp"), type="n", main="Sites")
-text(my.cca, display="sites", col=site.cols, cex=0.5)
+plot(my.cca, display=c("sites", "bp"), type="n", main="Sites", scaling="sites")
+text(my.cca, display="sites", col=site.cols, cex=0.5, scaling="sites")
 text(my.cca, display="bp", col="red", cex=0.5)
 
 # plot species
-plot(my.cca, display=c("species", "bp"), type="n", ylab="", main="Species")
-text(my.cca, display="species", col="black", cex=0.5)
+plot(my.cca, display=c("species", "bp"), type="n", ylab="", main="Species", scaling="species")
+text(my.cca, display="species", col="black", cex=0.5, scaling="species")
 text(my.cca, display="bp", col="red", cex=0.5)
 ```
 
@@ -300,9 +314,24 @@ my.pcca <- cca(X=abundance.matrix2, Y=fixed, Z=random)
 vif.cca(my.pcca)
 ```
 
-The VIFs are acceptable.
+The VIFs are acceptable. Make the figures for the pCCA: 
 
-I will not make the figures for the pCCA, which can be produced using the same code that we used for the CCA. If you do this on your own, you will find that not a whole lot has changed compared to the CCA. Compute the percent of variation explained by the predictors and test for signficance:
+```{r post_2017-04_mosquito-ecology_pcca_biplot, fig.width=8, fig.height=4}
+# 2 panels
+layout(matrix(1:2,1,2))
+
+# plot sites
+plot(my.pcca, display=c("sites", "bp"), type="n", main="Sites", scaling="sites")
+text(my.pcca, display="sites", col=site.cols, cex=0.5, scaling="sites")
+text(my.pcca, display="bp", col="red", cex=0.5)
+
+# plot species
+plot(my.pcca, display=c("species", "bp"), type="n", ylab="", main="Species", scaling="species")
+text(my.pcca, display="species", col="black", cex=0.5, scaling="species")
+text(my.pcca, display="bp", col="red", cex=0.5)
+```
+
+Not a whole lot has changed compared to the CCA. Compute the percent of variation explained by the predictors and test for signficance:
 
 ```{r}
 # proportion of variance explained
@@ -318,7 +347,7 @@ Recall that in our CCA, the predictors explained 36% of variation. Since the pCC
 
 Our analyses showed that both mosquito community diversity and mosquito community composition vary along a field-forest gradient, with the forest having greater diversity than the field. Our visualizations allowed us to identify mosquito species that strongly prefer either the forest (e.g., *Ae.can* and *Ae.dup*) or the field (e.g., *Ps.cil* and *Ps.col*). The fact that the leading axes of the CA and CCA ordinations both represent a field-forest gradient suggests that the vegetation variables being included in the CCA represent the dominant axis of variation in the abundance data. 
 
-One of the most confusing things about ordination is figuring out how the different methods relate to one another and which one to use. The good news is that all of these methods tend to produce comparable results for a given dataset. You can always try running both `rda` and `cca` and see which approach yields better visualizations of your data. When I applied the `rda` family of methods to this data, I found that the ordination plots were clumped and difficult to read. This makes sense since a few sites have very large abundances, and `rda` is sensitive to that (unlike `cca`, which works on relative values). 
+One of the most confusing things about ordination is figuring out how the different methods relate to one another and which one to use. The good news is that all of these methods tend to produce comparable results for a given dataset. Choosing the best one for your data is as much art as science. You can always try running both `rda` and `cca` to see which approach yields better visualizations of your data, or try different ways of scaling the scores (see the`?plot.cca` help page and the `vegan` [design decisions document](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwj61YCQ4-rTAhWBKiYKHaaCCMkQFggsMAA&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fvegan%2Fvignettes%2Fdecision-vegan.pdf&usg=AFQjCNFr1yflIOHdjmqpmaI1eeXrAQMeFA&sig2=ALSGpFzLgtfGpbMubMKaaw) to read more about scaling options). The goal is simply to get a birds-eye view of the major patterns of similarity and dissimilarity across your dataset in as clear a way as possible. 
 
 **Footnotes:**
 
