@@ -1,9 +1,9 @@
 ---
-title: "Orbit orientation isn't correlated with anything: a reanalysis of Heesy 2005 (ape, geiger, geomorph, ggtree)"
+title: "Orbit orientation isn't correlated with anything: a reanalysis of Heesy (2008)"
 layout: post
 date: 2017-06-xx
 category: post-publication-peer-review
-tags: R evolution primates morphology phylogeny GLMM ape geiger geomorph ggtree
+tags: R evolution primates mammals morphology phylogeny GLMM ape geiger geomorph ggtree
 comments: true
 ---
 
@@ -20,38 +20,75 @@ library(geomorph)
 library(ggtree)
 ```
 
-## The ecomorphology of orbit orientation (Heesy 2005)
+This post presents a re-analysis of data from a paper, ["Ecomorphology of orbit orientation and the adaptive significance of binocular vision in primates and other mammals"](http://www.karger.com/Article/Abstract/108621) by Dr. Christopher Heesy (2008). I demonstrate that correcting for the statistical non-independence of species data undermines the major conclusions of this paper, and I highlight directions for future work on the topic of mammalian orbit evolution.
 
-"Convergent orbits", or the tendancy for the orbits of the skull to face forwards, have long been included in the suite of characteristics that differentiate the first primates from other mammals of the early Cretaceous. Several theories have popularized the notion that orbit convergence was functionally important for early primates...
+Note: *This is not an attack on Chris Heesy's work- It is commendable that he published this impressive dataset, and he was extremely receptive and engaging when I shared my analyses with him. Maybe a future graduate student will be inspired by these ideas and run with them. If you feel so inspired, I suggest getting in touch with Chris.* :)  
 
-In recent years, the nocturnal visual predation (NVP) hypothesis has pulled out ahead of the other hypotheses in terms of widespread support. One study that has helped popularize NVP was Heesy's (2005) paper, "Ecomorphology of orbit orientation". Heesy compiled a comparative dataset on orbit orientation and the ecological variables of activity pattern (nocturnal = 1, other = 0), diet (insectivory = 1, other = 0), and substrate use (arboreal = 1, other = 0). Orbit orientation was captured with two angles, convergence and frontation, diagrammed below:
+## The ecomorphology of orbit orientation (Heesy 2008)
 
-Heesy (2005) assessed the relationship between the ecological variables and orbit orientation using MANOVA, with orbit convergence and frontation as the response variable, and nocturnality, insectivory, and arboreality as predictor variables. This is the full model:
+"Forward-facing orbits", or the tendancy of the orbits of the skull to face forwards, have long been included in the suite of characteristics that differentiate the first primates from other primitive mammals of the early Paleogene. Several theories have popularized the notion that orbit convergence was functionally important for early primates...
 
-[convergence, frontation] ~ nocturnality + insectivory + arboreality
+One study that has helped popularize NVP was Chris Heesy's (2008) paper, ["Ecomorphology of orbit orientation and the adaptive significance of binocular vision in primates and other mammals"](http://www.karger.com/Article/Abstract/108621). Heesy compiled a comparative dataset on mammal orbit orientation and the ecological variables of activity pattern (nocturnal = 1, other = 0), diet (insectivory = 1, other = 0), and substrate use (arboreal = 1, other = 0). Orbit orientation was captured with three angles, convergence, frontation, and verticality. Important lines and planes used for computing these angles are diagrammed below (the Figure was copied from Heesy 2008):
 
-The results showed that only nocturnality and insectivory were significant, lending support to the NVP hypothesis. Since Heesy commendably published his data along with his paper, we can easily reproduce the main MANOVA analysis:
+![](http://i.imgur.com/9RhjfDi.png)
 
-```{r post_2017-06_heesy-boxplots}
-# read data
+> **Technical notes on quantifying orbit orientation**: *Orbit convergence* is measured by the angle between the saggital and orbital planes, the latter being defined by the 3 points: OA- anterior orbit margin, OI- inferior orbit margin, and OS- superior orbit margin (this is shown in figure **a** above). *Orbit frontation* is measured by the angle between the line formed by the intersection of the saggital and orbital planes (shown in figure **b** above), and the inion-nasion line (not shown), which essentially runs along the midline from the back of the braincase through the forehead. *Orbit verticality* is the angle between the orbital plane and the palatal plane (formed by the prosthion and the midpoints of the M1 alveolar borders). All three of these measures capture the extent to which the orbits face 'forwards'. 
+
+Heesy (2008) assessed the relationship between orbit orientation and ecological variables using MANOVA, with orbit convergence, frontation, and verticality as a multivariate response variable, and nocturnality, insectivory, and arboreality as the predictor variables (plus interaction terms). This is the full model:
+
+> (convergence, frontation, verticality) ~ nocturnality \* insectivory \* arboreality
+
+In addition to MANOVA, one-way ANOVAs were performed for each orbit variable.
+
+To address concerns that certain taxonomic groups might be driving the MANOVA/ANOVA results, Heesy repeated all analyses on the full data and two subsets of the full dataset: mammals excluding marsupials and anthropoid primates, and mammals excluding marsupials and all primates. These particular groups were removed because it was argued that marsupials and primates (particularly anthropoids) have either special morphological constraints or highly derived orbit morphology (see Heesy's paper for details). 
+
+Since Heesy published his data along with his paper, we can easily reproduce his results. The following R code replicate the results presented in Table 1 of Heesy (2008):
+
+```{r}
+# import data
 data <- read.csv("~/Dropbox/Duke/Semesters at Duke/2014 Fall/Fossils/Fossil final project/Data/HeesyData.csv", header=TRUE, row.names=1)
 
-# manova
-heesy.model <- manova(cbind(OrbitConvergence, Frontition) ~ NOCCODE+Fauncode+Arbcode, data=data)
-summary(heesy.model)
+# MANOVA/ANOVA (all taxa)
+heesy.model.1 <- manova(cbind(OrbitConvergence, Frontition, Verticality) ~ NOCCODE*Fauncode*Arbcode, data=data)
+summary.manova(heesy.model.1, test="Wilks")
+summary.aov(heesy.model.1)
+
+# MANOVA/ANOVA (drop marsupials and anthropoids)
+data2 <- data[!(data$ORDER%in%c("Didelphimorphia","Diprotodontia")),]
+data2 <- data2[data$GROUP != "Anthropoidea",]
+heesy.model.2 <- manova(cbind(OrbitConvergence, Frontition, Verticality) ~ NOCCODE*Fauncode*Arbcode, data=data2)
+summary.manova(heesy.model.2, test="Wilks")
+summary.aov(heesy.model.2)
+
+# MANOVA/ANOVA (drop marsupials and all primates)
+data3 <- data[!(data$ORDER%in%c("Didelphimorphia","Diprotodontia","Primates")),]
+heesy.model.3 <- manova(cbind(OrbitConvergence, Frontition, Verticality) ~ NOCCODE*Fauncode*Arbcode, data=data3)
+summary.manova(heesy.model.3, test="Wilks")
+summary.aov(heesy.model.3)
 ```
 
-In the next section, we will see how a more appropriate model that accounts for the evolutionary relationships among taxa will lead us to very different statistical conclusions.
+Here is a run-down of the results (focusing on main effects):
+
+- Main effects are always in the expected direction (nocturnality, faunivory, and arboreality are associated with more forward-facing orbits)
+- All main effects are significant in all three MANOVAs.
+- All main effects are significant in all of the one-way ANOVAs for the full dataset and for the subset without marsupials and anthropoid primates
+- Main effects for nocturnality and insectivory (but not arboreality) were significant in the one-way ANOVAs for the subset without marsupials and ALL primates
+
+This last finding- that dropping marsupials and all primates from the analysis causes arboreality to become non-significant in one-way ANOVAs- is the key result that Heesy (2008) interprets as support for the NVP hypothesis and against the arboreal hypothesis. In other words, a major conclusion of the paper is based on the only non-significant main effect in the results.
+
+Now, I would find that interpretation problematic even if I didn't have an issue with the statistical models themselves. It isn't too surprising that arboreality becomes non-significant after dumping 40% of the data, which happens to include 80% of arboreal taxa. The problem is that Heesy is essentially turning a 'failure to reject the null hypothesis' into an 'acceptance of the null hypothesis', which is an incorrect interpretation statistical hypothesis tests. Even if arboreality is non-significant, we cannot infer that arboreality does not influence orbit evolution. Moreover, arboreality is still significant in all of the MANOVAs, so why fixate on the one non-significant result from the one-way ANOVAs?
+
+That said, we will now see how more appropriate phylogenetic models eliminate all of the significant statistical results, rendering moot the interpretation of the particular arrangement of p-values in Heesy's (2008) original results. 
 
 ## Problem of phylogenetic autocorrelation
 
-Phylogenetic autocorrelation, also called phylogenetic pseudoreplication or phylogenetic non-independence, is a well-known problem in comparative evolutionary biology. The problem arises when researchers attempt to apply statistical methods that assume independent observations (e.g., linear regression) to evolutionary data that is not statistically independent. For example, a human, a chimpanzee, and a tuna cannot be considered 3 independent entities because a human and a chimpanzee are much more closely related to each other than they are to a tuna, thus they have had less time to evolve independently. Failure to account for phylogenetic autocorrelation in statistical models leads to elevated risk of Type I error, or false positives, because relationships that are driven by phylogenetic patterns may be incorrectly attributed to predictor variables in the model. 
+Phylogenetic autocorrelation, also called phylogenetic pseudoreplication or phylogenetic non-independence, is a well-known problem in comparative evolutionary biology. The problem arises when researchers attempt to apply statistical methods that assume independent observations (e.g., linear regression) to evolutionary data that is not statistically independent. For example, a human, a chimpanzee, and a mouse cannot be considered 3 independent entities because a human and a chimpanzee are much more closely related to each other than they are to a mouse, thus they have had less time to evolve independently. Failure to account for phylogenetic autocorrelation in statistical models leads to elevated risk of Type I error, or false positives, because relationships that are driven by phylogenetic patterns may be incorrectly attributed to predictor variables in the model. 
 
-The need to incorporate phylogenetic relationships into statistical models of evolution has spawned an entire subfield at the intersection of evolutionary biology and statistics: phylogenetic comparative methods (PCM). One of the most commonly used PCMs is phylogenetic generalized least squares (PGLS), which is simply a linear regression that incorporates a phylogenetic distance matrix into the variance-covariance structure of the model. In the following section, we will see how using PGLS to correct for phylogenetic autocorrelation in Heesy's (2005) regression models eliminates the significant associations between orbit orientation and ecological variables. 
+Heesy was aware of this potential issue, but cited the absence of software for implementing phylogenetic MANOVA as the reason for using standard MANOVA. Lack of software might have been an issue in 2008, but fortunately it isn't anymore. In the following section I use functions from the R packages `geiger` and `geomorph` to correct for phylogenetic autocorrelation in Heesy's (2008) models, and discuss the impact it has on the results.
 
-## Reanalysis
+## Reanalysis of Heesy (2008) with phylogeny
 
-If you want to follow along with my entire analysis, make sure you have the following R packages installed: 
+If you want to follow along with the rest of my analysis, make sure to have the following R packages installed. Note that [installing `geomorph`](https://github.com/geomorphR/geomorph/wiki/Installing-geomorph) requires XQuartz if you are running Mac OS and `rgl` dependencies if you are running Linux: 
 
 ```{r, eval=FALSE}
 # install packages
@@ -61,7 +98,7 @@ install.packages(geomorph)
 install.packages(ggtree)
 ```
 
-Next, import a phylogeny from GitHub. This is a trimmed down version of the mammal supertree published by [Bininda-Emonds et al. ()](). I have already done the work of cleaning of taxa labels and dropping the few taxa from Heesy's data that were not present in the Bininda-Emonds phylogeny, so taxa labels should match up perfectly between the tree and data. 
+Next, import the phylogeny from GitHub. This is a trimmed down version of the mammal supertree published by [Bininda-Emonds et al. (2007)](http://www.nature.com/nature/journal/v446/n7135/abs/nature05634.html). I already did the work of cleaning of taxa labels and dropping the few taxa from Heesy's data that were not present in the Bininda-Emonds phylogeny, so taxa labels match up perfectly between the tree and data. 
 
 ```{r}
 # load package
@@ -70,11 +107,11 @@ library(ape)
 # import phylogenetic tree
 tree <- read.nexus("~/Dropbox/Duke/Semesters at Duke/2014 Fall/Fossils/Fossil final project/Data/HeesyTree.nexus")
 
-# resolve polytomies
+# arbitrarily resolve polytomies
 tree <- multi2di(tree)
 ```
 
-We can perform a simple phylogenetic MANOVA using the `aov.phylo` function in the `geiger` package. This function does not take a `data` argument, and has the limitation of only allowing one predictor variable at a time.
+We can perform a simple phylogenetic MANOVA using the `aov.phylo` function in the `geiger` package. This function has some limitations: it does not accept a `data` argument, and it only allows one predictor variable at a time. Still, we can use it to look at the MANOVA results for individual predictor variables:
 
 ```{r}
 # load package
@@ -88,7 +125,7 @@ nocturnal <- as.factor(setNames(data$NOCCODE, row.names(data)))
 insectivore <- as.factor(setNames(data$Fauncode, row.names(data)))
 arboreal <- as.factor(setNames(data$Arbcode, row.names(data)))
 
-# make reproducible
+# make simulation-based p-values reproducible
 set.seed(23)
 
 # activity pattern
@@ -104,15 +141,17 @@ mod3 <- aov.phylo(angles ~ arboreal, phy=tree)
 print(attributes(mod3)$summary)
 ```
 
+The output provides both standard (non-phylogenetic) and phylogenetic p-values in the last two columns of the MANOVA table. We can see that all of the standard p-values are highly significant, while the phylogenetic p-values are all non-significant (although arboreality is borderline).
 
+The `procD.pgls` function in the `geomorph` package allows us to perform [phylogenetic regression with a multivariate response variable](http://onlinelibrary.wiley.com/doi/10.1111/evo.12463/full) and multiple predictor variables. The function does not handle missing data, so we will have to do some pre-processing of the data before fitting the model. The model takes a few moments to run because the significance test is based on permutations:
 
 ```{r}
 # load package
 library("geomorph")
 
 # subset data (no missing values allowed)
-data2 <- data[,c("OrbitConvergence","Frontition","NOCCODE","Fauncode","Arbcode")]
-names(data2) <- c("Convergence", "Frontition", "Nocturnal", "Insectivore", "Arboreal")
+data2 <- data[,c("OrbitConvergence","Frontition","NOCCODE","Fauncode","Arbcode","GROUP","ORDER")]
+names(data2) <- c("Convergence", "Frontition", "Nocturnal", "Insectivore", "Arboreal","GROUP","ORDER")
 data2 <- data2[complete.cases(data2),]
 angles2 <- data2[,1:2]
 vars <- data2[,3:5]
@@ -123,30 +162,60 @@ tree2 <- multi2di(drop.tip(tree, droptax))
 df <- geomorph.data.frame(angles2, vars, tree2)
 
 # multivariate MANOVA with procD.pgls in geomorph
-procD.pgls(angles2 ~ nocturnal + insectivore + arboreal, phy=tree2, data=df)
+procD.pgls(angles2 ~ Nocturnal + Insectivore + Arboreal, phy=tree2, data=df)
 
 ```
 
-Clearly there is a strong phylogenetic pattern in the data, visualized below. 
+It is still worth fitting these models to subsets of the data if we are concerned that certain groups of mammals (e.g., marsupials and anthropoids) are not subject to the same evolutionary 'rules' as the other groups. More complex models could actually try to *model* these differences, but my goal here is simply to replicate Heesy (2008) with the addition of a phylogeny, so we'll fit the MANOVAs using the same subsets of the data as Heesy (2008):
 
-```{r post_2017-06_heesy-phylogeny}
-# load package
-library(ggtree)
+```{r}
+# drop marsupials and anthropoids, then rerun phylogenetic MANOVA
+data3 <- data2[!(data2$ORDER%in%c("Didelphimorphia","Diprotodontia")),]
+data3 <- data3[data3$GROUP != "Anthropoidea",]
+angles3 <- data3[,1:2]
+vars3 <- data3[,3:5]
+tree3 <- drop.tip(tree2, setdiff(tree2$tip.label,row.names(data3)))
+df3 <- geomorph.data.frame(angles3, vars3, tree3)
+procD.pgls(angles3 ~ Nocturnal + Insectivore + Arboreal, phy=tree3, data=df3)
+
+# drop marsupials and primates, then rerun phylogenetic MANOVA
+data4 <- data3[data3$ORDER != "Primates",]
+angles4 <- data4[,1:2]
+vars4 <- data4[,3:5]
+tree4 <- drop.tip(tree3, setdiff(tree3$tip.label,row.names(data4)))
+df4 <- geomorph.data.frame(angles4, vars4, tree4)
+procD.pgls(angles4 ~ Nocturnal + Insectivore + Arboreal, phy=tree4, data=df4)
+
 ```
 
-When we take this pattern into account in our statistical model, the relationships between ecological variables and orbit orientation are no longer statistically signficant. Thus, when analyzed properly, this comparative data does not provide statistical support for the NVP hypothesis. 
+Again, nothing is significant. Thus, simply incorporating phylogeny into the analysis has changed a study for which nearly every statistical test yielded a significant result into a study with NO significant results. Wow. It is hard to find a more perfect example of how important it can be to include phylogeny in analyses of interspecific data. 
+
+Feel free to play around with the data I provided to fit alternative models. In combination with the original paper, the defintions of variables should be easy to figure out. 
 
 ## Concluding remarks
 
-It is important to keep in mind what these results do *not* tell us... specifically, these results do *not* imply that shifts in orbit orientation were *not* driven by the ecological variables in question. It could be that any or all of these variables played a role in directing the evolution of early primate orbits. Unfortunately, unless our data captures numerous instances of correlated shifts in orbit orientation and ecology, we are unlikely to find statistical associations between these variables after controlling for phylogenetic autocorrelation. Inferences about such singular or very rare events in evolutionary history may have to depend more on circumstantial rather than statistical evidence. 
+It is important to keep in mind what 'negative' or 'null' results such as these do *not* tell us... specifically, the fact that there are no significant relationships between the ecological variables and orbit orientation does *not* imply that evolutionary shifts in orbit orientation were *not* driven by the ecological variables in question. It could be that any or all of these variables played a role in directing the evolution of early primate orbits. However, unless our data captures numerous instances of correlated shifts in orbit orientation and ecology, we are unlikely to find statistical associations between these variables after controlling for phylogenetic autocorrelation. Inferences about such singular or very rare events in evolutionary history may have to depend more on circumstantial rather than statistical evidence. 
 
-That said, I think there is room to do more comparative statistical work on the evolution of orbit orientation. I see two major directions for advancing this project. 
+That said, I think there is room to do more comparative statistical work on the evolution of orbit orientation, and I see at least two major directions for advancing this project. 
 
--First is expanding the dataset. There is room for more complete sampling of extant taxa, and for the addition of fossils. It also would be good to include other aspects of skull morphology in the models, particularly the size of the prefrontal cortex, which has been [hypothesized]() to explain much of the variation in mammalian orbit orientation.
+- First is expanding and refining the dataset. There is room for more complete sampling of extant taxa, and for the addition of fossil data. It also would be good to include other aspects of skull morphology in the models, such as the size and shape of the [braincase and basicranium](http://onlinelibrary.wiley.com/doi/10.1002/ajpa.1330910306/full). Finally, the ecological variables could use some work. Although activity pattern is relatively straightforward to code as a discrete variable, diet and substrate use are much more fraught, and predictor variables should be selected to reflect the hypotheses being tested as directly as possible. For example, if "leaping" is a factor that is thought to select for convergent orbits, then "leaping" is a much better predictor variable than "arboreality", which includes things like lorises and sloths that creep slowly along branches. Similarly, if "visual predation"" is a factor thought to select for convergent orbits, then "visual predation" is a much better predictor variable than "faunivory", which includes things like aye-ayes that find their prey by tapping on trees like woodpeckers. 
 
--Second is fitting more [sophisticated models]() that aim to detect shifts in the tempo or mode of evolution. For instance, it would be interesting to know if there is a statistically significant 'shift' in the mean orbit orientation at the base of the primate clade (I think the NVP hypothesis would predict a mean shift at the base of both the primates and the carnivores). 
+- Second is fitting more sophisticated models that aim to detect shifts in the tempo or mode of evolution (e.g., like [this](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12084/full)). This is a rather different approach that aims to identify parts of a phylogeny where the rules of evolution seem to change. For instance, it would be interesting to know if there is a statistically significant 'shift' in the mean orbit orientation at the base of the primate clade. I think the NVP hypothesis would predict a mean shift at the base of both the primates and the carnivores, as the ancestors of both groups are thought to have been nocturnal visual predators. 
 
-These two directions are complementary, since adding more data ([particularly fossils]()) increases statistical power to detect deviations from gradual (Brownian) evolution.
+These two directions are complementary, since adding more data ([particularly fossils](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12285/full)) increases statistical power to detect deviations from Brownian evolution.
+
+**Footnotes**:
+
+Bininda-Emonds, O.R., Cardillo, M., Jones, K.E., MacPhee, R.D., Beck, R.M., Grenyer, R., Price, S.A., Vos, R.A., Gittleman, J.L. and Purvis, A., 2007. The delayed rise of present-day mammals. *Nature* 446: 507-512.
+
+primate origins citations
+Cartmill
+-Soligo?
+
+Heesy, C.P., 2008. Ecomorphology of orbit orientation and the adaptive significance of binocular vision in primates and other mammals. *Brain, Behavior and Evolution* 71:54-67.
+
+Ross? (1994). Brain size and orbit orientation.
+
 
 
 
