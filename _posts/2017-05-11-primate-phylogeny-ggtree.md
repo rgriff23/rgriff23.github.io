@@ -2,7 +2,7 @@
 title: "Enhanced annotation of a primate phylogeny with ggtree"
 description: "Label tips, nodes, and branches with subplots or images"
 layout: post
-date: 2017-05-21
+date: 2017-05-11
 tags: R tutorial phylogeny primates ggtree phytools 
 comments: true
 ---
@@ -54,7 +54,7 @@ plot(p1)
 
 <img src="/assets/Rfigs/post_2017-05_ggtree_basic1-1.png" title="plot of chunk post_2017-05_ggtree_basic1" alt="plot of chunk post_2017-05_ggtree_basic1" style="display: block; margin: auto;" />
 
-The layouts available in `ggtree` are the same as those available in `ape`'s `plot.phylo` function, although the names are different. Here are all the layouts, and also a demonstration of how to put multiple phylogenies in one plot using the `multiplot` function:
+The layouts available in `ggtree` are basically the same as those available in `ape`'s `plot.phylo` function, although the names are different. Here are all the layouts, and also a demonstration of how to use `multiplot`:
 
 
 ```r
@@ -136,13 +136,13 @@ plot(p5)
 
 <img src="/assets/Rfigs/post_2017-05_ggtree_clades2-1.png" title="plot of chunk post_2017-05_ggtree_clades2" alt="plot of chunk post_2017-05_ggtree_clades2" style="display: block; margin: auto;" />
 
-Finally, we can label our clades with images. For an elegant look, we can import images from the phylopic.org database, which `ggtree` is designed to work with using the `phylopic` function. To annotate nodes with `phylopic`, first find the number of each node you want to annotate, then match each node with a link to an image on [phylopic.org](http://phylopic.org/). It is a bit strange, but to point to the images, you have to provide the 'phylopic_id' argument, which is the string of letters and numbers that comes after the `http://phylopic.org/image/` part of the url for the image you want. So for example, if I want to use the image of a chimpanzee at this url:
+Finally, we can label our clades with images. For an elegant look, import images from the phylopic.org database, which `ggtree` is designed to work with using the `phylopic` function. To annotate nodes with `phylopic`, first find the number of each node you want to annotate, then match each node with a link to an image on [phylopic.org](http://phylopic.org/). It is a bit strange, but to point to the images, you have to provide the 'phylopic_id' argument, which is the string of letters and numbers that comes after the `http://phylopic.org/image/` part of the url for the image you want. So for example, if I want to use the image of a chimpanzee at this url:
 
 `http://phylopic.org/image/f06b4dd0-094e-4f37-9105-25fdb4eb1b02/`
 
-Then the `phylopic_id` argument would be set equal to  `"f06b4dd0-094e-4f37-9105-25fdb4eb1b02"`.
+Then the `phylopic_id` argument would be set to  `"f06b4dd0-094e-4f37-9105-25fdb4eb1b02"`.
 
-Here are the subpaths images I want to use for the major primate superfamilies:
+Here are the subpaths to images I want to use for the major primate superfamilies:
 
 - Galagoidea (124): "7fb9bea8-e758-4986-afb2-95a2c3bf983d"
 - Lemuroidea (113): "bac25f49-97a4-4aec-beb6-f542158ebd23"
@@ -167,7 +167,7 @@ plot(p6)
 
 <img src="/assets/Rfigs/post_2017-05_ggtree_clades3-1.png" title="plot of chunk post_2017-05_ggtree_clades3" alt="plot of chunk post_2017-05_ggtree_clades3" style="display: block; margin: auto;" />
 
-Adding images from sources other than `phylopic` is a bit annoying to code, but it is possible. There is some code in the package author's ["Advance Tree Annotation" tutorial](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/advanceTreeAnnotation.html) that shows how to add a single external image to multiple nodes, but the code does not make it easy to add multiple different images to different at once. I managed to do it by writing a function that loops over vectors node numbers and urls of the images you want to add, and iteratively adds them to a plot using the `inset` function. Here is how I added Pokemon node labels from images on `imgur`:
+Adding images from sources other than `phylopic` is a bit annoying to code, but it is possible. There is some code in the package author's ["Advance Tree Annotation" tutorial](https://www.bioconductor.org/packages/devel/bioc/vignettes/ggtree/inst/doc/advanceTreeAnnotation.html) that shows how to add a single external image to multiple nodes, but the code does not make it easy to add multiple different images to different nodes at once. I managed to do it by writing a function that loops over vectors of node numbers and urls of the images you want to add, and iteratively adds them to a plot using the `inset` function. Here is how I added Pokemon node labels from images on `imgur`:
 
 
 ```r
@@ -204,6 +204,8 @@ plot(p7)
 <img src="/assets/Rfigs/post_2017-05_ggtree_clades4-1.png" title="plot of chunk post_2017-05_ggtree_clades4" alt="plot of chunk post_2017-05_ggtree_clades4" style="display: block; margin: auto;" />
 
 (In case you are wondering, that is my winning Blue Version team from the early 2000s)
+
+In general, `inset` accepts a list of `ggplot` graphic objects (they need not be the same type of object) and adds them to a `ggtree` plot. You can add any `ggplot` object you wish to your plot using this function. We will see several more uses of `inset` below.
 
 ### Annotating tips with comparative data
 
@@ -283,7 +285,6 @@ inset(psub, bx, width=0.2, height=0.15, hjust=-1)
 
 <img src="/assets/Rfigs/post_2017-05_ggtree_tips3-1.png" title="plot of chunk post_2017-05_ggtree_tips3" alt="plot of chunk post_2017-05_ggtree_tips3" style="display: block; margin: auto;" />
 
-Note that we used the `inset` function to add the subplots, which is the same function we used earlier to add external images to nodes. We will use `inset` again when we display the results of ancestral state reconstructions at internal nodes. In general, `inset` accepts a list of `ggplot` graphic objects (they need not be the same type of object) and adds them to a `ggtree` plot. You can add any `ggplot` object you wish to your plot using this function.
 
 ### Displaying ASRs with subplots
 
