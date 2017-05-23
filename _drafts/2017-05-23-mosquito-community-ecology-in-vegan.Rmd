@@ -1,16 +1,15 @@
 ---
 title: "Mosquito community diversity analysis (vegan)"
 layout: post
-date: 2017-05-21
+date: 2017-05-23
 tags: R tutorial ecology mosquitoes vegan
 comments: true
 ---
 
 ```{r setup, include=FALSE, message=FALSE}
 # knitr settings
-#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ", fig.align = 'center')
-#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
-knitr::opts_chunk$set(message=FALSE, comment=" ", cache=TRUE)
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment="> ", fig.align = 'center')
+knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages 
 library(vegan)
@@ -24,7 +23,7 @@ In this tutorial, I show how to use the R package [`vegan`](https://cran.r-proje
 
 ## Study design
 
-We selected three regions in the Raleigh-Durham area of NC (denoted DU, LW, and PR). Within each region, we identified three 200m transects that spanned a field-forest habitat gradient. We set up 5 traps along each transect, with the field-forest boundary located at the 100m mark. Altogether, this study design resulted in 45 trap locations (3 regions x 3 transects x 5 trap locations). 
+We selected three regions in the Raleigh-Durham area (denoted DU, LW, and PR). Within each region, we identified three 200m transects that spanned a field-forest habitat gradient. We set up 5 traps along each transect, with the field-forest boundary located at the midpoint. Altogether, this resulted in 45 trap locations (3 regions x 3 transects x 5 trap locations). 
 
 Using 6-inch ground resolution imagery from the <a target="_blank" href="http://earthexplorer.usgs.gov/">USGS Earth Explorer</a>, we digitally classified the landscape within a 100 meter radius of each trap into 9 categories and computed the proportion of the landscape that fell into each category: grassland, deciduous tree canopy, evergreen tree canopy, mixed tree canopy, shrub, cultivated crops, barren land, pavement, and buildings. 
 
@@ -39,10 +38,10 @@ Traps were set up at dusk and picked up at dawn. Mosquitoes were taken back to t
 Open R and load `vegan`, installing it first if necessary:
 
 ```{r, eval=FALSE}
-# install if needed
-install.packages("vegan") # community ecology package
+# install package
+install.packages("vegan") 
 
-# load packages
+# load package
 library("vegan")
 ```
 
@@ -64,7 +63,7 @@ Take a few minutes to familiarize yourself with the data. There are 45 rows corr
 4. column 13: number of trap-nights
 5. columns 14-36: abundance of mosquito species
 
-I refer to these column numbers when subsetting the data for different analyses. 
+I refer to these column numbers when subsetting the data below. 
 
 ## Does species diversity vary across habitats?
 
@@ -80,7 +79,7 @@ Here is code to compute these metrics for each trap site:
 # mosquito abundance matrix
 abundance.matrix <- data[,14:36]
 
-# compute indices and add to new 'indices' data frame
+# store computed indices in a new data frame called 'indices'
 indices <- data[,c("Region","Transect","Habitat")]
 indices$Richness <- rowSums(abundance.matrix>0)
 indices$Shannon <- diversity(abundance.matrix) # shannon is default
@@ -100,7 +99,7 @@ boxplot(Rarefied~Habitat, data=indices, boxwex=0.5, col=colors,
         cex.axis=0.5, ylab="Rarefied richness")
 ```
 
-It appears that species diversity increases as we move from the field to the forest. We can test for differences among habitats statistically using a linear model, with `Habitat` as an ordered categorical predictor of species diversity:
+It appears that species diversity increases as we move from the field to the forest. We can test for differences among habitats statistically using a linear model, with `Habitat` as a predictor of species diversity:
 
 ```{r ANOVA}
 # fit linear models
@@ -114,7 +113,7 @@ anova(mod.shannon)
 anova(mod.rarefied)
 ```
 
-Species richness and rarefied richness are both significantly associated with habitat type (*p* < 0.05), while Shannon-Weiner diversity is close (*p* < 0.07). The estimated coefficients of the linear models tell us something about *how* species diversity is associated with habitat. Since `Habitat` is coded as an ordered variable (Field < NearField < Edge < NearForest < Forest), the output might look a little different than what you are used to. Look at the estimated coefficients for the richness model:
+Species richness and rarefied richness are both significantly associated with habitat type (*p* < 0.05), while Shannon-Weiner diversity is close (*p* < 0.07). The estimated coefficients of the linear models tell us something about *how* species diversity is associated with habitat. Since `Habitat` is coded as an ordered variable (Field < NearField < Edge < NearForest < Forest), the output might look a little different than what you are used to for continuous or unordered categorical predictors. Look at the estimated coefficients for the richness model:
 
 ```{r}
 summary(mod.richness)
@@ -122,10 +121,9 @@ summary(mod.richness)
  
 There are four estimated coefficients: `Habitat.L`, `Habitat.Q`, `Habitat.C`, and `Habitat^4`. This is because ordered categories are modeled with a polynomial of order *c* - 1, where *c* is the number of levels in the category. In our case, our ordered category `Habitat` has 5 levels, so it will be modeled with a polynomial of order 5 - 1 = 4, e.g., `y = a + bx + cx^2 + dx^3 + ex^4`. In the model output, `Habitat.L` is the linear coefficient in the polynomial, `b`, `Habitat.Q` is the quadratic coefficient `c`, `Habitat.C` is the cubic coefficient `d`, and `Habitat.^4` is of course `e`. Only the linear coefficient is significant in our models and the coefficient is positive, indicating that our mosquito diversity indices increase linearly as one moves from trap to trap along our field-forest transects.
 
-
 ## Identifying major axes of variation in community composition
 
-In this section we will perform some exploratory [ordination analyses](https://en.wikipedia.org/wiki/Ordination_(statistics)), which can help us identify 1) which collection sites are most similar in terms of their composition of mosquito species, 2) which mosquito species are most similar in terms of their distribution across collection sites, and 3) whether our environmental variables explain a significant amount of variation in mosquito communities. Ordination methods are generally used more for exploration and visualization than for hypothesis testing (although as I will demonstrate, hypothesis testing is possible with these models). A community diversity study like this would feel incomplete without some sort of ordination plot to visualize structure in our high dimensional data.  
+In this section we will perform some exploratory [ordination analyses](https://en.wikipedia.org/wiki/Ordination_(statistics)), which can help us identify 1) which collection sites are most similar in terms of their composition of mosquito species, 2) which mosquito species are most similar in terms of their distribution across collection sites, and 3) whether our environmental variables explain a significant amount of variation in mosquito communities. Ordination methods are generally used more for exploration and visualization than for hypothesis testing (although as I will demonstrate, hypothesis testing is possible with these models). Visualization is key though. A community diversity study like this would feel incomplete without some sort of ordination plot to visualize structure in our high dimensional data.  
 
 Ordination techniques fall into two major categories: *unconstrained* and *constrained*. Unconstrained methods (e.g., principal components and correspondence analysis) take a species abundance matrix and identify the axes that optimally account for variation in the data. Unconstrained methods are agnostic about what factors underly those axes of variation. In contrast, constrained ordination methods essentially combine unconstrained ordination with regression analysis, with the axes of variation being constrained to linear combinations of a set of predictor variables. 
 
@@ -143,7 +141,7 @@ The following table summarizes how you can do both unconstrained and constrained
 
 Note that PCA is just an RDA without any explanatory variables, which is why you can run a PCA in `vegan` like this: `rda(abundance.matrix)`.
 
-In this tutorial, we will walk through the three ordination methods on the bottom row of the table since we have raw species abundance data. First, we will apply correspondence analysis (CA) to the mosquito abundance matrix and visualize the major axes of variation in mosquito community composition. Next, we will perform a constrained CA, also known as canonical CA (CCA), bringing the environmental data into play as predictors of mosquito community composition. Finally, we will perform an extension of CCA called *partial* CCA (pCCA), in which predictor variables are separated into effects you are interested in (i.e., fixed effects) and effects you want to control for (i.e., random effects).  
+In this tutorial, we will work through the three ordination methods on the bottom row of the table since we have raw species abundance data. First, we will apply correspondence analysis (CA) to the mosquito abundance matrix and visualize the major axes of variation in mosquito community composition. Next, we will perform a constrained CA, also known as canonical CA (CCA), bringing the environmental data into play as predictors of mosquito community composition. Finally, we will perform an extension of CCA called *partial* CCA (pCCA), in which predictor variables are separated into effects you are interested in (i.e., fixed effects) and effects you want to control for (i.e., random effects).  
 
 Before beginning, let's make a couple of small adjustments to our abundance matrix. First, implement a square root transformation to dampen the influence of large counts on the results. Second, divide counts by the variable `TrapNights` to normalize for the variable number of trap nights due to trap failures. 
 
@@ -181,7 +179,7 @@ The fact that the first 2 axes only explain a combined ~44% of variation in the 
 plot(my.ca)
 ```
 
-It is a bit difficult to see what is going on here. Let's see if we can make a visualization that is a little easier to see. One thing we can try is adjusting the scaling of the site and species scores in our plot. The `plot.cca` function (which is called when you use `plot` on a `cca` results) has an argument `scaling` that takes four values: 0 = no scaling, 1 = sites scores are scaled by eigenvalues, 2 = species scores are scaled by eigenvalues (the default), and 3 = both species and site scores are scaled by eigenvalues (alternatively, options 0-3 can be specified less cryptically with the character strings "none", "sites", "species", and "symmetric"). Under option 1 site scores are weighted averages of species scores, and under option 2 species scores are weighted averages of site scores. Option 3 is a compromise between options 1 and 2, and is generally a [good option](https://academic.oup.com/biomet/article-abstract/89/2/423/255280/Goodness-of-fit-of-biplots-and-correspondence?redirectedFrom=fulltext) for displaying sites and species in one plot. 
+It is a bit difficult to see what is going on here. Let's see if we can make a visualization that is a little easier to understand. One thing we can try is adjusting the scaling of the site and species scores in our plot. The `plot.cca` function (which is called when you use `plot` on a `cca` results) has an argument `scaling` that takes four values: 0 = no scaling, 1 = sites scores are scaled by eigenvalues, 2 = species scores are scaled by eigenvalues (the default), and 3 = both species and site scores are scaled by eigenvalues (alternatively, options 0-3 can be specified less cryptically with the character strings "none", "sites", "species", and "symmetric"). Under option 1, site scores are weighted averages of species scores, and under option 2, species scores are weighted averages of site scores. Option 3 is a compromise between options 1 and 2, and is generally a [good option](https://academic.oup.com/biomet/article-abstract/89/2/423/255280/Goodness-of-fit-of-biplots-and-correspondence?redirectedFrom=fulltext) for displaying sites and species in one plot. 
 
 Here is the effect these different options have on our plot:
 
@@ -194,7 +192,7 @@ plot(my.ca, scaling="species", main="scaling = 2, species (default)")
 plot(my.ca, scaling="symmetric", main="scaling = 3, both")
 ```
 
-An alternative way to make more space on our plot is to display the sites and species on separate panels. Let's also add colors to our site labels to represent different habitats, as we did for the boxplots. 
+An alternative way to make more space on our plot is to simply display the sites and species on separate plots. Let's also add colors to our site labels to represent different habitats, as we did for the boxplots. 
 
 ```{r post_2017-04_mosquito-ecology_ca_biplot_pretty, fig.width=8, fig.height=4}
 # 2 panels
@@ -253,7 +251,7 @@ my.cca <- cca(abundance.matrix2 ~ ., data=fixed)
 vif.cca(my.cca)
 ```
 
-It seems like that did the trick- all our VIFs are now reasonable. Let's visualize the proportion of variance explained by each CCA axis with a barplot:
+It seems like that did the trick- all of our VIFs are now reasonable. Let's visualize the proportion of variance explained by each CCA axis with a barplot:
 
 ```{r post_2017-04_mosquito-ecology_cca_bar, fig.height=4, fig.width=6}
 barplot(my.cca$CA$eig/my.cca$tot.chi, names.arg = 1:my.cca$CA$rank, cex.names = 0.5, ylab="Proportion of variance explained", xlab="CCA axis")
@@ -347,12 +345,10 @@ Recall that in our CCA, the predictors explained 36% of variation. Since the pCC
 
 Our analyses showed that both mosquito community diversity and mosquito community composition vary along a field-forest gradient, with the forest having greater diversity than the field. Our visualizations allowed us to identify mosquito species that strongly prefer either the forest (e.g., *Ae.can* and *Ae.dup*) or the field (e.g., *Ps.cil* and *Ps.col*). The fact that the leading axes of the CA and CCA ordinations both represent a field-forest gradient suggests that the vegetation variables being included in the CCA represent the dominant axis of variation in the abundance data. 
 
-One of the most confusing things about ordination is figuring out how the different methods relate to one another and which one to use. The good news is that all of these methods tend to produce comparable results for a given dataset. Choosing the best one for your data is as much art as science. You can always try running both `rda` and `cca` to see which approach yields better visualizations of your data, or try different ways of scaling the scores (see the`?plot.cca` help page and the `vegan` [design decisions document](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwj61YCQ4-rTAhWBKiYKHaaCCMkQFggsMAA&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fvegan%2Fvignettes%2Fdecision-vegan.pdf&usg=AFQjCNFr1yflIOHdjmqpmaI1eeXrAQMeFA&sig2=ALSGpFzLgtfGpbMubMKaaw) to read more about scaling options). The goal is simply to get a birds-eye view of the major patterns of similarity and dissimilarity across your dataset in as clear a way as possible. 
+One of the most confusing things about ordination is figuring out how the different methods relate to one another and which one to use. The good news is that all of these methods tend to produce comparable results for a given dataset. Choosing the best one for your data is largely an art. You can try running both `rda` and `cca` to see which approach yields better visualizations of your data, and try different ways of scaling the scores (see the`?plot.cca` help page and the `vegan` [design decisions document](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwj61YCQ4-rTAhWBKiYKHaaCCMkQFggsMAA&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fvegan%2Fvignettes%2Fdecision-vegan.pdf&usg=AFQjCNFr1yflIOHdjmqpmaI1eeXrAQMeFA&sig2=ALSGpFzLgtfGpbMubMKaaw) to read more about scaling options). The goal is simply to get a birds-eye view of the major patterns across your dataset in as clear a way as possible. 
 
 **Footnotes:**
 
 *For more information on species diversity indices, the `vegan` documentation is great and will point you toward any more specific literature you might want to look at. Try `?diversity` and `?rarefy`.*
 
 *For more information on ordination methods, the `vegan` package provides a simple introduction in this [vignette](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFggnMAA&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fvegan%2Fvignettes%2Fintro-vegan.pdf&usg=AFQjCNHp03BO8RXf4FdIuhAZbD_q0cLk6w&sig2=cKxb2fsAOL4Zkurcf6-68g), and the package author provides a more thorough introduction in this [tutorial](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFgg-MAI&url=http%3A%2F%2Fcc.oulu.fi%2F~jarioksa%2Fopetus%2Fmetodi%2Fvegantutor.pdf&usg=AFQjCNHsvyIZ380_KPgiGMqah_gA5V2jLQ&sig2=POfHX13ym8lEOQhLWZtmDg).*
-
-Reiskind, M., **Griffin, R.H.**, Janairo, M.S., and K.A. Hopperstad. 2016. Mosquitoes of Field and Forest: The Scale of Habitat Segregation in a Diverse Mosquito Assemblage. *Medical and Veterinary Entomology*. In press. [pdf](./assets/pdfs/Reiskind_etal_2016.pdf)
