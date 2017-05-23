@@ -1,5 +1,5 @@
 ---
-title: "Mosquito community diversity analysis in vegan"
+title: "Mosquito community diversity analysis with vegan"
 layout: post
 date: 2017-05-23
 tags: R tutorial ecology mosquitoes vegan
@@ -260,7 +260,7 @@ plot(my.ca)
 
 <img src="/assets/Rfigs/post_2017-04_mosquito-ecology_ca_biplot-1.png" title="plot of chunk post_2017-04_mosquito-ecology_ca_biplot" alt="plot of chunk post_2017-04_mosquito-ecology_ca_biplot" style="display: block; margin: auto;" />
 
-It is a bit difficult to see what is going on here. Let's see if we can make a visualization that is a little easier to understand. One thing we can try is adjusting the scaling of the site and species scores in our plot. The `plot.cca` function (which is called when you use `plot` on a `cca` results) has an argument `scaling` that takes four values: 0 = no scaling, 1 = sites scores are scaled by eigenvalues, 2 = species scores are scaled by eigenvalues (the default), and 3 = both species and site scores are scaled by eigenvalues (alternatively, options 0-3 can be specified less cryptically with the character strings "none", "sites", "species", and "symmetric"). Under option 1, site scores are weighted averages of species scores, and under option 2, species scores are weighted averages of site scores. Option 3 is a compromise between options 1 and 2, and is generally a [good option](https://academic.oup.com/biomet/article-abstract/89/2/423/255280/Goodness-of-fit-of-biplots-and-correspondence?redirectedFrom=fulltext) for displaying sites and species in one plot. 
+There are a few ways we can alter this plot to try to get a better picture of the data. One thing we can try is adjusting the scaling of the site and species scores in our plot. The `plot.cca` function (which is called when you use `plot` on a `cca` results) has an argument `scaling` that takes four values: 0 = no scaling, 1 = sites scores are scaled by eigenvalues, 2 = species scores are scaled by eigenvalues (the default), and 3 = both species and site scores are scaled by eigenvalues (alternatively, options 0-3 can be specified less cryptically with the character strings "none", "sites", "species", and "symmetric"). Under option 1, site scores are weighted averages of species scores, and under option 2, species scores are weighted averages of site scores. Option 3 is a compromise between options 1 and 2, and is generally a [good option](https://academic.oup.com/biomet/article-abstract/89/2/423/255280/Goodness-of-fit-of-biplots-and-correspondence?redirectedFrom=fulltext) for displaying sites and species in one plot. 
 
 Here is the effect these different options have on our plot:
 
@@ -276,7 +276,7 @@ plot(my.ca, scaling="symmetric", main="scaling = 3, both")
 
 <img src="/assets/Rfigs/post_2017-04_mosquito-ecology_ca_4biplot-1.png" title="plot of chunk post_2017-04_mosquito-ecology_ca_4biplot" alt="plot of chunk post_2017-04_mosquito-ecology_ca_4biplot" style="display: block; margin: auto;" />
 
-An alternative way to make more space on our plot is to simply display the sites and species on separate plots. Let's also add colors to our site labels to represent different habitats, as we did for the boxplots. 
+An alternative way to make more space on our plot is to simply display the sites and species on separate plots. Let's also add colors to our site labels to represent different habitats, and increase the size of the labels. 
 
 
 ```r
@@ -286,11 +286,11 @@ layout(matrix(1:2,1,2))
 # plot sites
 site.cols <- rep(terrain.colors(6)[5:1],9)
 plot(my.ca, display="sites", type="n", main="Sites", scaling="sites")
-text(my.ca, display="sites", col=site.cols, cex=0.5, scaling="sites")
+text(my.ca, display="sites", col=site.cols, scaling="sites")
 
 # plot species
 plot(my.ca, display="species", type="n", ylab="", main="Species", scaling="species")
-text(my.ca, display="species", col="black", cex=0.5, scaling="species")
+text(my.ca, display="species", col="black", scaling="species")
 ```
 
 <img src="/assets/Rfigs/post_2017-04_mosquito-ecology_ca_biplot_pretty-1.png" title="plot of chunk post_2017-04_mosquito-ecology_ca_biplot_pretty" alt="plot of chunk post_2017-04_mosquito-ecology_ca_biplot_pretty" style="display: block; margin: auto;" />
@@ -335,13 +335,13 @@ drop1(my.cca, test="perm")
 ```
 
 ```
->                  Df    AIC      F Pr(>F)   
->  <none>             41.478                 
->  DeciduousForest  1 42.643 2.8418  0.040 * 
->  EvergreenForest  1 43.179 3.3425  0.010 **
->  Grassland        1 42.769 2.9589  0.055 . 
->  MixedForest      1 41.828 2.0902  0.125   
->  ShrubScrub       1 42.283 2.5082  0.065 . 
+>                  Df    AIC      F Pr(>F)  
+>  <none>             41.478                
+>  DeciduousForest  1 42.643 2.8418  0.045 *
+>  EvergreenForest  1 43.179 3.3425  0.025 *
+>  Grassland        1 42.769 2.9589  0.040 *
+>  MixedForest      1 41.828 2.0902  0.100 .
+>  ShrubScrub       1 42.283 2.5082  0.080 .
 >  ---
 >  Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -385,13 +385,13 @@ layout(matrix(1:2,1,2))
 
 # plot sites
 plot(my.cca, display=c("sites", "bp"), type="n", main="Sites", scaling="sites")
-text(my.cca, display="sites", col=site.cols, cex=0.5, scaling="sites")
-text(my.cca, display="bp", col="red", cex=0.5)
+text(my.cca, display="sites", col=site.cols, scaling="sites")
+text(my.cca, display="bp", col="red")
 
 # plot species
 plot(my.cca, display=c("species", "bp"), type="n", ylab="", main="Species", scaling="species")
-text(my.cca, display="species", col="black", cex=0.5, scaling="species")
-text(my.cca, display="bp", col="red", cex=0.5)
+text(my.cca, display="species", col="black", scaling="species")
+text(my.cca, display="bp", col="red")
 ```
 
 <img src="/assets/Rfigs/post_2017-04_mosquito-ecology_cca_biplot-1.png" title="plot of chunk post_2017-04_mosquito-ecology_cca_biplot" alt="plot of chunk post_2017-04_mosquito-ecology_cca_biplot" style="display: block; margin: auto;" />
@@ -424,9 +424,9 @@ anova(my.cca, by="margin")
 >  Model: cca(formula = abundance.matrix2 ~ DeciduousForest + EvergreenForest + Grassland + ShrubScrub, data = fixed)
 >                  Df ChiSquare      F Pr(>F)  
 >  DeciduousForest  1   0.03706 1.9912  0.108  
->  EvergreenForest  1   0.04684 2.5172  0.052 .
->  Grassland        1   0.06610 3.5516  0.033 *
->  ShrubScrub       1   0.04907 2.6369  0.063 .
+>  EvergreenForest  1   0.04684 2.5172  0.064 .
+>  Grassland        1   0.06610 3.5516  0.021 *
+>  ShrubScrub       1   0.04907 2.6369  0.045 *
 >  Residual        40   0.74440                
 >  ---
 >  Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -489,13 +489,13 @@ layout(matrix(1:2,1,2))
 
 # plot sites
 plot(my.pcca, display=c("sites", "bp"), type="n", main="Sites", scaling="sites")
-text(my.pcca, display="sites", col=site.cols, cex=0.5, scaling="sites")
-text(my.pcca, display="bp", col="red", cex=0.5)
+text(my.pcca, display="sites", col=site.cols, scaling="sites")
+text(my.pcca, display="bp", col="red")
 
 # plot species
 plot(my.pcca, display=c("species", "bp"), type="n", ylab="", main="Species", scaling="species")
-text(my.pcca, display="species", col="black", cex=0.5, scaling="species")
-text(my.pcca, display="bp", col="red", cex=0.5)
+text(my.pcca, display="species", col="black", scaling="species")
+text(my.pcca, display="bp", col="red")
 ```
 
 <img src="/assets/Rfigs/post_2017-04_mosquito-ecology_pcca_biplot-1.png" title="plot of chunk post_2017-04_mosquito-ecology_pcca_biplot" alt="plot of chunk post_2017-04_mosquito-ecology_pcca_biplot" style="display: block; margin: auto;" />
@@ -542,6 +542,6 @@ One of the most confusing things about ordination is figuring out how the differ
 
 *For more information on species diversity indices, the `vegan` documentation is great and will point you toward any more specific literature you might want to look at. Try `?diversity` and `?rarefy`.*
 
-*For more information on ordination methods, the `vegan` package provides a simple introduction in this [vignette](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFggnMAA&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fvegan%2Fvignettes%2Fintro-vegan.pdf&usg=AFQjCNHp03BO8RXf4FdIuhAZbD_q0cLk6w&sig2=cKxb2fsAOL4Zkurcf6-68g), and the package author provides a more thorough introduction in this [tutorial](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFgg-MAI&url=http%3A%2F%2Fcc.oulu.fi%2F~jarioksa%2Fopetus%2Fmetodi%2Fvegantutor.pdf&usg=AFQjCNHsvyIZ380_KPgiGMqah_gA5V2jLQ&sig2=POfHX13ym8lEOQhLWZtmDg).*
+*For more information on ordination methods, the `vegan` package provides a simple introduction in this [vignette](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFggnMAA&url=https%3A%2F%2Fcran.r-project.org%2Fweb%2Fpackages%2Fvegan%2Fvignettes%2Fintro-vegan.pdf&usg=AFQjCNHp03BO8RXf4FdIuhAZbD_q0cLk6w&sig2=cKxb2fsAOL4Zkurcf6-68g), and the package author provides a more thorough introduction in this [tutorial](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=0ahUKEwjMjZqX6sXTAhVKQyYKHZ4rC34QFgg-MAI&url=http%3A%2F%2Fcc.oulu.fi%2F~jarioksa%2Fopetus%2Fmetodi%2Fvegantutor.pdf&usg=AFQjCNHsvyIZ380_KPgiGMqah_gA5V2jLQ&sig2=POfHX13ym8lEOQhLWZtmDg). A good tutorial for customizing the appearance of `vegan` ordination plots can be found [here](http://www.fromthebottomoftheheap.net/2012/04/11/customising-vegans-ordination-plots/)*
 
 *R code from our published [paper](/assets/pdfs/Reiskind_etal_2016.pdf) is available on [GitHub](https://github.com/rgriff23/Mosquito_ecology).
