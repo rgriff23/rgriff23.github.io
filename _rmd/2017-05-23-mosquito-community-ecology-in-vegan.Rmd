@@ -1,5 +1,5 @@
 ---
-title: "Mosquito community diversity analysis (vegan)"
+title: "Mosquito community diversity analysis in vegan"
 layout: post
 date: 2017-05-23
 tags: R tutorial ecology mosquitoes vegan
@@ -88,7 +88,7 @@ indices$Rarefied <- c(rarefy(abundance.matrix[1:45,], sample=15))
 
 Use boxplots to visualize differences in species diversity along our field-forest habitat gradient:
 
-```{r post_2017-04_mosquito-ecology_boxplots, fig.width=7, fig.height=5}
+```{r post_2017-04_mosquito-ecology_boxplots, fig.width=12, fig.height=6}
 par(mar=c(3,4,3,2), mfrow=c(2,2))
 colors = terrain.colors(6)[5:1]
 boxplot(Richness~Habitat, data=indices, boxwex=0.5, col=colors, 
@@ -160,7 +160,7 @@ my.ca <- cca(abundance.matrix2)
 
 Let's use a barplot to visualize how much of the variance is explained by each CA axes:
 
-```{r post_2017-04_mosquito-ecology_ca_bar, fig.height=4, fig.width=6}
+```{r post_2017-04_mosquito-ecology_ca_bar, fig.height=6, fig.width=8}
 # barchart for variance of CA explained
 barplot(my.ca$CA$eig/my.ca$tot.chi, names.arg = 1:my.ca$CA$rank, cex.names = 0.5, ylab="Proportion of variance explained", xlab="CA axis")
 ```
@@ -174,7 +174,7 @@ head(my.ca$CA$eig/my.ca$CA$tot.chi)
 
 The fact that the first 2 axes only explain a combined ~44% of variation in the data indicates that mosquito community composition is not easily reduced to just one or two axes of variation. Let's look at a scatterplot of our data with respect to the first two CAs:
 
-```{r post_2017-04_mosquito-ecology_ca_biplot, fig.height=4, fig.width=4}
+```{r post_2017-04_mosquito-ecology_ca_biplot, fig.height=8, fig.width=8}
 # plot
 plot(my.ca)
 ```
@@ -183,7 +183,7 @@ It is a bit difficult to see what is going on here. Let's see if we can make a v
 
 Here is the effect these different options have on our plot:
 
-```{r post_2017-04_mosquito-ecology_ca_4biplot, fig.width=8, fig.height=8}
+```{r post_2017-04_mosquito-ecology_ca_4biplot, fig.width=12, fig.height=12}
 # 4x4 PCA plots with different scaling options
 layout(matrix(1:4,2,2,byrow=TRUE))
 plot(my.ca, scaling="none", main="scaling = 0, raw")
@@ -194,7 +194,7 @@ plot(my.ca, scaling="symmetric", main="scaling = 3, both")
 
 An alternative way to make more space on our plot is to simply display the sites and species on separate plots. Let's also add colors to our site labels to represent different habitats, as we did for the boxplots. 
 
-```{r post_2017-04_mosquito-ecology_ca_biplot_pretty, fig.width=8, fig.height=4}
+```{r post_2017-04_mosquito-ecology_ca_biplot_pretty, fig.width=12, fig.height=6}
 # 2 panels
 layout(matrix(1:2,1,2))
 
@@ -253,7 +253,7 @@ vif.cca(my.cca)
 
 It seems like that did the trick- all of our VIFs are now reasonable. Let's visualize the proportion of variance explained by each CCA axis with a barplot:
 
-```{r post_2017-04_mosquito-ecology_cca_bar, fig.height=4, fig.width=6}
+```{r post_2017-04_mosquito-ecology_cca_bar, fig.height=6, fig.width=8}
 barplot(my.cca$CA$eig/my.cca$tot.chi, names.arg = 1:my.cca$CA$rank, cex.names = 0.5, ylab="Proportion of variance explained", xlab="CCA axis")
 ```
 
@@ -261,7 +261,7 @@ The first axis explains over 10% of the variance. Contrast this with the CA, for
 
 Look at CCA plots:
 
-```{r post_2017-04_mosquito-ecology_cca_biplot, fig.width=8, fig.height=4}
+```{r post_2017-04_mosquito-ecology_cca_biplot, fig.width=12, fig.height=6}
 # 2 panels
 layout(matrix(1:2,1,2))
 
@@ -314,7 +314,7 @@ vif.cca(my.pcca)
 
 The VIFs are acceptable. Make the figures for the pCCA: 
 
-```{r post_2017-04_mosquito-ecology_pcca_biplot, fig.width=8, fig.height=4}
+```{r post_2017-04_mosquito-ecology_pcca_biplot, fig.width=12, fig.height=6}
 # 2 panels
 layout(matrix(1:2,1,2))
 

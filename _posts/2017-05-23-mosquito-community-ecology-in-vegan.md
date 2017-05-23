@@ -1,5 +1,5 @@
 ---
-title: "Mosquito community diversity analysis with vegan"
+title: "Mosquito community diversity analysis in vegan"
 layout: post
 date: 2017-05-23
 tags: R tutorial ecology mosquitoes vegan
@@ -335,13 +335,13 @@ drop1(my.cca, test="perm")
 ```
 
 ```
->                  Df    AIC      F Pr(>F)  
->  <none>             41.478                
->  DeciduousForest  1 42.643 2.8418  0.040 *
->  EvergreenForest  1 43.179 3.3425  0.025 *
->  Grassland        1 42.769 2.9589  0.030 *
->  MixedForest      1 41.828 2.0902  0.065 .
->  ShrubScrub       1 42.283 2.5082  0.080 .
+>                  Df    AIC      F Pr(>F)   
+>  <none>             41.478                 
+>  DeciduousForest  1 42.643 2.8418  0.040 * 
+>  EvergreenForest  1 43.179 3.3425  0.010 **
+>  Grassland        1 42.769 2.9589  0.055 . 
+>  MixedForest      1 41.828 2.0902  0.125   
+>  ShrubScrub       1 42.283 2.5082  0.065 . 
 >  ---
 >  Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -423,10 +423,10 @@ anova(my.cca, by="margin")
 >  
 >  Model: cca(formula = abundance.matrix2 ~ DeciduousForest + EvergreenForest + Grassland + ShrubScrub, data = fixed)
 >                  Df ChiSquare      F Pr(>F)  
->  DeciduousForest  1   0.03706 1.9912  0.128  
->  EvergreenForest  1   0.04684 2.5172  0.065 .
->  Grassland        1   0.06610 3.5516  0.025 *
->  ShrubScrub       1   0.04907 2.6369  0.054 .
+>  DeciduousForest  1   0.03706 1.9912  0.108  
+>  EvergreenForest  1   0.04684 2.5172  0.052 .
+>  Grassland        1   0.06610 3.5516  0.033 *
+>  ShrubScrub       1   0.04907 2.6369  0.063 .
 >  Residual        40   0.74440                
 >  ---
 >  Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
