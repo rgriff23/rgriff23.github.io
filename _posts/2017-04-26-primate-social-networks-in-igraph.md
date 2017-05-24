@@ -1,5 +1,5 @@
 ---
-title: "Primate social networks: basics of visualization and analysis (igraph)"
+title: "Primate social networks: basics of visualization and analysis with igraph"
 layout: post
 date: 2017-04-26
 tags: R ecology tutorial
