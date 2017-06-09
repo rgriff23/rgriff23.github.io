@@ -13,7 +13,7 @@ I've been collecting 3D landmarks from the midline and right side of primate sku
 I wrote an R script to perform this task. The script first estimates the saggital plane using 3 or more landmarks on the midline of the skull, then reflects the specified bilateral landmarks across this plane. The function requires: 
 1. A matrix of 3D landmark coordinates
 2. A vector specifying at least three midline landmarks
-3. A vector specifying at least one bilateral landmark to be reflected 
+3. A vector specifying at least one bilateral landmark to be reflected. 
 The output is the same matrix, except the old coordinates are replaced with the reflected ones. Here is the function:
 
 
@@ -21,26 +21,21 @@ The output is the same matrix, except the old coordinates are replaced with the 
 # function to reflect 3D points across the plane of symmetry of an object
 reflect.coords <- function (mat, midline, reflect) {
   
-  # mean of midline points
-  m <- colMeans(mat[midline,])
+  # definitions
+  m <- colMeans(mat[midline,]) # mean of midline points
+  n <- prcomp(mat[midline,])$rotation[,3] # normal to saggital plane
+  d <- sum(-m*n) # distance to translate points
+  A <- diag(3) - 2*n%*%t(n) # Householder transformation matrix
   
-  # normal to saggital plane
-  n <- prcomp(mat[midline,])$rotation[,3] 
-  
-  # distance from m to the plane defined by n at the origin
-  d <- sum(-m*n) 
-  
-  # translate points so midline is at origin
+  # translate saggital plane to origin and reflect points 
   r <-  t(mat[reflect,]) + d*n 
-  
-  # Householder transformation (reflection) matrix
-  A <- diag(3) - 2*n%*%t(n) 
-  
-  # reflect and reverse-translate
   z <- ifelse(nrow(r)==1, 1, 2) 
-  mat[reflect,] <- t(apply(r, z, function(x) A%*%x))  - d*n
+  r <- t(apply(r, z, function(x) A%*%x))
   
-  # round and return matrix
+  # reverse-translate and substitute back into matrix
+  mat[reflect,] <- r  - d*n
+  
+  # return rounded matrix
   return(round(mat, 2))
 }
 ```
