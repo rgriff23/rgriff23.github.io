@@ -14,7 +14,7 @@ I wrote an R script to perform this task. The script first estimates the saggita
 1. A matrix of 3D landmark coordinates
 2. A vector specifying at least three midline landmarks
 3. A vector specifying at least one bilateral landmark to be reflected 
-The output is the same matrix, except the old coordinates are replaced with the reflected ones. Here is it is:
+The output is the same matrix, except the old coordinates are replaced with the reflected ones. Here is the function:
 
 
 ```r
@@ -45,7 +45,7 @@ reflect.coords <- function (mat, midline, reflect) {
 }
 ```
 
-> Mathematical details: The saggital plane is defined by the mean of the midline landmarks (`m` - a point on the plane) and the third principal axis from a principal components analysis (`n` - a normalized normal vector for the plane). The quantity `d = sum(-m*n)` is the minimum distance from `m` to the plane defined by the origin and normal vector `n`. Using this information, we can translate the landmarks so that the saggital plane passes through the origin by adding vector `d*n` to each landmark. Translating the saggital plane to the origin allows us to use a [Householder transformation matrix](https://en.wikipedia.org/wiki/Householder_transformation), `A`, to reflect landmarks across the plane. To translate the reflected landmarks back to their original coordinate system, simply subtract the vector `d*n`. 
+> Mathematical details: The saggital plane is defined by the mean of the midline landmarks (`m` - a point on the plane) and the third principal axis from a principal components analysis (`n` - a normalized normal vector for the plane). The quantity `d = sum(-m*n)` is the minimum distance from `m` to the plane passing through the origin with normal vector `n`. Using this information, we can translate the landmarks so that the saggital plane passes through the origin by adding vector `d*n` to each landmark. Translating the saggital plane to the origin allows us to use a [Householder transformation matrix](https://en.wikipedia.org/wiki/Householder_transformation), `A`, to reflect landmarks across the plane. To translate the reflected landmarks back to their original coordinate system, simply subtract the vector `d*n`. 
 
 Below is a real example from my skull data. As you can see in the Meshlab viewer, there is damage to the right inferior orbit margin (the bottom of the eye), so I placed that point on the left side of the skull.
 
@@ -133,7 +133,7 @@ pp.new
 >  Floor of sella          31.37 18.33 13.87
 ```
 
-You can see that all of the landmarks are the same except for 'Inferior orbit margin', which changed from (24.21, 30.55, 10.20) to (37.33, 30.97, 8.61). I manually updated the Meshlab file with the coordinates of the reflected point in order to visualize the reflection:
+You can see that all of the landmarks are the same except for `Orbit margin (inferior)`, which changed from (24.21, 30.55, 10.20) to (37.33, 30.97, 8.61). I manually updated the Meshlab file with the coordinates of the reflected point in order to visualize the reflection:
 
 ![](https://i.imgur.com/RXu3Npk.png) 
 
