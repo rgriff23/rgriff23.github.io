@@ -21,7 +21,7 @@
  <point name="Porion" y="14.0997" active="1" x="40.1296" z="12.7045"/>
  <point name="Zygomatic point" y="19.4875" active="1" x="42.2597" z="9.17477"/>
  <point name="Orbit margin (lateral)" y="29.2558" active="1" x="42.2429" z="13.9624"/>
- <point name="Orbit margin (inferior)" y="30.97" active="1" x="37.33" z="8.61"/>
+ <point name="Orbit margin (inferior)" y="30.55" active="1" x="24.21" z="10.20"/>
  <point name="Orbit margin (medial)" y="34.126" active="1" x="33.3217" z="13.5787"/>
  <point name="Orbit margin (superior)" y="33.0745" active="1" x="37.4532" z="17.8367"/>
  <point name="Glabella" y="34.7948" active="1" x="31.3798" z="16.3038"/>

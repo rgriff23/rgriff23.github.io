@@ -29,14 +29,28 @@ The output is the same matrix, except the old coordinates are replaced with the 
 ```{r}
 # function to reflect 3D points across the plane of symmetry of an object
 reflect.coords <- function (mat, midline, reflect) {
-  m <- colMeans(mat[midline,]) # mean of midline points
-  n <- prcomp(mat[midline,])$rotation[,3] # normal to saggital plane
-  d <- sum(-m*n) # distance from m to the plane defined by n at the origin
-  r <-  t(mat[reflect,]) + d*n # translate points so midline is at origin
-  A <- diag(3) - 2*n%*%t(n) # Householder transformation (reflection) matrix
+  
+  # mean of midline points
+  m <- colMeans(mat[midline,])
+  
+  # normal to saggital plane
+  n <- prcomp(mat[midline,])$rotation[,3] 
+  
+  # distance from m to the plane defined by n at the origin
+  d <- sum(-m*n) 
+  
+  # translate points so midline is at origin
+  r <-  t(mat[reflect,]) + d*n 
+  
+  # Householder transformation (reflection) matrix
+  A <- diag(3) - 2*n%*%t(n) 
+  
+  # reflect and reverse-translate
   z <- ifelse(nrow(r)==1, 1, 2) 
-  mat[reflect,] <- t(apply(r, z, function(x) A%*%x))  - d*n # reflect and reverse-translate
-  return(mat)
+  mat[reflect,] <- t(apply(r, z, function(x) A%*%x))  - d*n
+  
+  # round and return matrix
+  return(round(mat, 2))
 }
 ```
 
@@ -50,11 +64,11 @@ Below, I load the `reflect.coords` function directly from GitHub along with anot
 
 ```{r}
 # load functions
-#source('')
-source('~/Dropbox/Dissertation/Dissertation chapters/Chapter 4 - Landmarks and measurement error/R/read.pp.R', chdir = TRUE)
+source('https://raw.githubusercontent.com/rgriff23/rgriff23.github.io/master/assets/R/read.pp.R')
+source('https://raw.githubusercontent.com/rgriff23/rgriff23.github.io/master/assets/R/reflect.coords.R')
 
 # import landmarks into R
-pp <- read.pp('~/Dropbox/Dissertation/Dissertation chapters/Chapter 5 - Adaptation in the skull/Landmarks/Cebuella_pygmaea_M_AMNH-M-76327_picked_points.pp')
+pp <- read.pp('https://raw.githubusercontent.com/rgriff23/rgriff23.github.io/master/assets/data/Cebuella_pygmaea_M_AMNH-M-76327_picked_points.pp')
 pp
 
 # define midsaggital landmarks

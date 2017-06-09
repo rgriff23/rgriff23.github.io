@@ -1,13 +1,27 @@
 # function to reflect 3D points across the plane of symmetry of an object
 reflect.coords <- function (mat, midline, reflect) {
-  m <- colMeans(mat[midline,]) # mean of midline points
-  n <- prcomp(mat[midline,])$rotation[,3] # normal to saggital plane
-  d <- sum(-m*n) # distance from m to the plane defined by n at the origin
-  r <-  t(mat[reflect,]) + d*n # translate points so midline is at origin
-  A <- diag(3) - 2*n%*%t(n) # Householder transformation (reflection) matrix
+  
+  # mean of midline points
+  m <- colMeans(mat[midline,])
+  
+  # normal to saggital plane
+  n <- prcomp(mat[midline,])$rotation[,3] 
+  
+  # distance from m to the plane defined by n at the origin
+  d <- sum(-m*n) 
+  
+  # translate points so midline is at origin
+  r <-  t(mat[reflect,]) + d*n 
+  
+  # Householder transformation (reflection) matrix
+  A <- diag(3) - 2*n%*%t(n) 
+  
+  # reflect and reverse-translate
   z <- ifelse(nrow(r)==1, 1, 2) 
-  mat[reflect,] <- t(apply(r, z, function(x) A%*%x))  - d*n # reflect and reverse-translate
-  return(mat)
+  mat[reflect,] <- t(apply(r, z, function(x) A%*%x))  - d*n
+  
+  # round and return matrix
+  return(round(mat, 2))
 }
 
 # example usage
