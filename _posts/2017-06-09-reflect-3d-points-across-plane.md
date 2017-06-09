@@ -94,7 +94,7 @@ pp
 midline <- c("Rhinion","Prosthion","Infradentale","Gnathion","Glabella", "Vertex", "Opisthocranium","Opisthion","Basion","Floor of sella")
 
 # reflect inferior orbit landmark
-pp.new <- round(reflect.coords(pp, midline, reflect="Orbit margin (inferior)"),2)
+pp.new <- reflect.coords(pp, midline, reflect="Orbit margin (inferior)")
 pp.new
 ```
 
