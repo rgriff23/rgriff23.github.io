@@ -1,0 +1,75 @@
+---
+title: Missing 3D landmarks in objects with bilateral symmetry: reflecting points across a plane 
+layout: post
+date: 2017-06-015
+tags: R geometric-morphometrics 
+comments: true
+---
+
+```{r setup, include=FALSE}
+# knitr settings
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment="> ", fig.align='center')
+#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+
+# generate example data (4 midline points and 2 bilateral points to reflect)
+mat <- matrix(c(0,2,0,0,2,1,0,0,2,0,-1,1,3,0,0,2,0,1), nrow=6,ncol=3, byrow=T, dimnames=list(c("m1","m2","m3","m4","b1","b2"), c("x","y","z")))
+midline <- c("m1","m2","m3","m4")
+reflect <- c("b1","b2")
+
+```
+
+I've been collecting 3D landmarks from the midline and right side of primate skulls, but some skulls have damage that prevents the collection of particular landmarks. For landmarks with bilateral symmetry, it may be desirable to estimate the position of the missing landmark by placing the corresponding landmark on the left side of the skull and reflecting it across the saggital plane (i.e., the plane that divides the skull into symmetrical halves).
+
+I wrote an R script to perform this task. The script first estimates the saggital plane using 3 or more landmarks on the midline of the skull, then reflects the specified bilateral landmarks across this plane. The function input must include: 
+1. A matrix of 3D landmark coordinates
+2. A vector specifying at least three midline landmarks
+3. A vector specifying at least one bilateral landmark to be reflected 
+The output is the same matrix, except the old coordinates are replaced with the reflected ones. Here is the function:
+
+```{r}
+# function to reflect 3D points across the plane of symmetry of an object
+reflect.coords <- function (mat, midline, reflect) {
+  m <- colMeans(mat[midline,]) # mean of midline points
+  n <- prcomp(mat[midline,])$rotation[,3] # normal to saggital plane
+  d <- sum(-m*n) # distance from m to the plane defined by n at the origin
+  r <-  t(mat[reflect,]) + d*n # translate points so midline is at origin
+  A <- diag(3) - 2*n%*%t(n) # Householder transformation (reflection) matrix
+  z <- ifelse(nrow(r)==1, 1, 2) 
+  mat[reflect,] <- t(apply(r, z, function(x) A%*%x))  - d*n # reflect and reverse-translate
+  return(mat)
+}
+```
+
+> Mathematical details: The saggital plane is defined by computing a 'least squares' plane from the midline landmarks using the mean of the midline landmarks (`m` - which gives us a point on the plane) and the third principal axis from a principal components analysis (`n` - which gives us a normalized normal vector for the saggital plane). The quantity `d = sum(-m*n)` gives us the minimum distance from point `m` to the plane defined by the *origin* and normal vector `n`. Using this information, we can translate the set of landmarks so that the saggital plane passes through the origin by adding vector `d*n` to each landmark. Performing this translation allows us to use a [Householder transformation matrix](https://en.wikipedia.org/wiki/Householder_transformation), `A`, to reflect landmarks across the saggital plane at the origin. To translate the reflected landmarks back to their original coordinate system, simply subtract the vector `d*n`. 
+
+Below is a real example from my skull data. As you can see in the Meshlab viewer, there is some damage to the right inferior orbit margin (the bottom of the eye), so I placed that point on the left side of the skull.
+
+![](https://i.imgur.com/fLwt207.png)
+
+Below, I load the `reflect.coords` function directly from GitHub along with another function, `read.pp`, which I wrote for importing Meshlab PickedPoints files:
+
+```{r}
+# load functions
+#source('')
+source('~/Dropbox/Dissertation/Dissertation chapters/Chapter 4 - Landmarks and measurement error/R/read.pp.R', chdir = TRUE)
+
+# import landmarks into R
+pp <- read.pp('~/Dropbox/Dissertation/Dissertation chapters/Chapter 5 - Adaptation in the skull/Landmarks/Cebuella_pygmaea_M_AMNH-M-76327_picked_points.pp')
+pp
+
+# define midsaggital landmarks
+midline <- c("Rhinion","Prosthion","Infradentale","Gnathion","Glabella", "Vertex", "Opisthocranium","Opisthion","Basion","Floor of sella")
+
+# reflect inferior orbit landmark
+pp.new <- round(reflect.coords(pp, midline, reflect="Orbit margin (inferior)"),2)
+pp.new
+```
+
+You can see that all of the landmarks are the same except for 'Inferior orbit margin', which changed from (24.21, 30.55, 10.20) to (37.33, 30.97, 8.61). I manually updated the Meshlab file with the coordinates of the reflected point in order to visualize the reflection:
+
+![](https://i.imgur.com/RXu3Npk.png) 
+
+It looks good! 
+
+Of course, this approach only applies to landmarks with bilateral symmetry. It is important to visualize the reflected point to ensure that the placement is reasonable. If the object is not truly symmetrical (e.g., due to abnormal development, injury, or distortion during preservation), then reflecting points across the midline may yield a poor approximation.  In these cases, interpolation may be used to estimate the position of missing landmarks. Interpolation is also useful for missing landmarks along the midline. 
+
