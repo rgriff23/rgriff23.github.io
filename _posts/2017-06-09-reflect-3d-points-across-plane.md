@@ -6,14 +6,12 @@ tags: R geometric-morphometrics
 comments: true
 ---
 
-
-
 I've been collecting 3D landmarks from the midline and right side of primate skulls, but damage sometimes prevents the collection of landmarks. I want to estimate the position of missing bilateral landmarks by placing the corresponding landmark on the left side of the skull and reflecting it across the saggital plane (i.e., the plane that divides the skull into symmetrical halves).
 
 I wrote an R script to perform this task. The script first estimates the saggital plane using 3 or more landmarks on the midline of the skull, then reflects the specified bilateral landmarks across this plane. The function requires: 
 1. A matrix of 3D landmark coordinates
 2. A vector specifying at least three midline landmarks
-3. A vector specifying at least one bilateral landmark to be reflected. 
+3. A vector specifying at least one bilateral landmark to be reflected
 The output is the same matrix, except the old coordinates are replaced with the reflected ones. Here is the function:
 
 
