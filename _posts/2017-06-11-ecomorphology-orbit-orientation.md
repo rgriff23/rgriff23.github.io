@@ -543,7 +543,7 @@ procD.pgls(angles4 ~ Noccode * Fauncode * Arbcode, phy=tree4, data=df4, print.pr
 >  Total
 ```
 
-Wow, nothing is significant! Thus, simply incorporating phylogeny into the analysis has transformed a study for which nearly every statistical test yielded a significant result into a study with NO significant results. It is hard to find a more perfect example of how important it can be to include phylogeny in analyses of interspecific data. Feel free to play around with the data I provided to fit alternative models. In combination with the original paper, the defintions of variables should be easy to figure out. 
+Wow, nothing is significant! Thus, simply incorporating phylogeny into the analysis has transformed a study for which nearly every statistical test yielded a significant result into a study with NO significant results. It is hard to find a more perfect example of how important it can be to include phylogeny in analyses of interspecific data. 
 
 ## Concluding remarks
 
