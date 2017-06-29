@@ -45,7 +45,7 @@ ___
 
 On June 11, 2017, Arizona State University professor Katie Hinde unleashed a Twitter storm with the following tweet:
 
-<center>![](https://i.imgur.com/iPU7Eq0.png)</center> 
+<div style="text-align:center"><img src="https://i.imgur.com/iPU7Eq0.png"/></div>
 
 The tweet was incredibly popular, garnering over 132k likes and 26K retweets over about 36 hours. However, the tweet also attracted quite a bit of negative attention and discussion, and that will be the focus of this analysis. 
 
@@ -73,7 +73,7 @@ The original tweet was sent around 9 pm on June 11th. There was a slow trickle o
 
 However, the pure volume of tweets is not the whole story, because not all tweets are equal. The vast majority of tweets are ignored by the Twitter community, while a small number are highly influential. Below is a histogram of the volume of tweets over the 36 hour period (bins represent 30 minutes), and I overlayed red lines on the histogram to show the timing of the most influential tweets in the Twitterstorm. The height of the red lines corresponds to the number of retweets divided by 10 (I did this so that they would fit on the same chart as the histogram), and I labeled the 6 most popular tweets with the screennames of their authors:
 
-```{r post_2017-06_twitterstorm_influential_tweets}
+```{r post_2017-06_twitterstorm_influential_tweets, fig.width=7}
 # histogram of tweet volume over time, with popular tweets overlaid
 popular_tweets <- tweet_data[tweet_data$retweets>9,]
 popular_tweets$height <- popular_tweets$retweets/10
@@ -132,7 +132,7 @@ ggplot(tweet_data[!is.na(tweet_data$sentimentB),], aes(sentimentB)) +
 
 To get a sense of the exact language people used, we can vizualize the frequency of words with a wordcloud. Wordclouds are a visually appealing way to get a snapshot of the content of a corpus, but their creation and interpretation is more art than science (see [here](https://dataskeptic.com/blog/episodes/2016/kill-the-word-cloud) for an impassioned diatribe against wordclouds). However, despite their shortcomings, wordclouds can be a useful way to get a 'feel' for a text-based dataset and check for errors. A good example actually came from this project. After my first round of cleaning the text and making a wordcloud, I was confused about why so many people were using the word 'amp'. Is that what kids are saying these days?? What does it mean?? I asked Dr. Hinde, and she said nope- that's probably not right. Sure enough, I looked a bit closer and discovered that ampersands in tweets are represented by '&amp', which reduces to 'amp' after punctuation is removed. So maybe wordclouds aren't the most scientific thing in the world, but they are pretty to look at and they have their use. That said, here is a wordcloud for all the tweets: 
 
-```{r post_2017-06_twitterstorm_wordcloud_all}
+```{r post_2017-06_twitterstorm_wordcloud_all, fig.width=4}
 # create 'corpus' object from tweets
 corpus <- Corpus(VectorSource(tweet_data$text))
 corpus <- tm_map(tm_map(corpus, removeWords, stopwords('english')), stemDocument)
@@ -202,7 +202,7 @@ plot(g2, ylim=c(-0.75,0.3), xlim=c(-0.3,0.6), vertex.label=V(g2)$label_special, 
 
 This gives a nice overview of the static network structure among users who interacted with Dr. Hinde's tweet, but it is also helpful to watch the network evolve over time. The following animation shows the growth of the network over 3-hour intervals, highlighting users that posted the most influential tweets. The entire animation covers a 36 hour period:
 
-<center>![](http://i.imgur.com/Nby2XDE.gif)</center>
+<div style="text-align:center"><img src="http://i.imgur.com/Nby2XDE.gif"/></div>
 
 Now that we have assigned Twitter users to social network clusters based on their common friends, we can repeat some of our earlier analyses of the tweets, but this time focusing on comparisons across the Apolitical, Rightwing, and Leftwing clusters. Here is a breakdown of tweets coming from each cluster over time:
 
@@ -277,7 +277,7 @@ From the perspective of an R analyst just getting started with Twitter, these we
 
 And for the record, from the perspective of a feminist female scientist, this is how I feel about the entire ordeal:
 
-<center>![](https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif)</center>
+<div style="text-align:center"><img src="https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif"/></div>
 
 'nuff said. 
 

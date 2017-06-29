@@ -1,7 +1,7 @@
 ---
 title: "Analysis of a Twitterstorm: how to make both liberals and conservatives hate you with one tweet"
 layout: post
-date: 2017-06-29
+date: 2017-29-17
 tags: R twitteR
 comments: TRUE
 ---
@@ -16,7 +16,7 @@ ___
 
 On June 11, 2017, Arizona State University professor Katie Hinde unleashed a Twitter storm with the following tweet:
 
-<center>![](https://i.imgur.com/iPU7Eq0.png)</center> 
+<div style="text-align:center"><img src="https://i.imgur.com/iPU7Eq0.png"/></div>
 
 The tweet was incredibly popular, garnering over 132k likes and 26K retweets over about 36 hours. However, the tweet also attracted quite a bit of negative attention and discussion, and that will be the focus of this analysis. 
 
@@ -128,7 +128,7 @@ The second and third clusters seem to represent the political right and the poli
 
 This gives a nice overview of the static network structure among users who interacted with Dr. Hinde's tweet, but it is also helpful to watch the network evolve over time. The following animation shows the growth of the network over 3-hour intervals, highlighting users that posted the most influential tweets. The entire animation covers a 36 hour period:
 
-<center>![](http://i.imgur.com/Nby2XDE.gif)</center>
+<div style="text-align:center"><img src="http://i.imgur.com/Nby2XDE.gif"/></div>
 
 Now that we have assigned Twitter users to social network clusters based on their common friends, we can repeat some of our earlier analyses of the tweets, but this time focusing on comparisons across the Apolitical, Rightwing, and Leftwing clusters. Here is a breakdown of tweets coming from each cluster over time:
 
@@ -159,7 +159,7 @@ From the perspective of an R analyst just getting started with Twitter, these we
 
 And for the record, from the perspective of a feminist female scientist, this is how I feel about the entire ordeal:
 
-<center>![](https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif)</center>
+<div style="text-align:center"><img src="https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif"/></div>
 
 'nuff said. 
 
