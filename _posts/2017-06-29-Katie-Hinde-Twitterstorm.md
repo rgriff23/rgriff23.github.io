@@ -16,7 +16,9 @@ ___
 
 On June 11, 2017, Arizona State University professor Katie Hinde unleashed a Twitter storm with the following tweet:
 
-<div style="text-align:center"><img src="https://i.imgur.com/iPU7Eq0.png"/></div>
+<p align="center">
+  <img src="https://i.imgur.com/iPU7Eq0.png" />
+</p>
 
 The tweet was incredibly popular, garnering over 132k likes and 26K retweets over about 36 hours. However, the tweet also attracted quite a bit of negative attention and discussion, and that will be the focus of this analysis. 
 
@@ -128,7 +130,9 @@ The second and third clusters seem to represent the political right and the poli
 
 This gives a nice overview of the static network structure among users who interacted with Dr. Hinde's tweet, but it is also helpful to watch the network evolve over time. The following animation shows the growth of the network over 3-hour intervals, highlighting users that posted the most influential tweets. The entire animation covers a 36 hour period:
 
-<div style="text-align:center"><img src="http://i.imgur.com/Nby2XDE.gif"/></div>
+<p align="center">
+  <img src="http://i.imgur.com/Nby2XDE.gif" />
+</p>
 
 Now that we have assigned Twitter users to social network clusters based on their common friends, we can repeat some of our earlier analyses of the tweets, but this time focusing on comparisons across the Apolitical, Rightwing, and Leftwing clusters. Here is a breakdown of tweets coming from each cluster over time:
 
@@ -159,7 +163,9 @@ From the perspective of an R analyst just getting started with Twitter, these we
 
 And for the record, from the perspective of a feminist female scientist, this is how I feel about the entire ordeal:
 
-<div style="text-align:center"><img src="https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif"/></div>
+<p align="center">
+  <img src="https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif" />
+</p>
 
 'nuff said. 
 
