@@ -51,19 +51,20 @@ However, the pure volume of tweets is not the whole story, because not all tweet
 Here is the text of 6 of those most popular tweets, in order of occurance:
 
 1. **@lawilson009:** I hate to be the negative Nancy in all this but this is just making more work for the employees there. Trust me retail is annoying as it is. 
-2. **@surfbordt:** when you make a retain worker's life harder
+2. **@surfbordt:** when you make a retail worker's life harder
 3. **@upthetwerx:** White feminism is thinking you made a difference rearranging merch in one retail store and creating more work for minimum wage workers.
 4. **@AskTarget:** We aim to offer great selection & variety for every guest, & our tees are no exception. Check girls' selection here: tgt.biz/9l4t
 5. **@LiteralSalt:** Imagine being the person that stocked those tank tops then having to watch an obnoxious customer create more work for you. You're a knob.
 6. **@PrisonPlanet:** Did you just do something pointless & dumb to virtue signal and gain social brownie points from other idiots? Yes. Yes you did.
 
-Clearly, the most influential tweets in this storm were negative reactions (although Target keeps its tone pretty neutral while defending itself). In the next section, I take a closer look at the content of the tweets by using sentiment analysis to explore the emotional content of the tweets and wordclouds to visualize the most commonly used words in the Twitterstorm.   
+Clearly, the most influential tweets in this Twitterstorm were negative reactions (although Target keeps its tone pretty neutral while defending itself). In the next section, I take a closer look at the content of the tweets by using sentiment analysis to explore the emotional content of the tweets and wordclouds to visualize the most commonly used words in the Twitterstorm.   
 
 ## Sentiment analysis and word clouds
 
 I performed [sentiment analysis](https://en.wikipedia.org/wiki/Sentiment_analysis) to classify tweets according to their emotional valence or tone. I used two different algorithms to classify tweets according to their emotional content:
 
 1) **Emotional valence**: a five point scale that classifies each tweet as Very Negative, Negative, Neutral, Positive, or Very Positive. The method does not produce any missing values, since tweets that don't carry much emotional content get labeled 'Neutral'.
+
 2) **Emotional tone**: a six category system that uses a [naive Bayes classifier](https://en.wikipedia.org/wiki/Naive_Bayes_classifier) to characterize tweets as Joyful, Angry, Sad, Surprised, Fearful, or Disgusted. This method produces missing values when a tweet does not provide enough emotional content to be labeled. Just 36% of the the tweets in this dataset could be classified. 
 
 Below are the distributions of the different sentiments in the Twitterstorm:
@@ -72,7 +73,7 @@ Below are the distributions of the different sentiments in the Twitterstorm:
 
 <img src="/assets/Rfigs/post_2017-06_twitterstorm_emotional_tone_barplot-1.png" title="plot of chunk post_2017-06_twitterstorm_emotional_tone_barplot" alt="plot of chunk post_2017-06_twitterstorm_emotional_tone_barplot" style="display: block; margin: auto;" />
 
-To get a sense of the exact language people used, we can vizualize the frequency of words with a wordcloud. Wordclouds are a visually appealing way to get a snapshot of the content of a corpus, but their creation and interpretation is more art than science (see [here](https://dataskeptic.com/blog/episodes/2016/kill-the-word-cloud) for an impassioned diatribe against wordclouds). However, despite their shortcomings, wordclouds can be a useful way to get a 'feel' for a text-based dataset and check for errors. A good example actually came from this project. After my first round of cleaning the text and making a wordcloud, I was confused about why so many people were using the word 'amp'. Is that what kids are saying these days?? What does it mean?? I asked Dr. Hinde, and she said nope- that's probably not right. Sure enough, I looked a bit closer and discovered that ampersands in tweets are represented by '&amp', which reduces to 'amp' after punctuation is removed. So maybe wordclouds aren't the most scientific thing in the world, but they are pretty to look at and they have their use. That said, here is a wordcloud for all the tweets: 
+To get a sense of the exact language people used, we can vizualize the frequency of words with a wordcloud. Wordclouds are a visually appealing way to get a snapshot of the content of a corpus, but their creation and interpretation is more art than science (see [here](https://dataskeptic.com/blog/episodes/2016/kill-the-word-cloud) for an impassioned diatribe against wordclouds). However, despite their shortcomings, wordclouds can be a useful way to get a 'feel' for a text-based dataset and check for errors. A good example actually came from this project. After my first round of cleaning the text and making a wordcloud, I was confused about why so many people were using the word 'amp'. Is that what kids are saying these days?? What does it mean?? I asked Dr. Hinde, and she said nope- that's probably not right. Sure enough, I looked a bit closer and discovered that ampersands in tweets are represented by '&amp', which reduces to 'amp' after punctuation is removed. So maybe wordclouds aren't the most scientific thing in the world, but they are pretty to look at and they have their utility. That said, here is a wordcloud for all the tweets: 
 
 <img src="/assets/Rfigs/post_2017-06_twitterstorm_wordcloud_all-1.png" title="plot of chunk post_2017-06_twitterstorm_wordcloud_all" alt="plot of chunk post_2017-06_twitterstorm_wordcloud_all" style="display: block; margin: auto;" />
 
@@ -84,7 +85,7 @@ Here is a comparison cloud for the emotional tone of the tweets:
 
 <img src="/assets/Rfigs/post_2017-06_twitterstorm_wordcloud_emotional_tone-1.png" title="plot of chunk post_2017-06_twitterstorm_wordcloud_emotional_tone" alt="plot of chunk post_2017-06_twitterstorm_wordcloud_emotional_tone" style="display: block; margin: auto;" />
 
-These wordclouds seem reasonable, but a big concern for this dataset is that the emotional classifiers are not good at picking up on sarcasm, and these tweets have a lot of sarcasm. I suspect that many of the 'positive' and 'joyful' replies are in fact sarcastic (you can inspect the [raw data](https://github.com/rgriff23/Katie_Hinde_Twitter_storm_text_analysis/blob/master/data/clean_tweet_data.csv) if you doubt me).
+These wordclouds seem reasonable, but a big concern for this dataset is that the emotional classifiers are not good at picking up on sarcasm, and these tweets have a lot of sarcasm. I suspect that many of the 'positive' and 'joyful' replies are in fact sarcastic (you can inspect the [raw data](https://github.com/rgriff23/Katie_Hinde_Twitter_storm_text_analysis/blob/master/data/tweet_data.csv) if you doubt me).
 
 In the next section, I take a look at the social network of users in the Twitterstorm. Which different subgroups on Twitter interacted with this tweet? When and how did they do it?  
 
@@ -124,7 +125,7 @@ I used a [greedy algorithm](https://en.wikipedia.org/wiki/Greedy_algorithm) to i
    25 "earlxsweat"      "RubinReport"     "elizabethforma"
 ```
 
-The second and third clusters seem to represent the political right and the political left, respectively. The first cluster is a bit more difficult to characterize- the only political figures that made their top 25 are Donald Trump and Barack Obama, and otherwise they seem to be more interested in popular culture: music, sports, video games, and television. I will henceforth refer to the first group as 'Apolitical', the second group as 'Rightwing', and the third group as 'Leftwing'. Let's visualize the network with nodes are colored according to their cluster- gray for Apolitical, red for Rightwing, and blue for Leftwing:
+The second and third clusters seem to represent the political right and the political left, respectively. The first cluster is a bit more difficult to characterize- the only political figures that made their top 25 are Donald Trump and Barack Obama, and otherwise they seem to be more interested in popular culture: music, sports, video games, and television. I will henceforth refer to the first group as 'Apolitical', the second group as 'Rightwing', and the third group as 'Leftwing'. Let's visualize the network with nodes colored according to their cluster- gray for Apolitical, red for Rightwing, and blue for Leftwing:
 
 <img src="/assets/Rfigs/post_2017-06_twitterstorm_social_network-1.png" title="plot of chunk post_2017-06_twitterstorm_social_network" alt="plot of chunk post_2017-06_twitterstorm_social_network" style="display: block; margin: auto;" />
 
