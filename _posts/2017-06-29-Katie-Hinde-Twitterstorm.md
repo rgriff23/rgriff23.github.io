@@ -2,7 +2,7 @@
 title: "Analysis of a Twitterstorm: how to make both liberals and conservatives hate you with one tweet"
 layout: post
 date: 2017-06-29
-tags: R twitteR
+tags: R twitteR text-analysis
 comments: TRUE
 ---
 
