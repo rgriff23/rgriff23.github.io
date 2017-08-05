@@ -28,15 +28,15 @@ tree.f <- readRDS(url("https://rgriff23.github.io/assets/Rds/diss_tree_f.Rds"))
 tree.m <- readRDS(url("https://rgriff23.github.io/assets/Rds/diss_tree_m.Rds"))
 ```
 
-Now, generate side-by-side phylomorphospace plots. The plot parameters here serve to make the text a bit more readable, at least for peripheral species:
+Now, generate side-by-side phylomorphospace plots. The plot parameters here serve to make the text a bit more readable, at least for peripheral species?:
 
 
 ```r
 # side-by-side phylomorphospace plots
 layout(matrix(1:2, 1, 2))
-plotGMPhyloMorphoSpace(tree.f, gpa.f$coords, plot.param=list(t.cex=0.3, n.cex=0.3, lwd=0.3, txt.cex=0.3))
+plotGMPhyloMorphoSpace(tree.f, gpa.f$coords, plot.param=list(t.cex=0.3, n.cex=0.3, lwd=0.3, txt.cex=0.5))
 mtext("Females", line=1, cex=2)
-plotGMPhyloMorphoSpace(tree.m, gpa.m$coords, plot.param=list(t.cex=0.3, n.cex=0.3, lwd=0.3, txt.cex=0.3))
+plotGMPhyloMorphoSpace(tree.m, gpa.m$coords, plot.param=list(t.cex=0.3, n.cex=0.3, lwd=0.3, txt.cex=0.5))
 mtext("Males", line=1, cex=2)
 ```
 
@@ -55,9 +55,9 @@ source(url("https://raw.githubusercontent.com/rgriff23/Dissertation/master/Chapt
 
 # side-by-side phylomorphospace plots with y-axis in male plot flipped
 layout(matrix(1:2, 1, 2))
-plotGMPhyloMorphoSpace_axisflip(tree.f, gpa.f$coords, plot.param=list(t.cex=0.3, n.cex=0.3, lwd=0.3, txt.cex=0.3))
+plotGMPhyloMorphoSpace_axisflip(tree.f, gpa.f$coords, plot.param=list(t.cex=0.3, n.cex=0.3, lwd=0.3, txt.cex=0.5))
 mtext("Females", line=1, cex=2)
-plotGMPhyloMorphoSpace_axisflip(tree.m, gpa.m$coords, yaxis=-2, plot.param=list(t.cex=0.3, n.cex=0.3, lwd=0.3, txt.cex=0.3))
+plotGMPhyloMorphoSpace_axisflip(tree.m, gpa.m$coords, yaxis=-2, plot.param=list(t.cex=0.3, n.cex=0.3, lwd=0.3, txt.cex=0.5))
 mtext("Males", line=1, cex=2)
 ```
 
