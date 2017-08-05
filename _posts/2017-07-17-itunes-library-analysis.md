@@ -61,7 +61,7 @@ genre <- table(songs$Genre)
 wordcloud(names(genre), genre, random.order=FALSE, colors=rainbow(5))
 ```
 
-<img src="/assets/Rfigs/itunes_library_genre_wordcloud_unweighted-1.png" title="plot of chunk itunes_library_genre_wordcloud_unweighted" alt="plot of chunk itunes_library_genre_wordcloud_unweighted" style="display: block; margin: auto;" />
+<img src="/assets/Rfigs/post_2017-07_itunes_library_genre_wordcloud_unweighted-1.png" title="plot of chunk itunes_library_genre_wordcloud_unweighted" alt="plot of chunk itunes_library_genre_wordcloud_unweighted" style="display: block; margin: auto;" />
 
 Soundtracks are heavily represented because I tend to purchase complete soundtracks for movies I like. However, I rarely listen to these albums start-to-finish more than a once or twice. Instead, I choose a few songs I really like and incorporate them into playlists. Thus, simply listing the genres of all of the songs in my library gives a misleading picture of my favorite genres. A better representation of my musical taste can be found by weighting each genre by the playcounts of the songs in that genre:
 
@@ -77,7 +77,7 @@ genre.w <- table(rep(songs$Genre, times=songs$Play.Count))
 wordcloud(names(genre.w), genre.w, random.order=FALSE, colors=rainbow(5))
 ```
 
-<img src="/assets/Rfigs/itunes_library_genre_wordcloud_weighted-1.png" title="plot of chunk itunes_library_genre_wordcloud_weighted" alt="plot of chunk itunes_library_genre_wordcloud_weighted" style="display: block; margin: auto;" />
+<img src="/assets/Rfigs/post_2017-07_itunes_library_genre_wordcloud_weighted-1.png" title="plot of chunk itunes_library_genre_wordcloud_weighted" alt="plot of chunk itunes_library_genre_wordcloud_weighted" style="display: block; margin: auto;" />
 
 This is more or less what I expect to see. A lot of the music I listen to on a regular basis falls into the amorphous 'alternative' genre. In fact, 'alternative' music is such a wastebasket genre that doesn't reveal a whole lot about my musical tastes. To get a more nuanced picture, let's make a wordcloud for my favorite artists, first unweighted:
 
@@ -88,7 +88,7 @@ artist <- table(songs$Artist)
 wordcloud(names(artist), artist, random.order=FALSE, colors=rainbow(5))
 ```
 
-<img src="/assets/Rfigs/itunes_library_artist_wordcloud_unweighted-1.png" title="plot of chunk itunes_library_artist_wordcloud_unweighted" alt="plot of chunk itunes_library_artist_wordcloud_unweighted" style="display: block; margin: auto;" />
+<img src="/assets/Rfigs/post_2017-07_itunes_library_artist_wordcloud_unweighted-1.png" title="plot of chunk itunes_library_artist_wordcloud_unweighted" alt="plot of chunk itunes_library_artist_wordcloud_unweighted" style="display: block; margin: auto;" />
 
 And now weighted by play count:
 
@@ -99,7 +99,7 @@ artist.w <- table(rep(songs$Artist, times=songs$Play.Count))
 wordcloud(names(artist.w), artist.w, random.order=FALSE, colors=rainbow(5))
 ```
 
-<img src="/assets/Rfigs/itunes_library_artist_wordcloud_weighted-1.png" title="plot of chunk itunes_library_artist_wordcloud_weighted" alt="plot of chunk itunes_library_artist_wordcloud_weighted" style="display: block; margin: auto;" />
+<img src="/assets/Rfigs/post_2017-07_itunes_library_artist_wordcloud_weighted-1.png" title="plot of chunk itunes_library_artist_wordcloud_weighted" alt="plot of chunk itunes_library_artist_wordcloud_weighted" style="display: block; margin: auto;" />
 
 Unsurprisingly, the weighted and unweighted wordclouds look quite different. The unweighted wordcloud reflects the fact that I own every Rammstein album in existence, because this was the music that defined my angry adolescence. Occasionally, Rammstein still hits the spot, but I don't listen to them often as an adult. Hans Zimmer, Steven Jablonsky, and Ramin Djawadi are all soundtrack composers- Hans Zimmer composed a number of blockbuster movie soundtracks (e.g., The Dark Knight and Interstellar), while the latter two are best known for the Transformers movies and Game of Thrones, respectively. The Westminster Choir is there because I apparently have a ton of Christmas music by them for reasons I can't really explain, because I hate it (I *think* I copied these from my dad's collection many years ago without knowing what it was).
 
@@ -120,7 +120,7 @@ ggplot(song.tab) +
   coord_flip() 
 ```
 
-<img src="/assets/Rfigs/itunes_library_topsongs-1.png" title="plot of chunk itunes_library_topsongs" alt="plot of chunk itunes_library_topsongs" style="display: block; margin: auto;" />
+<img src="/assets/Rfigs/post_2017-07_itunes_library_topsongs-1.png" title="plot of chunk itunes_library_topsongs" alt="plot of chunk itunes_library_topsongs" style="display: block; margin: auto;" />
 
 Yupp... I have definitely gone through phases of listening to many of these songs on a loop, and many of them are also permanent fixtures on otherwise variable playlists.  
 
