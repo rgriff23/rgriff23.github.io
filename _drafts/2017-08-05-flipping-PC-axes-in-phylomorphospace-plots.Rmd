@@ -1,0 +1,57 @@
+---
+title: "Flipping PC axes in geomorph plotGMPhyloMorphoSpace plots"
+layout: post
+date: 2017-08-05
+tags: R geometric-morphometrics
+comments: true
+---
+
+```{r setup, include=FALSE}
+# knitr
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, warning=FALSE, comment="> ", fig.align = 'center')
+knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+```
+
+The `geomorph` R package provides a convenient function, `plotGMPhyloMorphoSpcae`, for plotting a phylogeny and Procrustes-aligned specimens in tangent space. However, a limitation of this function is that it does not allow users to flip the direction of one or both principal axes. Although this might be a rarely used feature, I found myself in a situation where I wanted to do exactly this. In this post, I reproduce my situation and make a simple modification to the `plotGMPhyloMorphoSpcae` that allows flipping one or both of the principal axes.
+
+### The situation
+
+I have geometric morphometric data on skull shape for a sample of ~65 primate species, with one male and one female specimen for each species (with a few exceptions). I am analyzing males and females separately, but I expect the analyses to produce similar results. I already cleaned and aligned the two datasets with Generalized Procrustes Alignment, and they can be imported from GitHub like this: 
+
+```{r}
+# load packages
+library("geomorph")
+
+# import GPA aligned data
+
+```
+
+Now, generate side-by-side phylomorphospace plots using the `plotGMPhyloMorphoSpace` function (the plot parameters here serve to make the text a bit more readable, at least for the peripheral species):
+
+```{r}
+# side-by-side phylomorphospace plots
+layout(matrix(1:2, 1, 2))
+
+```
+
+There isn't anything *wrong* with these plots, but it is annoying that the y-axes in the two plots seem to go in opposite directions even though they actually describe the same axis of variation. In other words, the second plot looks an awful lot like the first plot if it were vertically flipped. This mismatch in plot orientations makes it more difficult to recognize that the second principal axis describes a very similar gradient in both plots and also makes it more difficult to compare minor differences in the plots. 
+
+Since the direction of principal axes are arbitrary, we are allowed to flip the y-axis in the first plot to match the second plot. However, since the `plotGMPhyloMorphoSpace` function doesn't include a way to do this, I had to make a slight modification to the function. The complete code for the modified function can be found [here] on GitHub. The original function already includes `xaxis` and `yaxis` arguments that allow the user to specify which principal axes are represented on the x and y-axes, respectively. In the original function, these arguments must be positive integers, and they default to 1 and 2. With my modification, you can specify a flipped axis by providing a negative integer for these arguments. For example, to flip the y-axis in the second plot, I would simply specify `yaxis = -2`.
+
+Here is how to load the function and produce the plots I want:
+
+```{r}
+# import function from GitHub
+
+# side-by-side phylomorphospace plots
+
+```
+
+
+
+
+___
+
+
+
+
