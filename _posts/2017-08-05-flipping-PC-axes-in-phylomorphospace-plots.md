@@ -28,7 +28,7 @@ tree.f <- readRDS(url("https://rgriff23.github.io/assets/Rds/diss_tree_f.Rds"))
 tree.m <- readRDS(url("https://rgriff23.github.io/assets/Rds/diss_tree_m.Rds"))
 ```
 
-Now, generate side-by-side phylomorphospace plots. The plot parameters here serve to make the text a bit more readable, at least for peripheral species?:
+Now, generate side-by-side phylomorphospace plots. The plot parameters here serve to make the text a bit more readable, at least for peripheral species:
 
 
 ```r
