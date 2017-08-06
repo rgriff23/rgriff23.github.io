@@ -8,7 +8,7 @@ comments: true
 
 
 
-The `geomorph` R package provides a convenient function, `plotGMPhyloMorphoSpcae`, for plotting a phylogeny and Procrustes aligned specimens in tangent space (Rohlf 2002; Klingenberg & Gidaszewski 2010). However, a limitation of this function is that it does not allow users to flip the direction of one or both principal axes. Although this might be a rarely used feature, I recently found myself in a situation where I wanted to do exactly this. In this post, I reproduce my situation and make a simple modification to `plotGMPhyloMorphoSpcae` that allows the user to flip one or both principal axes.
+The `geomorph` R package provides a convenient function, `plotGMPhyloMorphoSpace`, for plotting a phylogeny and Procrustes aligned specimens in tangent space (Rohlf 2002; Klingenberg & Gidaszewski 2010). However, a limitation of this function is that it does not allow users to flip the direction of one or both principal axes. Although this might be a rarely used feature, I recently found myself in a situation where I wanted to do exactly this. In this post, I reproduce my situation and make a simple modification to `plotGMPhyloMorphoSpace` that allows the user to flip one or both principal axes.
 
 ### The situation
 
