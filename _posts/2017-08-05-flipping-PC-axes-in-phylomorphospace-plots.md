@@ -12,7 +12,7 @@ The `geomorph` R package provides a convenient function, `plotGMPhyloMorphoSpace
 
 ### The situation
 
-I have geometric morphometric data on skull shape for a sample of 62-63 primate species, with one male and one female specimen for each species (with a couple of exceptions). I am analyzing males and females separately, but given the strong correlation between male and female skulls from the same species, the analyses should produce similar results. I already cleaned and aligned the two datasets with Generalized Procrustes Alignment, and obtained phylogenetic trees for each dataset. The data can be imported from my website like this: 
+I have geometric morphometric data on skull shape for a sample of 63-64 primate species, with one male and one female specimen for each species (with a couple of exceptions). I am analyzing males and females separately, but given the strong correlation between male and female skulls from the same species, the analyses should produce similar results. I already cleaned and aligned the two datasets with Generalized Procrustes Alignment, and obtained phylogenetic trees for each dataset. The data can be imported from my website like this: 
 
 
 ```r
@@ -28,7 +28,7 @@ tree.f <- readRDS(url("https://rgriff23.github.io/assets/Rds/diss_tree_f.Rds"))
 tree.m <- readRDS(url("https://rgriff23.github.io/assets/Rds/diss_tree_m.Rds"))
 ```
 
-Now, generate side-by-side phylomorphospace plots. The plot parameters here serve to make the text a bit more readable, at least for peripheral species?:
+Now, generate side-by-side phylomorphospace plots. The plot parameters here serve to make the text a bit more readable, at least for peripheral species:
 
 
 ```r

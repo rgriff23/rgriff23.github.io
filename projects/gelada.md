@@ -14,14 +14,14 @@ ___
 
 ### Part 1: Tapeworm impact on host survival
 
-It is unknown whether the parasites reduce host longevity. We perform survival analyses using 10 years of longitudinal data on parasitic cysts and host survival. A manuscript is under review at *The American Journal of Primatology*. 
+We performed survival analyses using 10 years of longitudinal data on infection and host mortality, and found that the parasite drastically reduces host survival. Our findings were recently published in *The American Journal of Primatology* ([download](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017b.pdf)). 
 
-### Part 2: Tapeworm effects on host hormones
+### Part 2: Identifying undetected tapeworms
 
-It is hypothesized that this tapeworm species may manipulate host hormones. We use GLMMs to assess the effect of tapeworm infection on testosterone levels in males and oestrogen levels in females. We are in the data cleaning phase of this project.
+It is possible that undetected internal cysts are causing us to underestimate prevalence based on the presence of visible external cysts, so India developed an antigen assay for detecting infections from dried urine samples. I analyzed the results with GLMMs to explore demographic patterns in infection. This study was recently published in *PLOS Neglected Tropical Diseases* ([download](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017a.pdf)). 
 
-### Part 3: Identifying undetected tapeworms
+### Part 3: Tapeworm effects on host hormones
 
-It is possible that undetected internal cysts are causing us to underestimate prevalence based on the presence of visible external cysts, so India developed an antigen assay for detecting infections from dried urine samples. We analyzed the results with GLMMs to investigate demographic patterns in infection. A manuscript is under review at *PLOS Neglected Tropical Diseases*. 
+It is hypothesized that this tapeworm species may manipulate host hormones. We use GLMMs to assess the effect of tapeworm infection on testosterone levels in males and oestrogen levels in females. We are still in the data cleaning phase of this project.
 
 ___
