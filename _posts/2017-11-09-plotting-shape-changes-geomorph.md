@@ -105,7 +105,7 @@ Now plot the wireframe for mean shape:
 plot.coords(gpa$consensus, wireframe[,2:3])
 ```
 
-![](https://imgur.com/fFbVd3A.png)
+![](https://i.imgur.com/Bz86Kht.png)
 
 Note that after making the plot, you have to manually rotate the wireframe until it is in a position that makes it easy to see the aspects of shape you are interested in. You can use `snapshot3d` to save your image to a file once you are satisfied with the orienation.
 
@@ -116,7 +116,7 @@ Now let's change the appearance of the wireframe plot by adjusting the color and
 plot.coords(gpa$consensus, wireframe[,2:3], points.col="blue", points.cex=3, lines.col="red", lines.wd=5)
 ```
 
-![](https://imgur.com/AXF6HYy.png)
+![](https://i.imgur.com/DfIwphe.png)
 
 We can make the plot more informative by mapping color and size to some characteristic. For example, in the plot below, I use a different color to highlight different anatomical regions of the skull. To do this, I use the first column of the `wireframe` data.frame, which specifies the anatomical region each link belongs to. I also add a legend: 
 
@@ -132,7 +132,7 @@ plot.coords(gpa$consensus, wireframe[,2:3], lines.col=lines.col,
             legend.col=c("red","green","blue","purple","goldenrod"))
 ```
 
-![](https://imgur.com/UcJnxfc.png)
+![](https://i.imgur.com/246JZD0.png)
 
 In the next section, I show how to use wireframes to visualize results from a multivariate PGLS.
 
@@ -178,7 +178,7 @@ plot.procD(reg1, wireframe[,2:3], value=log(min(gdf$Csize)))
 plot.procD(reg1, wireframe[,2:3], value=log(max(gdf$Csize)))
 ```
 
-![](https://imgur.com/VXlfgWT.png)
+![](https://i.imgur.com/ckLpAAR.png)
 
 This comparison reveals that primates with larger skulls tend to have smaller and more convergent orbits, a more flexed basicranium, and an anteroposteriorly shortened face.
 
@@ -192,7 +192,7 @@ plot.procD(reg2, wireframe[,2:3], value=1, points.col="palegreen", lines.col="gr
            legend=c("Non-folivorous","Folivorous"), legend.pos="topright", legend.col=c("black","green"))
 ```
 
-![](https://imgur.com/yFUFlzy.png)
+![](https://i.imgur.com/bATlgwI.png)
 
 This comparison shows that folivorous primates tend to have have deeper mandibles and a smaller braincase.
 
