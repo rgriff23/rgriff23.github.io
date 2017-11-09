@@ -20,7 +20,7 @@ library(geomorph)
 set.seed(23)
 ```
 
-In this post, I re-analyze data from a paper, ["Ecomorphology of orbit orientation and the adaptive significance of binocular vision in primates and other mammals"](http://www.karger.com/Article/Abstract/108621) by Dr. Christopher Heesy (2008). I demonstrate that correcting for the statistical non-independence of species data undermines the paper's major conclusions, and I highlight directions for future work.   
+In this post, I re-analyze data from a paper, ["Ecomorphology of orbit orientation and the adaptive significance of binocular vision in primates and other mammals"](http://www.karger.com/Article/Abstract/108621) by Dr. Christopher Heesy (2008). I show that correcting for the statistical non-independence of species data undermines the paper's major conclusions, and I highlight directions for future work.   
 
 ## The ecomorphology of orbit orientation (Heesy 2008)
 
@@ -57,7 +57,7 @@ summary.aov(heesy.model.1)
 
 # MANOVA/ANOVA (drop marsupials and anthropoids)
 data.eu1 <- data[!(data$ORDER%in%c("Didelphimorphia","Diprotodontia")),]
-data.eu1 <- data.eu1[data$GROUP != "Anthropoidea",]
+data.eu1 <- data.eu1[data.eu1$GROUP != "Anthropoidea",]
 heesy.model.2 <- manova(cbind(Convergence, Frontition, Verticality) ~ Noccode*Fauncode*Arbcode, data=data.eu1)
 summary.manova(heesy.model.2, test="Wilks")
 summary.aov(heesy.model.2)
@@ -71,15 +71,12 @@ summary.aov(heesy.model.3)
 
 Here is a run-down of the results (focusing on main effects):
 
-- Main effects are always in the expected direction (nocturnality, faunivory, and arboreality are associated with more forward-facing orbits)
 - All main effects are significant in all three MANOVAs.
 - In one-way ANOVAs for the full dataset, all main effects are significant
-- In one-way ANOVAs for the subset without marsupials and anthropoids, all main effects are significant except for nocturnality, which is a non-significant predictor of convergence and frontition. *This is the biggest discrepency between my results and Heesy (2008), who found that nocturnality was significant in all of the one-way ANOVAs for this group.*
+- In one-way ANOVAs for the subset without marsupials and anthropoids, there is a mixture of significance for main effects
 - In one-way ANOVAs for the subset without marsupials and primates, only the main effects for nocturnality and insectivory are significant (arboreality is not)
 
-This last finding- that arboreality is non-significant in the one-way ANOVAs when  marsupials and all primates are dropped from the analysis- is the key result that Heesy (2008) interprets as support for the Nocturnal Visual Predation hypothesis and against hypotheses that focus on arboreality as a driving factor behind orbit evolution. 
-
-I have to say, I find it highly suspect to base this conclusion on a non-significant statistical result, particularly one which only appears after much of the data (and thus statistical power) has been removed. I also think it is noteworthy that the interaction between nocturnality and faunivory was not significant in the final model, since I would *think* that the Nocturnal Visual Predation Hypothesis should predict a significant *interaction* between these variables (not just independent effects). That said, I will now demonstrate that more appropriate phylogenetic models eliminate nearly all of the significant statistical results, rendering moot the interpretation of the particular arrangement of p-values in Heesy's (2008) original results. 
+This last finding- that arboreality is non-significant in the one-way ANOVAs when  marsupials and all primates are dropped from the analysis- is the key result that Heesy (2008) interprets as support for the Nocturnal Visual Predation hypothesis and against hypotheses that focus on arboreality as a driving factor behind orbit evolution. I find it highly suspect to base this conclusion on a non-significant statistical result, particularly one which only appears after much of the data (and thus statistical power) has been removed. I also think it is noteworthy that the interaction between nocturnality and faunivory was not significant in the final model, since I would *think* that the Nocturnal Visual Predation Hypothesis should predict a significant *interaction* between these variables (not just independent effects). That said, I will now demonstrate that more appropriate phylogenetic models eliminate nearly all of the significant statistical results, rendering moot the interpretation of the particular arrangement of p-values in Heesy's (2008) original results. 
 
 ## Problem of phylogenetic autocorrelation
 
@@ -177,19 +174,19 @@ procD.pgls(angles4 ~ Noccode * Fauncode * Arbcode, phy=tree4, data=df4, print.pr
 
 ```
 
-Wow, nothing is significant! Thus, simply incorporating phylogeny into the analysis has transformed a study for which nearly every statistical test yielded a significant result into a study with NO significant results. It is hard to find a more perfect example of how important it can be to include phylogeny in analyses of interspecific data. Feel free to play around with the data I provided to fit alternative models. In combination with the original paper, the defintions of variables should be easy to figure out. 
+Nothing is significant! Simply incorporating phylogeny into the analysis has transformed a study for which nearly every statistical test yielded a significant result into a study with NO significant results. This shows how important it can be to include phylogeny in analyses of interspecific data.
 
 ## Concluding remarks
 
-It is important to keep in mind what 'negative' or 'null' results such as these do *not* tell us... specifically, the fact that there are no significant relationships between the ecological variables and orbit orientation does *not* imply that evolutionary shifts in orbit orientation were *not* driven by the ecological variables in question. It could be that any or all of these variables played a role in directing the evolution of early primate orbits. However, unless our data captures numerous instances of correlated shifts in orbit orientation and ecology, we are unlikely to find statistical associations between these variables after controlling for phylogenetic autocorrelation. Inferences about such singular or very rare events in evolutionary history may have to depend more on circumstantial rather than statistical evidence. 
+It is important to keep in mind what 'negative' or 'null' results such as these do *not* tell us. Specifically, the fact that there are no significant relationships between the ecological variables and orbit orientation does *not* imply that evolutionary shifts in orbit orientation were *not* driven by the ecological variables in question. It could be that any or all of these variables played a role in directing the evolution of early primate orbits. However, unless our data captures numerous instances of correlated shifts in orbit orientation and ecology, we are unlikely to find statistical associations between these variables after controlling for phylogenetic autocorrelation. Inferences about such singular or very rare events in evolutionary history may have to depend more on circumstantial rather than statistical evidence. 
 
-That said, I think there is room to do more phylogenetic comparative work on the evolution of orbit orientation, and I see at least two major directions for advancing this project. 
+I see at least two major directions for future phylogenetic comparative work on the evolution of orbit orientation. 
 
 - First is expanding and refining the dataset. There is room for more complete sampling of extant taxa, and for the addition of fossil data. It also would be good to include other aspects of skull morphology in the models, such as the size and shape of the [braincase and basicranium](http://onlinelibrary.wiley.com/doi/10.1002/ajpa.1330910306/full), perhaps in a [geometric morphometrics framework](https://en.wikipedia.org/wiki/Geometric_morphometrics_in_anthropology). Additionally, the ecological variables could use some work. Although activity pattern is relatively straightforward to code as a discrete variable, diet and substrate use are much more fraught, and predictor variables should be selected to reflect the hypotheses being tested as directly as possible. For example, if "leaping" is a factor that is thought to select for convergent orbits, then "leaping" is a much better predictor variable than "arboreality", which includes things like lorises and sloths that creep slowly along branches. Similarly, if "visual predation"" is a factor thought to select for convergent orbits, then "visual predation" is a much better predictor variable than "faunivory", which includes things like aye-ayes that find their prey by tapping on trees like woodpeckers. 
 
 - Second is fitting more sophisticated models that aim to detect shifts in the tempo or mode of evolution (e.g., like [this](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12084/full)). This is a rather different approach that aims to identify parts of a phylogeny where the rules of evolution seem to change. For instance, it would be interesting to know if there is a statistically significant 'shift' in the mean orbit orientation at the base of the primate clade. That wouldn't tell us *why* the shift occurred, but it would at least support our assumption that *something* happened there that warrants explanation. I think the Nocturnal Visual Predation hypothesis would predict a mean shift at the base of both the primates and the carnivores, as the ancestors of both groups are thought to have been nocturnal visual predators. 
 
-These two directions are complementary, since adding more data ([particularly fossils](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12285/full)) increases statistical power to detect deviations from Brownian evolution.
+These directions are complementary, since adding more data ([particularly fossils](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12285/full)) increases statistical power to detect deviations from Brownian evolution.
 
 **References**:
 
