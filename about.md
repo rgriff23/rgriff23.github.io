@@ -9,6 +9,10 @@ I am in my final year of a PhD program in <a target="_blank" href="https://evolu
 
 *Side notes*
 
-These are my pets- Mr. Spock and Mr. Cody:
+These are my pets, Mr. Spock and Mr. Cody:
 
-![](http://i.imgur.com/Sz7P5wb.jpg) | ![](http://i.imgur.com/74U2w0i.jpg)
+![](https://i.imgur.com/kRxZ6j5.jpg) | ![](https://i.imgur.com/rEvZhO1.jpg)
+
+And this is me:
+
+![](https://i.imgur.com/pSHvOOv.jpg)
