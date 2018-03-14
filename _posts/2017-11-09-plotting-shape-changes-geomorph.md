@@ -28,7 +28,7 @@ library("geomorph")
 gpa <- readRDS(url("https://rgriff23.github.io/assets/Rds/diss_gpa_f.Rds"))
 data <- readRDS(url("https://rgriff23.github.io/assets/Rds/diss_data_f.Rds"))
 tree <- readRDS(url("https://rgriff23.github.io/assets/Rds/diss_tree_f.Rds"))
-wireframe <- read.csv(url("https://rgriff23.github.io/assets/Rds/diss_wires.csv"), header=F)
+wireframe <- read.csv(url("https://raw.githubusercontent.com/rgriff23/rgriff23.github.io/master/assets/data/diss_wires.csv"), header=F)
 ```
 
 The data is clean and landmarks have been aligned with Generalized Procrustes Analysis. The only preparation we need to do before running multivariate phylogenetic regressions is to combine the landmark coordinates, phylogeny, and predictor variables into a `geomorph dataframe`. After doing that, let's fit two simple models- one that includes log centroid size as the only predictor variable, and a second that includes three additional predictors (a continous sexual dimorphism index, and two binary variables representing nocturnality activity pattern and a folivorous diet):
