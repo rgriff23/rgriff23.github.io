@@ -15,4 +15,4 @@ These are my pets, Mr. Spock and Mr. Cody:
 
 And this is me:
 
-![](https://i.imgur.com/pSHvOOv.jpg)
+![](https://i.imgur.com/dmgAGdZ.jpg)

@@ -15,16 +15,14 @@ knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.i
 library("ggplot2")
 ```
 
-**Disclosure of possible personal bias: I'm on the Korean women's ice hockey team.**
-
-A lot of people think we have little to no chance of beating Japan in the Olympics tomorrow. After all, we've never beaten them before, and the combined score of all the South Korea vs. Japan games in history is a demoralizing 117-1. However, that view ignores the trend in those game scores over time. To provide a more nuanced perspective on our chances tomorrow, I compiled the [dates and scores](https://www.nationalteamsoficehockey.com/wp-content/uploads/2018/01/South-Korea-Women-All-Time-Results.pdf) of all the games against Japan in the history of the program, a record that reaches back to 1999. 
+I compiled the [dates and scores](https://www.nationalteamsoficehockey.com/wp-content/uploads/2018/01/South-Korea-Women-All-Time-Results.pdf) of all the games against Japan in the history of the program, a record that reaches back to 1999. 
 
 The following plot shows the goal differential over time, along with the best-fit regression line (in blue with shaded confidence interval) to estimate the trend. The vertical red line represents February 14, 2018 (the date of the game tomorrow), and the horizontal dashed black line represents a goal differential of 0 (tied game). Goal differentials above the dashed line corresponding the a win for Korea, and differentials below the line corresponding to a win for Japan. The intersection of the blue and red lines represents the predicted goal differential for tomorrow:
 
 ```{r goal_differential_plot}
 # data
-Date <- as.Date(c("2/20/17","2/15/12", "1/28/11","11/11/10","1/29/01","3/28/06","1/30/03","2/4/99"), format="%m/%d/%y")
-diff <- c(-3,-5,-10,-12,-29,-12,-21,-25)
+Date <- as.Date(c("2/20/17","2/15/12", "1/28/11","11/11/10","1/29/01","3/28/06","1/30/03","2/4/99", "2/14/18"), format="%m/%d/%y")
+diff <- c(-3,-5,-10,-12,-29,-12,-21,-25, -3)
 data <- data.frame(Date, diff)
 
 # plot
@@ -37,18 +35,13 @@ ggplot(data, aes(x=Date, y=diff)) +
   ylab("Goal differential") +
   xlab("Date") +
   geom_smooth(method='lm', fullrange=TRUE) +
-  geom_hline(yintercept=0, lty=2) +
-  geom_vline(xintercept=as.numeric(as.Date('2018/02/14', format='%Y/%m/%d')), color="red")
+  geom_hline(yintercept=0, lty=2)
 ```
 
-As you can see, the predicted goal differential is close to 0. In fact, by February 14, the differential is jussst barely on the 'Korea wins' side of line. There is a pretty wide confidence interval, ranging from approximately -5 (Korea loses by 5) to +6 (Korea wins by 6).
 
-I know, I know... it's bad to extrapolate beyond the range of the data, and this is not a lot of data. But you have to admit there is a pretty strong pattern here, and I'm not extrapolating very far, so cut me some slack?!?
-
-Tomorrow, we add one more data point to the plot. I predict... it will be a good game. :)
 
 ![](https://i.imgur.com/651EVzt.jpg)
 
 **Footnotes**
 
-* As always, the code is on [GitHub]()
+* The code is on [GitHub]()
