@@ -194,3 +194,7 @@ Thanks to Sam Fox for pointing out that emotions have colors, and my initial arb
 
 Thanks to Katie Hinde, India Schneider-Crease, and Joseph Feldblum for the use of their Twitter accounts to compile the data.
 
+Code is on [GitHub](https://github.com/rgriff23/Katie_Hinde_Twitter_storm_text_analysis).
+
+Data is on [figshare](https://figshare.com/articles/Twitterstorm_data_the_Katie_Hinde_Target_t-shirt_saga_2017-06-11/6096986).
+
