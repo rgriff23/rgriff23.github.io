@@ -23,6 +23,12 @@ title: Projects
 
 [**caRds**](/projects/caRds)- The most important work I've ever done
 
+### Datasets on figshare
+
+[**Twitterstorm data**](https://figshare.com/articles/Twitterstorm_data_the_Katie_Hinde_Target_t-shirt_saga_2017-06-11/6096986)- tweets, user data, and social network from [this twitterstorm](https://rgriff23.github.io/2017/06/29/Katie-Hinde-Twitterstorm.html)
+
+[**3D primate skull data**](https://figshare.com/articles/3D_surfaces_of_primate_skulls_from_my_dissertation_Macroevolution_of_primate_skull_shape_combining_geometric_morphometrics_and_phylogenetic_comparative_methods_/5971231/1)- 3D surfaces (PLY files) for 122 primate skull scans from my [dissertation](/projects/skull)
+
 ### Other
 
 [My blog](/index)- a catalogue of R code snippets, original analyses, updates on stuff I'm doing, etc. 
