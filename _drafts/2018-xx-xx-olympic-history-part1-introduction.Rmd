@@ -1,0 +1,47 @@
+---
+title: "Olympic history (part 1): scraping and wrangling the data"
+date: '2018-xx-xx'
+layout: post
+tags: R olympics sports tidyr ggplot2
+comment: yes
+---
+
+```{r setup, include=FALSE}
+# knitr settings
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
+#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+
+# load packages 
+
+```
+
+This is the first in a series of posts analyzing data on the modern Olympic Games, which comprises all of the Olympics since Athens 1986. In this post, I introduce the data and the methods I used to collect it and clean it for analysis. In subsequent posts, I will analyze historical trends in this data using methods from the `tidyverse` R package, as described in the book [R for Data Science](http://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham. I don't use `tidyverse` in this post since I compiled this dataset before I discovered it. 
+
+Surprisingly, the International Olympic Committee (IOC) does not maintain an organized database about the Olympics. Fortunately, a detailed [database](http://www.olympedia.org/) was developed and maintained by independent enthusiasts of Olympic history, and this data was made availbale on www.sports-reference.com. However, as explained in this [blog post](http://olympstats.com/2016/08/21/the-olymadmen-and-olympstats-and-sports-reference/), the IOC recently recognized the value of maintaining an Olympic database and partnered with the creators of the sports-reference database to transfer the data to an official IOC Olympic Statistical Database. When exactly that will happen and how much of the data will be publicly accessible is unclear, so I decided to scrape a dataset from www.sports-reference.com before it disappears! 
+
+### Web scraping
+
+```{r}
+```
+
+### Wrangling
+
+```{r}
+```
+
+### Summary of the dataset
+
+The final dataset contains X columns and XXXX rows of data. Here are some summary statistics for each column:
+
+- 
+
+### Next steps
+
+In the next few posts I will explore this dataset from multiple angles. I focus on using data visualization to illuminate historical trends, and I make use of `tidyr` and `ggplot2` to manipulate and visualize data. 
+
+Up next: Analyzing historical trends in international participation and medalling. 
+
+**Footnotes**
+
+For a comprehensive history of the modern Olympics, I recommend ['Politics, Power, and the Olympic Games'](https://www.amazon.com/Power-Politics-Olympic-Games-Alfred/dp/0880119586/ref=sr_1_1?ie=UTF8&qid=1523105541&sr=8-1&keywords=politics+power+olympic+games) by Alfred Senn. It's a bit dry, but very thorough.
+

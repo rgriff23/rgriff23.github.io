@@ -1,0 +1,31 @@
+---
+title: "Olympic history (part 5): is there a home team advantage?"
+date: '2018-xx-xx'
+layout: post
+tags: R olympics sports tidyr ggplot2
+comment: yes
+---
+
+```{r setup, include=FALSE}
+# knitr settings
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
+#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+
+# load packages 
+library("ggplot2")
+```
+
+This is the fifth in a series of posts analyzing data on the modern Olympic Games.
+
+Many factors determine a country's medal count in any given Olympics, and these factors vary from one Olympics to the next. In this post, I investigate whether being the home team increases a country's medal count on average. 'Home team advantage' has been reported in other contexts, such as... 
+
+I fit separate mixed-effects models for the Summer and Winter Games, with 'country' as a random effect, 'home' as a fixed effect, and temporal autocorrelation estimated for each country.  
+
+### Conclusion
+
+Up next: Migrants, merceneries, and opportunists???
+
+**Footnotes**
+
+For a comprehensive history of the modern Olympics, I recommend ['Politics, Power, and the Olympic Games'](https://www.amazon.com/Power-Politics-Olympic-Games-Alfred/dp/0880119586/ref=sr_1_1?ie=UTF8&qid=1523105541&sr=8-1&keywords=politics+power+olympic+games) by Alfred Senn. It's a bit dry, but very thorough.
+

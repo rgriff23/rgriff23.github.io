@@ -1,0 +1,49 @@
+---
+title: "Olympic history (part 2): trends in international participation and medalling"
+date: '2018-xx-xx'
+layout: post
+tags: R olympics sports tidyr ggplot2
+comment: yes
+---
+
+```{r setup, include=FALSE}
+# knitr settings
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment="> ", fig.align='center')
+#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+```
+
+This is the second in a series of posts analyzing data on the modern Olympic Games. My focus here is on how international participation in the Games has changed over time and on which countries have dominated the podium.  
+
+To start, load the packages `ggplot2` and `tidyverse`, and the dataset `athlete_events` (which can be found in the [GitHub repo](https://github.com/rgriff23/Olympic_history). 
+
+```{r}
+# load packages
+library("tidyverse")
+
+# load data 
+data <- read.csv("~/Desktop/GitHub/Olympic_history/athlete_events.csv")
+```
+
+### Who participates in the Games?
+
+
+
+```{r}
+
+```
+
+### Who medals at the Games?
+
+```{r}
+```
+
+### Conclusion
+
+[concluding remarks]
+
+Up next: Analyzing historical trends in women's participation in the Olympics.
+
+**Footnotes**
+
+For a comprehensive history of the modern Olympics, I recommend ['Politics, Power, and the Olympic Games'](https://www.amazon.com/Power-Politics-Olympic-Games-Alfred/dp/0880119586/ref=sr_1_1?ie=UTF8&qid=1523105541&sr=8-1&keywords=politics+power+olympic+games) by Alfred Senn. It's a bit dry, but very thorough.
+
