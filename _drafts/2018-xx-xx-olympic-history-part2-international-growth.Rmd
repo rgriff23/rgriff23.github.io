@@ -12,36 +12,91 @@ comment: yes
 #knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 ```
 
-This is the second in a series of posts analyzing data on the modern Olympic Games. My focus here is on how international participation in the Games has changed over time and on which countries have dominated the podium.  
+This is the second in a series of posts analyzing data on the modern Olympic Games, from Athens 1986 to London 2012. Here, I show how international participation in the Games has grown over time and identify which nations have dominated the podium throughout history. As in the other posts in this series, I use the `tidyverse` R package for manipulating and plotting data. 
 
 To start, load the packages `ggplot2` and `tidyverse`, and the dataset `athlete_events` (which can be found in the [GitHub repo](https://github.com/rgriff23/Olympic_history). 
 
-```{r}
+```{r, message=FALSE}
 # load packages
 library("tidyverse")
 
 # load data 
-data <- read.csv("~/Desktop/GitHub/Olympic_history/athlete_events.csv")
+athlete_events <- read_csv("~/Desktop/GitHub/Olympic_history/athlete_events.csv",
+                           col_types = cols(
+                             Name = col_character(),
+                             Sex = col_factor(levels = c("M","F")),
+                             Birthplace = col_character(),
+                             Age =  col_integer(),
+                             City = col_character(),
+                             Sport = col_character(),
+                             NOC = col_character(),
+                             Medal = col_factor(levels = c("Bronze","Silver","Gold")),
+                             Year = col_integer(),
+                             Season = col_factor(levels = c("Summer","Winter"))
+                           ))
 ```
 
-### Who participates in the Games?
+The first modern Olympics, Athens 1986, included 216 athletes from 50 nations competing in 34 summer events. Since then, the Olympics has grown to include 10,673 athletes from 214 nations competing in 56 events in the 2012 London Olympics, and 2,883 athletes from 162 nations competing in 50 events in the 2010 Vancouver Olympics. The following charts depict the number of athletes, nations, and events in the Summer and Winter Games over time:
 
+```{r num_nations_vs_time}
+# subset data
 
+# plot number of athletes vs time
+
+# plot number of nations vs time
+
+# plot number of events vs time
+```
+
+Now let's look at which nations have historically dominated the medal count in the Olympics. I don't want to distinguish between gold, silver, and bronze, so I will add a column to the data called `Medal2` which contains a logical (TRUE/FALSE) indicator of whether a medal was won:
 
 ```{r}
-
+# add logical column for medaling
+athlete_events <- mutate(athlete_events, Medal2 = !is.na(Medal))
 ```
 
-### Who medals at the Games?
+Typing `sum(athlete_events$Medal2)` reveals 37,774 medals in the dataset. 
 
 ```{r}
+# create tibble of historical medal counts for each nation
+medal_count <- athlete_events %>% group_by(NOC) %>% summarize(n = sum(Medal2)) %>% arrange(desc(n)) %>% mutate(proportion = round(n/sum(n),3))
+
+# view all nations with at least 1% of the medal count
+medal_count %>% filter(proportion >= 0.01) %>% print(n=Inf)
+
+# compute proportion of medals won by the top 10 countries
+sum(medal_count$proportion[1:10])
+
+# compute proportion of medals won by nations with at least 1% of the medal count
+filter(medal_count, proportion >= 0.01) %>% select(proportion) %>% sum
 ```
 
-### Conclusion
+The U.S. comes out on top with a whopping 14.2% of all medals in Olympics history. The top 10 nations have won a combined 53.4% of all medals. Only 30 nations have at least 1% of the total, and these 30 nations have won a combined total of 88.9% of all medals in history. 
+
+This birds eye view might obscure interesting temporal patterns and differences between the Summer and Winter Games. For a more nuanced view, I use line graphs to reveal historical trends in the proportion of medals won in past Olympics by the top 30 countries, plotting Summer and Winter Games data separately. There are so many countries that it is difficult to distinguish them all using different line colors, so I add country flags as plotting symbols using the `emojifont` package.
+
+```{r}
+# load emojifont
+library("emojifont")
+
+# prepare data
+
+# Summer Olympis
+```
+
+[comments]
+
+```{r}
+# prepare data
+
+# Winter Olympics
+```
+
+[comments]
 
 [concluding remarks]
 
-Up next: Analyzing historical trends in women's participation in the Olympics.
+Up next: Historical trends in women's participation in the Olympics.
 
 **Footnotes**
 

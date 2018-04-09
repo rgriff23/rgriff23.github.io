@@ -15,7 +15,7 @@ comment: yes
 
 ```
 
-This is the first in a series of posts analyzing data on the modern Olympic Games, which comprises all of the Olympics since Athens 1986. In this post, I introduce the data and the methods I used to collect it and clean it for analysis. In subsequent posts, I will analyze historical trends in this data using methods from the `tidyverse` R package, as described in the book [R for Data Science](http://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham. I don't use `tidyverse` in this post since I compiled this dataset before I discovered it. 
+This is the first in a series of posts analyzing data on the modern Olympic Games, which comprises all of the Olympics from Athens 1986 to London 2012 (data was not available for more recent Olympics at the time I compiled this data). In this post, I introduce the data and the methods I used to collect it and clean it for analysis. In subsequent posts, I analyze historical trends in this data using methods from the `tidyverse` R package, as described in the book [R for Data Science](http://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham.  
 
 Surprisingly, the International Olympic Committee (IOC) does not maintain an organized database about the Olympics. Fortunately, a detailed [database](http://www.olympedia.org/) was developed and maintained by independent enthusiasts of Olympic history, and this data was made availbale on www.sports-reference.com. However, as explained in this [blog post](http://olympstats.com/2016/08/21/the-olymadmen-and-olympstats-and-sports-reference/), the IOC recently recognized the value of maintaining an Olympic database and partnered with the creators of the sports-reference database to transfer the data to an official IOC Olympic Statistical Database. When exactly that will happen and how much of the data will be publicly accessible is unclear, so I decided to scrape a dataset from www.sports-reference.com before it disappears! 
 
@@ -31,15 +31,82 @@ Surprisingly, the International Olympic Committee (IOC) does not maintain an org
 
 ### Summary of the dataset
 
-The final dataset contains X columns and XXXX rows of data. Here are some summary statistics for each column:
+The final dataset contains 10 columns and 257,430 rows. Below, I compute some simple summary statistics for each column using `tidyverse` methods:
 
-- 
+```{r}
+# load tidyverse
+library("tidyverse")
 
-### Next steps
+# load clean data as a tibble
+athlete_events <- read_csv("~/Desktop/GitHub/Olympic_history/athlete_events.csv",
+                           col_types = cols(
+                             Name = col_character(),
+                             Sex = col_factor(levels = c("M","F")),
+                             Birthplace = col_character(),
+                             Age =  col_integer(),
+                             City = col_character(),
+                             Sport = col_character(),
+                             NOC = col_character(),
+                             Medal = col_factor(levels = c("Bronze","Silver","Gold")),
+                             Year = col_integer(),
+                             Season = col_factor(levels = c("Summer","Winter"))
+                           ))
+```
 
-In the next few posts I will explore this dataset from multiple angles. I focus on using data visualization to illuminate historical trends, and I make use of `tidyr` and `ggplot2` to manipulate and visualize data. 
+Now for some summary statistics: 
 
-Up next: Analyzing historical trends in international participation and medalling. 
+```{r}
+# Number of unique athletes in the dataset
+athlete_events %>% select(Name) %>% unique %>% nrow
+```
+
+```{r}
+# Number of male (M) and female(F) athletes in the dataset
+table(athlete_events$Sex)
+```
+
+```{r}
+# Number of athltes with a known birthplace in the dataset
+athlete_events %>% select(Name, Birthplace) %>% .[complete.cases(.),] %>% unique %>% nrow
+```
+
+```{r}
+# Age of the youngest and oldest Olympians in history
+range(athlete_events$Age, na.rm=TRUE)
+```
+
+```{r}
+# Number of different cities the Olympics have been held in
+athlete_events %>% select(City) %>% unique %>% nrow
+```
+
+```{r}
+# Number of different sports that have been played in the Olympics
+athlete_events %>% select(Sport) %>% unique %>% nrow
+```
+
+```{r}
+# Number of different nations that have appeared in the Olympics
+athlete_events %>% select(NOC) %>% unique %>% nrow
+```
+
+```{r}
+# Number of medals that have been awarded in the Olympics
+athlete_events %>% select(Medal) %>% table 
+```
+
+```{r}
+# Number of years in which the Olympics was held
+athlete_events %>% select(Year) %>% unique %>% nrow 
+```
+```{r}
+# Number of Summer and Winter games
+athlete_events %>% select(Year, Season) %>% unique %>% select(Season) %>% table
+```
+
+You might notice that although there are 28 Summer Olympics and 22 Winter Olympics, there are only 34 years in which the Olympics was held. This is explained by the fact that the Summer and Winter Olympics were held in the same year until 1992. There are fewer Winter Olympics than Summer Olympics because winter sports were not included in the Olympics until 1924.
+
+Up next: Historical trends in international participation and medalling. 
 
 **Footnotes**
 
