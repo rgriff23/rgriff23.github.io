@@ -15,18 +15,114 @@ Surprisingly, the International Olympic Committee (IOC) does not maintain an org
 Below is the code I used to scrape data from the individual athlete pages from sports-reference. Note that I omit many data cleaning steps that occurred in between the initial data scraping and the final clean dataset I analyze in subsequent posts. I omit these steps because they are tedious and many steps were done 'manually'. 
 
 
+```r
+# Load packages
+library("RCurl")
+library("XML")
+library("data.table") 
+
+# Identify relevant nodes in the athlete directory
+athlete_url <- getURL("http://www.sports-reference.com/olympics/athletes/")
+athlete_xml <- htmlParse(athlete_url, asText=TRUE)
+athlete_paths <- xpathSApply(athlete_xml, '//td/a', xmlGetAttr, 'href')
+athlete_links <- paste('http://www.sports-reference.com/', athlete_paths, sep="")
+length(athlete_links) # 452 pages
+
+# Visit athlete directory pages and identify individual athlete pages
+individual_links <- c()
+system.time(for (i in 1:length(athlete_links)) {
+  individual_url <- getURL(athlete_links[i])
+  individual_xml <- htmlParse(individual_url, asText=TRUE)
+  individual_paths <- xpathSApply(individual_xml, '//*[(@id = "page_content")]//a', xmlGetAttr, 'href')
+  individual_links_new <- paste('http://www.sports-reference.com/', individual_paths, sep="")
+  individual_links <- c(individual_links, individual_links_new)
+  print(i)
+}) # took about ~7.5 minutes
+length(individual_links)  # 128415
+
+# Extract data table for each individual athlete page into a list (takes ~1 sec per athlete)
+athlete_data <- list()
+for (i in 1:length(individual_links)) {
+  data_url <- getURL(individual_links[i])
+  data_xml <- htmlParse(data_url, asText=TRUE)
+  tab <- readHTMLTable(data_xml)$results[-10]
+  name <- xpathSApply(data_xml, '//*[@id="info_box"]/h1', xmlValue)
+  infobox <- strsplit(xpathSApply(data_xml, '//*[@id="info_box"]/p', xmlValue), '\n')[[1]]
+  sex <- ifelse(length(grep("Female", infobox))==0, "M", "F")
+  born <- grep("Born:", infobox)
+  birthplace <- ifelse(length(born)==1, substring(tail(strsplit(infobox[born], ',')[[1]], 1), 2), NA)
+  if (!is.null(tab)) {
+    athlete_data[[i]] <- data.table(Name=name, Sex=sex, Birthplace=birthplace, tab)
+  } else {athlete_data[[i]] <- NA}
+  print(i)
+}
+
+# Check data
+length(athlete_data) # should be 128415 athletes
+unique(unlist(lapply(athlete_data, ncol))) # should be 12 columns for all athletes (NAs excluded)
+complete_cases <- unlist(lapply(athlete_data, is.data.frame))
+missing_cases <- individual_links[!complete_cases] # visit these pages to see what's up, fix data manually where needed 
+
+# Combine results into a single athlete-event table
+athlete_data <- athlete_data[complete_cases] # drop cases with missing data
+athlete_data <- rbindlist(athlete_data, use.names=TRUE)
+
+# Many names are messed up due to problematic character encoding... a huge headache
+# As an imperfect solution, I replace all non-ASCII characters with '?'
+# This would be a problem if I cared about getting athletes' names right, but luckily I don't 
+athlete_data$name <- sapply(athlete_data$name, gsub, pattern="[^\x01-\x7f]", replacement="?")
+
+# Check easy variables for unexpected values
+table(athlete_data$Sex, useNA="always") # good
+table(athlete_data$Age, useNA="always") # good
+table(athlete_data$City, useNA="always") # good
+table(athlete_data$Sport, useNA="always") # good
+table(athlete_data$NOC, useNA="always") # good
+table(athlete_data$Medal, useNA="always") # good
+table(athlete_data$Year, useNA="always") # some are missing, not sure why... fix manually
+table(athlete_data$Season, useNA="always") # good
+```
 
 The final dataset contains 10 columns and 257,430 rows. Below, I use `tidyverse` methods to read the cleaned version of the dataset into R and compute some simple summary statistics for each column.
 
 
+```r
+# load tidyverse
+library("tidyverse")
+
+# load clean data as a tibble
+athlete_events <- read_csv("~/Desktop/GitHub/Olympic_history/athlete_events.csv",
+                           col_types = cols(
+                             Name = col_character(),
+                             Sex = col_factor(levels = c("M","F")),
+                             Birthplace = col_character(),
+                             Age =  col_integer(),
+                             City = col_character(),
+                             Sport = col_character(),
+                             NOC = col_character(),
+                             Medal = col_factor(levels = c("Bronze","Silver","Gold")),
+                             Year = col_integer(),
+                             Season = col_factor(levels = c("Summer","Winter"))
+                           ))
+```
 
 Now for some summary statistics: 
 
 
-```
->  [1] 125913
+```r
+# Number of unique athletes in the dataset
+athlete_events %>% select(Name) %>% unique %>% nrow
 ```
 
+```
+>  [1] 125912
+```
+
+
+```r
+# Number of male (M) and female(F) athletes in the dataset
+table(athlete_events$Sex)
+```
 
 ```
 >  
@@ -35,30 +131,60 @@ Now for some summary statistics:
 ```
 
 
-```
->  [1] 98336
+```r
+# Number of athltes with a known birthplace in the dataset
+athlete_events %>% select(Name, Birthplace) %>% .[complete.cases(.),] %>% unique %>% nrow
 ```
 
+```
+>  [1] 98335
+```
+
+
+```r
+# Age of the youngest and oldest Olympians in history
+range(athlete_events$Age, na.rm=TRUE)
+```
 
 ```
 >  [1] 10 96
 ```
 
 
+```r
+# Number of different cities the Olympics have been held in
+athlete_events %>% select(City) %>% unique %>% nrow
+```
+
 ```
 >  [1] 41
 ```
 
+
+```r
+# Number of different sports that have been played in the Olympics
+athlete_events %>% select(Sport) %>% unique %>% nrow
+```
 
 ```
 >  [1] 65
 ```
 
 
+```r
+# Number of different nations that have appeared in the Olympics
+athlete_events %>% select(NOC) %>% unique %>% nrow
+```
+
 ```
 >  [1] 227
 ```
 
+
+```r
+# Number of medals that have been awarded in the Olympics
+athlete_events %>% select(Medal) %>% table 
+```
 
 ```
 >  .
@@ -67,8 +193,18 @@ Now for some summary statistics:
 ```
 
 
+```r
+# Number of years in which the Olympics was held
+athlete_events %>% select(Year) %>% unique %>% nrow 
+```
+
 ```
 >  [1] 34
+```
+
+```r
+# Number of Summer and Winter games
+athlete_events %>% select(Year, Season) %>% unique %>% select(Season) %>% table
 ```
 
 ```
