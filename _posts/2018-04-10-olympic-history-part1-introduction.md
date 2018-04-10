@@ -1,6 +1,6 @@
 ---
 title: 'Olympic history (part 1): scraping data from sports-reference.com'
-date: "2018-04-10"
+date: '2018-04-10'
 layout: post
 tags: R olympics sports tidyverse
 comment: yes
@@ -10,7 +10,7 @@ comment: yes
 
 This is the first in a series of posts analyzing data on the modern Olympic Games, which comprises all of the Olympics from Athens 1986 to Sochi 2014 (data was not available for more recent Olympics at the time I compiled this data in September 2016). In this post, I introduce the dataset and the methods I used to collect it. In subsequent posts, I analyze historical trends in this data using methods from the `tidyverse` R package, as described in the book [R for Data Science](http://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham. I've been wanting to familiarize myself with `tidyverse` for a while now, and this data exploration is mostly an excuse to do that. 
 
-Surprisingly, the International Olympic Committee (IOC) does not maintain an organized database about the Olympics. However, a detailed [database](http://www.olympedia.org/) was developed and maintained by independent enthusiasts of Olympic history, and this data was made available on <www.sports-reference.com>. However, as explained in this [blog post](http://olympstats.com/2016/08/21/the-olymadmen-and-olympstats-and-sports-reference/), the IOC recently recognized the value of maintaining an Olympic database and partnered with the creators of the sports-reference database to transfer the data to an official IOC Olympic Statistical Database. When exactly that will happen and how much of the data will be publicly accessible is unclear, so I decided to scrape this dataset before it disappears! 
+Surprisingly, the International Olympic Committee (IOC) does not maintain an organized database about the Olympics. However, a detailed [database](http://www.olympedia.org/) was developed and maintained by independent enthusiasts of Olympic history, and this data was made available on www.sports-reference.com. However, as explained [here](http://olympstats.com/2016/08/21/the-olymadmen-and-olympstats-and-sports-reference/), the IOC recently recognized the value of maintaining an Olympic database and partnered with the creators of the sports-reference database to transfer the data to an official IOC Olympic Statistical Database. When exactly that will happen and how much of the data will be publicly accessible is unclear, so I decided to scrape this dataset before it disappears! 
 
 Below is the code I used to scrape data from the individual athlete pages from sports-reference. Note that I omit many data cleaning steps that occurred in between the initial data scraping and the final clean dataset I analyze in subsequent posts. I omit these steps because they are tedious and many steps were done 'manually'. 
 
