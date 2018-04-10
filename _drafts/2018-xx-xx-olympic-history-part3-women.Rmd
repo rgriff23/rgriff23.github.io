@@ -12,14 +12,22 @@ comment: yes
 #knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages 
-library("ggplot2")
+library("tidyverse")
 ```
 
 This is the third in a series of posts analyzing data on the modern Olympic Games. Here, I investigate trends in the number of female athletes participating in the Games, where they come from, and which ones find their way to the podium. 
 
-### Conclusion
+In the last post, we saw that the number of athletes participating in the Olympics has increased dramatically over time. But how does the increase in the number of male athletes compare to the number of female athletes? The following chart compares the growth of male and female participants over time:
 
-Up next: Analyzing historical trends in which sports are included in the Olympics.
+```{r}
+# male/female athletes vs time
+```
+
+[comments]
+
+Next, let's look at *where* most of these female athletes are coming from, and compare this to male athletes. I consider the Summer and Winter Games separately, and focus on 3 Olympics: 1952, 1980, and 2012 for the Summer Games, and 1952, 1980, and 2010 for the Winter Games. 
+
+Up next: Is there a home team advantage in the Olympics?
 
 **Footnotes**
 

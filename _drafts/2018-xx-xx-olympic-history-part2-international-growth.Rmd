@@ -12,7 +12,7 @@ comment: yes
 #knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 ```
 
-This is the second in a series of posts analyzing data on the modern Olympic Games, from Athens 1986 to London 2012. Here, I show how international participation in the Games has grown over time and identify which nations have dominated the podium throughout history. As in the other posts in this series, I use the `tidyverse` R package for manipulating and plotting data. 
+This is the second in a series of posts analyzing data on the modern Olympic Games, from Athens 1986 to Sochi 2014. Here, I show how international participation in the Games has grown over time and identify which nations have dominated the podium throughout history. As in the other posts in this series, I use the `tidyverse` R package for manipulating and plotting data. 
 
 To start, load the packages `ggplot2` and `tidyverse`, and the dataset `athlete_events` (which can be found in the [GitHub repo](https://github.com/rgriff23/Olympic_history). 
 
