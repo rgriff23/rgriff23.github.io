@@ -3,7 +3,7 @@ title: 'Olympic history (part 1): scraping data from sports-reference.com'
 date: '2018-04-10'
 layout: post
 tags: R olympics sports tidyverse
-comment: yes
+comments: true
 ---
 
 ```{r setup, include=FALSE}
@@ -86,7 +86,7 @@ table(athlete_data$Year, useNA="always") # some are missing, not sure why... fix
 table(athlete_data$Season, useNA="always") # good
 ```
 
-The final dataset contains 10 columns and 257,430 rows. Below, I use `tidyverse` methods to read the cleaned version of the dataset into R and compute some simple summary statistics for each column.
+The final dataset contains 10 columns and 257,430 rows. Below, I use `tidyverse` methods to read the cleaned version of the dataset into R and compute some simple summary statistics for each column. If you want to follow along with this part, download the data from [figshare](). 
 
 ```{r, message=FALSE}
 # load tidyverse

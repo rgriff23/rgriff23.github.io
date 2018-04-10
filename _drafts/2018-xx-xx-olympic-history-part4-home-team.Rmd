@@ -3,7 +3,7 @@ title: "Olympic history (part 5): is there a home team advantage?"
 date: '2018-xx-xx'
 layout: post
 tags: R olympics sports tidyr ggplot2
-comment: yes
+comments: true
 ---
 
 ```{r setup, include=FALSE}

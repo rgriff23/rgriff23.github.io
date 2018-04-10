@@ -3,7 +3,7 @@ title: 'Olympic history (part 1): scraping data from sports-reference.com'
 date: '2018-04-10'
 layout: post
 tags: R olympics sports tidyverse
-comment: yes
+comments: true
 ---
 
 
