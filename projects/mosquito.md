@@ -11,7 +11,7 @@ ___
 
 This collaboration with the <a target="_blank" href="www.vectorecology.org/">Vector Ecology Lab</a> at NC State aimed to investigate how mosquito community composition varies across habitats and regions in the Raleigh-Durham area. In addition to collecting and identifying thousands of mosquitoes, I lead statistical analysis for the project. 
 
-<img src="https://i.imgur.com/ed1sT04.jpg" style="display: block; margin: auto;" />
+![](https://i.imgur.com/ed1sT04.jpg)
 
 ### Further reading
 
