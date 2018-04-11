@@ -7,14 +7,14 @@ comments: false
 
 ___
 
-This is my dissertation research. The code is on **<a target="_blank" href="https://github.com/rgriff23/Dissertation">GitHub</a>**, but it is a work in progress. These are my chapters:
+This is my dissertation research. The code is on **<a target="_blank" href="https://github.com/rgriff23/Dissertation">GitHub</a>**. These are my chapters:
 
 1. Introduction
-2. Compilation of 3D scans of primate skulls
-3. Error study of digital jaw-closing method
-4. Error study of 3D landmarks for describing skull shape
-5. Ecomorphology and evolution of primate skull shape
-6. Integration and modularity in primate skull evolution
-7. Conclusions
+2. Collecting 3D digital data on primate skulls
+3. Using n-point alignment to approximate maximum intercuspation for digital primate crania and mandibles
+4. Macroevolutionary correlates of primate skull shape
+5. Macroevolutionary integration and modularity in the primate skull
+6. Conclusions
 
+Update: I have a defense date, May 11 2018!
 ___
