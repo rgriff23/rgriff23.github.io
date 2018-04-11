@@ -27,6 +27,12 @@ In the last post, we saw that the number of athletes participating in the Olympi
 
 Next, let's look at *where* most of these female athletes are coming from, and compare this to male athletes. I consider the Summer and Winter Games separately, and focus on 3 Olympics: 1952, 1980, and 2012 for the Summer Games, and 1952, 1980, and 2010 for the Winter Games. 
 
+```{r}
+
+```
+
+Finally, let's look at where female medalists come from. 
+
 Up next: Is there a home team advantage in the Olympics?
 
 **Footnotes**
