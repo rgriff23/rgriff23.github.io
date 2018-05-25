@@ -11,17 +11,19 @@ comments: yes
 
 ## Introduction
 
-The R package `btw` is an R wrapper for the [BayesTraits](https://www.evolution.rdg.ac.uk/BayesTraits.html) software for phylogenetic comparative methods. The functions in `btw` run BayesTraits on your system, import and parse the output files in R, and then delete the output files from your system There are two major advantages to using `btw` rather than running BayesTraits from the command line. First, `btw` makes it easy to incorporate BayesTraits into R scripts. Second, `btw` automatically parses BayesTraits output into ready-to-use formats for R analyses, greatly simplifying your workflow if you analyze your BayesTraits output in R.
+`btw` is an R package for running the [BayesTraits](https://www.evolution.rdg.ac.uk/BayesTraits.html) phylogenetic comparative methods software from R. The functions in `btw` run BayesTraits on your system, import and parse the output files in R, and delete the output files from your system. 
+
+There are two major advantages to using `btw` rather than running BayesTraits from the command line. First, `btw` makes it easy to incorporate BayesTraits into R scripts. Second, `btw` automatically parses BayesTraits output into ready-to-use formats for R analyses, greatly simplifying your workflow if you analyze your BayesTraits output in R.
 
 BayesTraits was developed by Mark Pagel and Andrew Meade, and is available from their <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">website</a> as an executable file that can be run from a command line program such as Terminal (MacOS) or Command Prompt (Windows). PLEASE read the BayesTraits documentation thoroughly before trying to use `btw`, as the tutorial presented on this page assumes you are familiar with the capabilities, commands, and types of output produced by BayesTraits. I cannot emphasize this enough - if you don't know how to use BayesTraits, then you are going to have problems using `btw`. The purpose of `btw` is not to distance users from the original software and documentation; it is simply a tool to streamline your workflow. 
 
-This page is for version 2 of `btw`, which I added in May 2018. There are three significant changes from version 1:
+This is version 2 of `btw`, which I added in May 2018. There are three significant changes from version 1:
 
 1. Windows compatibility (formerly `btw` only worked on MacOS)
 2. Simplified structure for specifying BayesTraits commands
 3. It works the most recent version of BayesTraits, BayesTraitsV3
 
-I recommend working with this version of `btw` and BayesTraitsV3 (which is the most recent version as of May 2018). If you want to work with version 1 of `btw`, visit the [version 1 project page](/btw_version1) for a tutorial that demonstrations how to install and use version 1. 
+I recommend working with this version of `btw` and BayesTraitsV3 (which is the most recent version as of May 2018). If you want to work with version 1 of `btw`, visit the [version 1 project page](./btw_version1) for a tutorial that demonstrations how to install and use version 1. 
 
 There is one feature of BayesTraitsV3 that `btw` does not support: the variable rates model. I don't think this is a great loss because I'm skeptical about the model - I think it produces vastly overparameterized models (see [Ho & Ané 2014](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12285) for an excellent discussion of this issue). But on a practical note, the output of this model is a nightmare and I had a hard time understanding it. Pagel & Meade, perhaps recognizing this, created a [web tool](http://www.evolution.reading.ac.uk/VarRatesWebPP/) to process the output from their variable rates model, so if you want to run their variable rates model you can use their web tool. 
 

@@ -8,7 +8,7 @@ comments: yes
 
 ___
 
-IMPORTANT NOTE: This is an out-of-date version of `btw`. For the up-to-date version (which includes Windows compatibility, support for BayesTraitsV3, and a much simpler approach to specifying BayesTraits commands), see [here](/projects/btw).  
+IMPORTANT NOTE: This is an out-of-date version of `btw`. For the up-to-date version (which includes Windows compatibility, support for BayesTraitsV3, and a much simpler approach to specifying BayesTraits commands), see [here](./projects/btw).  
 
 ___
 
