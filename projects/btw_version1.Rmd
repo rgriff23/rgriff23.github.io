@@ -1,14 +1,14 @@
 ---
+title: "BayesTraits Wrapper (btw) version 1"
+author: "Randi H. Griffin"
 layout: project
-title: "BayesTraits Wrapper (btw)"
-author: Randi H. Griffin
-comments: true
+comments: yes
 ---
 
 
 ___
 
-IMPORTANT NOTE: this package is currently a bit out of date. There are two major updates coming up. **First**, `btw` is designed to work with BayesTraits Version 2, but I realize there is now a Version 3 that has some new features to support. **Second**, `btw` user Peter Ranacher was kind enough to send me some code for running `btw` on Windows, so I plan to incorporate that as well.
+IMPORTANT NOTE: This is an out-of-date version of `btw`. For the up-to-date version (which includes Windows compatibility, support for BayesTraitsV3, and a much simpler approach to specifying BayesTraits commands), see [here]().  
 
 ___
 
@@ -24,12 +24,12 @@ ___
 
 ## Set-up
 
-If you have the `devtools` package installed, you can intall `btw` from GitHub:
+If you have the `devtools` package installed, you can intall version 1 of `btw` from GitHub like this (note that the `ref="v1"` argument specifies version 1 of `btw`:
 
 
 ```r
 library(devtools)
-install_github("rgriff23/btw")
+install_github("rgriff23/btw", ref="v1")
 library(btw)
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: 'Olympic history (part 1): scraping data from sports-reference.com'
-date: '2018-04-10'
+date: '2018-05-xx'
 layout: post
 tags: R olympics sports tidyverse
 comments: true
@@ -12,160 +12,106 @@ knitr::opts_chunk$set(fig.path = "assets/Rfigs/", comment="> ", fig.align='cente
 knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 ```
 
-This is the first in a series of posts analyzing data on the modern Olympic Games, which comprises all of the Olympics from Athens 1986 to Sochi 2014 (data was not available for more recent Olympics at the time I compiled this data in September 2016). In this post, I introduce the dataset and the methods I used to collect it. In subsequent posts, I analyze historical trends in this data using methods from the `tidyverse` R package, as described in the book [R for Data Science](http://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham. I've been wanting to familiarize myself with `tidyverse` for a while now, and this data exploration is mostly an excuse to do that. 
+This is the first in a series of posts analyzing data on the modern Olympics, comprising all the Games from Athens 1986 to Rio 2016. In this post, I introduce the dataset and the methods I used to collect it. In subsequent posts, I will wrangle and then analyze historical trends in the data. Throughout these posts, I use methods from the `tidyverse` R package, as described in the book [R for Data Science](http://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham. I've been wanting to familiarize myself with `tidyverse` for a while now, and this data exploration was a good excuse to do that. 
 
-Surprisingly, the International Olympic Committee (IOC) does not maintain an organized database about the Olympics. However, a detailed [database](http://www.olympedia.org/) was developed and maintained by independent enthusiasts of Olympic history, and this data was made available on www.sports-reference.com. However, as explained [here](http://olympstats.com/2016/08/21/the-olymadmen-and-olympstats-and-sports-reference/), the IOC recently recognized the value of maintaining an Olympic database and partnered with the creators of the sports-reference database to transfer the data to an official IOC Olympic Statistical Database. When exactly that will happen and how much of the data will be publicly accessible is unclear, so I decided to scrape this dataset before it disappears! 
+## Where the data comes from
 
-Below is the code I used to scrape data from the individual athlete pages from sports-reference. Note that I omit many data cleaning steps that occurred in between the initial data scraping and the final clean dataset I analyze in subsequent posts. I omit these steps because they are tedious and many steps were done 'manually'. 
+At this time of this post, the International Olympic Committee (IOC) does not maintain an organized database about the Olympics, but a detailed [database](http://www.olympedia.org/) was developed and maintained by independent enthusiasts of Olympic history, and this data was made available on www.sports-reference.com. However, as explained [here](http://olympstats.com/2016/08/21/the-olymadmen-and-olympstats-and-sports-reference/), the IOC recently recognized the value of maintaining an Olympic database and partnered with the creators of the sports-reference database to transfer the data to an official IOC Olympic Statistical Database. When exactly that will happen and how much of the data will be publicly accessible is unclear, so I decided to scrape this dataset before it disappears! 
+
+## Scraping the data
+
+Below, I present the code I used to scrape data from the individual athlete pages from sports-reference. First, the necessary R packages, including `RCurl` for retrieving data from the web and `XML` for parsing html files:
 
 ```{r, eval=FALSE}
 # Load packages
 library("RCurl")
 library("XML")
-library("data.table") 
-
-# Identify relevant nodes in the athlete directory
-athlete_url <- getURL("http://www.sports-reference.com/olympics/athletes/")
-athlete_xml <- htmlParse(athlete_url, asText=TRUE)
-athlete_paths <- xpathSApply(athlete_xml, '//td/a', xmlGetAttr, 'href')
-athlete_links <- paste('http://www.sports-reference.com/', athlete_paths, sep="")
-length(athlete_links) # 452 pages
-
-# Visit athlete directory pages and identify individual athlete pages
-individual_links <- c()
-system.time(for (i in 1:length(athlete_links)) {
-  individual_url <- getURL(athlete_links[i])
-  individual_xml <- htmlParse(individual_url, asText=TRUE)
-  individual_paths <- xpathSApply(individual_xml, '//*[(@id = "page_content")]//a', xmlGetAttr, 'href')
-  individual_links_new <- paste('http://www.sports-reference.com/', individual_paths, sep="")
-  individual_links <- c(individual_links, individual_links_new)
-  print(i)
-}) # took about ~7.5 minutes
-length(individual_links)  # 128415
-
-# Extract data table for each individual athlete page into a list (takes ~1 sec per athlete)
-athlete_data <- list()
-for (i in 1:length(individual_links)) {
-  data_url <- getURL(individual_links[i])
-  data_xml <- htmlParse(data_url, asText=TRUE)
-  tab <- readHTMLTable(data_xml)$results[-10]
-  name <- xpathSApply(data_xml, '//*[@id="info_box"]/h1', xmlValue)
-  infobox <- strsplit(xpathSApply(data_xml, '//*[@id="info_box"]/p', xmlValue), '\n')[[1]]
-  sex <- ifelse(length(grep("Female", infobox))==0, "M", "F")
-  born <- grep("Born:", infobox)
-  birthplace <- ifelse(length(born)==1, substring(tail(strsplit(infobox[born], ',')[[1]], 1), 2), NA)
-  if (!is.null(tab)) {
-    athlete_data[[i]] <- data.table(Name=name, Sex=sex, Birthplace=birthplace, tab)
-  } else {athlete_data[[i]] <- NA}
-  print(i)
-}
-
-# Check data
-length(athlete_data) # should be 128415 athletes
-unique(unlist(lapply(athlete_data, ncol))) # should be 12 columns for all athletes (NAs excluded)
-complete_cases <- unlist(lapply(athlete_data, is.data.frame))
-missing_cases <- individual_links[!complete_cases] # visit these pages to see what's up, fix data manually where needed 
-
-# Combine results into a single athlete-event table
-athlete_data <- athlete_data[complete_cases] # drop cases with missing data
-athlete_data <- rbindlist(athlete_data, use.names=TRUE)
-
-# Many names are messed up due to problematic character encoding... a huge headache
-# As an imperfect solution, I replace all non-ASCII characters with '?'
-# This would be a problem if I cared about getting athletes' names right, but luckily I don't 
-athlete_data$name <- sapply(athlete_data$name, gsub, pattern="[^\x01-\x7f]", replacement="?")
-
-# Check easy variables for unexpected values
-table(athlete_data$Sex, useNA="always") # good
-table(athlete_data$Age, useNA="always") # good
-table(athlete_data$City, useNA="always") # good
-table(athlete_data$Sport, useNA="always") # good
-table(athlete_data$NOC, useNA="always") # good
-table(athlete_data$Medal, useNA="always") # good
-table(athlete_data$Year, useNA="always") # some are missing, not sure why... fix manually
-table(athlete_data$Season, useNA="always") # good
-```
-
-The final dataset contains 10 columns and 257,430 rows. Below, I use `tidyverse` methods to read the cleaned version of the dataset into R and compute some simple summary statistics for each column. If you want to follow along with this part, download the data from [figshare](). 
-
-```{r, message=FALSE}
-# load tidyverse
 library("tidyverse")
-
-# load clean data as a tibble
-athlete_events <- read_csv("~/Desktop/GitHub/Olympic_history/athlete_events.csv",
-                           col_types = cols(
-                             Name = col_character(),
-                             Sex = col_factor(levels = c("M","F")),
-                             Birthplace = col_character(),
-                             Age =  col_integer(),
-                             City = col_character(),
-                             Sport = col_character(),
-                             NOC = col_character(),
-                             Medal = col_factor(levels = c("Bronze","Silver","Gold")),
-                             Year = col_integer(),
-                             Season = col_factor(levels = c("Summer","Winter"))
-                           ))
 ```
 
-Now for some summary statistics: 
+The sports-reference website has an Olympic athlete [directory page](https://www.sports-reference.com/olympics/athletes) with a bunch of sub-pages (453 to be exact) that organizes individual athlete pages by the first two letters of their surname. My first step was to extract a list of the sub-pages using `getURL` and parse the data to produce a vector containing the links to the sub-pages.
 
 ```{r}
-# Number of unique athletes in the dataset
-athlete_events %>% select(Name) %>% unique %>% nrow
+# Get list of sub-pages in athlete directory (each contains list of individual athlete pages)
+athlete_directory <- getURL("https://www.sports-reference.com/olympics/athletes/") %>%
+  htmlParse(asText=TRUE) %>%
+  xpathSApply('//td/a', xmlGetAttr, 'href') %>%
+  paste('https://www.sports-reference.com/', ., sep="")
+
+# Check number of sub-pages 
+length(athlete_directory) # 453 pages
 ```
+
+My next step was to visit each of these sub-pages and extract a list of links to the individual athlete pages, which I store in one long vector that contains one link per athlete in the database. This step took about 3.5 minutes to complete, and the end result was a vector containing links to pages with information on 135,584 Olympic athletes.
 
 ```{r}
-# Number of male (M) and female(F) athletes in the dataset
-table(athlete_events$Sex)
+# Initialize vector to store links
+individual_links <- c() 
+
+system.time( # ~3.5 minutes
+  for (i in 1:length(athlete_directory)) {
+    
+    # parse athlete directory sub-page to get all links
+    new <- getURL(athlete_directory[i]) %>%
+      htmlParse(asText=TRUE) %>%
+      xpathSApply('//*[(@id = "page_content")]//a', xmlGetAttr, 'href') %>%
+      paste('http://www.sports-reference.com/', ., sep="")
+    
+    # update vector of athlete pages
+    individual_links <- c(individual_links, new) 
+    
+    # track progress in console
+    print(i) 
+    flush.console() # avoid output buffering
+  }
+) 
+
+# Check number of individual links (athletes)
+length(individual_links) # 135584
 ```
+
+Next came the time consuming part. I looped through each of the 135,584 individual athlete pages and extracted two bundles of information: 1) An 'info-box' containing basic biographical information such as the athlete's name, gender, birthdate, and birthplace, and 2) A 'results' table containing a row for each event the athlete competed in and columns with information about the Olympics in which the event took place and the athlete's performance in the event. I stored each bundle of information in separate lists since they come in different formats and will have to be parsed separately. This step took nearly 26.5 hours. 
 
 ```{r}
-# Number of athltes with a known birthplace in the dataset
-athlete_events %>% select(Name, Birthplace) %>% .[complete.cases(.),] %>% unique %>% nrow
+# Initialize lists to store scraped data
+infobox <- results_table <- vector("list", length(individual_links))
+
+# Loop through links and extract data 
+system.time( 
+  for (i in 1:135584) {
+    
+    # get html (wait a minute and try again if it times out and throws and error)
+    html <- try(getURL(individual_links[i], .opts=curlOptions(followlocation=TRUE)), silent=TRUE)
+    if(class(html) == "try-error") {
+      Sys.sleep(60)
+      html <- getURL(individual_links[i], .opts=curlOptions(followlocation=TRUE))
+    }
+    html <- htmlParse(html, asText=TRUE)
+    
+    # save 'infobox'
+    infobox[[i]] <- xpathSApply(html, '//*[@id="info_box"]/p', xmlValue) %>%
+    strsplit('\n') %>% .[[1]]
+    
+    # save 'results table'
+    results_table[[i]] <- readHTMLTable(html) %>% .$results
+    
+    # track progress in console
+    print(i)
+    flush.console() 
+  }
+)
+# 95560.75/135548 = 0.705 sec/page
+# total run time: 26.54 hours
 ```
+
+Finally, I saved the resulting list of info-boxes and results-tables in an Rdata file so that I can pick up from this point any time in the future.
 
 ```{r}
-# Age of the youngest and oldest Olympians in history
-range(athlete_events$Age, na.rm=TRUE)
+save(individual_links, infobox, results_table, file="C:/Users/Randi Griffin/Documents/GitHub/Olympic_history/scrapings.Rdata")
 ```
 
-```{r}
-# Number of different cities the Olympics have been held in
-athlete_events %>% select(City) %>% unique %>% nrow
-```
-
-```{r}
-# Number of different sports that have been played in the Olympics
-athlete_events %>% select(Sport) %>% unique %>% nrow
-```
-
-```{r}
-# Number of different nations that have appeared in the Olympics
-athlete_events %>% select(NOC) %>% unique %>% nrow
-```
-
-```{r}
-# Number of medals that have been awarded in the Olympics
-athlete_events %>% select(Medal) %>% table 
-```
-
-```{r}
-# Number of years in which the Olympics was held
-athlete_events %>% select(Year) %>% unique %>% nrow 
-```
-```{r}
-# Number of Summer and Winter games
-athlete_events %>% select(Year, Season) %>% unique %>% select(Season) %>% table
-```
-
-You might notice that although there are 28 Summer Olympics and 22 Winter Olympics, there are only 34 years in which the Olympics was held. This is explained by the fact that the Summer and Winter Olympics were held in the same year until 1992. There are fewer Winter Olympics than Summer Olympics because winter sports were not included in the Olympics until 1924.
-
-This is a pretty rich dataset to play around with, although I have one major regret: I didn't have the foresight to include an 'event' variable in the dataset. I included a 'sport' variable, but a lot of sports are divided into many different events, and it would have been interesting to look at the history of how events were added and removed from the Games (adding and removing entire sports is much less common). 
-
-Up next: I will look at historical trends in international participation and medalling. 
+The next step is wrangling this data into a usable format. 
 
 **Footnotes**
 
-For a comprehensive history of the modern Olympics, I recommend ['Politics, Power, and the Olympic Games'](https://www.amazon.com/Power-Politics-Olympic-Games-Alfred/dp/0880119586/ref=sr_1_1?ie=UTF8&qid=1523105541&sr=8-1&keywords=politics+power+olympic+games) by Alfred Senn. It's a bit dry, but very thorough.
-
+Source code for this project is on [GitHub](https://github.com/rgriff23/Olympic_history).
