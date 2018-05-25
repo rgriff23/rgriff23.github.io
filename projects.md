@@ -19,7 +19,7 @@ title: Projects
 
 ### R packages
 
-[**btw**](/projects/btw)- Wrapper for <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraitsV2</a>
+[**btw**](/projects/btw)- Wrapper for <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraitsV3</a>
 
 [**caRds**](/projects/caRds)- The most important work I've ever done
 

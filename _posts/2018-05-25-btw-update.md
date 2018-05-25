@@ -1,6 +1,6 @@
 ---
 title: 'Major update to R package btw: prettier code, BayesTraitsV3 and Windows support'
-date: "2017-05-xx"
+date: "2018-05-25"
 layout: post
 tags: R BayesTraits btw
 comment: yes
@@ -14,4 +14,4 @@ I've finished a long-overdue update to `btw`, my R package for running [BayesTra
 
 3. `btw` now supports all the new functionality of BayesTraitsV3. I endeavored to be thorough in importing and handling all of the different types of output from BayesTraitsV3. The only type of output `btw` doesn't support is the variable rates model output, but I don't recommend using this model anyway (read [this paper](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12285) to know why).
 
-The updated [tutorial](/projects/btw) on my projects page provides more detail and demonstrates how to run BayesTraitsV3 from R with `btw`. 
+The updated [project page](/projects/btw) provides more detail and a tutorial. 
