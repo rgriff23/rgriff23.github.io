@@ -8,7 +8,7 @@ comments: TRUE
 
 
 
-In this post, I explore some data I collected from a rather nasty and unexpected Twitterstorm that began with a colleague's tweet. I've used `twitteR` to analyze data about [users](https://rgriff23.github.io/2017/05/01/USWNT-NHL-Twitter-popularity.html) in the past, but this is my first time working with raw tweets. Although this isn't a tutorial, I make frequent references to the project's well-annotated [GitHub repo](https://github.com/rgriff23/Katie_Hinde_Twitter_storm_text_analysis) where you can see how I did everything.  
+In this post, I explore some data I collected from a rather nasty and unexpected Twitterstorm that began with a colleague's tweet. I've used `twitteR` to analyze data about [users](https://rgriff23.github.io/2017/05/01/USWNT-NHL-Twitter-popularity.html) in the past, but this is my first time working with raw tweets. If you want to learn more about how I did this, check out the project's well-annotated [GitHub repo](https://github.com/rgriff23/Katie_Hinde_Twitter_storm_text_analysis).  
 
 Oh, and despite the title of this post, I don't actually provide a formula for how to make both liberals and conservatives hate you with one tweet. Twitter is a noisy place where the arbitrary whims of groupthink reign supreme, and I suspect it is extremely difficult to predict when a particular tweet will cause a Twitterstorm, particularly from a user of low to moderate popularity in the Twitterverse. 
 
@@ -42,7 +42,7 @@ Finally, the script for performing the analyses presented in this post is [here]
 
 ## Twitterstorm over time
 
-The original tweet was sent around 9 pm on June 11th. There was a slow trickle of reactions and responses throughout the night, but things really started pick up around 7 am on June 12th as people woke up and checked their Twitter feeds. The rate of replies continued to increase throughout the day, reaching its peak at ~200 replies per hour at 4 pm. After 5 pm, replies began to decline, although they remained fairly high and began to pick up again on the morning of June 13th. My dataset includes 4843 total tweets (2726 replies and 2117 quote tweets).
+The original tweet was sent around 9 pm on June 11th. There was a slow trickle of reactions and responses throughout the night, but things really started to pick up around 7 am on June 12th as people woke up and checked their Twitter feeds. The rate of replies continued to increase throughout the day, reaching its peak at ~200 replies per hour at 4 pm. After 5 pm, replies began to decline, although they remained fairly high and began to pick up again on the morning of June 13th. My dataset includes 4843 total tweets (2726 replies and 2117 quote tweets).
 
 However, the pure volume of tweets is not the whole story, because not all tweets are equal. The vast majority of tweets are ignored by the Twitter community, while a small number are highly influential. Below is a histogram of the volume of tweets over the 36 hour period (bins represent 30 minutes), and I overlayed red lines on the histogram to show the timing of the most influential tweets in the Twitterstorm. The height of the red lines corresponds to the number of retweets divided by 10 (I did this so that they would fit on the same chart as the histogram), and I labeled the 6 most popular tweets with the screennames of their authors:
 

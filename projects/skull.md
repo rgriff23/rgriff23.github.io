@@ -16,5 +16,6 @@ This is my dissertation research. The code is on **<a target="_blank" href="http
 5. Macroevolutionary integration and modularity in the primate skull
 6. Conclusions
 
-Update: I successfully defended my dissertation on May 11, 2018! I'll be trying to publish chapters 3-5 over the summer and will post about these studies after that. 
+Update: I successfully defended my dissertation on May 11, 2018! 
+
 ___

@@ -12,9 +12,9 @@ This is an R package for producing pretty caRds for special occasions. If you ha
 
 
 ```r
-library(devtools)
+library("devtools")
 install_github("rgriff23/caRds")
-library(caRds)
+library("caRds")
 ```
 ___
 

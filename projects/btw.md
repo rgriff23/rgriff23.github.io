@@ -23,7 +23,7 @@ This is version 2 of `btw`, which I added in May 2018. There are three significa
 
 1. Windows compatibility (formerly `btw` only worked on MacOS)
 2. Simplified structure for specifying BayesTraits commands
-3. It works the most recent version of BayesTraits, BayesTraitsV3
+3. It works with BayesTraitsV3
 
 I recommend working with this version of `btw` and BayesTraitsV3 (which is the most recent version as of May 2018). If you want to work with version 1 of `btw`, visit the [version 1 project page](./btw_version1) for a tutorial that demonstrations how to install and use version 1. 
 
@@ -67,7 +67,7 @@ Type `ls()` into your R console to see the data files that were loaded. Some imp
 * Species names must match exactly between the tree and data (but order doesn't matter)
 * You cannot have spaces in your species names
 * Discrete characters should be represented with characters or factors *(not integers!)* between 0 and 9
-* A discrete character/factor with more than 1 digit is interpreted as ambiguous (e.g., "01") indicates that the species is equally likely to be in state "0" or "1" (now you see why the discrete characters can't be of class 'integer', because 01 would just be seen as 1)
+* A discrete character/factor with more than 1 digit is interpreted as ambiguous (e.g., "01"), and indicates that the species is equally likely to be in state "0" or "1" (now you see why the discrete characters can't be of class 'integer', because 01 would just be seen as 1)
 * If testing for correlated evolution in discrete characters, use 0 and 1 as the character states
 * The only valid way to represent missing data is with a "-" character
 
@@ -113,7 +113,7 @@ model_options_1 <- log_file_1$options
 model_results_1 <- log_file_1$results
 ```
 
-If we run an MCMC analysis, we get an additional output file called the **Schedule file**, which is used for monitoring chain mixing (long time users of BayesTraits will recognize this as a new feature). Like log files, the schedule file is stored as a named list in R and can be accessed by name.
+If we run an MCMC analysis, we get an additional output file called the **Schedule file**, which is used for monitoring chain mixing. Like log files, the schedule file is stored as a named list in R and can be accessed by name.
 
 
 ```r
@@ -130,7 +130,7 @@ schedule_2 <- results_2$Schedule
 
 The number of items in the schedule list will depend on the model settings. 
 
-There are several more types of output files produced by BayesTraitsV3. One, the **AncStates file**, is unique to the geographic model implemented in BayesTraitsV3. We can fit a geographic model and access the AncStates output like this:
+There are several more types of output files produced by BayesTraitsV3. The **AncStates file** is unique to the geographic model implemented in BayesTraitsV3. We can fit a geographic model and access the AncStates output like this:
 
 
 ```r
@@ -162,7 +162,7 @@ schedule_4 <- results_4$Schedule
 stones_4 <- results_4$Stones
 ```
 
-Finally, the **OutputTrees file** is produced when the `SaveTrees` command is used, and the **InitialTrees file**, produced when the `SaveTrees` command is used. This is just a nexus file.
+Finally, the **OutputTrees file** is produced when the `SaveTrees` command is used. This is just a nexus file.
 
 
 ```r
@@ -183,18 +183,18 @@ It is also possible to tell BayesTraits to save the initial sample of trees usin
 
 ## Parsing existing BayesTraits output
 
-In case you have some BayesTraits output that you want to read into R without actually running BayesTraits from R, I have provided several parsing functions that can be used for this purpose. Previously the code for these functions was embedded inside the functions for running BayesTraits, so you couldn't use them independently. There are four parsing functions:
+In case you have some BayesTraits output that you want to read into R without actually running `bayestraits`, I have provided several parsing functions that can be used for this purpose. Previously the code for these functions was embedded inside the functions for running BayesTraits so you couldn't use them independently. There are four parsing functions:
 
 1. `parse_log` - parses a BayesTraits log file
 2. `parse_schedule` - parses a BayesTraits schedule file
 3. `parse_stones` - parses a BayesTraits stones file
 4. `parse_ancstates` - parses a BayesTraits AncStates file
 
-Each function simply takes a file path as input, and then produces output identical to the output produced by `bayestraits`, except for a single output file rather than all of the output files from an analysis. There are no special functions for importing the tree files because you can just use `read.nexus` from the `ape` package.
+Each function takes a file path as input and produces output identical to the output produced by `bayestraits`, except for a single output file rather than all of the output files from an analysis. There are no special functions for importing the tree files because you can just use `read.nexus` from the `ape` package.
 
 ## Other `btw` functions
 
-There are a few more functions included in `btw`. An important one is `killbt`, which simply kills all BayesTraits processes running on your system. If you accidentally start a long BayesTraits processes and realize that you made a mistake, you have to kill that process otherwise it will keep running in the background and can really bog down your system. You can execute this function by hitting ESC or Ctrl-z to escape the function within R and typing `killbt()` in the R console.
+There are a few more functions included in `btw`. An important one is `killbt`, which simply kills all BayesTraits processes running on your system. If you accidentally start a long BayesTraits processes and realize that you made a mistake, you have to kill that process otherwise it will keep running in the background and can really bog down your system. You can execute this function by hitting ESC or Ctrl-z to escape the function within R and typing `killbt()` in the R console. Sometimes you can't escape the function without restarting your R session. That's fine, but keep in mind that the process can keep running after R shuts down, so the first thing you will want to do when you restart R is run `killbt()`.
 
 Another couple of handy shortcuts are `lrtest` and `bftest`, which perform likelihood ratio and Bayes Factor tests respectively. Each function takes a pair of model results as arguments, e.g., `lrtest(model_results_1, model_results_2)`. It isn't difficult to extract the relevant quantities from the model results and perform the tests on your own, but these functions can save you some typing.
 
@@ -202,7 +202,7 @@ Another couple of handy shortcuts are `lrtest` and `bftest`, which perform likel
 
 Before messaging me, check that you are specifying all of the BayesTraits parameters correctly. Go to your command line program (e.g., Terminal on a Mac, Command Prompt in Windows) and make sure you can run BayesTraits using the commands exactly as you have specified them in your command vector.
 
-If you are specifying the commands correctly and `bayestraits` is still not working properly, then there may be a problem with the `btw` parsing functions. You can investigate this by running BayesTraits from the command line and then try to use the parsing functions to pull each output file into R. If one of these fails, then you know the problem is with that function.
+If you are specifying the commands correctly and `bayestraits` is still not working properly, then there may be a problem with the parsing functions. You can investigate this by running BayesTraits from the command line and trying to use the parsing functions to pull each output file into R. If one of these fails, then you know the problem is with that function.
 
 It is very possible that BayesTraits produces output that is unexpected in some way and my parsing functions won't work. Sometimes, this is because of inconsistencies and typos in BayesTraits. For example, when you run BayesTraits in MCMC mode, the Log file contains a line that says "Analysis Type: MCMC", but when you run BayesTraits in Maximum Likelihood mode, the word "Analysis" is misspelled in that line, so it reads "Analsis Type: Maximum Likelihood". Luckily I discovered this one early on and worked around it, but I'm sure there are other places where unexpected output will break my parsing functions, so do let me know if you find a problem. Be sure to send me the data and commands you used so that I can replicate the problem.
 

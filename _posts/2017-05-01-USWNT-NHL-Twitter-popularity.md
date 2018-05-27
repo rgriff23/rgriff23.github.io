@@ -35,11 +35,11 @@ Keeping that in mind, let's look at the data (for details on how I compiled the 
 
 The x-axis is on a log scale to make the distribution easier to visualize. For some perspective, the NHL average corresponds to about 40,800 followers, and the range is ~2500 to ~2.4 million. Over half of the women (14/23) are within the range of NHL players, and one women is well above the NHL average ([Hilary Knight](https://twitter.com/Hilary_Knight?lang=en) with ~68,200 followers).
 
-Now let's look at how NHL salaries are related to popularity. A fitted sigmoidal curve is plotted along with the data below, and for some context, the vertical red line shows where Hilary Knight falls on this graph.
+Now let's look at how NHL salaries are related to popularity. I fitted sigmoidal curve to the data below. For some context, the vertical red line shows where Hilary Knight falls on the graph.
 
 <img src="/assets/Rfigs/post_2017-05_uswnt_model-1.png" title="plot of chunk post_2017-05_uswnt_model" alt="plot of chunk post_2017-05_uswnt_model" style="display: block; margin: auto;" />
 
-We can use the fitted curve to estimate the average salary of NHL players with the same level of popularity as the USWNT players. To avoid the dangers of extrapolating beyond the range of the data, I focus on the 14 USWNT players with follower counts within the NHL range. Here are the estimated salaries- all 7 digit figures:   
+We can use the fitted curve to estimate the average salary of NHL players with the same level of popularity as the USWNT players. To avoid the dangers of extrapolating beyond the range of the data, I focus on the 14 USWNT players with follower counts within the NHL range. Here are the estimated salaries (which are all 7 digit figures):   
 
 
 ```

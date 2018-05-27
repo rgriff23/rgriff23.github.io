@@ -9,9 +9,9 @@ ___
 
 This project includes my methodological research on a pair of phylogenetic comparative methods that aim to estimate ancestral states for continuous traits. These methods were recently developed by Jeroen B Smaers (JBS), and they have gained some traction over the last few years, appearing in 11 combined publications as of May 10, 2017 (they are listed in the Appendix at the bottom of this page).
 
-I have found that these methods are highly unprincipled and do not do what they claim to do. An addition, the simulation studies that purport to validate these methods were seriously flawed and produced misleading results. 
+I have found that these methods are highly unprincipled and do not do what they claim to do. In addition, I argue that the simulation studies used to validate these methods were rather misleading. 
 
-Below is a timeline and summary of papers relevant to this project, including 3 written by JBS and 2 written by myself. My papers include reproducible simulation studies, linked to below.
+Below is a summary of papers relevant to this project, including 3 written by JBS and 2 written by myself. My papers include reproducible simulation studies with code on GitHub, linked to below.
 
 ___
 
@@ -36,11 +36,11 @@ This method was published shortly after our critique of the first method was pub
 
 **Griffin & Yapuncich (2017)** - [download](/assets/pdfs/Griffin&Yapuncich_2017.pdf)
 
-We argue that the method presented by Smaers et al. (2016) is inviable and highlight major problems with its conception and presentation. The method is not actually a 'multiple variance Brownian motion model', as the name and verbal description of the method implies. Based on the code and the mathematical description, the method is an algorithm that adjusts phylogenetic branch lengths to provide a closer fit to a dataset in a rather arbitrary way, and then estimates Brownian motion ancestral states on the adjusted phylogeny. The equations used to adjust phylogenetic branch lengths are extremely unprincipled, and there is no reason why this approach should improve the accuracy of ancestral state estimates in general. JBS et al. simulated extreme evolutionary scenarios (dramatic bursts of evolutionary change on a few branches of the tree) and demonstrated that their method produces more accurate ancestral states than simple Brownian motion models, but they presented results in a way that obscures the fact that their estimated ancestral states are extremely inaccurate and they neglected to test their method against models that are designed to handle the extreme scenarios they simulated. <a target="_blank" href="https://github.com/rgriff23/Evaluating_mvBM">Go to simulations</a>
+We argue that the method presented by Smaers et al. (2016) is inviable and highlight major problems with its conception and presentation. The method is not actually a 'multiple variance Brownian motion model', as the name and verbal description of the method implies. Based on the code and the mathematical description, the method is an algorithm that adjusts phylogenetic branch lengths to provide a closer fit to a dataset in a rather arbitrary way, and then estimates Brownian motion ancestral states on the adjusted phylogeny. The equations used to adjust phylogenetic branch lengths are unprincipled, and there is no reason why this approach should improve the accuracy of ancestral state estimates in general. JBS et al. simulated extreme evolutionary scenarios (dramatic bursts of evolutionary change on a few branches of the tree) and demonstrated that their method produces more accurate ancestral states than simple Brownian motion models, but they presented results in a way that obscures the fact that their estimated ancestral states are extremely inaccurate and they neglected to test their method against models that are designed to handle the extreme scenarios they simulated. <a target="_blank" href="https://github.com/rgriff23/Evaluating_mvBM">Go to simulations</a>
 
 **Smaers & Mongle (2017)** - [download](/assets/pdfs/Smaers&Mongle2017.pdf)
 
-JBS responds to our critique with 10 pages of smoke and mirrors.
+JBS responds to our critique with 10 pages of... words. I couldn't make much sense of it.
 
 ___
 
