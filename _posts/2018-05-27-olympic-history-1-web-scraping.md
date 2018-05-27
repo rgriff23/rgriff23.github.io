@@ -1,5 +1,5 @@
 ---
-title: 'Olympic history (part 1): Scraping data from sports-reference.com'
+title: 'Olympic history: Scraping data from sports-reference.com'
 date: '2018-05-27'
 layout: post
 tags: R olympics sports tidyverse RCurl XML
@@ -112,7 +112,7 @@ system.time(
 # total run time: 26.54 hours
 ```
 
-Finally, I saved the resulting list of links, info-boxes, results-tables in an Rdata file so that I can pick up from this point any time in the future. 
+Finally, I saved the resulting list of links, info-boxes, and results-tables in an Rdata file so that I can pick up from this point at any time in the future. 
 
 
 ```r
