@@ -29,7 +29,7 @@ ls()
 ```
 
 ```
->   [1] "individual_links"             "info"     "results_table"
+>   [1] "individual_links"   "info"    "results_table"
 ```
 
 The three objects included in this Rdata file are:
