@@ -21,7 +21,7 @@ To start, load the packages `ggplot2` and `tidyverse`, and the dataset `athlete_
 library("tidyverse")
 
 # load data 
-athlete_events <- read_csv("~/Desktop/GitHub/Olympic_history/athlete_events.csv",
+athlete_events <- read_csv("~/Documents/GitHub/Olympic_history/data/athlete_events.csv",
                            col_types = cols(
                              Name = col_character(),
                              Sex = col_factor(levels = c("M","F")),
