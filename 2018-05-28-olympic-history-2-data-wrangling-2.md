@@ -6,115 +6,9 @@ tags: R olympics sports tidyverse
 comments: yes
 ---
 
-```{r setup, include=FALSE, message=FALSE}
-# knitr settings
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment="> ", fig.align='center')
-knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
-```
 
-```{r, include=FALSE}
-# load packages & data
-library("tidyverse")
-library("data.table")
-load("~/Documents/GitHub/Olympic_history/data/scrapings.Rdata")
 
-# There are 135584 athletes in the database
-n_athletes <- infobox %>% length
 
-# Create new tibble with one column: Name
-info <- infobox %>% 
-  lapply(function(x) strsplit(x[[1]], ": ")[[1]][2]) %>% unlist %>%  tibble(Name = .)
-
-# Name variable
-info <- infobox %>% 
-  lapply(function(x) {
-    x <- x[grep("Gender:",x)] 
-    if (length(x) == 0) {
-      sex <- "M"
-      } else {
-        sex <- grepl("Female",x) %>% 
-          ifelse("F","M")
-      }
-    return(sex)
-  }) %>% unlist %>% factor %>% add_column(info, Sex = .)
-# Manually fix females with missing data
-info$Sex[c(30521, 42623, 47015, 81716)] <- "F"
-
-# Height variable
-info <- infobox %>% 
-  lapply(function(x) {
-    x <- x[grep("Height:",x)] 
-    if (length(x) > 0) {
-      x <- gsub(".*\\((.*)\\).*", "\\1", x)
-      height <- as.numeric(gsub(" cm", "", x))
-    } else {height <- NA}
-    return(height)
-  }) %>% unlist %>% add_column(info, Height = .)
-
-# Weight variable
-info <- infobox %>% 
-  lapply(function(x) {
-    x <- x[grep("Weight:",x)] 
-    if (length(x) > 0) {
-      if (length(grep("lbs", x)) == 1) {
-        x <- gsub(".*\\((.*)\\).*", "\\1", x)
-        weight <- as.numeric(gsub(" kg", "", x))
-      } else {
-        x <- strsplit(x, " ")[[1]]
-        if (length(x) == 3) {
-          weight <- strsplit(x[[2]],"-")[[1]] %>% as.numeric %>% mean
-        } else if (length(x) == 4) {
-          weight <- c(gsub(",","",x[2]),x[3]) %>% as.numeric %>% mean
-        } else if (length(x) == 5) {
-          weight <- c(gsub(",","",x[2:3]),x[4]) %>% as.numeric %>% mean
-        } else weight <- -1
-      }
-    } else weight <- NA
-    return(weight)
-  }) %>%
-  unlist %>% add_column(info, Weight = .)
-# Fix the one problematic entry
-unparsed <- infobox %>%
-  lapply(function(x) grepl("Weight:", x)) %>%
-  lapply(sum) %>% unlist %>% as.logical
-parsed <- ifelse(is.na(info$Weight), 0, 1) 
-sums <- parsed + unparsed
-info$Weight[which(sums==1)] <- 77.5 
-
-# Drop NULL entries from both info and results
-nulls <- which(results_table %>% lapply(is.null) %>% unlist) 
-info <- info[-nulls,]
-results_table <- results_table[-nulls]
-
-# Keep columns of interest (drop 'Rank' and empty final column)
-keep <- c("Games", "Age", "City", "Sport", "Event", "Team", "NOC", "Medal")
-results_table <- lapply(results_table, function (x) {x[,keep]})
-
-# Add an ID column to the 'info' dataframe
-info$ID <- as.character(1:nrow(info))
-
-# Use the same ID variable to name the elements in 'results_table'
-results_table <- setNames(results_table, info$ID)
-
-# Use 'rbindlist' from the 'data.table' package to convert 'results_table'
-# to a dataframe with the element names as an ID column
-data <- rbindlist(results_table, use.names=TRUE, idcol="ID") 
-
-# join 'info' and 'results_table' by the ID column
-data <- right_join(info, data, by="ID")
-
-# Games must be a character vector to use 'gsub'
-data$Games <- data$Games %>% as.character
-
-# Replace letters after the space with ""
-data$Year <- data$Games %>% gsub(" [A-z]*", "", .) %>% as.numeric
-
-# Replace digits before the space with ""
-data$Season <- data$Games %>% gsub("[0-9]* ", "", .)
-
-# Reorder the variables
-data <- data[,c("ID","Name","Sex","Age","Height","Weight","Team","NOC","Games","Year","Season","City","Sport","Event","Medal")]
-```
 
 In my last post, I scraped data on 135,584 Olympic athletes from www.sports-reference.com, and the data was saved in two lists containing information on each athlete in different formats. In its present form, the data is pretty useless. In this post, I tidy up this data so that it can actually be analyzed. 
 
@@ -128,45 +22,109 @@ To follow along with this code, you must start by importing the data and running
 
 The dataframe we are dealing with has 15 variables. Let's take a peek:
 
-```{r}
+
+```r
 # Check data
 data %>% print(width=Inf)
+```
+
+```
+>  # A tibble: 271,116 x 15
+>     ID    Name                     Sex   Age   Height Weight Team          
+>     <chr> <chr>                    <fct> <fct>  <dbl>  <dbl> <fct>         
+>   1 1     A Dijiang                M     24       180     80 China         
+>   2 2     A Lamusi                 M     23       170     60 China         
+>   3 3     Gunnar Nielsen Aaby      M     24        NA     NA Denmark       
+>   4 4     Edgar Lindenau Aabye     M     34        NA     NA Denmark/Sweden
+>   5 5     Christine Jacoba Aaftink F     21       185     82 Netherlands   
+>   6 5     Christine Jacoba Aaftink F     21       185     82 Netherlands   
+>   7 5     Christine Jacoba Aaftink F     25       185     82 Netherlands   
+>   8 5     Christine Jacoba Aaftink F     25       185     82 Netherlands   
+>   9 5     Christine Jacoba Aaftink F     27       185     82 Netherlands   
+>  10 5     Christine Jacoba Aaftink F     27       185     82 Netherlands   
+>     NOC   Games        Year Season City        Sport        
+>     <fct> <chr>       <dbl> <chr>  <fct>       <fct>        
+>   1 CHN   1992 Summer  1992 Summer Barcelona   Basketball   
+>   2 CHN   2012 Summer  2012 Summer London      Judo         
+>   3 DEN   1920 Summer  1920 Summer Antwerpen   Football     
+>   4 DEN   1900 Summer  1900 Summer Paris       Tug-Of-War   
+>   5 NED   1988 Winter  1988 Winter Calgary     Speed Skating
+>   6 NED   1988 Winter  1988 Winter Calgary     Speed Skating
+>   7 NED   1992 Winter  1992 Winter Albertville Speed Skating
+>   8 NED   1992 Winter  1992 Winter Albertville Speed Skating
+>   9 NED   1994 Winter  1994 Winter Lillehammer Speed Skating
+>  10 NED   1994 Winter  1994 Winter Lillehammer Speed Skating
+>     Event                   Medal
+>     <fct>                   <fct>
+>   1 Men's Basketball        ""   
+>   2 Men's Extra-Lightweight ""   
+>   3 Men's Football          ""   
+>   4 Men's Tug-Of-War        Gold 
+>   5 Women's 500 metres      ""   
+>   6 Women's 1,000 metres    ""   
+>   7 Women's 500 metres      ""   
+>   8 Women's 1,000 metres    ""   
+>   9 Women's 500 metres      ""   
+>  10 Women's 1,000 metres    ""   
+>  # ... with 271,106 more rows
 ```
 
 Now let's go through each variable in turn, check for weird values, and if we find something weird, deal with it.
 
 'ID' is just a unique identifier for each athlete, and there are no issues there. The first variable that needs our attention is 'Name', which contains the name of each athlete. Inspecting this variable reveals widespread encoding issues. Since I'm not particularly concerned with displaying athlete's names 'correctly', but I do want to make sure that weird characters don't confuse R during analysis, I'm going to opt for a quick fix and simply replace all non-ASCII characters with a blank space. 
 
-```{r}
+
+```r
 # Remove non-ascii characters from athlete names
 data$Name <- data$Name %>% iconv("UTF-8","ASCII", sub="")
 ```
 
 The Sex variable seems fine: we can confirm that M and F are the only values for this variable.
 
-```{r}
+
+```r
 # Check unique values
 data$Sex %>% unique
 ```
 
+```
+>  [1] M F
+>  Levels: F M
+```
+
 Let's look at unique values for the Age variable.
 
-```{r}
+
+```r
 # Check unique values
 data$Age %>% unique
 ```
 
+```
+>   [1] 24 23 34 21 25 27 31 33 18 26 22 30 32 28 54 20 17 43 47 29 41 45 49
+>  [24] 53 57    19 38 35 16 37 15 42 46 40 36 14 39 48 52 44 55 50 71 63 51
+>  [47] 58 13 60 75 65 56 64 68 84 12 72 59 61 70 74 62 67 69 73 66 11 76 88
+>  [70] 96 80 10 81 77 97
+>  75 Levels: 24 23 34 21 25 27 31 33 18 26 22 30 32 28 54 20 17 43 47 ... 97
+```
+
 This seems fine, but it's weird that Age is coded as a factor and not an integer. Let's fix that.
 
-```{r}
+
+```r
 # Convert Age variable to integer type
 data$Age <- data$Age %>% parse_integer
 ```
 
 Now that Age is coded as an integer, we can check for weird values using functions that work on numbers, which is nice. For example, let's look at the range.
 
-```{r}
+
+```r
 data$Age %>% range(na.rm=TRUE)
+```
+
+```
+>  [1] 10 97
 ```
 
 In case you are worried that the lower limit of 10 is a mistake, I assure you that it isn't. Not only was there a 10 year old in the 1896 Olympics, but he won a [bronze medal](https://www.topendsports.com/events/summer/oldest-youngest.htm) in gymnastics. 
@@ -177,43 +135,92 @@ Obviously there is an issue with this. How does one record the age of an Olympia
 
 The next two variables, Height and Weight, should be fine since we already inspected them pretty carefully in the first data wrangling post. Let's double check their range.
 
-```{r}
+
+```r
 # Check range
 data$Height %>% range(na.rm=TRUE)
+```
+
+```
+>  [1] 127 226
+```
+
+```r
 data$Weight %>% range(na.rm=TRUE)
+```
+
+```
+>  [1]  25 214
 ```
 
 The next variable is Team, and this one has a lot of encoding issues, just like the Name variable. I will deal with them in the same way. I don't expect this variable to be very useful in future analyses since the NOC variable gives a more consistent indicator of where athletes come from, but I'm keeping it in the data set just in case. Now let's get rid of those pesky non-ASCII characters.
 
-```{r}
+
+```r
 # Remove non-ASCII characters
 data$Team <- data$Team %>% iconv("UTF-8","ASCII", sub="")
 ```
 
 The NOC (National Olympic Committee) variable is a factor with 230 levels, and it seems okay. 
 
-```{r}
+
+```r
 # Check unique values
 data$NOC %>% levels # 230 levels
 ```
 
+```
+>    [1] "CHN" "DEN" "NED" "USA" "FIN" "NOR" "ROU" "EST" "FRA" "MAR" "ESP"
+>   [12] "EGY" "IRI" "BUL" "ITA" "CHA" "AZE" "SUD" "RUS" "ARG" "CUB" "BLR"
+>   [23] "GRE" "CMR" "TUR" "CHI" "MEX" "URS" "NCA" "HUN" "NGR" "ALG" "KUW"
+>   [34] "BRN" "PAK" "IRQ" "UAR" "LIB" "QAT" "MAS" "GER" "CAN" "IRL" "AUS"
+>   [45] "RSA" "ERI" "TAN" "JOR" "TUN" "LBA" "BEL" "DJI" "PLE" "COM" "KAZ"
+>   [56] "BRU" "IND" "KSA" "SYR" "MDV" "ETH" "UAE" "YAR" "INA" "PHI" "SGP"
+>   [67] "UZB" "KGZ" "TJK" "EUN" "JPN" "CGO" "SUI" "BRA" "FRG" "GDR" "MON"
+>   [78] "ISR" "URU" "SWE" "ISV" "SRI" "ARM" "CIV" "KEN" "BEN" "UKR" "GBR"
+>   [89] "GHA" "SOM" "LAT" "NIG" "MLI" "AFG" "POL" "CRC" "PAN" "GEO" "SLO"
+>  [100] "CRO" "GUY" "NZL" "POR" "PAR" "ANG" "VEN" "COL" "BAN" "PER" "ESA"
+>  [111] "PUR" "UGA" "HON" "ECU" "TKM" "MRI" "SEY" "TCH" "LUX" "MTN" "CZE"
+>  [122] "SKN" "TTO" "DOM" "VIN" "JAM" "LBR" "SUR" "NEP" "MGL" "AUT" "PLW"
+>  [133] "LTU" "TOG" "NAM" "AHO" "ISL" "ASA" "SAM" "RWA" "DMA" "HAI" "MLT"
+>  [144] "CYP" "GUI" "BIZ" "YMD" "KOR" "THA" "BER" "ANZ" "SCG" "SLE" "PNG"
+>  [155] "YEM" "IOA" "OMA" "FIJ" "VAN" "MDA" "YUG" "BAH" "GUA" "SRB" "IVB"
+>  [166] "MOZ" "CAF" "MAD" "MAL" "BIH" "GUM" "CAY" "SVK" "BAR" "GBS" "TLS"
+>  [177] "COD" "GAB" "SMR" "LAO" "BOT" "ROT" "CAM" "PRK" "SOL" "SEN" "CPV"
+>  [188] "CRT" "GEQ" "BOL" "SAA" "AND" "ANT" "ZIM" "GRN" "HKG" "LCA" "FSM"
+>  [199] "MYA" "MAW" "ZAM" "RHO" "TPE" "STP" "MKD" "BOH" "TGA" "LIE" "MNE"
+>  [210] "GAM" "COK" "ALB" "WIF" "SWZ" "BUR" "NBO" "BDI" "ARU" "NRU" "VNM"
+>  [221] "VIE" "BHU" "MHL" "KIR" "UNK" "TUV" "NFL" "KOS" "SSD" "LES"
+```
+
 The Games variable includes an identifer for each Olympic Games in the format "Year Season". It has 52 levels, and inspecting them reveals one oddity.
 
-```{r}
+
+```r
 # Check unique values
 data$Games %>% levels # 52 levels
 ```
 
+```
+>  NULL
+```
+
 All of the Games are either 'Summer' or 'Winter', except for one: "1956 Equestrian". We can see this more easily by inspecting the Season variable.
 
-```{r}
+
+```r
 # Check unique values
 data$Season %>% levels
 ```
 
+```
+>  NULL
+```
+
 The reason for this is that in 1956, the Equestrian events were held 5 months earlier and in a [different city](https://en.wikipedia.org/wiki/Equestrian_at_the_1956_Summer_Olympics) than the other Summer Games events, so it became known as the 1956 Equestrian Games. However, in every other Olympics, Equestrian has been considered a part of the Summer Games, and I see no advantage to given these events such a special distinction. So let's replace "Equestrian" with "Summer" for all of these entries.
 
-```{r}
+
+```r
 # Change 'Equestrian' to 'Summer' in Games and Season variables
 data$Games[data$Games == "1956 Equestrian"] <- "1956 Summer"
 data$Season[data$Season == "Equestrian"] <- "Summer"
@@ -222,21 +229,54 @@ data$Season <- data$Season %>% as.factor
 
 Moving on, the Year variable seems fine.
 
-```{r}
+
+```r
 # Check unique values
 data$Year %>% unique # 35
 ```
 
+```
+>   [1] 1992 2012 1920 1900 1988 1994 1932 2002 1952 1980 2000 1996 1912 1924
+>  [15] 2014 1948 1998 2006 2008 2016 2004 1960 1964 1984 1968 1972 1936 1956
+>  [29] 1928 1976 2010 1906 1904 1908 1896
+```
+
 The next variable is City, and this one has a few encoding problems.
 
-```{r}
+
+```r
 # Check unique values
 data$City %>% levels # 42 levels
 ```
 
+```
+>   [1] "Barcelona"                "London"                  
+>   [3] "Antwerpen"                "Paris"                   
+>   [5] "Albertville"              "Calgary"                 
+>   [7] "Lillehammer"              "Los Angeles"             
+>   [9] "Salt Lake City"           "Helsinki"                
+>  [11] "Lake Placid"              "Sydney"                  
+>  [13] "Atlanta"                  "Stockholm"               
+>  [15] "Sochi"                    "Nagano"                  
+>  [17] "Torino"                   "Beijing"                 
+>  [19] "Rio de Janeiro"           "Athina"                  
+>  [21] "Innsbruck"                "Squaw Valley"            
+>  [23] "Sarajevo"                 "Ciudad de MÃ\u0083Â©xico"
+>  [25] "MÃ\u0083Â¼nchen"          "Seoul"                   
+>  [27] "Berlin"                   "Cortina d'Ampezzo"       
+>  [29] "Oslo"                     "Melbourne"               
+>  [31] "Roma"                     "Amsterdam"               
+>  [33] "MontrÃ\u0083Â©al"         "Moskva"                  
+>  [35] "Tokyo"                    "Vancouver"               
+>  [37] "Grenoble"                 "Sapporo"                 
+>  [39] "Chamonix"                 "St. Louis"               
+>  [41] "Sankt Moritz"             "Garmisch-Partenkirchen"
+```
+
 In the order they appear above, the three badly-encoded cities are Mexico City, Munich, and Montreal. Let's fix those - note that we have to convert the variable to a character type in order to easily make these changes, and then change it back to a factor at the end.
 
-```{r}
+
+```r
 # Fix text encoding for cities
 cities <- data$City %>% unique
 problem_cities <- cities[c(24,25,33)]
@@ -250,20 +290,65 @@ data$City <- data$City %>% as.factor
 
 The Sport variable seems okay. It is a factor with 66 levels.
 
-```{r}
+
+```r
 data$Sport %>% levels # 66 levels
+```
+
+```
+>   [1] "Basketball"                "Judo"                     
+>   [3] "Football"                  "Tug-Of-War"               
+>   [5] "Speed Skating"             "Cross Country Skiing"     
+>   [7] "Athletics"                 "Ice Hockey"               
+>   [9] "Swimming"                  "Badminton"                
+>  [11] "Sailing"                   "Biathlon"                 
+>  [13] "Gymnastics"                "Art Competitions"         
+>  [15] "Alpine Skiing"             "Handball"                 
+>  [17] "Weightlifting"             "Wrestling"                
+>  [19] "Luge"                      "Water Polo"               
+>  [21] "Hockey"                    "Rowing"                   
+>  [23] "Bobsleigh"                 "Fencing"                  
+>  [25] "Equestrianism"             "Shooting"                 
+>  [27] "Boxing"                    "Taekwondo"                
+>  [29] "Cycling"                   "Diving"                   
+>  [31] "Canoeing"                  "Tennis"                   
+>  [33] "Modern Pentathlon"         "Figure Skating"           
+>  [35] "Golf"                      "Softball"                 
+>  [37] "Archery"                   "Volleyball"               
+>  [39] "Synchronized Swimming"     "Table Tennis"             
+>  [41] "Nordic Combined"           "Baseball"                 
+>  [43] "Rhythmic Gymnastics"       "Freestyle Skiing"         
+>  [45] "Rugby Sevens"              "Trampolining"             
+>  [47] "Beach Volleyball"          "Triathlon"                
+>  [49] "Ski Jumping"               "Curling"                  
+>  [51] "Snowboarding"              "Rugby"                    
+>  [53] "Short Track Speed Skating" "Skeleton"                 
+>  [55] "Lacrosse"                  "Polo"                     
+>  [57] "Cricket"                   "Racquets"                 
+>  [59] "Motorboating"              "Military Ski Patrol"      
+>  [61] "Croquet"                   "Jeu De Paume"             
+>  [63] "Roque"                     "Alpinism"                 
+>  [65] "Basque Pelota"             "Aeronautics"
 ```
 
 The Event variable has quite a few encoding problems. You can see one in the last level printed below (there's too many events to print them all).
 
-```{r}
+
+```r
 # Check unique values
 data$Event %>% levels %>% head # 679 levels
 ```
 
+```
+>  [1] "Men's Basketball"        "Men's Extra-Lightweight"
+>  [3] "Men's Football"          "Men's Tug-Of-War"       
+>  [5] "Women's 1,000 metres"    "Women's 500 metres"
+```
+
 I want to get these variables right and couldn't figure out an easy way to do it, so I finally decided to do it by hand. I'm not sure if a more elegant solution is possible, but the number of issues here is small enough that it didn't seem worth it to spend much more time searching for a way to automate this. Here is how I replaced the badly-encoded Events (sorry this is a lot of text).   
 
-```{r}
+
+```r
 # Fix text encoding for events
 events <- data$Event %>% unique
 problem_events <- events[c(10,13,53,56,57,66,103,132,158,170,172,205,209,223,237,
@@ -304,21 +389,28 @@ data$Event <- data$Event %>% as.factor
 
 There is one more issue I want to address related to the Event variable. Some of the 'same' Events actually correspond to different sports... for example, something like "Men's 100 meters" could correspond to running, swimming, or biking. To differentiate Events of the same name but different sports, I will replace the current Event column with a Sport-Event column that pastes together the name of the sport and the name of the event.
 
-```{r}
+
+```r
 # Paste sports and events together in new Event column
 data$Event <- paste(data$Sport, data$Event) %>% as.factor
 ```
 
 Finally, our last variable is Medal, which indicates whether an athlete won a gold, silver, bronze, or nothing in each event.
 
-```{r}
+
+```r
 # Check unique values
 data$Medal %>% levels 
 ```
 
+```
+>  [1] ""       "Gold"   "Bronze" "Silver"
+```
+
 The only issue I have with this variable is that the empty character vectors should be replaced with NAs, so let's do that.
 
-```{r}
+
+```r
 # Replace "" with NA
 data$Medal[data$Medal == ""] <- NA
 ```
