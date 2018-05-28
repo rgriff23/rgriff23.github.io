@@ -29,10 +29,7 @@ ls()
 ```
 
 ```
->   [1] "data"             "gender_check"     "individual_links"
->   [4] "info"             "infobox"          "keep"            
->   [7] "n_athletes"       "nulls"            "parsed"          
->  [10] "results_table"    "sums"             "unparsed"
+>   [1] "individual_links"             "info"     "results_table"
 ```
 
 The three objects included in this Rdata file are:
