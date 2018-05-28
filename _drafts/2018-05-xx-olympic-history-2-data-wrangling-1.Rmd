@@ -8,8 +8,8 @@ comments: yes
 
 ```{r setup, include=FALSE, message=FALSE}
 # knitr settings
-knitr::opts_chunk$set(fig.path = "assets\\Rfigs\\", message=FALSE, comment="> ", fig.align='center')
-knitr::opts_knit$set(base.dir = "C:\\Users\\Randi Griffin\\Documents\\GitHub\\rgriff23.github.io\\", base.url = "\\")
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment="> ", fig.align='center')
+knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
 ```
 
 In my last post, I scraped data on 135,584 Olympic athletes from www.sports-reference.com. I saved the data in two lists containing information on each athlete in different formats. In its present form, the data is pretty useless. In this post, I demonstrate how to tidy up this data so that it can be analyzed. Feel free to follow along using the data provided in the [GitHub repo](https://github.com/rgriff23/Olympic_history) for this project.
@@ -26,7 +26,7 @@ library("data.table")
 Load the `scrapings.Rdata` file, which can be found in the `data` folder of the GitHub repo.
 
 ```{r}
-load('C:/Users/Randi Griffin/Documents/GitHub/Olympic_history/data/scrapings.Rdata')
+load("~/Documents/GitHub/Olympic_history/data/scrapings.Rdata")
 ls()
 ```
 

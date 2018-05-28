@@ -1,24 +1,125 @@
 ---
 title: 'Olympic history: Data wrangling (part 2)'
-date: '2018-05-xx'
+date: "2018-05-xx"
 layout: post
 tags: R olympics sports tidyverse
-comments: true
+comments: yes
 ---
 
 ```{r setup, include=FALSE, message=FALSE}
 # knitr settings
-knitr::opts_chunk$set(fig.path = "assets\\Rfigs\\", message=FALSE, comment="> ", fig.align='center')
-knitr::opts_knit$set(base.dir = "C:\\Users\\Randi Griffin\\Documents\\GitHub\\rgriff23.github.io\\", base.url = "\\")
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment="> ", fig.align='center')
+knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
 ```
 
 ```{r, include=FALSE}
+# load packages & data
+library("tidyverse")
+library("data.table")
+load("~/Documents/GitHub/Olympic_history/data/scrapings.Rdata")
 
+# There are 135584 athletes in the database
+n_athletes <- infobox %>% length
+
+# Create new tibble with one column: Name
+info <- infobox %>% 
+  lapply(function(x) strsplit(x[[1]], ": ")[[1]][2]) %>% unlist %>%  tibble(Name = .)
+
+# Name variable
+info <- infobox %>% 
+  lapply(function(x) {
+    x <- x[grep("Gender:",x)] 
+    if (length(x) == 0) {
+      sex <- "M"
+      } else {
+        sex <- grepl("Female",x) %>% 
+          ifelse("F","M")
+      }
+    return(sex)
+  }) %>% unlist %>% factor %>% add_column(info, Sex = .)
+# Manually fix females with missing data
+info$Sex[c(30521, 42623, 47015, 81716)] <- "F"
+
+# Height variable
+info <- infobox %>% 
+  lapply(function(x) {
+    x <- x[grep("Height:",x)] 
+    if (length(x) > 0) {
+      x <- gsub(".*\\((.*)\\).*", "\\1", x)
+      height <- as.numeric(gsub(" cm", "", x))
+    } else {height <- NA}
+    return(height)
+  }) %>% unlist %>% add_column(info, Height = .)
+
+# Weight variable
+info <- infobox %>% 
+  lapply(function(x) {
+    x <- x[grep("Weight:",x)] 
+    if (length(x) > 0) {
+      if (length(grep("lbs", x)) == 1) {
+        x <- gsub(".*\\((.*)\\).*", "\\1", x)
+        weight <- as.numeric(gsub(" kg", "", x))
+      } else {
+        x <- strsplit(x, " ")[[1]]
+        if (length(x) == 3) {
+          weight <- strsplit(x[[2]],"-")[[1]] %>% as.numeric %>% mean
+        } else if (length(x) == 4) {
+          weight <- c(gsub(",","",x[2]),x[3]) %>% as.numeric %>% mean
+        } else if (length(x) == 5) {
+          weight <- c(gsub(",","",x[2:3]),x[4]) %>% as.numeric %>% mean
+        } else weight <- -1
+      }
+    } else weight <- NA
+    return(weight)
+  }) %>%
+  unlist %>% add_column(info, Weight = .)
+# Fix the one problematic entry
+info$Weight[which(sums==1)] <- 77.5 
+
+# Drop NULL entries from both info and results
+nulls <- which(results_table %>% lapply(is.null) %>% unlist) 
+info <- info[-nulls,]
+results_table <- results_table[-nulls]
+
+# Keep columns of interest (drop 'Rank' and empty final column)
+keep <- c("Games", "Age", "City", "Sport", "Event", "Team", "NOC", "Medal")
+results_table <- lapply(results_table, function (x) {x[,keep]})
+
+# Add an ID column to the 'info' dataframe
+info$ID <- as.character(1:nrow(info))
+
+# Use the same ID variable to name the elements in 'results_table'
+results_table <- setNames(results_table, info$ID)
+
+# Use 'rbindlist' from the 'data.table' package to convert 'results_table'
+# to a dataframe with the element names as an ID column
+data <- rbindlist(results_table, use.names=TRUE, idcol="ID") 
+
+# join 'info' and 'results_table' by the ID column
+data <- right_join(info, data, by="ID")
+
+# Games must be a character vector to use 'gsub'
+data$Games <- data$Games %>% as.character
+
+# Replace letters after the space with ""
+data$Year <- data$Games %>% gsub(" [A-z]*", "", .) %>% as.numeric
+
+# Replace digits before the space with ""
+data$Season <- data$Games %>% gsub("[0-9]* ", "", .)
+
+# Reorder the variables
+data <- data[,c("ID","Name","Sex","Age","Height","Weight","Team","NOC","Games","Year","Season","City","Sport","Event","Medal")]
 ```
 
 In my last post, I scraped data on 135,584 Olympic athletes from www.sports-reference.com, and the data was saved in two lists containing information on each athlete in different formats. In its present form, the data is pretty useless. In this post, I tidy up this data so that it can actually be analyzed. 
 
 Normally, this part of my work flow would get buried in a file somewhere that I'd expect nobody to ever look at. However, a big part of my motivation for doing this project was learning `tidyverse`, and the data wrangling stage was one of the places where I felt the advantages of `tidyverse` the most, so I'm going to dive into the wrangling this once. If you aren't interested in the wrangling and you just want to see pretty plots about Olympic history, then stay tuned for my later posts in which I analyze the prettied-up data.
+
+## Set up
+
+To follow along with this code, you must start by importing the data and running the code in the [previous post](). 
+
+## Check variables for weird values
 
 ```{r}
 # Check for weird values
