@@ -1,0 +1,14 @@
+---
+title: "Olympic history: Trends in the size of Olympians"
+date: '2018-xx-xx'
+layout: post
+tags: R olympics sports tidyverse
+comment: yes
+---
+
+```{r setup, include=FALSE}
+# knitr settings
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
+#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+```
+
