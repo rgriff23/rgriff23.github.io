@@ -66,12 +66,20 @@ p1 <- ggplot(counts, aes(x=Year, y=Athletes, color=Season)) +
   geom_point(size=2) +
   geom_line() +
   scale_color_manual(values=c("darkorange","darkblue")) +
-  xlab("")
+  xlab("") +  
+  annotate("text", x=c(1932,1956,1976,1980),
+           y=c(2500,4500,7500,6500),
+           label=c("L.A. 1932","Melbourne 1956","Montreal 1976","Moscow 1980"),
+           size=2)
 p2 <- ggplot(counts, aes(x=Year, y=Nations, color=Season)) +
   geom_point(size=2) +
   geom_line() +
   scale_color_manual(values=c("darkorange","darkblue")) +
-  xlab("")
+  xlab("") +  
+  annotate("text", x=c(1932,1976,1980),
+           y=c(70,115,100),
+           label=c("L.A. 1932","Montreal 1976","Moscow 1980"),
+           size=2)
 p3 <- ggplot(counts, aes(x=Year, y=Events, color=Season)) +
   geom_point(size=2) +
   geom_line() +
@@ -81,7 +89,7 @@ grid.arrange(p1, p2, p3, ncol=1)
 
 You can see two long periods without any Games between 1912-1920 and 1936-1948, corresponding to WWI and WWII. In addition, a few Games are highlighted where dips in attendance occur. There are:
 
-- **L.A. and Lake Placid, 1932:** As these Games occured in the midst of the Great Depression and were held in remote locations, many athletes were unable to afford the trip to the Olympics, and attendence [suffered](https://history.fei.org/node/26) as a result. 
+- **L.A., 1932:** As these Games occured in the midst of the Great Depression and were held in remote locations, many athletes were unable to afford the trip to the Olympics, and attendence [suffered](https://history.fei.org/node/26) as a result. 
 
 - **Melbourne, 1956:** Attendance dipped due to several boycotts: Iraq, Egypt, and Lebanon did not participate due to the involvement of France and Britain in the [Suez Crisis](https://en.wikipedia.org/wiki/Suez_Crisis); the Netherlands, Spain, Switzerland, and Cambodia did not participate due to the Soviet Union's beat down of the [Hungarian Revolution](https://en.wikipedia.org/wiki/Hungarian_Revolution_of_1956); and China did not participate in protest of the IOC's [recognition](https://en.wikipedia.org/wiki/Chinese_Taipei_at_the_Olympics) of Taiwan.   
 
