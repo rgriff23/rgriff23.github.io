@@ -1,15 +1,15 @@
 ---
-title: "Olympic history (part 3): trends in women's participation"
+title: "Olympic history: Women in the Olympics"
 date: '2018-xx-xx'
 layout: post
-tags: R olympics sports tidyr ggplot2
+tags: R olympics sports tidyverse
 comment: yes
 ---
 
 ```{r setup, include=FALSE}
 # knitr settings
-#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
-#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
+knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages 
 library("tidyverse")
