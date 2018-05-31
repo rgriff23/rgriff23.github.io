@@ -68,7 +68,7 @@ p1 <- ggplot(counts, aes(x=Year, y=Athletes, color=Season)) +
   annotate("text", x=c(1932,1956,1976,1980),
            y=c(2500,4000,7500,6000),
            label=c("L.A. 1932","Melbourne 1956","Montreal 1976","Moscow 1980"),
-           size=3) +
+           size=4) +
   annotate("text",x=c(1916,1942),y=c(10000,10000),
            label=c("WWI","WWII"), size=4, color="red") +
   geom_segment(mapping=aes(x=1914,y=8000,xend=1918,yend=8000),color="red", size=2) +
