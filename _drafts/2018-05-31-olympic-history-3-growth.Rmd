@@ -3,7 +3,7 @@ title: 'Olympic history: Over a century of growth'
 date: "2018-05-31"
 layout: post
 tags: R olympics sports tidyverse
-comment: yes
+comments: true
 ---
 
 ```{r setup, include=FALSE}
@@ -66,9 +66,9 @@ p1 <- ggplot(counts, aes(x=Year, y=Athletes, color=Season)) +
   scale_color_manual(values=c("darkorange","darkblue")) +
   xlab("") +  
   annotate("text", x=c(1932,1956,1976,1980),
-           y=c(2500,4500,7500,6500),
+           y=c(2500,4000,7500,6000),
            label=c("L.A. 1932","Melbourne 1956","Montreal 1976","Moscow 1980"),
-           size=2) +
+           size=3) +
   annotate("text",x=c(1916,1942),y=c(10000,10000),
            label=c("WWI","WWII"), size=4, color="red") +
   geom_segment(mapping=aes(x=1914,y=8000,xend=1918,yend=8000),color="red", size=2) +
@@ -81,7 +81,7 @@ p2 <- ggplot(counts, aes(x=Year, y=Nations, color=Season)) +
   annotate("text", x=c(1932,1976,1980),
            y=c(70,115,100),
            label=c("L.A. 1932","Montreal 1976","Moscow 1980"),
-           size=2)
+           size=4)
 p3 <- ggplot(counts, aes(x=Year, y=Events, color=Season)) +
   geom_point(size=2) +
   geom_line() +
