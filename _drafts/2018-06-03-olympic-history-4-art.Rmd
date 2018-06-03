@@ -1,18 +1,18 @@
 ---
 title: "Olympic history: the Art Competitions"
-date: '2018-xx-xx'
+date: '2018-06-03'
 layout: post
 tags: R olympics sports tidyverse
-comment: yes
+comments: true
 ---
 
 ```{r setup, include=FALSE}
 # knitr settings
-#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment="> ", fig.align='center')
-#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, echo=FALSE, comment="> ", fig.align='center')
+knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
 ```
 
-The data used in this post can be downloaded from [figshare](https://figshare.com/articles/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274). 
+The data used in this post can be downloaded from [figshare](https://figshare.com/articles/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274) and the R code is on [GitHub](https://github.com/rgriff23/Olympic_history/blob/master/R/analyses/art_competitions.R). 
 
 ## Introduction
 
@@ -20,13 +20,13 @@ In my last post, I charted the growth of the Olympics in terms of the number of 
 
 In some cases, the IOC's decision about whether to include a particular sport or event in the Olympics is a statement about Olympic ideals, as understood by the IOC. Nowhere is this more apparent than in the case of the Art Competitions, which were included in the Olympics from 1912 to 1948, and included events in 5 disciplines: Architecture, Scupting, Painting, Literature, and Music. Medals were awarded to artists just like any other Olympic competition. 
 
-The ideal of including sport-inspired art alongside athletic competitions was always part of the [vision](http://www.slate.com/human-interest/2018/05/gay-kids-and-sports-how-pe-class-felt-as-though-it-revealed-my-gayness-to-my-classmates.html) that Pierre de Coubertin, founder of the modern Olympics, had for the Games. He envisioned the Olympics as a multi-cultural celebration that showcased the educational value of amateur athletics for young men (and absolutely not for [young women](https://www.sbs.com.au/topics/zela/article/2016/05/03/women-olympic-games-uninteresting-unaesthetic-incorrect), but that's a topic for another post). However, in 1954, the IOC concluded that art should no longer be included in the Olympics, and as a replacement, they recommended that a sports-themed exhibition be held alongside the Olympics (a tradition that continues to this day, and is known as the [Cultural Olympiad](https://en.wikipedia.org/wiki/Olympiad#Cultural_Olympiad)). 
+The ideal of including sport-inspired art alongside athletic competitions was always part of the [vision](http://www.slate.com/human-interest/2018/05/gay-kids-and-sports-how-pe-class-felt-as-though-it-revealed-my-gayness-to-my-classmates.html) that Pierre de Coubertin, founder of the modern Olympics, had for the Games. He envisioned the Olympics as a multi-cultural celebration that showcased the educational value of amateur athletics for young men (and absolutely not for [young women](https://www.sbs.com.au/topics/zela/article/2016/05/03/women-olympic-games-uninteresting-unaesthetic-incorrect), but that's a topic for another post). However, in 1954, the IOC concluded that art should no longer be included in the Olympics, and as a replacement, they recommended that a sports-themed exhibition be held alongside the Olympics. This tradition continues to the present day, and is known as the [Cultural Olympiad](https://en.wikipedia.org/wiki/Olympiad#Cultural_Olympiad). 
 
-In light of the 21st century conception of the Olympics as a Mega-World-Sports-Championship showcasing the Supermen and Superwomen of the world with their super hot bodies and corporate sponsorships, you might be thinking, "Well of course art shouldn't be in the Olympics, it isn't a sport!". On the other hand, if you are less of an athlete and more of an artist, you might find yourself balking at the idea that art could ever be included in a gladiatorial spectacle like the Olympics that presumes to crown the "best" in every category.
+In light of the 21st century conception of the Olympics as a Mega-World-Sports-Championship showcasing the supermen and superwomen of the world, you might be thinking, "Well of course art shouldn't be in the Olympics, it isn't a sport!". On the other hand, if you are less of an athlete and more of an artist, you might find yourself balking at the idea that art could ever be included in a gladiatorial spectacle like the Olympics that presumes to crown the "best" in every category.
 
-So you might be surprised to learn that "insufficient sportiness" or "violating the spirit of art" had nothing to do with the IOC's decision. Rather, the IOC at the time was obsessed with the idea that Olympians should not be paid so much as a penny for their talents, and they determined that artists, who had a habit of selling their art after the Olympics were over, could not be considered "amateurs". So artists were banished to the sidelines of the Olympics, and there they have remained. 
+So you might be surprised to learn that "insufficient sportiness" or "violating the spirit of art" had nothing to do with the IOC's decision. Rather, the IOC at the time was obsessed with the idea that Olympians should not be paid so much as a penny for their talents, and they determined that artists, who had a habit of selling their art after the Olympics, were not "amateurs". So artists were banished to the sidelines of the Olympics, and there they have remained. 
 
-Of course, the IOC is now totally cool with Olympians making millions playing their sport. Presumably, the reason why the Art Competitions haven't been reinstated as Olympic events has more to do with "insufficient sportiness" and the present-day importance of television ratings. But forgotten as they may be, I find this to be a fascinating bit of history that is deserving of its own post, even if the Art Competitions make up a mere 1.3% of my data. 
+Of course, the IOC is now totally cool with Olympians making millions at their sport. Presumably, the reason why the Art Competitions haven't been reinstated in the Olympics has more to do with insufficient sportiness and the present-day importance of television ratings. But forgotten as they may be, I find this to be a fascinating bit of history that is deserving of its own post, even if the Art Competitions make up a mere 1.3% of my data. 
 
 This post has two parts. First, I poke around in the data on the Olympic Art Competitions from 1912 to 1948. Second, I share some photos and experiences from the Pyeongchang 2018 Olympics, where I had the opportunity to see some "Olympic art" for myself and got to meet [Roald Bradstock](https://ussa.edu/news/academy-2003-sport-artist-of-the-year-roald-bradstock-featured-in-historic-art-event-at-pyeongchang-olympics/), a.k.a. the Olympic Picasso, a former Olympian and artist obsessed with keeping a place for art in the Olympics. 
 
@@ -34,7 +34,7 @@ This post has two parts. First, I poke around in the data on the Olympic Art Com
 
 Load packages and the data into R, then subset to the Athlete Competitions.
 
-```{r, message=FALSE}
+```{r}
 # load packages
 library("tidyverse")
 library("gridExtra")
@@ -64,12 +64,9 @@ data <- read_csv("~/Documents/GitHub/Olympic_history/data/athlete_events.csv",
 art <- data %>% 
   filter(Sport == "Art Competitions") %>%
   select(Name, Sex, Age, Team, NOC, Year, City, Event, Medal)
-
-# View art competition data
-art %>% print(n = 5, width = Inf)
 ```
 
-The Art Competitions included 7 Olympic Games from 1912 to 1948. Three Games during this period were skipped due to World Wars I and II (1916, 1940, and 1944).  
+The Art Competitions included 7 Olympic Games from 1912 to 1948. Three Games during this period were skipped due to World Wars I and II (1916, 1940, and 1944). 
 
 ```{r}
 # View unique Year/City arranged by Year
@@ -78,7 +75,7 @@ art %>% select(Year, City) %>% unique %>% arrange(Year)
 
 Over this period, the number of events, participating nations, and artists grew somewhat irregularly. There was a jump in the number of nations and athletes participating in 1924, and perhaps in response to this increased participation, the number of events jumped up in 1928. 
 
-```{r}
+```{r post_2018-06_art_trends}
 # Count Events, Nations, and Artists each year
 counts <- art %>% filter(Team != "Unknown") %>%
   group_by(Year) %>%
@@ -101,40 +98,19 @@ p3 <- ggplot(counts, aes(x=Year, y=Artists)) +
 grid.arrange(p1, p2, p3, ncol=1)
 ```
 
-[COMPARE TO OVERALL TRENDS IN OLYMPIC PARTICIPATION]
-
-The Art Competitions drew slightly more female competitors than other Olympic events during these years: 11.2% of Olympic Artists were female, as compared to 7.5% of all Olympians.
+The Art Competitions drew slightly more female competitors than other Olympic events during these years: 11.2% of Olympic Artists were female, as compared to 7.5% of all Olympians. However, although 11.2% of artists were women, only 7% of medals were awarded to women, and just one gold medal. Here is a list of all the female Art Competition medalists.
 
 ```{r}
 # subset to female artists
 art_women <- art %>% filter(Sex == "F") %>% select(-Sex, -Team) 
 
-# percentage women in art competitions
-(art_women$Name %>% unique %>% length)/
-  (art$Name %>% unique %>% length)
-```
-```{r}
-# percentage women in all competitions
-data_1912_1948 <- data %>% filter(Year %in% unique(art$Year))
-(data_1912_1948 %>% filter(Sex == "F") %>% select(Name) %>% unique %>% nrow)/
-(data_1912_1948$Name %>% unique %>% length)
-```
-
-However, although 11.2% of artists were women, only 7% of medals were awarded to women, and just one gold medal.
-
-```{r}
-# Percentage of medalists who were women
-(art_women %>% filter(!is.na(Medal)) %>% nrow)/
-  (art %>% filter(!is.na(Medal)) %>% nrow)
-```
-```{r}
 # List female medalists in Art Competitions
 art_women %>% filter(!is.na(Medal)) %>% arrange(Year) %>% print(n=Inf, width=Inf)
 ```
 
 Out of 50 nations that participated in the Art Competitions, fewer than half won a medal, and over a third of all medals were awarded to artists representing just three countries: Germany, Italy, and France. 
 
-```{r}
+```{r post_2018-06_art_medals}
 # Count number of medals awarded to each Team
 medal_counts <- art %>% filter(!is.na(Medal))%>%
   group_by(Team, Medal) %>%
@@ -159,7 +135,7 @@ ggplot(medal_counts, aes(x=Team, y=Count, fill=Medal)) +
 
 It is remarkable that Germany won the most medals in the Art Competitions between 1912 and 1948, considering that Germany was not invited to participate in 3 of the 7 Olympics during this period (they were banned from the 1920, 1924, and 1948 Olympics due to post-war politics). However, Germany made up for these absences with an especially strong showing at the 1936 Berlin Olympics, a.k.a., the [Nazi Olympics](http://www.jewishvirtuallibrary.org/the-nazi-olympics-august-1936), in which they won 40% of the medals in the Art Competitions and 60% of all the Art Competition medals in the country's history.  
 
-```{r}
+```{r post_2018-06_art_nazis}
 # Count number of medals awarded to each Team at Nazi Olympics
 medal_counts2 <- art %>% filter(Year==1936, !is.na(Medal))%>%
   group_by(Team, Medal) %>%
@@ -178,7 +154,7 @@ ggplot(medal_counts2, aes(x=Team, y=Count, fill=Medal)) +
   geom_col() +
   coord_flip() +
   scale_fill_manual(values=c("gold1","gray70","gold4")) +
-  ggtitle("Nazi domination of Art Competitions at the Nazi Olympics") +
+  ggtitle("Nazi domination of Art Competitions at the 1936 Olympics") +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
@@ -186,7 +162,7 @@ That concludes the data exploration component of this post. In the rest of this 
 
 ## Art at Pyeongchang 2018
 
-Although few who weren't in Gangneung for the 2018 Pyeongchang Olympics would know about it, there was an impressive display of art along the Gangneung beach front, about a 15 minute drive from the athlete village and athletic venues. Here are a few of my favorite pieces - unfortunately I don't recall the names of the artists, but I note their countries of origin.
+Although few who weren't in Gangneung for the 2018 Pyeongchang Olympics would know about it, there was an impressive display of art along the Gangneung beach front, about a 15 minute drive from the athlete village and athletic venues. Here are some of my favorite pieces - unfortunately I don't recall the names of the artists, but I note their countries of origin.
 
 Obviously, this was near the top of my list: Giant skulls on the beach made from wooden planks (Korean artist).
 
