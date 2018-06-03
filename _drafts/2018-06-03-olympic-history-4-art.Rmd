@@ -38,6 +38,7 @@ Load packages and the data into R, then subset to the Athlete Competitions.
 # load packages
 library("tidyverse")
 library("gridExtra")
+library("knitr")
 
 # load data 
 data <- read_csv("~/Documents/GitHub/Olympic_history/data/athlete_events.csv",
@@ -70,7 +71,7 @@ The Art Competitions included 7 Olympic Games from 1912 to 1948. Three Games dur
 
 ```{r}
 # View unique Year/City arranged by Year
-art %>% select(Year, City) %>% unique %>% arrange(Year)
+art %>% select(Year, City) %>% unique %>% arrange(Year) %>% kable
 ```
 
 Over this period, the number of events, participating nations, and artists grew somewhat irregularly. There was a jump in the number of nations and athletes participating in 1924, and perhaps in response to this increased participation, the number of events jumped up in 1928. 
@@ -98,14 +99,14 @@ p3 <- ggplot(counts, aes(x=Year, y=Artists)) +
 grid.arrange(p1, p2, p3, ncol=1)
 ```
 
-The Art Competitions drew slightly more female competitors than other Olympic events during these years: 11.2% of Olympic Artists were female, as compared to 7.5% of all Olympians. However, although 11.2% of artists were women, only 7% of medals were awarded to women, and just one gold medal. Here is a list of all the female Art Competition medalists.
+The Art Competitions drew slightly more female competitors than other Olympic events during these years: 11.2% of Olympic Artists were female, as compared to 7.5% of all Olympians. However, although 11.2% of artists were women, only 7% of medals were awarded to women, and just one gold medal. Here is a table displaying all the female Art Competition medalists in history.
 
 ```{r}
 # subset to female artists
 art_women <- art %>% filter(Sex == "F") %>% select(-Sex, -Team) 
 
 # List female medalists in Art Competitions
-art_women %>% filter(!is.na(Medal)) %>% arrange(Year) %>% print(n=Inf, width=Inf)
+art_women %>% filter(!is.na(Medal)) %>% arrange(Year) %>% select(Name, NOC, Year, Medal) %>% print(n=Inf, width=Inf) %>% kable
 ```
 
 Out of 50 nations that participated in the Art Competitions, fewer than half won a medal, and over a third of all medals were awarded to artists representing just three countries: Germany, Italy, and France. 

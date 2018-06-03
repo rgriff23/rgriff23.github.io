@@ -35,55 +35,55 @@ Load packages and the data into R, then subset to the Athlete Competitions.
 The Art Competitions included 7 Olympic Games from 1912 to 1948. Three Games during this period were skipped due to World Wars I and II (1916, 1940, and 1944). 
 
 
-```
->  # A tibble: 7 x 2
->     Year City       
->    <int> <chr>      
->  1  1912 Stockholm  
->  2  1920 Antwerpen  
->  3  1924 Paris      
->  4  1928 Amsterdam  
->  5  1932 Los Angeles
->  6  1936 Berlin     
->  7  1948 London
-```
+| Year|City        |
+|----:|:-----------|
+| 1912|Stockholm   |
+| 1920|Antwerpen   |
+| 1924|Paris       |
+| 1928|Amsterdam   |
+| 1932|Los Angeles |
+| 1936|Berlin      |
+| 1948|London      |
 
 Over this period, the number of events, participating nations, and artists grew somewhat irregularly. There was a jump in the number of nations and athletes participating in 1924, and perhaps in response to this increased participation, the number of events jumped up in 1928. 
 
 <img src="/assets/Rfigs/post_2018-06_art_trends-1.png" title="plot of chunk post_2018-06_art_trends" alt="plot of chunk post_2018-06_art_trends" style="display: block; margin: auto;" />
 
-The Art Competitions drew slightly more female competitors than other Olympic events during these years: 11.2% of Olympic Artists were female, as compared to 7.5% of all Olympians. However, although 11.2% of artists were women, only 7% of medals were awarded to women, and just one gold medal. Here is a list of all the female Art Competition medalists.
+The Art Competitions drew slightly more female competitors than other Olympic events during these years: 11.2% of Olympic Artists were female, as compared to 7.5% of all Olympians. However, although 11.2% of artists were women, only 7% of medals were awarded to women, and just one gold medal. Here is a table displaying all the female Art Competition medalists in history.
 
 
 ```
->  # A tibble: 11 x 7
->     Name                                       Age NOC    Year City       
->     <chr>                                    <int> <chr> <int> <chr>      
->   1 Eve-Henriette Brossin de Mre-de Polanska    41 FRA    1920 Antwerpen  
->   2 Dorothy Margaret Stuart Browne              NA GBR    1924 Paris      
->   3 Laura Knight (Johnson-)                     50 GBR    1928 Amsterdam  
->   4 Margo Sybranda Everdina Scharten-Antink     58 NED    1928 Amsterdam  
->   5 Rene (Renate Alice-) Sintenis (-Weiss)      40 GER    1928 Amsterdam  
->   6 Janina Konarska-Sonimska (Seideman-)        32 POL    1932 Los Angeles
->   7 Ruth Blanchard Miller (-Fracker)            28 USA    1932 Los Angeles
->   8 Rosamund Mary Beatrice Fletcher             39 GBR    1948 London     
->   9 va Fldes                                    34 HUN    1948 London     
->  10 Letitia Marion Hamilton                     69 IRL    1948 London     
->  11 Aale Maria Tynni (-Pirinen, -Haavio)        34 FIN    1948 London     
->     Event                                          Medal 
->     <chr>                                          <fct> 
->   1 Art Competitions Mixed Painting                Silver
->   2 Art Competitions Mixed Literature              Silver
->   3 Art Competitions Mixed Painting, Paintings     Silver
->   4 Art Competitions Mixed Literature, Epic Works  Bronze
->   5 Art Competitions Mixed Sculpturing, Statues    Bronze
->   6 Art Competitions Mixed Painting, Graphic Arts  Silver
->   7 Art Competitions Mixed Painting, Paintings     Silver
->   8 Art Competitions Mixed Sculpturing, Reliefs    Bronze
->   9 Art Competitions Mixed Literature, Epic Works  Bronze
->  10 Art Competitions Mixed Painting, Paintings     Bronze
->  11 Art Competitions Mixed Literature, Lyric Works Gold
+>  # A tibble: 11 x 4
+>     Name                                     NOC    Year Medal 
+>     <chr>                                    <chr> <int> <fct> 
+>   1 Eve-Henriette Brossin de Mre-de Polanska FRA    1920 Silver
+>   2 Dorothy Margaret Stuart Browne           GBR    1924 Silver
+>   3 Laura Knight (Johnson-)                  GBR    1928 Silver
+>   4 Margo Sybranda Everdina Scharten-Antink  NED    1928 Bronze
+>   5 Rene (Renate Alice-) Sintenis (-Weiss)   GER    1928 Bronze
+>   6 Janina Konarska-Sonimska (Seideman-)     POL    1932 Silver
+>   7 Ruth Blanchard Miller (-Fracker)         USA    1932 Silver
+>   8 Rosamund Mary Beatrice Fletcher          GBR    1948 Bronze
+>   9 va Fldes                                 HUN    1948 Bronze
+>  10 Letitia Marion Hamilton                  IRL    1948 Bronze
+>  11 Aale Maria Tynni (-Pirinen, -Haavio)     FIN    1948 Gold
 ```
+
+
+
+|Name                                     |NOC | Year|Medal  |
+|:----------------------------------------|:---|----:|:------|
+|Eve-Henriette Brossin de Mre-de Polanska |FRA | 1920|Silver |
+|Dorothy Margaret Stuart Browne           |GBR | 1924|Silver |
+|Laura Knight (Johnson-)                  |GBR | 1928|Silver |
+|Margo Sybranda Everdina Scharten-Antink  |NED | 1928|Bronze |
+|Rene (Renate Alice-) Sintenis (-Weiss)   |GER | 1928|Bronze |
+|Janina Konarska-Sonimska (Seideman-)     |POL | 1932|Silver |
+|Ruth Blanchard Miller (-Fracker)         |USA | 1932|Silver |
+|Rosamund Mary Beatrice Fletcher          |GBR | 1948|Bronze |
+|va Fldes                                 |HUN | 1948|Bronze |
+|Letitia Marion Hamilton                  |IRL | 1948|Bronze |
+|Aale Maria Tynni (-Pirinen, -Haavio)     |FIN | 1948|Gold   |
 
 Out of 50 nations that participated in the Art Competitions, fewer than half won a medal, and over a third of all medals were awarded to artists representing just three countries: Germany, Italy, and France. 
 
