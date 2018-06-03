@@ -52,25 +52,6 @@ Over this period, the number of events, participating nations, and artists grew 
 The Art Competitions drew slightly more female competitors than other Olympic events during these years: 11.2% of Olympic Artists were female, as compared to 7.5% of all Olympians. However, although 11.2% of artists were women, only 7% of medals were awarded to women, and just one gold medal. Here is a table displaying all the female Art Competition medalists in history.
 
 
-```
->  # A tibble: 11 x 4
->     Name                                     NOC    Year Medal 
->     <chr>                                    <chr> <int> <fct> 
->   1 Eve-Henriette Brossin de Mre-de Polanska FRA    1920 Silver
->   2 Dorothy Margaret Stuart Browne           GBR    1924 Silver
->   3 Laura Knight (Johnson-)                  GBR    1928 Silver
->   4 Margo Sybranda Everdina Scharten-Antink  NED    1928 Bronze
->   5 Rene (Renate Alice-) Sintenis (-Weiss)   GER    1928 Bronze
->   6 Janina Konarska-Sonimska (Seideman-)     POL    1932 Silver
->   7 Ruth Blanchard Miller (-Fracker)         USA    1932 Silver
->   8 Rosamund Mary Beatrice Fletcher          GBR    1948 Bronze
->   9 va Fldes                                 HUN    1948 Bronze
->  10 Letitia Marion Hamilton                  IRL    1948 Bronze
->  11 Aale Maria Tynni (-Pirinen, -Haavio)     FIN    1948 Gold
-```
-
-
-
 |Name                                     |NOC | Year|Medal  |
 |:----------------------------------------|:---|----:|:------|
 |Eve-Henriette Brossin de Mre-de Polanska |FRA | 1920|Silver |

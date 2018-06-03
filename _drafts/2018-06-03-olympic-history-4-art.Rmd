@@ -106,7 +106,7 @@ The Art Competitions drew slightly more female competitors than other Olympic ev
 art_women <- art %>% filter(Sex == "F") %>% select(-Sex, -Team) 
 
 # List female medalists in Art Competitions
-art_women %>% filter(!is.na(Medal)) %>% arrange(Year) %>% select(Name, NOC, Year, Medal) %>% print(n=Inf, width=Inf) %>% kable
+art_women %>% filter(!is.na(Medal)) %>% arrange(Year) %>% select(Name, NOC, Year, Medal) %>% kable
 ```
 
 Out of 50 nations that participated in the Art Competitions, fewer than half won a medal, and over a third of all medals were awarded to artists representing just three countries: Germany, Italy, and France. 
