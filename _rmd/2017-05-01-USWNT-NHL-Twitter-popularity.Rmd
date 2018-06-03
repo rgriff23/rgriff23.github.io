@@ -7,11 +7,12 @@ tags: R hockey twitteR
 
 ```{r setup, include=FALSE}
 # knitr settings
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, comment=" ", fig.align = 'center')
-knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, echo=FALSE, comment=" ", fig.align = 'center')
+knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages
-library(data.table)
+library("data.table")
+library("knitr")
 
 # read clean data from GitHub
 nhl.data <-  fread('https://raw.githubusercontent.com/rgriff23/NHL_on_twitter/master/data/nhl_clean.csv')
@@ -24,7 +25,7 @@ uswnt.data$log.Followers <- log(uswnt.data$Followers)
 
 April was a good month for the US Women's Ice Hockey National Team (USWNT). In addition to winning their [7th title in 8 years](https://www.usatoday.com/story/sports/hockey/2017/04/07/uswnht-wins-iihf-world-championships-canada/100197176/) at the IIHF World Championships, they negotiated with USA Hockey [to secure](https://www.nytimes.com/2017/03/28/sports/hockey/usa-hockey-uswnt-boycott.html?_r=0) a \$2000 year-round monthly stipend, increased bonuses, a committee for promoting the growth of women’s ice hockey, and the same travel and insurance accommodations as the men’s team. Previously, players received only [$1000 per month](http://www.espn.com/espnw/voices/article/18908360/time-usa-hockey-wake-support-women-team) from USA Hockey during the 6 months leading up to the Olympics, despite the fact that players were expected to train year-round. The deal was a direct result of the USWNT boycott of the World Championship tournament, and represents a historic victory for women’s sports. 
 
-But some hockey fans just can’t handle it. They lash out in the comment sections of articles, littering them with comments such as these:  
+But some hockey fans just can’t handle it. They lash out in the comment sections of articles, littering them with comments such as these: 
 
 ___
 
@@ -43,9 +44,9 @@ What I want to focus on is the claim that people just don't care about women's h
 
 Before comparing the USWNT to the NHL, I should point out that only ~38% of NHL players were on Twitter when I collected this data (compared to 100% of the USWNT), and it is a biased sample. Comparing the average salary of NHL players who are on Twitter to those who are not on Twitter reveals that players on Twitter earn about 50% more on average than players who are not on Twitter. Thus, the sample of NHL players on Twitter is biased towards better and probably more popular players. 
 
-Keeping that in mind, let's look at the data (for details on how I compiled the data, see the [GitHub repo](https://github.com/rgriff23/NHL_on_twitter)). The following histogram shows the distribution of Twitter follower counts for the 293 current NHL players who use Twitter, while the red vertical lines represent follower counts for current USWNT players, and the blue vertical line in the middle represents the average for NHL players. 
+Keeping that in mind, let's look at the data (for details on how I compiled the data, see the [GitHub repo](https://github.com/rgriff23/NHL_on_twitter)). The following histogram shows the distribution of Twitter follower counts for the 293 current NHL players who use Twitter, while the red vertical lines represent follower counts for current USWNT players, and the blue vertical line in the middle represents the average for NHL players.
 
-```{r post_2017-05_uswnt_histogram, echo=FALSE}
+```{r post_2017-05_uswnt_histogram}
 hist(nhl.data$log.Followers, breaks=40, col="gray", xlim=c(4,16), xlab="Log (Number of Followers)", main="")
 abline(v=uswnt.data$log.Followers, col="red")
 abline(v=mean(nhl.data$log.Followers), col="blue", lwd=3)
@@ -53,9 +54,9 @@ abline(v=mean(nhl.data$log.Followers), col="blue", lwd=3)
 
 The x-axis is on a log scale to make the distribution easier to visualize. For some perspective, the NHL average corresponds to about 40,800 followers, and the range is ~2500 to ~2.4 million. Over half of the women (14/23) are within the range of NHL players, and one women is well above the NHL average ([Hilary Knight](https://twitter.com/Hilary_Knight?lang=en) with ~68,200 followers).
 
-Now let's look at how NHL salaries are related to popularity. A fitted sigmoidal curve is plotted along with the data below, and for some context, the vertical red line shows where Hilary Knight falls on this graph.
+Now let's look at how NHL salaries are related to popularity. I fitted sigmoidal curve to the data below. For some context, the vertical red line shows where Hilary Knight falls on the graph.
 
-```{r post_2017-05_uswnt_model, echo=FALSE}
+```{r post_2017-05_uswnt_model}
 # fit sigmoidal curve
 fit <- nls(Salary/1000000 ~ SSlogis(log.Followers, Asym, xmid, scal), data = nhl.data)
 x = seq(4,16,0.1)
@@ -67,15 +68,15 @@ lines(x,y)
 abline(v=uswnt.data[uswnt.data$Player=="Hilary Knight","log.Followers"], col="red", lwd=2)
 ```
 
-We can use the fitted curve to estimate the average salary of NHL players with the same level of popularity as the USWNT players. To avoid the dangers of extrapolating beyond the range of the data, I focus on the 14 USWNT players with follower counts within the NHL range. Here are the estimated salaries- all 7 digit figures:   
+We can use the fitted curve to estimate the average salary of NHL players with the same level of popularity as the USWNT players. To avoid the dangers of extrapolating beyond the range of the data, I focus on the 14 USWNT players with follower counts within the NHL range. Here are the estimated salaries (which are all 7 digit figures):   
 
-```{r prediction, echo=FALSE, comment=" "}
+```{r prediction}
 # use model to make salary preditions for USWNT
 predictions <- predict(fit, list(log.Followers=uswnt.data$log.Followers))
 uswnt.data$Estimated_salary <- paste("$", round(predictions*1000000,0), sep="")
 
 # sort USWNT data 
-uswnt.data[sort.int(predictions, index.return=T, decreasing=T)$ix,][1:14,-c(2,4)]
+kable(uswnt.data[sort.int(predictions, index.return=T, decreasing=T)$ix,][1:14,-c(2,4)])
 ```
 
 I am not suggesting that popularity on Twitter should determine anyone's salary. My point is simply this: if there is any validity to the argument that the USWNT doesn't deserve better because they aren't popular, then the data should show that USWNT players are much less popular than male ice hockey players who are making millions. Clearly, that is far from the case.
