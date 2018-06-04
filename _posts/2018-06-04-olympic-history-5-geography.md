@@ -6,7 +6,7 @@ tags: R olympics sports tidyverse
 comments: true
 ---
 
-The data used in this post can be downloaded from [figshare](https://figshare.com/articles/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274)and the R code is on [GitHub](https://github.com/rgriff23/Olympic_history/blob/master/R/analyses/geography.R). 
+The data used in this post can be downloaded from [figshare](https://figshare.com/articles/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274) and the R code is on [GitHub](https://github.com/rgriff23/Olympic_history/blob/master/R/analyses/geography.R). 
 
 
 
