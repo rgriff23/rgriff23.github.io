@@ -28,9 +28,7 @@ With this historical context in mind, let's look at how the geography of the Oly
 
 ## Mapping host cities
 
-The data used to generate the following plot can be found [here](https://github.com/rgriff23/Olympic_history/blob/master/data/host_city_locations.csv). Getting latitude-longitude coordinates for host cities was made easy by the function `mutate_geocode` in the `ggmap` package. 
-
-Points are colored based on the time period in which the Games occurred (before, during, or after the Cold War), and two different plotting symbols are used to distinguish between Summer and Winter Games.
+The data used to generate the following plot can be found [here](https://github.com/rgriff23/Olympic_history/blob/master/data/host_city_locations.csv). Points are colored based on the time period in which the Games occurred (before, during, or after the Cold War), and two different plotting symbols are used to distinguish between Summer and Winter Games.
 
 <img src="/assets/Rfigs/post_2018-06_geography_host_cities-1.png" title="plot of chunk post_2018-06_geography_host_cities" alt="plot of chunk post_2018-06_geography_host_cities" style="display: block; margin: auto;" />
 
@@ -45,11 +43,6 @@ To visualize historical trends in where athletes come from, I simplify things a 
 - Rio 2016: Boycott-free Olympics with the highest attendance in history, as of 2018
 
 To produce maps, I had to match up National Olympic Committees (NOCs) with countries, which can be a bit tricky since both NOCs and countries are political entities that have not remained constant over the history of the Olympics. See the 'notes' column of the [data file](https://github.com/rgriff23/Olympic_history/blob/master/data/noc_regions.csv) to see places where I matched tricky NOCs with contemporary countries. Even though it isn't perfectly accurate, the resulting maps still capture overall patterns in the nations being represented at the Games. 
-
-
-```
->  [1] 370
-```
 
 <img src="/assets/Rfigs/post_2018-06_geography_amsterdam_1928-1.png" title="plot of chunk post_2018-06_geography_amsterdam_1928" alt="plot of chunk post_2018-06_geography_amsterdam_1928" style="display: block; margin: auto;" />
 <img src="/assets/Rfigs/post_2018-06_geography_munich_1972-1.png" title="plot of chunk post_2018-06_geography_munich_1972" alt="plot of chunk post_2018-06_geography_munich_1972" style="display: block; margin: auto;" />

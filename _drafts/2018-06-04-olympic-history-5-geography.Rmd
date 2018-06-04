@@ -56,11 +56,9 @@ With this historical context in mind, let's look at how the geography of the Oly
 
 ## Mapping host cities
 
-The data used to generate the following plot can be found [here](https://github.com/rgriff23/Olympic_history/blob/master/data/host_city_locations.csv). Getting latitude-longitude coordinates for host cities was made easy by the function `mutate_geocode` in the `ggmap` package. 
+The data used to generate the following plot can be found [here](https://github.com/rgriff23/Olympic_history/blob/master/data/host_city_locations.csv). Points are colored based on the time period in which the Games occurred (before, during, or after the Cold War), and two different plotting symbols are used to distinguish between Summer and Winter Games.
 
-Points are colored based on the time period in which the Games occurred (before, during, or after the Cold War), and two different plotting symbols are used to distinguish between Summer and Winter Games.
-
-```{r post_2018-06_geography_host_cities}
+```{r post_2018-06_geography_host_cities, fig.height=10, fig.width=10}
 # Sorted table of Games (Year, Season, City)
 #games <- data %>% 
 #  select(Year,Season,City) %>% 
@@ -98,7 +96,7 @@ To visualize historical trends in where athletes come from, I simplify things a 
 
 To produce maps, I had to match up National Olympic Committees (NOCs) with countries, which can be a bit tricky since both NOCs and countries are political entities that have not remained constant over the history of the Olympics. See the 'notes' column of the [data file](https://github.com/rgriff23/Olympic_history/blob/master/data/noc_regions.csv) to see places where I matched tricky NOCs with contemporary countries. Even though it isn't perfectly accurate, the resulting maps still capture overall patterns in the nations being represented at the Games. 
 
-```{r post_2018-06_geography_amsterdam_1928, fig.width=5, fig.height=3}
+```{r post_2018-06_geography_amsterdam_1928, fig.width=10, fig.height=6}
 # Read NOC-region map data
 noc <- read_csv("~/Documents/GitHub/Olympic_history/data/noc_regions.csv",
                 col_types = cols(
@@ -111,7 +109,6 @@ noc <- noc %>% dplyr::select(-notes)
 data_regions <- data %>% 
   left_join(noc,by="NOC") %>%
   filter(!is.na(region))
-nrow(data) - nrow(data_regions) # 370 removed
 
 # Subset to Games of interest and count athletes from each country
 amsterdam <- data_regions %>% 
@@ -152,7 +149,7 @@ ggplot(world, aes(x = long, y = lat, group = group)) +
   guides(fill=guide_colourbar(title="Athletes")) +
   scale_fill_gradient(low="white",high="red")
 ```
-```{r post_2018-06_geography_munich_1972, fig.width=5, fig.height=3}
+```{r post_2018-06_geography_munich_1972, fig.width=10, fig.height=6}
 # Plot: Munich 1972
 ggplot(world, aes(x = long, y = lat, group = group)) +
   geom_polygon(aes(fill = Munich)) +
@@ -165,7 +162,7 @@ ggplot(world, aes(x = long, y = lat, group = group)) +
   guides(fill=guide_colourbar(title="Athletes")) +
   scale_fill_gradient2(low = "white", high = "red")
 ```
-```{r post_2018-06_geography_rio_2016, fig.width=5, fig.height=3}
+```{r post_2018-06_geography_rio_2016, fig.width=10, fig.height=6}
 # Plot:  Rio 2016
 ggplot(world, aes(x = long, y = lat, group = group)) +
   geom_polygon(aes(fill = Rio)) +
