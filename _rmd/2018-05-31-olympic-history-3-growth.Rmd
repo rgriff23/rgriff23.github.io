@@ -12,7 +12,7 @@ knitr::opts_chunk$set(fig.path = "assets/Rfigs/", message=FALSE, echo=FALSE, com
 knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
 ```
 
-The data used in this post can be downloaded from [figshare](https://figshare.com/articles/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274)and the R code is on [GitHub](https://github.com/rgriff23/Olympic_history/blob/master/R/analyses/century_of_growth.R). 
+The data used in this post can be downloaded from [figshare](https://figshare.com/articles/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274) and the R code is on [GitHub](https://github.com/rgriff23/Olympic_history/blob/master/R/analyses/century_of_growth.R). 
 
 ## Introduction
 
