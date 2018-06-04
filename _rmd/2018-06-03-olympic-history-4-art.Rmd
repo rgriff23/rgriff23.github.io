@@ -107,7 +107,7 @@ art_women <- art %>% filter(Sex == "F") %>% select(-Sex, -Team)
 art_women %>% filter(!is.na(Medal)) %>% arrange(Year) %>% select(Name, NOC, Year, Medal) %>% kable
 ```
 
-Out of 50 nations that participated in the Art Competitions, fewer than half won a medal, and over a third of all medals were awarded to artists representing just three countries: Germany, Italy, and France. 
+Out of 50 nations that participated in the Art Competitions, fewer than half won a medal, and over a third of all medals were awarded to artists representing just three countries: Germany, France, and Italy. 
 
 ```{r post_2018-06_art_medals}
 # Count number of medals awarded to each Team

@@ -62,7 +62,7 @@ The Art Competitions drew slightly more female competitors than other Olympic ev
 |Letitia Marion Hamilton                  |IRL | 1948|Bronze |
 |Aale Maria Tynni (-Pirinen, -Haavio)     |FIN | 1948|Gold   |
 
-Out of 50 nations that participated in the Art Competitions, fewer than half won a medal, and over a third of all medals were awarded to artists representing just three countries: Germany, Italy, and France. 
+Out of 50 nations that participated in the Art Competitions, fewer than half won a medal, and over a third of all medals were awarded to artists representing just three countries: Germany, France, and Italy.  
 
 <img src="/assets/Rfigs/post_2018-06_art_medals-1.png" title="plot of chunk post_2018-06_art_medals" alt="plot of chunk post_2018-06_art_medals" style="display: block; margin: auto;" />
 
