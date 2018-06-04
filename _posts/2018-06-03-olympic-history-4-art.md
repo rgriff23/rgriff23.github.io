@@ -28,10 +28,6 @@ This post has two parts. First, I poke around in the data on the Olympic Art Com
 
 ## Data exploration: the Art Competitions
 
-Load packages and the data into R, then subset to the Athlete Competitions.
-
-
-
 The Art Competitions included 7 Olympic Games from 1912 to 1948. Three Games during this period were skipped due to World Wars I and II (1916, 1940, and 1944). 
 
 

@@ -32,8 +32,6 @@ This post has two parts. First, I poke around in the data on the Olympic Art Com
 
 ## Data exploration: the Art Competitions
 
-Load packages and the data into R, then subset to the Athlete Competitions.
-
 ```{r}
 # load packages
 library("tidyverse")
