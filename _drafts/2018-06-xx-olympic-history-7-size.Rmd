@@ -10,7 +10,7 @@ The data used in this post can be downloaded from [figshare](https://figshare.co
 
 ```{r setup, include=FALSE}
 # knitr settings
-#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
+#knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, message=FALSE, comment="> ", fig.align='center')
 #knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages
