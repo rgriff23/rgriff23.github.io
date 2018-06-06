@@ -1,14 +1,50 @@
 ---
-title: "Olympic history: Trends in the size of Olympians"
+title: "Olympic history: the size of Olympians"
 date: '2018-xx-xx'
 layout: post
 tags: R olympics sports tidyverse
-comment: yes
+comments: true
 ---
+
+The data used in this post can be downloaded from [figshare](https://figshare.com/articles/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274) and the R code is on [GitHub](https://github.com/rgriff23/Olympic_history/blob/master/R/analyses/size.R).
 
 ```{r setup, include=FALSE}
 # knitr settings
 #knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
-#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+#knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
+
+
+# load packages
+library("tidyverse")
+
+# load data 
+data <- read_csv("~/Documents/GitHub/Olympic_history/data/athlete_events.csv",
+                           col_types = cols(
+                             ID = col_character(),
+                             Name = col_character(),
+                             Sex = col_factor(levels = c("M","F")),
+                             Age =  col_integer(),
+                             Height = col_double(),
+                             Weight = col_double(),
+                             Team = col_character(),
+                             NOC = col_character(),
+                             Games = col_character(),
+                             Year = col_integer(),
+                             Season = col_factor(levels = c("Summer","Winter")),
+                             City = col_character(),
+                             Sport = col_character(),
+                             Event = col_character(),
+                             Medal = col_factor(levels = c("Gold","Silver","Bronze"))
+                             )
+                           )
 ```
 
+
+
+
+
+
+
+
+
+This will be my last post using this data on the Olympics, at least for a while. There is always a chance I will think of something else to do with the data in the future, but for now, I'm satisfied and ready to move on to something new. 

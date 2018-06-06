@@ -6,6 +6,8 @@ tags: R olympics sports tidyverse
 comments: true
 ---
 
+The data used in this post can be downloaded from [figshare](https://figshare.com/articles/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274) and the R code is on [GitHub](https://github.com/rgriff23/Olympic_history/blob/master/R/analyses/women.R).
+
 ```{r setup, include=FALSE}
 # knitr settings
 #knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
@@ -114,7 +116,7 @@ So which NOCs are leading the way for gender equality in the Olympics? The follo
 
 [analysis]
 
-The final question I ask here is: which nations won the most medals in women's events? 
+The last question I ask here is: which nations won the most medals in women's events? 
 
 ```{r}
 
@@ -122,4 +124,4 @@ The final question I ask here is: which nations won the most medals in women's e
 
 [analysis]
 
-
+My next post will delve into data on the heights and weights of the athletes.
