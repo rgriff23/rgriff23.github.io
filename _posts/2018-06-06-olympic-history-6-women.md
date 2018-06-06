@@ -36,13 +36,12 @@ The chart shows that although there wasn't much change from 1936 to 1956, there 
 
 So which NOCs are leading the way for gender equality in the Olympics? The following charts rank nations by the proportion of female athletes on their Olympic Teams. In addition to showing the proportion of female athletes on each team, I show the proportion of each nations' medals that were won by females. I highlight data from 3 Olympiads: 1936 (Garmisch-Partenkirchen and Berlin), 1976 (Innsbruck and Montreal), and 2016 (Sochi and Rio). Like the previous chart, an NOC must have sent at least 50 athletes to the Games to be included. 
 
-<img src="/assets/Rfigs/post_2018-06_women_props_1936-1.png" title="plot of chunk post_2018-06_women_props_1936" alt="plot of chunk post_2018-06_women_props_1936" style="display: block; margin: auto;" />
 
 ```
 >  Warning: Removed 2 rows containing missing values (geom_point).
 ```
 
-<img src="/assets/Rfigs/post_2018-06_women_props_1936-2.png" title="plot of chunk post_2018-06_women_props_1936" alt="plot of chunk post_2018-06_women_props_1936" style="display: block; margin: auto;" />
+<img src="/assets/Rfigs/post_2018-06_women_props_1936-1.png" title="plot of chunk post_2018-06_women_props_1936" alt="plot of chunk post_2018-06_women_props_1936" style="display: block; margin: auto;" />
 
 Just 26 countries met the cutoff of sending at least 50 athletes to the 1936 Olympics. Canada lead the way with a 20% female Olympic team, followed by Great Britain with 19%. All other teams sent fewer than 15% women.
 

@@ -10,7 +10,7 @@ The data used in this post can be downloaded from [figshare](https://figshare.co
 
 ```{r setup, include=FALSE}
 # knitr settings
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, message=FALSE, comment="> ", fig.align='center')
 knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages
@@ -124,9 +124,6 @@ props <- props %>%
   filter(Athletes_F + Athletes_M > 49)
 props$Prop_F_medals[props$Medals_M + props$Medals_F == 0] <- NA
 
-plot(Prop_F_medals~Prop_F_athletes, data=props[which(props$Year==2016),], xlim=c(0,1),ylim=c(0,1))
-abline(a=0,b=1)
-
 # Data for 1936 only
 props_1936 <- props %>% 
   filter(Year == 1936) %>%
@@ -136,7 +133,7 @@ levs <- props_1936 %>%
   arrange(value) %>% select(NOC)
 props_1936$NOC <- factor(props_1936$NOC, levels=c(levs$NOC))
 
-# Plot 
+# Plot 1936
 ggplot(props_1936, aes(x=value, y=NOC, color=type)) +
   geom_point(na.rm=FALSE, alpha=0.8) +
   scale_color_manual(name="",
@@ -165,7 +162,7 @@ levs_1936 <- counts_1936 %>%
   select(NOC)
 counts_1936$NOC <- factor(counts_1936$NOC, levels=levs_1936$NOC)
 
-# Plot
+# Plot 1936
 ggplot(counts_1936, aes(x=NOC, y=Count, fill=Medal)) +
   geom_col() +
   coord_flip() +
@@ -177,6 +174,7 @@ ggplot(counts_1936, aes(x=NOC, y=Count, fill=Medal)) +
 Female participation was much higher at the 1976 Olympics, with 12 teams bringing at least 25% women.
 
 ```{r post_2018-06_women_props_1976}
+# Data for 1976 only
 props_1976 <- props %>% 
   filter(Year == 1976) %>%
   gather(Prop_F_athletes, Prop_F_medals, key="type", value="value")
@@ -184,6 +182,8 @@ levs <- props_1976 %>%
   filter(type == "Prop_F_athletes") %>%
   arrange(value) %>% select(NOC)
 props_1976$NOC <- factor(props_1976$NOC, levels=c(levs$NOC))
+
+# Plot 1976
 ggplot(props_1976, aes(x=value, y=NOC, color=type)) +
   geom_point(na.rm=FALSE, alpha=0.8) +
   scale_color_manual(name="",
@@ -212,7 +212,7 @@ levs_1976 <- counts_1976 %>%
   select(NOC)
 counts_1976$NOC <- factor(counts_1976$NOC, levels=levs_1976$NOC)
 
-# Plot
+# Plot 1976
 ggplot(counts_1976, aes(x=NOC, y=Count, fill=Medal)) +
   geom_col() +
   coord_flip() +
@@ -225,7 +225,8 @@ Whereas the women of Nazi Germany dominated the 1936 Olympics, the Soviet Union 
 
 Forty years later, participation of women in the Olympics surged.
 
-```{r post_2018-06_women_props_2016, fig.height=3, fig.width=3}
+```{r post_2018-06_women_props_2016, fig.height=8, fig.width=5}
+# Data for 2014/2016 only
 props_2016 <- props %>% 
   filter(Year == 2016) %>%
   gather(Prop_F_athletes, Prop_F_medals, key="type", value="value")
@@ -233,6 +234,8 @@ levs <- props_2016 %>%
   filter(type == "Prop_F_athletes") %>%
   arrange(value) %>% select(NOC)
 props_2016$NOC <- factor(props_2016$NOC, levels=c(levs$NOC))
+
+# Plot 2014/2016
 ggplot(props_2016, aes(x=value, y=NOC, color=type)) +
   geom_point(na.rm=FALSE, alpha=0.8) +
   scale_color_manual(name="",
@@ -249,7 +252,7 @@ In comparison to 1976, in which not a single Olympic team was comprised of 50% w
 
 Once again, total medal counts in the women's events reflect changing global power dynamics, with the U.S., the undisputed winners of the Cold War, dominating the medal count by a large margin. The women of Russia, Canada, Germany, China, and Great Britain formed an impressive but second class tier of female athletes. 
 
-```{r post_2018-06_women_medals_2016, fig.height=3, fig.width=3}
+```{r post_2018-06_women_medals_2016, fig.height=8, fig.width=5}
 # Count number of medals awarded to each NOC at 2014/2016 Olympics
 counts_2016 <- data %>% filter(Year==2016, !is.na(Medal), Sex=="F") %>%
   group_by(NOC, Medal) %>%
@@ -263,7 +266,7 @@ levs_2016 <- counts_2016 %>%
   select(NOC)
 counts_2016$NOC <- factor(counts_2016$NOC, levels=levs_2016$NOC)
 
-# Plot
+# Plot 2014/2016
 ggplot(counts_2016, aes(x=NOC, y=Count, fill=Medal)) +
   geom_col() +
   coord_flip() +
