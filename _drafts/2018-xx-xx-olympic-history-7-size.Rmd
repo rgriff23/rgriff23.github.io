@@ -1,6 +1,6 @@
 ---
 title: "Olympic history: the size of Olympians"
-date: '2018-xx-xx'
+date: '2018-06-xx'
 layout: post
 tags: R olympics sports tidyverse
 comments: true
@@ -12,7 +12,6 @@ The data used in this post can be downloaded from [figshare](https://figshare.co
 # knitr settings
 #knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, comment="> ", fig.align='center')
 #knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
-
 
 # load packages
 library("tidyverse")
@@ -37,14 +36,30 @@ data <- read_csv("~/Documents/GitHub/Olympic_history/data/athlete_events.csv",
                              Medal = col_factor(levels = c("Gold","Silver","Bronze"))
                              )
                            )
+
+# Add BMI column
+data$BMI <- data$Weight/(data$Height/100)^2 
+```
+
+
+```{r}
+ggplot(data, aes(x=as.factor(Year), y=Height, fill=Sex)) +
+  geom_boxplot()
+
+ggplot(data, aes(x=as.factor(Year), y=Weight, fill=Sex)) +
+  geom_boxplot()
+
+ggplot(data, aes(x=as.factor(Year), y=BMI, fill=Sex)) +
+  geom_boxplot()
 ```
 
 
 
 
+## Final thoughts
 
+This will be my last post using the Olympic history data, at least for a while. There is always a chance I will think of something else to do with the data in the future, but for now, I'm satisfied with the exploring I've done and ready to move on. The very last thing I'll say is that couple of books were really helpful for getting a big-picture view of Olympic history and providing some motivation for these data explorations: 
 
+The first is [Power, Politics, and the Olympic Games](https://www.amazon.com/Power-Politics-Olympic-Games-Alfred/dp/0880119586) by Alfred Senn. The book is a bit old, 1999, but it provides a moderately detailed and insightful history of the Olympics up to that point. Senn's history helps to demystify the Games, which are widely presented by the media as being a timeless and sacred affair. A recurring theme in Senn's book is the clash between Olympic myth and reality, and how the nature of this clash has evolved over the 20th century.   
 
-
-
-This will be my last post using this data on the Olympics, at least for a while. There is always a chance I will think of something else to do with the data in the future, but for now, I'm satisfied and ready to move on to something new. 
+Second, [Watching the Olympics: Politics, Power, and Representation](https://www.amazon.com/Watching-Olympics-Politics-Power-Representation-ebook/dp/B007ZZFPJO/ref=dp_kinw_strp_1?dpID=41Ohh7IVE5L&preST=_SY445_QL70_&dpSrc=detail) is a collection of essays from scholars in different disiplines. In contrast to Senn's book, each chapter is dedicated to a particular aspect of the Olympics (e.g., the selection of host cities, media coverage, security, doping, women, the paralympics) rather than to a specific period of time in Olympic history. The focus on topics and perspectives rather than moments in time provided a nice complement to Senn's book, and I actually ended up reading Senn's book a second time after reading this one, since much of the detail Senn provides was more interesting and meaningful in the context of the different issues and arguments raised in this book.
