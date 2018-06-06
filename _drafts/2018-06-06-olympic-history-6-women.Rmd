@@ -225,7 +225,7 @@ Whereas the women of Nazi Germany dominated the 1936 Olympics, the Soviet Union 
 
 Forty years later, participation of women in the Olympics surged.
 
-```{r post_2018-06_women_props_2016, fig.height=8, fig.width=5}
+```{r post_2018-06_women_props_2016, fig.height=8, fig.width=6}
 # Data for 2014/2016 only
 props_2016 <- props %>% 
   filter(Year == 2016) %>%
@@ -252,7 +252,7 @@ In comparison to 1976, in which not a single Olympic team was comprised of 50% w
 
 Once again, total medal counts in the women's events reflect changing global power dynamics, with the U.S., the undisputed winners of the Cold War, dominating the medal count by a large margin. The women of Russia, Canada, Germany, China, and Great Britain formed an impressive but second class tier of female athletes. 
 
-```{r post_2018-06_women_medals_2016, fig.height=8, fig.width=5}
+```{r post_2018-06_women_medals_2016, fig.height=8, fig.width=6}
 # Count number of medals awarded to each NOC at 2014/2016 Olympics
 counts_2016 <- data %>% filter(Year==2016, !is.na(Medal), Sex=="F") %>%
   group_by(NOC, Medal) %>%
