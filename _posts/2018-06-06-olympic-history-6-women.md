@@ -36,34 +36,7 @@ The chart shows that although there wasn't much change from 1936 to 1956, there 
 
 So which NOCs are leading the way for gender equality in the Olympics? The following charts rank nations by the proportion of female athletes on their Olympic Teams. In addition to showing the proportion of female athletes on each team, I show the proportion of each nations' medals that were won by females. I highlight data from 3 Olympiads: 1936 (Garmisch-Partenkirchen and Berlin), 1976 (Innsbruck and Montreal), and 2016 (Sochi and Rio). Like the previous chart, an NOC must have sent at least 50 athletes to the Games to be included. 
 
-
-```
->  Error in dcast(setDT(props), Year + NOC ~ Sex, fun.aggregate = sum, value.var = c("Athletes", : could not find function "dcast"
-```
-
-```
->  Error in mutate_impl(.data, dots): Evaluation error: object 'Athletes_F' not found.
-```
-
-```
->  Error in `$<-.data.frame`(`*tmp*`, Prop_F_medals, value = logical(0)): replacement has 0 rows, data has 646
-```
-
-```
->  Error in .f(.x[[i]], ...): object 'Prop_F_athletes' not found
-```
-
-```
->  Error in eval(lhs, parent, parent): object 'props_1936' not found
-```
-
-```
->  Error in factor(props_1936$NOC, levels = c(levs$NOC)): object 'props_1936' not found
-```
-
-```
->  Error in ggplot(props_1936, aes(x = value, y = NOC, color = type)): object 'props_1936' not found
-```
+<img src="/assets/Rfigs/post_2018-06_women_props_1936-1.png" title="plot of chunk post_2018-06_women_props_1936" alt="plot of chunk post_2018-06_women_props_1936" style="display: block; margin: auto;" />
 
 Just 26 countries met the cutoff of sending at least 50 athletes to the 1936 Olympics. Canada lead the way with a 20% female Olympic team, followed by Great Britain with 19%. All other teams sent fewer than 15% women.
 
@@ -73,22 +46,7 @@ In terms of raw medal counts, the women of Nazi Germany dominated the 1936 Olymp
 
 Female participation was much higher at the 1976 Olympics, with 12 teams bringing at least 25% women.
 
-
-```
->  Error in .f(.x[[i]], ...): object 'Prop_F_athletes' not found
-```
-
-```
->  Error in eval(lhs, parent, parent): object 'props_1976' not found
-```
-
-```
->  Error in factor(props_1976$NOC, levels = c(levs$NOC)): object 'props_1976' not found
-```
-
-```
->  Error in ggplot(props_1976, aes(x = value, y = NOC, color = type)): object 'props_1976' not found
-```
+<img src="/assets/Rfigs/post_2018-06_women_props_1976-1.png" title="plot of chunk post_2018-06_women_props_1976" alt="plot of chunk post_2018-06_women_props_1976" style="display: block; margin: auto;" />
 
 This time East Germany lead the way with 40% of their team being female, followed by the Netherlands (35%) and Canada (33%). The Cold War superpowers, the U.S.S.R. and U.S., also had a relatively large number of female competitors on their teams, with about 29% each.
 
@@ -100,22 +58,7 @@ Whereas the women of Nazi Germany dominated the 1936 Olympics, the Soviet Union 
 
 Forty years later, participation of women in the Olympics surged.
 
-
-```
->  Error in .f(.x[[i]], ...): object 'Prop_F_athletes' not found
-```
-
-```
->  Error in eval(lhs, parent, parent): object 'props_2016' not found
-```
-
-```
->  Error in factor(props_2016$NOC, levels = c(levs$NOC)): object 'props_2016' not found
-```
-
-```
->  Error in ggplot(props_2016, aes(x = value, y = NOC, color = type)): object 'props_2016' not found
-```
+<img src="/assets/Rfigs/post_2018-06_women_props_2016-1.png" title="plot of chunk post_2018-06_women_props_2016" alt="plot of chunk post_2018-06_women_props_2016" style="display: block; margin: auto;" />
 
 In comparison to 1976, in which not a single Olympic team was comprised of 50% women, the 2014/2016 Olympics included 15 teams that were at least 50% female, lead by China (64%), Romania (58%), and the Ukraine (57%). A few countries won 100% of their medals in women's events: Taiwan (5 medals in weightlifting and archery), India (2 medals in wrestling and badminton), Bulgaria (7 medals in the high jump, rhythmic gymnastics, and wrestling), and Portugal (1 medal in judo). 
 

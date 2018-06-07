@@ -15,6 +15,7 @@ knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github
 
 # load packages
 library("tidyverse")
+library("data.table")
 
 # load data 
 data <- read_csv("~/Documents/GitHub/Olympic_history/data/athlete_events.csv",
