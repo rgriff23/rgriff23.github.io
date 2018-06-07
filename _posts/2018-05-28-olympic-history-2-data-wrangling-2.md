@@ -7,15 +7,6 @@ comments: yes
 ---
 
 
-
-
-
-In my last post, I scraped data on 135,584 Olympic athletes from www.sports-reference.com, and the data was saved in two lists containing information on each athlete in different formats. In its present form, the data is pretty useless. In this post, I tidy up this data so that it can actually be analyzed. 
-
-Normally, this part of my work flow would get buried in a file somewhere that I'd expect nobody to ever look at. However, a big part of my motivation for doing this project was learning `tidyverse`, and the data wrangling stage was one of the places where I felt the advantages of `tidyverse` the most, so I'm going to dive into the wrangling this once. If you aren't interested in the wrangling and you just want to see pretty plots about Olympic history, then stay tuned for my later posts in which I analyze the prettied-up data.
-
-## Set up
-
 To follow along with this code, you must start by importing the data and running the code in the [previous post](https://rgriff23.github.io/2018/05/28/olympic-history-2-data-wrangling-1.html). You'll need to load the `tidyverse` package too.
 
 ## Check variables for weird values
