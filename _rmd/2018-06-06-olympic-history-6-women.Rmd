@@ -10,7 +10,7 @@ The data used in this post can be downloaded from [figshare](https://figshare.co
 
 ```{r setup, include=FALSE}
 # knitr settings
-knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, message=FALSE, comment="> ", fig.align='center')
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, message=FALSE, warning=FALSE, comment="> ", fig.align='center')
 knitr::opts_knit$set(base.dir = "/Users/nunnlab/Documents/GitHub/rgriff23.github.io/", base.url = "/")
 
 # load packages
@@ -77,7 +77,7 @@ ggplot(counts, aes(x=Year, y=Athletes, color=Sex)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-Growth in the number of female athletes largely mirrored growth in the number of male athletes up until 1996, when growth in the number of male athletes leveled off at ~8000, while the number of female athletes continued to grow at a high rate. The participation of female athletes reached its highest point during the most recent Olympiad (Sochi 2014 and Rio 2016), in which slightly more than 44%% of Olympians were women. 
+Growth in the number of female athletes largely mirrored growth in the number of male athletes up until 1996, when growth in the number of male athletes leveled off at ~8000, while the number of female athletes continued to grow at a high rate. The participation of female athletes reached its highest point during the most recent Olympiad (Sochi 2014 and Rio 2016), in which slightly more than 44% of Olympians were women. 
 
 But not all nations have invested equally in their female athletes: some have embraced the opportunity to win more medals in women's events, while others have been slow to include women on their Olympic teams. The following chart shows the number of female athletes versus the number of male athletes from 5 select Olympic Games (1936, 1956, 1976, 1996, and 2016), with each data point representing a National Olympic Committee (NOC) and separate best-fit regression lines for each of the 5 Games. Only NOCs represented by at least 50 athletes are included in the plot and regression line fitting. The dashed line represents the ideal of NOCs sending teams comprised of 50% women.  
 
@@ -194,7 +194,7 @@ ggplot(props_1976, aes(x=value, y=NOC, color=type)) +
   xlim(0,1)
 ```
 
-This time East Germany lead the way with 40% of their team being female, followed by the Netherlands (35%) and Canada (33%). The Cold War superpowers, the U.S.S.R. and U.S.A., also had a relatively large number of female competitors on their teams, with about 29% each.
+This time East Germany lead the way with 40% of their team being female, followed by the Netherlands (35%) and Canada (33%). The Cold War superpowers, the U.S.S.R. and U.S., also had a relatively large number of female competitors on their teams, with about 29% each.
 
 The raw medal counts reflect the dramatically different state of global political power in 1976 compared to 1936. 
 
@@ -250,7 +250,7 @@ ggplot(props_2016, aes(x=value, y=NOC, color=type)) +
 
 In comparison to 1976, in which not a single Olympic team was comprised of 50% women, the 2014/2016 Olympics included 15 teams that were at least 50% female, lead by China (64%), Romania (58%), and the Ukraine (57%). A few countries won 100% of their medals in women's events: Taiwan (5 medals in weightlifting and archery), India (2 medals in wrestling and badminton), Bulgaria (7 medals in the high jump, rhythmic gymnastics, and wrestling), and Portugal (1 medal in judo). 
 
-Once again, total medal counts in the women's events reflect changing global power dynamics, with the U.S., the undisputed winners of the Cold War, dominating the medal count by a large margin. The women of Russia, Canada, Germany, China, and Great Britain formed an impressive but second class tier of female athletes. 
+Once again, total medal counts in the women's events reflect changing global power dynamics, with the U.S. dominating the medal count by a large margin. The women of Russia, Canada, Germany, China, and Great Britain formed an impressive but second class tier of female athletes. 
 
 ```{r post_2018-06_women_medals_2016, fig.height=8, fig.width=6}
 # Count number of medals awarded to each NOC at 2014/2016 Olympics
@@ -276,6 +276,6 @@ ggplot(counts_2016, aes(x=NOC, y=Count, fill=Medal)) +
         axis.text.y = element_text(size=6))
 ```
 
-These descriptive charts demonstrate that women's participation in the Olympics has grown dramatically over the past century, although equal participation has not yet been achieved. The Olympics will undoubtedly continue to be an important event for women's athletics, since for better or worse, nationalism seems to inspire people of diverse nations to care about women's athletics at least for the brief duration of the Games. In turn, this opportunity for international glory has the potential to motivate governments to invest in women's athletics even when a self-sustaining model for professional women's athletics is lacking.
+These charts demonstrate that women's participation in the Olympics has grown dramatically over the past century, although equal participation has not yet been achieved. The Olympics will undoubtedly continue to be an important event for women's athletics, since for better or worse, nationalism seems to inspire people of diverse nations to care about women's athletics at least for the brief duration of the Games. In turn, the opportunity for international glory has the potential to motivate governments to invest in women's athletics even when a self-sustaining model for professional women's athletics is lacking.
 
 My next post will delve into historical trends in another characteristic of Olympians: the heights and weights of the athletes.
