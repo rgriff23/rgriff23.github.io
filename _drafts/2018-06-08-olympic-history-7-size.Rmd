@@ -161,7 +161,7 @@ slopes$Height <- round(slopes$Height*56,1)
 slopes$Weight <- round(slopes$Weight*56,1)
 
 # plotly margins
-m <- list(l = 50, r = 50, b = 50, t = 100, pad = 4)
+m <- list(l = 50, r = 50, b = 70, t = 100, pad = 4)
 
 # Plot regression slopes of weight ~ height for men
 g2.m <- ggplot(slopes[slopes$Sex=="Men",], aes(x=Height, y=Weight, color=Sport, label=Event)) +
@@ -174,7 +174,8 @@ g2.m <- ggplot(slopes[slopes$Sex=="Men",], aes(x=Height, y=Weight, color=Sport, 
   theme(plot.title = element_text(hjust = 0.5),
         legend.position="none")
 g2.m <- ggplotly(g2.m, session="knitr", width = 500, height = 500) %>%
-  layout(autosize = F, margin = m)
+  layout(autosize = F, margin = m) %>% 
+  config(displayModeBar = F)
 g2.m <- api_create(g2.m, filename="post_2018-06_size_events_men")
 g2.m
 ```
@@ -199,7 +200,8 @@ g2.f <- ggplot(slopes[slopes$Sex=="Women",], aes(x=Height, y=Weight, color=Sport
   theme(plot.title = element_text(hjust = 0.5),
         legend.position="none")
 g2.f <- ggplotly(g2.f, session="knitr", width = 500, height = 500) %>%
-  layout(autosize = F, margin = m)
+  layout(autosize = F, margin = m) %>% 
+  config(displayModeBar = F)
 g2.f <- api_create(g2.f, filename="post_2018-06_size_events_women")
 g2.f
 ```
