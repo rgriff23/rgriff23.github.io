@@ -174,8 +174,7 @@ g2.m <- ggplot(slopes[slopes$Sex=="Men",], aes(x=Height, y=Weight, color=Sport, 
   theme(plot.title = element_text(hjust = 0.5),
         legend.position="none")
 g2.m <- ggplotly(g2.m, session="knitr", width = 500, height = 500) %>%
-  layout(autosize = F, margin = m) %>% 
-  config(displayModeBar = F)
+  layout(autosize = F, margin = m)
 g2.m <- api_create(g2.m, filename="post_2018-06_size_events_men")
 g2.m
 ```
@@ -200,8 +199,7 @@ g2.f <- ggplot(slopes[slopes$Sex=="Women",], aes(x=Height, y=Weight, color=Sport
   theme(plot.title = element_text(hjust = 0.5),
         legend.position="none")
 g2.f <- ggplotly(g2.f, session="knitr", width = 500, height = 500) %>%
-  layout(autosize = F, margin = m) %>% 
-  config(displayModeBar = F)
+  layout(autosize = F, margin = m)
 g2.f <- api_create(g2.f, filename="post_2018-06_size_events_women")
 g2.f
 ```
