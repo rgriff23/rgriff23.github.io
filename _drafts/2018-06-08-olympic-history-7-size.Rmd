@@ -161,7 +161,7 @@ slopes$Height <- round(slopes$Height*56,1)
 slopes$Weight <- round(slopes$Weight*56,1)
 
 # plotly margins
-m <- list(l = 50, r = 50, b = 0, t = 100, pad = 4)
+m <- list(l = 50, r = 50, b = 50, t = 100, pad = 4)
 
 # Plot regression slopes of weight ~ height for men
 g2.m <- ggplot(slopes[slopes$Sex=="Men",], aes(x=Height, y=Weight, color=Sport, label=Event)) +

@@ -48,7 +48,7 @@ To charaterize historical trends in size for different events, I fit separate li
 
 Here is an interactive plot for men's events. Simply hover your cursor over a point to see the exact slopes for height and weight, as well as the sport and event. The colors of points identify clusters of events from the same sport, and the axes are scaled to show the expected change in height and weight from 1960 to 2016 (e.g., a regression slope of 5 for the weight variable indicates that the estimated increase in the weight of athletes in that event from 1960 to 2016 is 5 kg). 
 
-<center><iframe src="https://plot.ly/~rgriff23/1.embed?showlink=false" width="500" height="500" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe></center>
+<iframe src="https://plot.ly/~rgriff23/1.embed?showlink=false" width="500" height="500" id="igraph" scrolling="no" seamless="seamless" frameBorder="0" align="middle"> </iframe>
 
 The vast majority of points fall in the upper right quadrant, indicating that the most common trend is for athletes to get both taller and heavier. This agrees with the boxplots from earlier in this post, which showed that the average height and weight for Olympic athletes has increased over time. The increase in size has been most extreme for points near the upper right corner of the plot, including basketball, ice hockey, water polo, downhill skiing, and rowing. Swimmers appear near the lower right portion of this quadrant, indicating that they have increased disproportionately in height relative to weight.
 
@@ -58,7 +58,7 @@ Virtually no points fall in the upper left quadrant, indicating that there are n
 
 Here is the same plot for women's events.
 
-<center><iframe src="https://plot.ly/~rgriff23/3.embed?showlink=false" width="500" height="500" id="igraph" scrolling="no" seamless="seamless" frameBorder="0"> </iframe></center>
+<iframe src="https://plot.ly/~rgriff23/3.embed?showlink=false" width="500" height="500" id="igraph" scrolling="no" seamless="seamless" frameBorder="0" align="middle"> </iframe>
 
 Overall, results for the women's events are similar to the men's events. Although women's basketball, ice hockey, and water polo are missing from the data due to their absence from at least some of the Game since 1960, the other sports appearing in the extreme upper right quadrant are the same: alpine skiing, swimming, the shot put and the discus throw. Like the men, female gymnasts and platform divers appear in the lower left quadrant, indicating that they too have decreased in both height and weight. No events appear in the upper left quadrant, and scarcely any fall in the lower right quadrant. The one point that falls clearly in the lower right quadrant corresponds to the high jump, in which women mirror the men in becoming substantially taller and slightly lighter. 
 
