@@ -8,7 +8,7 @@ comments: true
 
 
 
-This is the first in a series of posts analyzing data on the modern Olympics, comprising all the Games from Athens 1986 to Rio 2016. In this post, I introduce the dataset and the methods I used to collect it. In subsequent posts, I will wrangle and then analyze historical trends in the data. Throughout these posts, I use methods from the `tidyverse` R package, as described in the book [R for Data Science](http://r4ds.had.co.nz/) by Garrett Grolemund and Hadley Wickham. I've been wanting to familiarize myself with `tidyverse` for a while now, and this data exploration was a good excuse to do that. 
+This is the first in a series of posts analyzing data on the modern Olympics, comprising all the Games from Athens 1986 to Rio 2016. In this post, I introduce the dataset and the methods I used to collect it. In subsequent posts, I will wrangle and then analyze historical trends in the data. 
 
 ## Where the data comes from
 
