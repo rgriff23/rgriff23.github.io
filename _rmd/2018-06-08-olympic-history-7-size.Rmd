@@ -41,9 +41,6 @@ data <- read_csv("~/Documents/GitHub/Olympic_history/data/athlete_events.csv",
 # Exclude art competitions
 data <- data %>% filter(Sport != "Art Competitions")
 
-# Add BMI column
-data$BMI <- data$Weight/(data$Height/100)^2 
-
 # Recode year of Winter Games after 1992 to match the next Summer Games
 original <- c(1994,1998,2002,2006,2010,2014)
 new <- c(1996,2000,2004,2008,2012,2016)
@@ -70,7 +67,7 @@ data %>% group_by(Year, Sex) %>%
   summarize(Present = length(unique(ID[which(!is.na(Height) & !is.na(Weight))])),
             Total = length(unique(ID))) %>%
   mutate(Proportion = Present/Total) %>%
-  ggplot(aes(x=Year, y=Proportion, color=Sex)) +
+  ggplot(aes(x=Year, y=Proportion, group=Sex, color=Sex)) +
   geom_point() +
   geom_line() +
   scale_color_manual(values=c("darkblue","red"))  +
