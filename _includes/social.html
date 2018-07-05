@@ -5,6 +5,12 @@
   </a>
   {% endif %}
 
+  {% if site.kaggle_username %}
+  <a href="https://www.kaggle.com/{{ site.kaggle_username }}">
+    <i class="fa "></i>
+  </a>
+  {% endif %}
+
   {% if site.stackexchange_username %}
   <a href="https://stackexchange.com/users/{{site.stackexchange_username }}">
     <i class="fa fa-stack-exchange"></i>
@@ -46,6 +52,5 @@
     <i class="fa fa-tumblr-square"></i>
   </a>
   {% endif %}
-
 
 </div>
