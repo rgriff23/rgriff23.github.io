@@ -11,13 +11,6 @@ comments: TRUE
 knitr::opts_chunk$set(fig.path = "assets/Rfigs/", echo=FALSE, message=FALSE, warning=FALSE, comment="  ", fig.align = 'center')
 knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
 
-# install packages
-if (!require("ggplot2")) {install.packages("ggplot2")}
-if (!require("tm")) {install.packages("tm")}
-if (!require("wordcloud")) {install.packages("wordcloud")}
-if (!require("igraph")) {install.packages("igraph")}
-if (!require("plyr")) {install.packages("plyr")}
-
 # load packages
 library("ggplot2")
 library("tm")
