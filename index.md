@@ -8,7 +8,7 @@ title: About me
 I am a recent PhD graduate with 9 years of experience analyzing data with R. I have a strong foundation in statistics and research methods in the social and biological sciences. Here is a breakdown of my coding skills (1 = beginner, 10 = expert):
 
 <p align="center">
-  <img src="https://i.imgur.com/6Ps3ylL.png">
+  <img src="https://i.imgur.com/5wHs8Ln.png">
 </p>
 
 For examples of my work, check out my [blog](https://rgriff23.github.io/blog.html) or download my [resume](https://rgriff23.github.io/assets/pdfs/Randi_Griffin_resume.pdf). You can [fork me](https://github.com/rgriff23) on GitHub, [follow me](https://www.kaggle.com/heesoo37) on Kaggle, or [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn.
