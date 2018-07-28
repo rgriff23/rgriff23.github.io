@@ -21,7 +21,7 @@ I will be participating in the [Insight Data Science Fellowship](https://www.ins
 
 My academic research focused on the evolution and ecology of primates (from [morphology](https://rgriff23.github.io/2017/06/09/reflect-3d-points-across-plane.html) to [social networks](https://rgriff23.github.io/2017/04/26/primate-social-networks-in-igraph.html)) and parasites (from [mosquitoes](https://rgriff23.github.io/2017/05/23/mosquito-community-ecology-in-vegan.html) to [tapeworms](https://rgriff23.github.io/projects/gelada)). I've done some computer simulation-based [statistical methods research](https://rgriff23.github.io/projects/pcm) and authored an [R package](https://rgriff23.github.io/projects/btw). 
 
-I do lots of random side projects, such as web scraping and analyzing [historical data on Olympic athletes and results](https://rgriff23.github.io/2018/05/27/olympic-history-1-web-scraping.html) (this dataset became a very popular after I shared it on [Kaggle](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results)), or breaking down this [Twitterstorm](https://rgriff23.github.io/2017/06/29/Katie-Hinde-Twitterstorm.html).
+I do lots of random side projects, such as web scraping and analyzing [historical data on Olympic athletes and results](https://rgriff23.github.io/2018/05/27/olympic-history-1-web-scraping.html) (this dataset became very popular after I shared it on [Kaggle](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results)), or breaking down this [Twitterstorm](https://rgriff23.github.io/2017/06/29/Katie-Hinde-Twitterstorm.html).
 
 *Personal*
 
