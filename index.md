@@ -5,13 +5,13 @@ title: About me
 
 <p><h1>About me</h1></p>
 
-I'm a recent PhD graduate with 9 years of experience analyzing data with R. I have a strong foundation in statistics, research methods in the social and biological sciences, and programming.
+I'm a recent PhD graduate with 9 years of experience analyzing data with R. I have a strong background in statistics, research methods in the social and biological sciences, and programming.
 
 <p align="center">
   <img src="https://i.imgur.com/5wHs8Ln.png">
 </p>
 
-For examples of my work, check out my [blog](https://rgriff23.github.io/blog.html) or download my [resume](https://rgriff23.github.io/assets/pdfs/Randi_Griffin_resume.pdf). You can also [fork me](https://github.com/rgriff23) on GitHub, [follow me](https://www.kaggle.com/heesoo37) on Kaggle, or [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn!
+For examples of my work, check out my [blog](https://rgriff23.github.io/blog.html) or [publications](https://rgriff23.github.io/blog.html). You can also [fork me](https://github.com/rgriff23) on GitHub, [follow me](https://www.kaggle.com/heesoo37) on Kaggle, or [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn!
 
 *Current status*
 
