@@ -9,7 +9,7 @@ title: Projects
 
 [**Public health projects**](/projects/public_health)- In collaboration with Samara Fox at Yale Medical School
 
-[**Primate skull evolution**](/projects/skull)- My recently completed dissertation
+[**Primate skull evolution**](/projects/skull)- My dissertation
 
 *Recently active* 
 
