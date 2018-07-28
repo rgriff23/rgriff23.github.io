@@ -6,7 +6,7 @@ comments: false
 ---
 ___
 
-I have two projects in collaboration with Yale Medical student [Samara Fox](https://www.linkedin.com/in/samara-fox-5483469/). We are in the data collection/cleaning phases of these projects. Currently, there are two parts to the project:
+I have two projects in collaboration with Yale Medical student [Samara Fox](https://www.linkedin.com/in/samara-fox-5483469/):
 
 ___
 
