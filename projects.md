@@ -7,15 +7,17 @@ title: Projects
 
 *Active*
 
-[**Primate skull evolution**](/projects/skull)- This is my dissertation
+[**Public health projects**](/projects/public_health/)- In collaboration with Samara Fox at Yale Medical School
 
-[**Gelada monkey parasites**](/projects/gelada)- This is a collaboration with the <a target="_blank" href="https://sites.lsa.umich.edu/gelada/">Gelada research project</a>.
+[**Primate skull evolution**](/projects/skull)- My recently completed dissertation
 
 *Recently active* 
 
+[**Gelada monkey parasites**](/projects/gelada)- In collaboration with the <a target="_blank" href="https://sites.lsa.umich.edu/gelada/">Gelada research project</a> at U Mich
+
 [**Phylogenetic comparative methods**](/projects/pcm)- I assessed the validity of two recently developed statistical methods 
 
-[**Mosquito community ecology**](/projects/mosquito)- I spent a summer collecting bugs and a year analyzing them
+[**Mosquito community ecology**](/projects/mosquito)- In collaboration with the [Vector Ecology Lab](http://vectorecology.org/) at NC State
 
 ### R packages
 
@@ -23,9 +25,9 @@ title: Projects
 
 [**caRds**](/projects/caRds)- The most important work I've ever done
 
-### Datasets on figshare
+### Public datasets
 
-[**Olympic history data**](https://figshare.com/articles/Olympic_history_longitudinal_data_scraped_from_www_sports-reference_com/6121274) - longitudinal data on athletes and events in the modern Olympics (1896 - 2016), scraped from www.sports-reference.com
+[**Olympic history data**](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results) - longitudinal data on athletes and events in the modern Olympics (1896 - 2016), scraped from www.sports-reference.com
 
 [**Twitterstorm data**](https://figshare.com/articles/Twitterstorm_data_the_Katie_Hinde_Target_t-shirt_saga_2017-06-11/6096986)- tweets, user data, and social network from [this twitterstorm](https://rgriff23.github.io/2017/06/29/Katie-Hinde-Twitterstorm.html)
 
@@ -33,7 +35,7 @@ title: Projects
 
 ### Other
 
-[My blog](/index)- a catalogue of R code snippets, original analyses, updates on stuff I'm doing, etc. 
+[My blog](/index)- analyses, tutorials, updates 
 
 <a target="_blank" href="https://github.com/rgriff23/rgriff23.github.io">My website</a>- My site is powered by <a target="_blank" href="https://jekyllrb.com/">jekyll</a> and hosted by <a target="_blank" href="https://pages.github.com/">GitHub Pages</a>. 
 

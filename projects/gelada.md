@@ -14,7 +14,7 @@ ___
 
 ___
 
-Currently, there are three parts to the project:
+Currently, there are two parts to the project:
 
 ___
 
@@ -25,9 +25,5 @@ We performed survival analyses using 10 years of longitudinal data on infection 
 ### Part 2: Identifying undetected tapeworms
 
 It is possible that undetected internal cysts are causing us to underestimate prevalence based on the presence of visible external cysts, so India developed an antigen assay for detecting infections from dried urine samples. I analyzed the results with GLMMs to explore demographic patterns in infection. This study was recently published in *PLOS Neglected Tropical Diseases* ([download](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017a.pdf)). 
-
-### Part 3: Tapeworm effects on host hormones
-
-It is hypothesized that this tapeworm species may manipulate host hormones. We use GLMMs to assess the effect of tapeworm infection on testosterone levels in males and oestrogen levels in females. We are still in the data cleaning phase of this project.
 
 ___
