@@ -5,7 +5,7 @@ title: About me
 
 <p><h1>About me</h1></p>
 
-I am a recent PhD graduate with 9 years of experience analyzing data with R. I have a strong foundation in statistics and research methods in the social and biological sciences. Here is a breakdown of my coding skills (1 = beginner, 10 = expert):
+I am a recent PhD graduate with 9 years of experience analyzing data with R. I have a strong foundation in statistics and research methods in the social and biological sciences. Here is a breakdown of my coding skills:
 
 <p align="center">
   <img src="https://i.imgur.com/5wHs8Ln.png">
