@@ -2,13 +2,19 @@
 
   {% if site.github_username %}
   <a href="https://github.com/{{ site.github_username }}">
-    <i class="fa fa-github-square"></i>
+    <i class="fab fa-github"></i>
   </a>
   {% endif %}
 
   {% if site.kaggle_username %}
   <a href="https://www.kaggle.com/{{ site.kaggle_username }}">
     <i class="fab fa-kaggle"></i>
+  </a>
+  {% endif %}
+
+  {% if site.linkedin_username %}
+  <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
+    <i class="fab fa-linkedin-in"></i>
   </a>
   {% endif %}
 
@@ -33,12 +39,6 @@
   {% if site.facebook_username %}
   <a href="https://facebook.com/{{ site.facebook_username }}">
     <i class="fa fa-facebook-square"></i>
-  </a>
-  {% endif %}
-
-  {% if site.linkedin_username %}
-  <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
-    <i class="fa fa-linkedin-square"></i>
   </a>
   {% endif %}
 
