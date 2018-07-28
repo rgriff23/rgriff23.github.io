@@ -2,7 +2,7 @@
 title: "Kaggle Kernel (and Award!): Stack Overflow survey data analysis"
 layout: post
 date: 2018-07-27
-tags: life
+tags: kaggle survey-data life
 comments: TRUE
 ---
 
