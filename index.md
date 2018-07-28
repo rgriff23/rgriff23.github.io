@@ -33,6 +33,6 @@ I live in CT with my girlfriend, dog, and cat. We adopted them from a shelter fo
 
 *Ice hockey*
 
-I play professional women's ice hockey for the [Connecticut Whale](https://www.theicegarden.com/2018/7/10/17553146/connecticut-whale-sign-randi-griffin-sarah-hughson-re-sign-hanna-beattie-team-korea-free-agency) and internationally for [Team Korea](https://www.usatoday.com/story/sports/winter-olympics-2018/2018/02/14/koreas-historic-goal-american-randi-griffin-has-roots-usas-first-gold-1998/336270002/). Previously, I played varsity women's ice hockey at [Harvard University](https://www.thecrimson.com/article/2018/2/1/randi-griffin-15q/). When I'm not playing, I coach!
+I play professional women's ice hockey for the [Connecticut Whale](https://www.theicegarden.com/2018/7/10/17553146/connecticut-whale-sign-randi-griffin-sarah-hughson-re-sign-hanna-beattie-team-korea-free-agency) and internationally for [Team Korea](https://today.duke.edu/2018/03/duke-olympian-will-soon-defend-her-phd). Previously, I played varsity women's ice hockey at [Harvard University](https://www.thecrimson.com/article/2018/2/1/randi-griffin-15q/). When I'm not playing, I coach!
 
 **[Last updated: July 28, 2018]**
