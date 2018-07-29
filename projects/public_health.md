@@ -16,6 +16,6 @@ We are analyzing data on the time it took to receive various treatments for pati
 
 ### Project 2: Mental health in LGBTQ asylum seekers
 
-We are analyzing survey data about mental health and healthcare access among LGBTQ asylum seekers in the U.S. Our goal is to describe the the epidemiology of mental health problems in this population and their access to treatment.
+We are analyzing survey data about mental health and healthcare access among LGBTQ asylum seekers in the U.S. Our goal is to describe the epidemiology of mental health problems in this population and their access to treatment.
 
 ___
