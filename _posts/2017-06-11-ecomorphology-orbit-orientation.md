@@ -558,7 +558,7 @@ I see at least two major directions for future phylogenetic comparative work on 
 
 - Second is fitting more sophisticated models that aim to detect shifts in the tempo or mode of evolution (e.g., like [this](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12084/full)). This is a rather different approach that aims to identify parts of a phylogeny where the rules of evolution seem to change. For instance, it would be interesting to know if there is a statistically significant 'shift' in the mean orbit orientation at the base of the primate clade. That wouldn't tell us *why* the shift occurred, but it would at least support our assumption that *something* happened there that warrants explanation. I think the Nocturnal Visual Predation hypothesis would predict a mean shift at the base of both the primates and the carnivores, as the ancestors of both groups are thought to have been nocturnal visual predators. 
 
-These directions are complementary, since adding more data ([particularly fossils](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12285/full)) increases statistical power to detect deviations from Brownian evolution.
+This last direction will also benefit from the inclusion of fossil data, since adding more data ([particularly fossils](http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12285/full)) increases statistical power to detect deviations from neutral evolution.
 
 **References**:
 

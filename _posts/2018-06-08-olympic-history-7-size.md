@@ -10,7 +10,7 @@ The data used in this post can be downloaded from [figshare](https://figshare.co
 
 
 
-## Introductions
+## Introduction
 
 The motto for the Olympics is "Citius, Altius, Fortius", which means "Faster, Higher, Stronger" in Latin. This motto was proposed by Pierre de Coubertin, the founder of the modern Olympics, in 1894. Indeed, as illustrated by the long history of record-breaking performances at the Olympics, athletes at every Olympics seem to be faster and stronger than the one before. In this post, I explore a correlary of this phenomenon: historical trends in the heights and weights of Olympic athletes.  
 
@@ -39,7 +39,7 @@ Out of 489 events that appeared at least once in the Olympics since 1960, only 1
 
 This is a lot of events to consider, but we can reduce the list a bit. First, we can eliminate events based on weight classes (wrestling, weightlifting, and boxing), since the size of athletes in these events are restricted and the changes over time primarily reflect [shifting definitions](https://www.sports-reference.com/olympics/summer/2000/WRE/) of the weight classes. Second, we can eliminate events that include both men and women, including all the equestrian events and pairs figure skating. This leaves 108 events to consider. 
 
-To charaterize historical trends in size for different events, I fit separate linear regressions for Height ~ Year and Weight ~ Year for athletes in each event, and saved the estimated regression slopes. By plotting the estimated regression slopes for height against the estimated regression slopes for weight across different events, we can identify events in which the size of athletes have changed the most. Importantly, the quadrant of the plot in which the point falls indicates the type of size change for each event:
+To characterize historical trends in size for different events, I fit separate linear regressions for Height ~ Year and Weight ~ Year for athletes in each event, and saved the estimated regression slopes. By plotting the estimated regression slopes for height against the estimated regression slopes for weight across different events, we can identify events in which the size of athletes have changed the most. Importantly, the quadrant of the plot in which the point falls indicates the type of size change for each event:
 
 - Upper left quadrant: athletes have gotten shorter and heavier
 - Upper right quadrant: athletes have gotten taller and heavier
