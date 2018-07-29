@@ -5,7 +5,11 @@ title: About me
 
 <p><h1>About me</h1></p>
 
-I'm a recent PhD graduate with 9 years of experience analyzing data with the R programming language. I have a strong background in the social and biological sciences, as well as statistics and programming.
+Download my [resume](https://rgriff23.github.io/assets/pdfs/Randi_Griffin_resume.pdf)
+
+___
+
+I'm a recent PhD graduate with 9 years of experience analyzing data with the R programming language. I have a strong background in the social and biological sciences, as well as statistics and programming. 
 
 <p align="center">
   <img src="https://i.imgur.com/Hmlxm7T.png?1">
