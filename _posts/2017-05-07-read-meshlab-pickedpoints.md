@@ -1,11 +1,10 @@
 ---
-title: "Function to import Meshlab picked points (*.pp) into R"
+title: "Function to read and write Meshlab picked points (*.pp) with R"
 layout: post
 date: 2017-05-07
 tags: R geometric-morphometrics Meshlab 
 comments: true
 ---
-
 
 
 Recently, I've been using the 'PickPoints' feature of  [Meshlab](http://www.meshlab.net/) to collect landmarks from 3D surface models of primate skulls. Meshlab exports landmark coordinates in uniquely formatted 'PickedPoints' files, which I want to read into R as 3D coordinate matrices. Here is an example of the files I am working with- this one decribes 3 points, or landmarks, named "p1", "p2", and "p3":
@@ -50,12 +49,48 @@ read.pp <- function (file) {
 }
 ```
 
-Import a single `*.pp` file like this:
+Amd here is a function to write Meshlab `*.pp` files from R. This function takes a matrix with 3 columns, and assumes the coordinates are in the order: `x`, `y`, `z`. 
+
+```r
+# function to write Meshlap *.pp files from R
+write.pp <- function (mat, file) {
+  # create text for each point
+   pp <- c()
+   for (i in 1:nrow(mat)) {
+     point <- paste0("  <point x=\"", mat[i,1],
+                     "\" y=\"", mat[i,2],
+                     "\" z=\"", mat[i,3],
+                     "\" name=\"p", i,
+                     "\" active=\"1\"/>")
+     pp <- append(pp, point)
+   }
+  # add supporting markup
+   pp <- c("<!DOCTYPE PickedPoints>",
+          "<PickedPoints>",
+          "  <DocumentData>",
+          paste0("    <DataFileName name=\"", tail(strsplit(file,"/")[[1]],1), "\"/>"),
+          "    <templateName name=\"template.pptpl\"/>",
+          "  </DocumentData>",
+          pp,
+          "</PickedPoints>")
+  # write the file
+  write(pp, file=file)
+}
+```
+
+You can now import a single `*.pp` file like this:
 
 
 ```r
 # import a single file
 coords <- read.pp("~/path/to/file.pp")
+```
+
+And export individual `*.pp` files like this:
+
+```r
+# export a single file
+write.pp(coords, "~/path/to/file.pp")
 ```
 
 To import a set of `*.pp` files from a directory and format them as a 3D array, use `read.pp` and `abind` in a loop: 
@@ -76,7 +111,9 @@ for (i in 1:length(files)) {
 }
 ```
 
-And that's how you can pull your Meshlab landmarks into R!
+And that's how you can import and export Meshlab landmark files with R! 
+
+
 
 **Footnotes:**
 
