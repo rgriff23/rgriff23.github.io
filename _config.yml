@@ -27,8 +27,8 @@ url: "https://rgriff23.github.io" # the base hostname & protocol for your site, 
 
 # Social media usernames
 github_username:    rgriff23
-kaggle_username:    heesoo37
 linkedin_username:    randigriffin
+kaggle_username:    heesoo37
 #twitter_username:     HeesooRandi
 
 markdown: kramdown
