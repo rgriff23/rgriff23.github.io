@@ -1,7 +1,14 @@
+---
+title: "Insight Data Science, Python, and the Whale"
+layout: post
+date: 2018-08-01
+tags: life
+comments: true
+---
 
 ## Introduction
 
-I rarely make life update posts, but so much has happened in the past month that I thought it was worth posting about, especially since some of the changes will affect this blog. Here is the tl;dr version:
+I rarely make life update posts, but enough has happened in the past month that I thought it was worth posting about, especially since some of the changes will affect this blog! Here is the tl;dr version:
 
 1. I accepted an [Insight Data Science](https://www.insightdatascience.com/) post-doctoral fellowship in Boston.
 2. I am learning Python and avoiding R (except for emergencies).
@@ -29,7 +36,7 @@ Just as I removed Matlab from my computer when I was first learning R, I have fo
 
 ### Connecticut Whale (NWHL)
 
-I signed a [contract](https://www.theicegarden.com/2018/7/10/17553146/connecticut-whale-sign-randi-griffin-sarah-hughson-re-sign-hanna-beattie-team-korea-free-agency) with the Whale, so I am officially a professional ice hockey player now. I have no idea what my role will be on this roster, but I am prepared for anything, even riding the pine! I'm just happy to be skating for another year. My personal keys for success this season:
+I signed a [contract](https://www.theicegarden.com/2018/7/10/17553146/connecticut-whale-sign-randi-griffin-sarah-hughson-re-sign-hanna-beattie-team-korea-free-agency) with the Whale, so I am officially a professional ice hockey player! I have no idea what my role will be on this roster, but I am prepared for anything, even riding the pine. I'm just happy to be skating for another year. My personal keys for success this season:
 
 - Health and fitness first
 - Hit the singles
