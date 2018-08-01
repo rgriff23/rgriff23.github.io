@@ -9,9 +9,7 @@ Download my [resume](https://rgriff23.github.io/assets/pdfs/Randi_Griffin_resume
 
 ___
 
-I'm a recent PhD graduate with 9 years of experience analyzing data with R. I have a strong background in the social and biological sciences, as well as statistics and programming. 
-
-For examples of my work, check out my [blog](https://rgriff23.github.io/blog.html) or [publications](https://rgriff23.github.io/blog.html). You can also [fork me](https://github.com/rgriff23) on GitHub, [follow me](https://www.kaggle.com/heesoo37) on Kaggle, or [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn!
+I'm a recent PhD graduate with 9 years of experience analyzing data with R. I have a strong background in the social and biological sciences, as well as statistics and programming. For examples of my work, check out my [blog](https://rgriff23.github.io/blog.html) or [publications](https://rgriff23.github.io/blog.html). You can also [fork me](https://github.com/rgriff23) on GitHub, [follow me](https://www.kaggle.com/heesoo37) on Kaggle, or [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn!
 
 *Current status*
 

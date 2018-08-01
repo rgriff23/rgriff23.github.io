@@ -6,8 +6,6 @@ tags: life
 comments: true
 ---
 
-## Introduction
-
 I rarely make life update posts, but enough has happened in the past month that I thought it was worth posting about, especially since some of the changes will affect this blog! Here is the tl;dr version:
 
 1. I accepted an [Insight Data Science](https://www.insightdatascience.com/) post-doctoral fellowship in Boston.
