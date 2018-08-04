@@ -6,6 +6,12 @@
   </a>
   {% endif %}
 
+  {% if site.researchgate_username %}
+  <a href="https://www.researchgate.net/profile/{{ site.researchgate_username }}">
+    <i class="fab fa-researchgate"></i>
+  </a>
+  {% endif %}
+
   {% if site.linkedin_username %}
   <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
     <i class="fab fa-linkedin-in"></i>
