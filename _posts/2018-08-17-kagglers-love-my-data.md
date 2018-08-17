@@ -1,4 +1,12 @@
 
+---
+title: "Holy shit, Kagglers love my Olympic History dataset!"
+layout: post
+date: 2018-08-17
+tags: life
+comments: true
+---
+
 A couple of months ago, I shared my [Olympic History dataset](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results) with the Kaggle community, and I have been absolutely amazed and honored by it's popularity! It is currently the hottest dataset on Kaggle. 
 
 ![](https://i.imgur.com/EV8mJU4.png) 
