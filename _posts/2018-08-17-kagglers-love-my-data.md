@@ -1,4 +1,3 @@
-
 ---
 title: "Holy shit, Kagglers love my Olympic History dataset!"
 layout: post
