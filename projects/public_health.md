@@ -14,7 +14,11 @@ ___
 
 We are analyzing data on the time it took to receive various treatments for patients arriving with traumatic brain injuries at an emergency room in Moshi, Tanzania. We are interested in knowing how patient outcomes can be improved at this hospital.
 
-### Project 2: Mental health in LGBTQ asylum seekers
+### Project 2: Effectiveness of a training intervention for emergency room staff in Tanzania
+
+At the same hospital as Project 1, we are evaluating the effectiveness of a staff traning intervention (developed and implemented by Samara Fox) in improving clinical practice and patient outcomes for patients with traumatic brain injuries. 
+
+### Project 3: Mental health in LGBTQ asylum seekers
 
 We are analyzing survey data about mental health and healthcare access among LGBTQ asylum seekers in the U.S. Our goal is to describe the epidemiology of mental health problems in this population and their access to treatment.
 
