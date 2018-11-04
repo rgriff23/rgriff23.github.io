@@ -130,7 +130,7 @@ summary(mod2)
 >  F-statistic: 184.8 on 2 and 87 DF,  p-value: < 2.2e-16
 ```
 
-The maximum likelihood estimate of lambda is 1, indicating a high degree of phylogenetic non-independence, and the relationship between orbit area and activity pattern is now barely statistically significant (p = 0.017). This demonstrates that the data are strongly structured by phylogenetic relationships and that standard errors were greatly inflated when OLS was used.
+The maximum likelihood estimate of lambda is 1, indicating a high degree of phylogenetic non-independence, and the relationship between orbit area and activity pattern is now barely statistically significant (p = 0.017). This demonstrates that the data are strongly structured by phylogenetic relationships and that standard errors were greatly underestimated when OLS was used.
 
 Now let's compare OLS and PGLS results for relative optic foramen area, beginning with a visualization the relationship between relative optic foramen area versus skull length:
 

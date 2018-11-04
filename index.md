@@ -7,7 +7,7 @@ title: About me
 
 ___
 
-I'm currently a Data Science Fellow at Insight Data Science. I have a background in the social and biological sciences, as well as statistics and programming in R and Python. For examples of my work, check out my [blog](https://rgriff23.github.io/blog.html) or [publications](https://rgriff23.github.io/blog.html). [Fork me](https://github.com/rgriff23) on GitHub or [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn!
+I'm currently a Fellow at Insight Data Science. I have a background in the social and biological sciences, as well as statistics and programming in R and Python. For examples of my work, check out my [blog](https://rgriff23.github.io/blog.html) or [publications](https://rgriff23.github.io/blog.html). You can also [fork me](https://github.com/rgriff23) on GitHub or [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn!
 
 *Past work*
 
