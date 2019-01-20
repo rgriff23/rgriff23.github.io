@@ -36,6 +36,8 @@ markdown: kramdown
 
 gems:
   - jekyll-feed
+plugins:
+  - jekyll-feed
 exclude:
   - Gemfile
   - Gemfile.lock
