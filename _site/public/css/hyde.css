@@ -78,7 +78,7 @@ html {
   text-decoration: underline;
 }
 .sidebar-nav-item:active {
-  font-weight: bold;
+   font-weight: Bold;
 }
 
 .sidebar-nav-item-sub {
