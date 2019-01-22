@@ -1,4 +1,4 @@
-site.title/*
+.title/*
  *                        ___
  *                       /\_ \
  *  _____     ___     ___\//\ \      __
@@ -290,8 +290,10 @@ tbody tr:nth-child(odd) th {
   max-width: 38rem;
   padding-left:  1rem;
   padding-right: 1rem;
+  padding-bottom: 1rem;
   margin-left:  auto;
   margin-right: auto;
+  margin-bottom: 1;
 }
 
 
