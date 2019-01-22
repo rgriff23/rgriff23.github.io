@@ -84,12 +84,12 @@ a.sidebar-nav-item:focus {
 
 /* Sticky sidebar
  *
- * Add the `sidebar-sticky` class to the sidebar's container to affix it the
+ * Add the `sidebar` class to the sidebar's container to affix it the
  * contents to the bottom of the sidebar in tablets and up.
  */
 
 @media (min-width: 48em) {
-  .sidebar-sticky {
+  .sidebar {
     position: absolute;
     right:  1rem;
     top: 1rem;
@@ -122,4 +122,15 @@ a.sidebar-nav-item:focus {
     margin-left: 20rem;
     margin-right: 4rem;
   }
+}
+
+/* Responsive profile photo size
+ *
+ * Align the contents of the site above the proper threshold with some margin-fu
+ * with a 25%-wide `.sidebar`.
+ */
+ 
+.responsive {
+  width: 100%;
+  height: auto;
 }
