@@ -127,3 +127,7 @@ html {
     max-height: 100%;
   }
 }
+
+.content.container {
+  margin-bottom: 0;
+}
