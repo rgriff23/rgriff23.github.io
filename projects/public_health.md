@@ -20,6 +20,6 @@ At the same hospital as Project 1, we are evaluating the effectiveness of a staf
 
 ### Project 3: Mental health in LGBTQ asylum seekers
 
-We are analyzing survey data about mental health and healthcare access among LGBTQ asylum seekers in the U.S. Our goal is to describe the epidemiology of mental health problems in this population and their access to treatment.
+We are conducting a survey study about mental health and healthcare access among LGBTQ asylum seekers in the U.S. Our goal is to describe the epidemiology of mental health problems in this population and their access to treatment.
 
 ___
