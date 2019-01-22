@@ -113,6 +113,7 @@ html {
     max-width: 38rem;
     margin-left: 18rem;
     margin-right: 2rem;
+    padding-bottom: 0rem;
   }
 }
 
@@ -120,5 +121,6 @@ html {
   .content {
     margin-left: 20rem;
     margin-right: 2rem;
+    padding-bottom: 0rem;
   }
 }
