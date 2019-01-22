@@ -80,6 +80,7 @@ a.sidebar-nav-item:focus {
 .sidebar-nav-item.active {
   font-weight: bold;
 }
+
 .sidebar-nav-item-sub {
   font-size: 2;
 }
