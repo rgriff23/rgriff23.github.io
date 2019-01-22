@@ -73,11 +73,11 @@ html {
   display: block;
   line-height: 1.75;
 }
-.sidebar-nav-item a:hover,
-.sidebar-nav-item a:focus {
+.sidebar-nav-item:hover,
+.sidebar-nav-item:focus {
   text-decoration: underline;
 }
-.sidebar-nav-item a:active {
+.sidebar-nav-item.active {
   font-weight: bold;
 }
 
