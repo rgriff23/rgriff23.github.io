@@ -77,7 +77,7 @@ html {
 .sidebar-nav-item:focus {
   text-decoration: underline;
 }
-.sidebar-nav-item.active {
+.active {
   font-weight: bold;
 }
 
