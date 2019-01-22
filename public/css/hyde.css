@@ -81,22 +81,6 @@ a.sidebar-nav-item:focus {
   font-weight: bold;
 }
 
-/* Sticky sidebar
- *
- * Add the `sidebar` class to the sidebar's container to affix it the
- * contents to the bottom of the sidebar in tablets and up.
- */
-
-@media (min-width: 48em) {
-  .sidebar {
-    position: absolute;
-    right:  1rem;
-    top: 1rem;
-    left:   1rem;
-  }
-}
-
-
 /* Container
  *
  * Align the contents of the site above the proper threshold with some margin-fu
