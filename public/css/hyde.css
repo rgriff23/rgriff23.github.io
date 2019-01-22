@@ -97,6 +97,7 @@ a.sidebar-nav-item:focus {
     max-width: 38rem;
     margin-left: 18rem;
     margin-right: 18rem;
+    margin-bottom: 36rem;
   }
 }
 
@@ -104,13 +105,12 @@ a.sidebar-nav-item:focus {
   .content {
     margin-left: 20rem;
     margin-right: 20rem;
+    margin-bottom: 40rem;
   }
 }
 
-/* Responsive profile photo size
- *
- * Align the contents of the site above the proper threshold with some margin-fu
- * with a 25%-wide `.sidebar`.
+/* 
+ * Responsive profile photo size.
  */
  
 .responsive {
