@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Projects
+active: projects
 ---
 
 ### Research

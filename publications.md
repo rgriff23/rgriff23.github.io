@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Publications
+active: publications
 ---
 
 Download my [CV](https://rgriff23.github.io/assets/pdfs/CV.pdf)

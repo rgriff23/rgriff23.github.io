@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About me
+active: about
 ---
 
 <p><h1>About me</h1></p>
