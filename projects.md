@@ -9,15 +9,11 @@ title: Projects
 
 [**Public health projects**](/projects/public_health)- In collaboration with Samara Fox at Yale Medical School
 
-[**Primate skull evolution**](/projects/skull)- My dissertation
-
 *Recently active* 
 
+[**Primate skull evolution**](/projects/skull)- My dissertation
+
 [**Gelada monkey parasites**](/projects/gelada)- In collaboration with the <a target="_blank" href="https://sites.lsa.umich.edu/gelada/">Gelada research project</a> at U Mich
-
-[**Phylogenetic comparative methods**](/projects/pcm)- I assessed the validity of two recently developed statistical methods 
-
-[**Mosquito community ecology**](/projects/mosquito)- In collaboration with the [Vector Ecology Lab](http://vectorecology.org/) at NC State
 
 ### R packages
 
