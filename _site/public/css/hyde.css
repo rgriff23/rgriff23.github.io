@@ -81,8 +81,8 @@ a.sidebar-nav-item:focus {
   font-weight: bold;
 }
 
-.sidebar-nav-item.sub {
-  font-size: 1;
+.sidebar-nav-item-sub {
+  font-size: 10px
 }
 
 /* Sticky sidebar
