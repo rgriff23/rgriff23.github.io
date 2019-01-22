@@ -27,6 +27,10 @@ site.title/*
  * Reverse layout
  * Themes
  */
+ 
+ .page {
+    padding-right: 0;
+  }
 
 
 /*
