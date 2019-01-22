@@ -29,8 +29,9 @@ site.title/*
  */
  
  .page {
-    width: 80%;
+    width: 100%;
     padding-right: 0;
+    margin-right: 0;
   }
 
 
