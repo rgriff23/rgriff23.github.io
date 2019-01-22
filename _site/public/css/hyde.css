@@ -81,10 +81,6 @@ html {
   font-weight: bold;
 }
 
-.sidebar-nav-item-sub {
-  font-size: 2rem;
-}
-
 /* Sticky sidebar
  *
  * Add the `sidebar-sticky` class to the sidebar's container to affix it the
