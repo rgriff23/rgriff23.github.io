@@ -78,7 +78,7 @@ html {
   text-decoration: underline;
 }
 .sidebar-nav-item:active {
-   font-weight: Bold;
+  font-weight: bold;
 }
 
 .sidebar-nav-item-sub {
@@ -123,6 +123,6 @@ html {
 @media (min-width: 64em) {
   .content {
     margin-left: 20rem;
-    margin-right: 4rem;
+    margin-right: 6rem;
   }
 }
