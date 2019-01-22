@@ -37,7 +37,7 @@ html {
 
 .sidebar {
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 2rem 2rem;
   color: rgba(255,255,255,.5);
   background-color: #000000;
 }
@@ -96,7 +96,7 @@ a.sidebar-nav-item:focus {
   .content {
     max-width: 38rem;
     margin-left: 18rem;
-    margin-right: 18rem;
+    margin-right: 2rem;
     margin-bottom: 36rem;
   }
 }
@@ -104,7 +104,7 @@ a.sidebar-nav-item:focus {
 @media (min-width: 64em) {
   .content {
     margin-left: 20rem;
-    margin-right: 20rem;
+    margin-right: 2rem;
     margin-bottom: 40rem;
   }
 }
