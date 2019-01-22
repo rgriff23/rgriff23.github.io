@@ -90,6 +90,8 @@ a.sidebar-nav-item:focus {
 .content {
   padding-top:    3rem;
   padding-bottom: 3rem;
+  padding-right:    1rem;
+  padding-left: 1rem;
 }
 
 @media (min-width: 48em) {
@@ -104,7 +106,7 @@ a.sidebar-nav-item:focus {
 @media (min-width: 64em) {
   .content {
     margin-left: 20rem;
-    margin-right: 5rem;
+    margin-right: 3rem;
     margin-bottom: 40rem;
   }
 }
