@@ -2,7 +2,7 @@
 title: "Orbit orientation isn't correlated with anything: a reanalysis of Heesy (2008)"
 layout: post
 date: 2017-06-11
-tags: R evolution primates mammals morphology phylogeny geiger geomorph
+tags: R primates mammals morphology evolution
 comments: true
 ---
 

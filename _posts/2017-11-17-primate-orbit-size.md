@@ -2,7 +2,7 @@
 title: "Primate activity pattern and orbit morphology: a phylogenetic analysis of data from Kirk & Kay (2004)"
 layout: post
 date: 2017-11-17
-tags: R morphology evolution PGLS regression
+tags: R regression primates ecology evolution morphology
 comments: true
 ---
 

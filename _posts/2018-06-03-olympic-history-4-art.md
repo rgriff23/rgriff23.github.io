@@ -2,7 +2,7 @@
 title: "Olympic history: the Art Competitions"
 date: '2018-06-03'
 layout: post
-tags: R olympics sports tidyverse
+tags: R olympics sports
 comments: true
 ---
 

@@ -3,7 +3,7 @@ title: "Enhanced annotation of a primate phylogeny with ggtree"
 description: "Label tips, nodes, and branches with subplots or images"
 layout: post
 date: 2017-05-11
-tags: R tutorial phylogeny primates ggtree phytools 
+tags: R tutorial visualization primates evolution
 comments: true
 ---
 

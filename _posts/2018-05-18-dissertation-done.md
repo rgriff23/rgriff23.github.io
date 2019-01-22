@@ -2,7 +2,7 @@
 title: "Dissertation is done!"
 layout: post
 date: 2018-05-18
-tags: life
+tags: announcement
 comments: TRUE
 ---
 

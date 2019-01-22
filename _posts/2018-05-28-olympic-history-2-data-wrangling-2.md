@@ -2,7 +2,7 @@
 title: 'Olympic history: Data wrangling (part 2)'
 date: "2018-05-28"
 layout: post
-tags: R olympics sports tidyverse
+tags: R olympics sports
 comments: yes
 ---
 

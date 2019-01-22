@@ -2,7 +2,7 @@
 title: "Olympic history: Geography of the Olympics"
 date: '2018-06-04'
 layout: post
-tags: R olympics sports tidyverse
+tags: R olympics sports
 comments: true
 ---
 

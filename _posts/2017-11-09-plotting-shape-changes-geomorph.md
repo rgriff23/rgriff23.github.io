@@ -3,7 +3,7 @@ title: Wireframe plots and visualizing results from multivariate phylogenetic re
   (geomorph)
 date: '2017-11-10'
 layout: post
-tags: R geometric-morphometrics PGLS regression visualization geomorph
+tags: R geometric-morphometrics regression visualization primates ecology evolution morphology
 comments: yes
 ---
 

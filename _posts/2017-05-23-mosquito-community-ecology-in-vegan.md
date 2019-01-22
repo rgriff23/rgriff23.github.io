@@ -2,7 +2,7 @@
 title: "Mosquito community diversity analysis with vegan"
 layout: post
 date: 2017-05-23
-tags: R tutorial ecology mosquitoes vegan
+tags: R tutorial ecology mosquitoes
 comments: true
 ---
 

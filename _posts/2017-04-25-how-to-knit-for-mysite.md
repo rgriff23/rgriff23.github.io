@@ -2,7 +2,7 @@
 title: "Figure path mess with R Markdown/knitr/jekyll/GitHub"
 layout: post
 date: 2017-04-25
-tags: R blog hack knitr
+tags: R
 comments: true
 ---
 

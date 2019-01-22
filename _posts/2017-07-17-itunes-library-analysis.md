@@ -2,7 +2,7 @@
 title: "Analyzing your iTunes library"
 layout: post
 date: 2017-07-17
-tags: R text-analysis itunes
+tags: R random
 comments: true
 ---
 

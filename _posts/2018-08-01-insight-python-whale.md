@@ -2,7 +2,7 @@
 title: "Insight Data Science, Python, and the Whale"
 layout: post
 date: 2018-08-01
-tags: life
+tags: python announement
 comments: true
 ---
 

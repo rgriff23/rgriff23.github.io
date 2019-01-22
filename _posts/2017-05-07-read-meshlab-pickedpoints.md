@@ -2,7 +2,7 @@
 title: "Function to read and write Meshlab picked points (*.pp) with R"
 layout: post
 date: 2017-05-07
-tags: R geometric-morphometrics Meshlab 
+tags: R geometric-morphometrics 
 comments: true
 ---
 

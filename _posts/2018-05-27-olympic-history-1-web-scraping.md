@@ -2,7 +2,7 @@
 title: 'Olympic history: Scraping data from sports-reference.com'
 date: '2018-05-27'
 layout: post
-tags: R olympics sports tidyverse RCurl XML
+tags: R olympics sports
 comments: true
 ---
 

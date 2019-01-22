@@ -2,7 +2,7 @@
 title: 'Major update to R package btw: prettier code, BayesTraitsV3 and Windows support'
 date: "2018-05-25"
 layout: post
-tags: R BayesTraits btw
+tags: R btw evolution 
 comments: TRUE
 ---
 

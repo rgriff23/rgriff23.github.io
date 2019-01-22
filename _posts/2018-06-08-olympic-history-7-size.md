@@ -2,7 +2,7 @@
 title: "Olympic history: the size of Olympians"
 date: '2018-06-08'
 layout: post
-tags: R olympics sports tidyverse
+tags: R olympics sports
 comments: true
 ---
 

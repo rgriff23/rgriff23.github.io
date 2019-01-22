@@ -2,7 +2,7 @@
 title: "Olympic history: Women in the Olympics"
 date: '2018-06-06'
 layout: post
-tags: R olympics sports tidyverse
+tags: R olympics sports
 comments: true
 ---
 

@@ -2,7 +2,7 @@
 title: 'Olympic history: Over a century of growth'
 date: "2018-05-31"
 layout: post
-tags: R olympics sports tidyverse
+tags: R olympics sports
 comments: true
 ---
 
