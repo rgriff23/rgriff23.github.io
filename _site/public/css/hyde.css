@@ -106,6 +106,7 @@ html {
 .content {
   padding-top:    3rem;
   padding-bottom: 0rem;
+  margin-bottom: -25px
 }
 
 @media (min-width: 48em) {
@@ -114,6 +115,7 @@ html {
     margin-left: 18rem;
     margin-right: 2rem;
     padding-bottom: 0rem;
+    margin-bottom: -25px
   }
 }
 
@@ -122,5 +124,6 @@ html {
     margin-left: 20rem;
     margin-right: 2rem;
     padding-bottom: 0rem;
+    margin-bottom: -25px
   }
 }
