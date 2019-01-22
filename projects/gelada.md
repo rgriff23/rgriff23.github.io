@@ -20,10 +20,14 @@ ___
 
 ### Part 1: Tapeworm impact on host survival
 
-We performed survival analyses using 10 years of longitudinal data on infection and host mortality, and found that the parasite drastically reduces host survival. Our findings were recently published in *The American Journal of Primatology* ([download](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017b.pdf)). 
+We performed survival analyses using 10 years of longitudinal data on infection and host mortality, and found that the parasite drastically reduces host survival. The implication is that the *Taenia serialis* parasite represents a real selection pressure on its host, making this a potentially interesting system for studying parasite-host dynamics. It is surprisingly rare to identify a long-lived mammal population (e.g., any primate) with an endemic parasite that demonstrably impacts host fitness. This isn't because parasites rarely affect host fitness; rather, it is because it is rare for a population of long lived animals to be studied long enough to see the impact of parasites. It is no surprise that when studies do observe an impact, they always have study periods spanning many years. For a well known example, consider the study demonstrating elevated death rates in [chimpanzees with SIV](https://www.ncbi.nlm.nih.gov/pubmed/25716944), which spanned 9 years. 
+
+Our study was recently published in *The American Journal of Primatology* ([download](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017b.pdf)). 
 
 ### Part 2: Identifying undetected tapeworms
 
-It is possible that undetected internal cysts are causing us to underestimate prevalence based on the presence of visible external cysts, so India developed an antigen assay for detecting infections from dried urine samples. I analyzed the results with GLMMs to explore demographic patterns in infection. This study was recently published in *PLOS Neglected Tropical Diseases* ([download](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017a.pdf)). 
+It is possible that undetected internal cysts are causing us to underestimate parasite prevalence based on the presence of visible external cysts, so India developed an antigen assay for detecting infection (both internal and external) from dried urine samples. I analyzed the results with GLMMs to explore demographic patterns in infection. The models showed that infections were equally common across all age and sex categories, despite the fact that disease symptoms were more commonly observed in adults. This makes sense because only a percentage of cysts are observable by field assistants, and the longer an animal is exposed to infection, the higher the probability that an observable cyst develops. This antigen test allows us to more accurately monitor infections in the population without resorting to invasive measures. 
+
+Our study was recently published in *PLOS Neglected Tropical Diseases* ([download](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017a.pdf)). 
 
 ___
