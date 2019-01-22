@@ -77,7 +77,7 @@ a.sidebar-nav-item:hover,
 a.sidebar-nav-item:focus {
   text-decoration: underline;
 }
-.sidebar-nav-item:active {
+a.sidebar-nav-item:active {
   font-weight: bold;
 }
 
