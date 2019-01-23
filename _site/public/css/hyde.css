@@ -121,7 +121,8 @@ html {
 
 @media (min-width: 64em) {
   .content {
+    max-width: 50rem;
     margin-left: 20rem;
-    margin-right: 3rem;
+    margin-right: 4rem;
   }
 }
