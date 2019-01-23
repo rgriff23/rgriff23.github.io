@@ -6,11 +6,7 @@ active: projects
 
 ### Research
 
-*Active*
-
 [**Public health projects**](/projects/public_health)- In collaboration with Samara Fox at Yale Medical School
-
-*Recently active* 
 
 [**Primate skull evolution**](/projects/skull)- My dissertation
 
@@ -22,7 +18,7 @@ active: projects
 
 [**caRds**](/projects/caRds)- The most important work I've ever done
 
-### Public datasets
+### Datasets
 
 [**Olympic history data**](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results) - longitudinal data on athletes and events in the modern Olympics (1896 - 2016), scraped from www.sports-reference.com
 
@@ -31,8 +27,6 @@ active: projects
 [**3D primate skull data**](https://figshare.com/articles/3D_surfaces_of_primate_skulls_from_my_dissertation_Macroevolution_of_primate_skull_shape_combining_geometric_morphometrics_and_phylogenetic_comparative_methods_/5971231/1)- 3D surfaces (PLY files) for 122 primate skull scans from my [dissertation](/projects/skull)
 
 ### Other
-
-[My blog](/blog)- analyses, tutorials, updates 
 
 <a target="_blank" href="https://github.com/rgriff23/rgriff23.github.io">My website</a>- My site is powered by <a target="_blank" href="https://jekyllrb.com/">jekyll</a> and hosted by <a target="_blank" href="https://pages.github.com/">GitHub Pages</a>
 
