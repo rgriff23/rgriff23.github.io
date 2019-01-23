@@ -36,7 +36,7 @@ html {
 
 .sidebar {
   text-align: center;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   color: rgba(255,255,255,.5);
   background-color: #000000;
   overflow: auto;
@@ -105,8 +105,6 @@ html {
 .content {
   padding-top:    0;
   padding-bottom: 0;
-  margin-right: 20rem;
-  margin-bottom: 0;
 }
 
 @media (min-width: 48em) {
