@@ -10,8 +10,7 @@ xw/*
 /*
  * Global resets
  *
- * Update the foundational and global aspects of the page.
- */
+ * Update the foundational and global aspects of the page. */
 
 html {
   font-family: "PT Sans", Helvetica, Arial, sans-serif, cursive;
@@ -40,6 +39,7 @@ html {
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
   background-color: #000000;
+  overflow: auto;
 }
 @media (min-width: 48em) {
   .sidebar {
@@ -95,7 +95,6 @@ html {
     left:   1rem;
   }
 }
-
 
 /* Container
  *
