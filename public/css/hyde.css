@@ -77,9 +77,6 @@ a.sidebar-nav-item:hover,
 a.sidebar-nav-item:focus {
   text-decoration: underline;
 }
-.sidebar-nav-item.active {
-  font-weight: bold;
-}
 
 /* Container
  *
@@ -99,7 +96,7 @@ a.sidebar-nav-item:focus {
     max-width: 38rem;
     margin-left: 18rem;
     margin-right: 6rem;
-    margin-bottom: 36rem;
+    margin-bottom: 5rem;
   }
 }
 
@@ -107,7 +104,7 @@ a.sidebar-nav-item:focus {
   .content {
     margin-left: 20rem;
     margin-right: 0rem;
-    margin-bottom: 40rem;
+    margin-bottom: 5rem;
   }
 }
 
