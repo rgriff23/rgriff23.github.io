@@ -9,7 +9,7 @@ comments: true
 I rarely make life update posts, but this is a big enough deal that I thought it was worth posting about, especially since some of the changes will affect this blog! Here is the tl;dr version:
 
 1. I accepted an [Insight Data Science](https://www.insightdatascience.com/) post-doctoral fellowship in Boston.
-2. I am learning Python and avoiding R (except for emergencies).
+2. I am transitioning from R to Python, and although I will likely continue using R for academic projects, Python is my new go-to tool.
 
 If you want to know a little more about these updates, read on!
 
