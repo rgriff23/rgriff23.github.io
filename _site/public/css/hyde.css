@@ -77,15 +77,17 @@ html {
 .sidebar-nav-item:focus {
   text-decoration: underline;
 }
+
+/*
 .sidebar-nav-item a:active {
   font-weight: bold;
 }
+*/
 
 /* Sticky sidebar
  *
  * Add the `sidebar-sticky` class to the sidebar's container to affix it the
  * contents to the bottom of the sidebar in tablets and up.
- */
 
 @media (min-width: 48em) {
   .sidebar-sticky {
@@ -95,6 +97,7 @@ html {
     left:   1rem;
   }
 }
+*/
 
 /* Container
  *
