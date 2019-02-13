@@ -12,6 +12,6 @@ I am a data scientist on the performance marketing team at [KAYAK](https://www.k
 
 Before KAYAK, I was a Fellow at [Insight Data Science](https://www.insightdatascience.com/), a program that helps PhDs land industry jobs (it works!). Before that, I got my PhD in [Evolutionary Anthropology](https://evolutionaryanthropology.duke.edu/) from Duke University, where my research focused on the ecology and evolution of primate morphology, behavior, and infectious disease. 
 
-I'm always on the lookout for exciting opportunities to apply and expand my data science skills. In addition, I'm passionate about paying it forward through outreach, mentorship, and pro bono work. Interested in talking or collaborating? [Fork me](https://github.com/rgriff23) on GitHub, [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn, or shoot me an e-mail! 
+I'm always on the lookout for exciting opportunities to apply and expand my data science skills. In addition, I'm passionate about paying it forward through teaching, mentorship, and pro bono work. Interested in talking or collaborating? [Fork me](https://github.com/rgriff23) on GitHub, [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn, or shoot me an e-mail! 
 
 **[Last updated: Feb 13, 2019]**
