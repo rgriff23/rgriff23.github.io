@@ -30,5 +30,5 @@ active: projects
 
 ### Other
 
-<a target="_blank" href="https://github.com/rgriff23/rgriff23.github.io">This site</a>- powered by <a target="_blank" href="https://jekyllrb.com/">jekyll</a> and hosted by <a target="_blank" href="https://pages.github.com/">GitHub Pages</a>
+<a target="_blank" href="https://github.com/rgriff23/rgriff23.github.io"><b>This site</b></a>- powered by <a target="_blank" href="https://jekyllrb.com/">jekyll</a> and hosted by <a target="_blank" href="https://pages.github.com/">GitHub Pages</a>
 
