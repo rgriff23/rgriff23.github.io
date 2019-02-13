@@ -4,13 +4,17 @@ title: Projects
 active: projects
 ---
 
-### Research
+### Active research
 
-[**Public health projects**](/projects/public_health)- In collaboration with Samara Fox at Yale Medical School
+[**Misc public health projects**](/projects/public_health)
 
-[**Primate skull evolution**](/projects/skull)- My dissertation
+### Past research
 
-[**Gelada monkey parasites**](/projects/gelada)- In collaboration with the <a target="_blank" href="https://sites.lsa.umich.edu/gelada/">Gelada research project</a> at U Mich
+[**Primate skull evolution**](/projects/skull)
+
+[**Primate parasite ecology**](/projects/gelada)
+
+[**Mosquito spatial ecology**](/projects/mosquito)
 
 ### R packages
 
