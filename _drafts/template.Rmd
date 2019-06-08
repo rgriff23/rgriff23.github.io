@@ -1,0 +1,31 @@
+---
+title: ""
+layout: post
+date: 20xx-xx-xx
+tags: dogs cats 
+comments: true
+---
+
+```{r setup, include=FALSE}
+# knitr
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", comment="> ", fig.align = 'center', message=FALSE)
+knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+```
+
+Introduction.
+
+```{r cars}
+summary(cars)
+```
+
+Embedded image:
+
+<p align="center">
+  <img src="https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif" />
+</p>
+
+___
+
+**Footnotes**
+
+Give thanks here.

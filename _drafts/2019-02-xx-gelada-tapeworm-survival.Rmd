@@ -1,0 +1,59 @@
+---
+title: "Using survival models to analyze the impact of parasites on wild gelada monkeys"
+layout: post
+date: 2019-xx-xx
+tags: R survival-analysis ecology primates parasites
+comments: true
+---
+
+```{r setup, include=FALSE}
+# knitr
+knitr::opts_chunk$set(fig.path = "assets/Rfigs/", comment="> ", fig.align = 'center', message=FALSE)
+knitr::opts_knit$set(base.dir = "/Users/nunnlab/Desktop/GitHub/rgriff23.github.io/", base.url = "/")
+```
+
+
+[India Schneider-Crease]() and the [Gelada Research Lab]().
+
+
+
+Survival analysis is a fairly niche area of statistics that I learned about specifically for this project. In this post, I introduce both the models and the R code we used to fit the them.  
+
+## Time-to-event data
+
+## Cox survival model
+
+The [Cox model]() is a powerful tool for analyzing time-to-event data. It can be broken into two components: 
+
+1. A flexible non-parametric model for the underlying hazard function, h_0
+2. A multiplicative model for the effects of features on the hazard function for an individual h_i
+
+Mathematically, the model for the hazard function looks like this:
+
+<p align="center"><img src="" /></p>
+
+Where h_0 is the non-parametric baseline hazard function. You can see that if all the regression coefficients are equal to 1, then h_i = h_0. The linear model component  
+
+Since the Cox model is a combination of non-parametric and parametric components, it is often called 'semi-parametric'. 
+
+
+
+particularly if you have a lot of *censored data*. Censored data occurs when you know either the start or end time for an individual's time line, but not both. For example, if a patient enrolled in a study drops out before the trial is complete, you may have data on when they started a treatment but no information after they dropped out. 
+
+[chimpanzees with SIV](https://www.ncbi.nlm.nih.gov/pubmed/25716944)
+
+```{r cars}
+summary(cars)
+```
+
+Embedded image:
+
+<p align="center">
+  <img src="https://media.giphy.com/media/S2whkd4LyloiI/giphy.gif" />
+</p>
+
+___
+
+**Footnotes**
+
+Give thanks here.
