@@ -8,7 +8,7 @@ active: teaching
 
 **Instructor notes**
 
-These notes cover the major themes, concepts, and code covered in my Data Mining course in the Northeastern University Masters in Analytics program. 
+These notes cover major themes, concepts, and code covered in my Data Mining course in the Northeastern University Masters in Analytics program. The materials were developed by myself as a supplement to my lectures and live coding sessions. They reflect my personal philosophy towards teaching and practicing data mining, with the specific backgrounds and needs of my students in mind.   
 
 - [Instructor Notes 1: Data mining and modeling](/assets/teaching_materials/Instructor_Notes_1.html)
 - [Instructor Notes 2: Exploratory data analysis I](/assets/teaching_materials/Instructor_Notes_2.html)
