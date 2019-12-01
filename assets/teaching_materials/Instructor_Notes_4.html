@@ -336,9 +336,9 @@ lm_lin %&gt;% summary</code></pre>
 <ol style="list-style-type: decimal">
 <li>Split data into train/test sets
 <ul>
-<li>Common train/test splits include 80%/20% or 90%/20%</li>
+<li>Common train/test splits include 80%/20% or 90%/10%</li>
 <li>If rows are independent, you may randomize rows into train/test sets</li>
-<li>If you have date/time data and are predicting the future, your test set should come temporally after the training set (e.g., if you have 24 months of data and want to generate monthly predictions, train on the first 23 months and test on the 24th)</li>
+<li>If you have date/time data and are predicting the future, your test set should come AFTER the training set in your time line (e.g., if you have 24 months of data and want to generate monthly predictions, train on the first 23 months and test on the 24th)</li>
 </ul></li>
 <li>Fit model on training set</li>
 <li>Use fitted model to generate predictions and performance metrics for:
@@ -472,7 +472,7 @@ cm_test</code></pre>
 <li>The test recall is 0.69, which means that when the actual <code>y</code> is 1, the model guesses 1 correctly 0.69% of the time.</li>
 </ul>
 <p>Since this is a simulated dataset with no real meaning, there isn’t much else to say. In a real project, depending on your goals, you may care about optimizing for precision or recall rather than optimizing for overall accuracy. For example, if you are developing a medical test for a deadly illness, you may care more about maximizing recall because there is such a high cost to false negatives (i.e., sending a very sick person home when they need treatment).</p>
-<p><strong>Note: </strong> In biomedical research, Recall and Precision are usually called Sensitivity and Specificity. A highly sensitive medical test (high recall) will rarely miss a case of disease, but might incorrectly label many healthy patients as having the disease (high false positive rate). Conversely, a highly specific medical test (high precision) is nearly always correct when it says you have a disease, but it might miss many cases of disease (high false negative rate). Whether you want a more sensitive or specific test depends on the situation. You must ask which is the more harmful mistake: incorrectly telling a healthy patient that they have a disease (False Positive), or incorrectly telling a sick patient that they are healthy (False Negative)?</p>
+<p><strong>Note: </strong> In biomedical research, Recall is usually called Sensitivity. A highly sensitive medical test (high recall) will rarely miss a case of disease, but might incorrectly label many healthy patients as having the disease (high false positive rate). Conversely, a precise test is nearly always correct when it says you have a disease, but it might miss many cases of disease (high false negative rate). Whether you want a more sensitive depends on the situation. You must ask which is the more harmful mistake: incorrectly telling a healthy patient that they have a disease (False Positive), or incorrectly telling a sick patient that they are healthy (False Negative)?</p>
 </div>
 </div>
 </div>
