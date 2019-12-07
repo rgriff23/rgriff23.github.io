@@ -8,6 +8,8 @@ Download [CV](https://rgriff23.github.io/assets/pdfs/CV.pdf)
 
 ___
 
+Fox, S.D., **Griffin, R.H.**, Pachankis, J.E. *In press.* Minority Stress, Social Integration, and the Mental Health Needs of LGBTQ Asylum Seekers in North America. Social Science & Medicine. 
+
 Schneider-Crease, I.A., **Griffin, R.H.**, Gomery, M.A., Bergman, T.J., and J.C. Beehner. 2017. High mortality associated with parasitism in geladas (Theropithecus gelada) in the Simien Mountains National Park, Ethiopia. *American Journal of Primatology*, 79(9). [pdf](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017b.pdf)
 
 Schneider-Crease, I.A., **Griffin, R.H.**, Dorny, P., Noh, J.C., Handali, S., Chastain, H.M., Wilkins, P.P., Nunn, C.L., Snyder-Mackler, N., Beehner, J.C., and T.J. Bergman. 2017. Identifying wildlife reservoirs of neglected taeniid tapeworms: non-invasive diagnosis of endemic *Taenia serialis* infection in wild primates. *PLOS Neglected Tropical Diseases*, 11(7): p.e0005709. [pdf](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017a.pdf)
