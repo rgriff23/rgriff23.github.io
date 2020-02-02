@@ -4,31 +4,30 @@ title: Projects
 active: projects
 ---
 
-### Research
+### Independent projects
 
-[**Misc public health projects**](/projects/public_health)
+**Olympic history**
 
-[**Primate skull evolution**](/projects/skull)
+- [Kaggle dataset](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results) - I scraped and cleaned a complete historical dataset of Olympic athletes and medal results from www.sports-reference.com. The dataset has been downloaded from Kaggle over 45K times (as of Feb, 2020). [git](https://github.com/rgriff23/Olympic_history)
+- [Kaggle kernel](https://www.kaggle.com/heesoo37/olympic-history-data-a-thorough-analysis) - I published an extensive analysis to accompany the dataset, focusing on exploratory analysis and visualization with R.
 
-[**Primate parasite ecology**](/projects/gelada)
+**Twitter analytics**
 
-[**Mosquito spatial ecology**](/projects/mosquito)
+- [Twitterstorm dynamics](https://rgriff23.github.io/2017/06/29/Katie-Hinde-Twitterstorm.html) - I pulled ~5K tweets from a Twitterstorm that embroiled a colleague and did a deep dive into the dynamics of the storm. [git](https://github.com/rgriff23/Katie_Hinde_Twitter_storm_text_analysis)
+- [NHL vs female Olympian salaries](http://www.randigriffin.com/2017/05/01/USWNT-NHL-Twitter-popularity.html) - I built a model of `Salary ~ Twitter popularity` for NHL hockey players and showed that if female U.S. Olympic hockey players were subjected to the same model, they would be millionaires. [git](https://github.com/rgriff23/NHL_on_twitter)
 
-### Software
+### Open source software
 
-[**btw**](/projects/btw)- R wrapper for <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraitsV3</a>
+- [**btw**](/projects/btw)- R wrapper for <a target="_blank" href="http://www.evolution.rdg.ac.uk/BayesTraits.html">BayesTraitsV3</a>
 
-[**caRds**](/projects/caRds)- The most important work I've ever done
+- [**caRds**](/projects/caRds)- The most important work I've ever done
 
-### Datasets
+### Research topics
 
-[**Olympic history data**](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results) scraped from www.sports-reference.com
+- [**Public health**](/projects/public_health)
 
-[**Twitterstorm data**](https://figshare.com/articles/Twitterstorm_data_the_Katie_Hinde_Target_t-shirt_saga_2017-06-11/6096986) from [this twitterstorm](https://rgriff23.github.io/2017/06/29/Katie-Hinde-Twitterstorm.html)
+- [**Primate skull evolution**](/projects/skull)
 
-[**3D primate skull PLY files**](https://figshare.com/articles/3D_surfaces_of_primate_skulls_from_my_dissertation_Macroevolution_of_primate_skull_shape_combining_geometric_morphometrics_and_phylogenetic_comparative_methods_/5971231/1) from my [dissertation](/projects/skull)
+- [**Primate parasite ecology**](/projects/gelada)
 
-### Other
-
-<a target="_blank" href="https://github.com/rgriff23/rgriff23.github.io"><b>This site</b></a>- powered by <a target="_blank" href="https://jekyllrb.com/">jekyll</a> and hosted by <a target="_blank" href="https://pages.github.com/">GitHub Pages</a>
-
+- [**Mosquito spatial ecology**](/projects/mosquito)

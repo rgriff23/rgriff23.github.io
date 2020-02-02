@@ -4,11 +4,11 @@ title: Teaching
 active: teaching
 ---
 
+These materials accompany my courses in the Northeastern University Masters in Analytics. Syllabi and assignments are only available to enrolled students.  
+
 ### ALY 6040: Data Mining
 
 **Instructor notes**
-
-These notes cover major themes, concepts, and code covered in my Data Mining course in the Northeastern University Masters in Analytics program.   
 
 - [Instructor Notes 1: Data mining and modeling](/assets/teaching_materials/Instructor_Notes_1.html)
 - [Instructor Notes 2: EDA I & data cleaning](/assets/teaching_materials/Instructor_Notes_2.html)
@@ -20,4 +20,8 @@ These notes cover major themes, concepts, and code covered in my Data Mining cou
 - [R Markdown Example Report](/assets/teaching_materials/Example_Report.html)
 - [Uploading work to Kaggle](/assets/teaching_materials/Creating_Rmd_Kaggle_kernels.html)
 
-[Last updated: Oct 27, 2019]
+### ALY 6980: Capstone
+
+TBD...
+
+[Last updated: Feb 2, 2020]

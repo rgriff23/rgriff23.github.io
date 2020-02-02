@@ -7,15 +7,10 @@ comments: false
 
 ___
 
-This is my dissertation research. The code is on **<a target="_blank" href="https://github.com/rgriff23/Dissertation">GitHub</a>**. These are my chapters:
+Dissertation: [Macroevolution of Primate Skull Shape: Combining Geometric Morphometrics and Phylogenetic Comparative Methods](https://dukespace.lib.duke.edu/dspace/handle/10161/17444)
+Code: [Reproducible R scripts](https://github.com/rgriff23/Dissertation)
+Raw data: [3D primate skull PLY files](https://figshare.com/articles/3D_surfaces_of_primate_skulls_from_my_dissertation_Macroevolution_of_primate_skull_shape_combining_geometric_morphometrics_and_phylogenetic_comparative_methods_/5971231/1) 
 
-1. Introduction
-2. Collecting 3D digital data on primate skulls
-3. Using n-point alignment to align digital primate crania and mandibles
-4. Macroevolutionary correlates of primate skull shape
-5. Macroevolutionary integration and modularity in the primate skull
-6. Conclusions
-
-Update: I successfully defended my dissertation on May 11, 2018! 
+I successfully defended on May 11, 2018! 
 
 ___

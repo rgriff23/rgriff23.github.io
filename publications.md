@@ -8,7 +8,7 @@ Download [CV](https://rgriff23.github.io/assets/pdfs/CV.pdf)
 
 ___
 
-Fox, S.D., **Griffin, R.H.**, Pachankis, J.E. *In press.* Minority Stress, Social Integration, and the Mental Health Needs of LGBTQ Asylum Seekers in North America. *Social Science & Medicine*. 
+Fox, S.D., **Griffin, R.H.**, Pachankis, J.E. 2020. Minority Stress, Social Integration, and the Mental Health Needs of LGBTQ Asylum Seekers in North America. *Social Science & Medicine*, 246, 112727. [pdf](https://rgriff23.github.io/assets/pdfs/Fox_etal_2020.pdf)
 
 Schneider-Crease, I.A., **Griffin, R.H.**, Gomery, M.A., Bergman, T.J., and J.C. Beehner. 2017. High mortality associated with parasitism in geladas (Theropithecus gelada) in the Simien Mountains National Park, Ethiopia. *American Journal of Primatology*, 79(9). [pdf](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017b.pdf)
 
