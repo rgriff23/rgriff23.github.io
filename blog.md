@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Blog (old)
+title: Blog
 active: blog
 ---
 
