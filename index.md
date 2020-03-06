@@ -8,7 +8,7 @@ active: about
 
 ___
 
-I am a Data Scientist on the marketing team at [KAYAK](https://www.kayak.com/). In addition, I love teaching and serve as a part-time analytics lecturer at [Northeastern University](https://www.northeastern.edu/graduate/analytics/).
+I am a Data Scientist on the performance marketing team at [KAYAK](https://www.kayak.com/). In addition, I love teaching and serve as a part-time analytics lecturer at [Northeastern University](https://www.northeastern.edu/graduate/analytics/).
 
 Before KAYAK, I earned my PhD in [Human Evolutionary Biology](https://evolutionaryanthropology.duke.edu/) from Duke University, where I studied the ecology and evolution of primates. An [Insight Data Science](https://www.insightdatascience.com/) Fellowship helped me make the jump to industry. 
 
