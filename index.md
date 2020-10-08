@@ -8,7 +8,7 @@ active: about
 
 ___
 
-I am a Data Scientist on the marketing optimization team at [KAYAK](https://www.kayak.com/). I also love teaching and moonlight as a part-time analytics lecturer at [Northeastern University](https://www.northeastern.edu/graduate/analytics/). 
+I am a Data Scientist on the marketing optimization team at [KAYAK](https://www.kayak.com/). I also love teaching and moonlight as an analytics lecturer at [Northeastern University](https://www.northeastern.edu/graduate/analytics/). 
 
 Lately, I've been an enthusiastic contributor to the [progressive movement](https://www.guide.progressivedatajobs.org/02_what_is_prog_analytics). Current activities include:
 
