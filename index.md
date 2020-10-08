@@ -10,7 +10,7 @@ ___
 
 I am a Data Scientist on the marketing optimization team at [KAYAK](https://www.kayak.com/). I also love teaching and moonlight as an analytics lecturer at [Northeastern University](https://www.northeastern.edu/graduate/analytics/). 
 
-Lately, I've been an enthusiastic contributor to the [progressive movement](https://www.guide.progressivedatajobs.org/02_what_is_prog_analytics). Current activities include:
+Increasingly, I've been seeking ways to use my skills to help the [progressive movement](https://www.guide.progressivedatajobs.org/02_what_is_prog_analytics). Current activities include:
 
 1. I am a contributor to the open source Python library [Parsons](https://move-coop.github.io/parsons/html/index.html), which provides core data infrastructure for the progressive movement. 
 2. I serve as a Data Consultant to [Stand Up America](https://www.standupamerica.com/), providing voter data pulls and dashboarding to support their get-out-the-vote effort for the 2020 presidential election.
