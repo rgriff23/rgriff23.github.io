@@ -8,13 +8,13 @@ active: about
 
 ___
 
-I am a Data Scientist on the digital marketing team at [KAYAK](https://www.kayak.com/). I also love teaching and serve as a part-time analytics lecturer at [Northeastern University](https://www.northeastern.edu/graduate/analytics/).  
+I am a Data Scientist on the marketing optimization team at [KAYAK](https://www.kayak.com/). I also love teaching and moonlight as a part-time analytics lecturer at [Northeastern University](https://www.northeastern.edu/graduate/analytics/). 
 
-I am passionate about the [progressive movement](https://www.guide.progressivedatajobs.org/02_what_is_prog_analytics) and eager to use my skills to tackle the issues that matter most to our democracy. Current activities include:
+Lately, I've been an enthusiastic contributor to the [progressive movement](https://www.guide.progressivedatajobs.org/02_what_is_prog_analytics). Current activities include:
 
 1. I am a contributor to the open source Python library [Parsons](https://move-coop.github.io/parsons/html/index.html), which provides core data infrastructure for the progressive movement. 
 2. I serve as a Data Consultant to [Stand Up America](https://www.standupamerica.com/), providing voter data pulls and dashboarding to support their get-out-the-vote effort for the 2020 presidential election.
-3. I am part of the [Ragtag](https://ragtag.org/) community, which helps connect people with tech skills with the organizations that need them the most.
+3. I am part of the [Ragtag](https://ragtag.org/) community, which helps connect technology workers with the organizations that need them the most.
 
 Previously, I earned my PhD in [Human Evolutionary Biology](https://evolutionaryanthropology.duke.edu/) from Duke University, where I studied the ecology and evolution of primates. 
 
