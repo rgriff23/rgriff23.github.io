@@ -4,7 +4,7 @@ title: Blog (archived)
 active: blog
 ---
 
-<p>* I'm no longer contributing to this blog, but I'll do my best to respond to questions or comments about anything I've written. :)</p>
+<p><i>I'm no longer contributing to this blog, but I'll do my best to respond to questions or comments about anything I've written. :)</i></p>
 
 <div>
 <ul>
