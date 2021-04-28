@@ -8,8 +8,16 @@ active: about
 
 ___
 
+**Professional roles**
 
-I'm a Senior Data Scientist at the Boston Consulting Group (BCG). Previously, I worked on the digital marketing team at [KAYAK](https://www.kayak.com/), where I contributed to the full lifecycle of reporting, experimentation, and predictive modeling projects. 
+*Current*
+
+I'm a Senior Data Scientist at [BCG GAMMA](https://www.bcg.com/beyond-consulting/bcg-gamma/default). 
+
+*Previous*
+
+* I worked on the digital marketing team at [KAYAK](https://www.kayak.com/) for 2.5 years, where I contributed to the full lifecycle of experimentation, machine learning, and reporting projects.
+* I taught analytics courses at Northeastern University as a part-time lecturer in the CPS [Masters in Analytics](https://cps.northeastern.edu/program/master-of-professional-studies-in-analytics-online/) program.
 
 **Progressive analytics**
 
@@ -22,10 +30,9 @@ I've sought to support the [progressive movement](https://www.guide.progressived
 
 I hold a PhD in Evolutionary Anthropology from Duke University and a BA in Human Evolutionary Biology from Harvard University. My research focused on using statistical methods to shed light on the ecology and evolution of primates. 
 
-For more information, check my [publications](/publications.md)!
-
 **Contact**
 
 [Fork me](https://github.com/rgriff23) on GitHub or [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn! 
 
-* Last updated: Apr 28, 2021
+<br></br>
+*Last updated: Apr 28, 2021*
