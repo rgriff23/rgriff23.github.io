@@ -10,11 +10,9 @@ ___
 
 **Professional roles**
 
-*Current*
+I'm a Senior Data Scientist at [BCG GAMMA](https://www.bcg.com/beyond-consulting/bcg-gamma/default), the data science arm of the Boston Consulting Group. 
 
-I'm a Senior Data Scientist at [BCG GAMMA](https://www.bcg.com/beyond-consulting/bcg-gamma/default). 
-
-*Previous*
+*Previously*
 
 * I worked on the digital marketing team at [KAYAK](https://www.kayak.com/) for 2.5 years, where I contributed to the full lifecycle of experimentation, machine learning, and reporting projects.
 * I taught analytics courses at Northeastern University as a part-time lecturer in the CPS [Masters in Analytics](https://cps.northeastern.edu/program/master-of-professional-studies-in-analytics-online/) program.
