@@ -9,6 +9,8 @@ comments: yes
 
 ---
 
+View on [GitHub](https://github.com/rgriff23/btw)
+
 ## Introduction
 
 `btw` is an R package for running the [BayesTraits](https://www.evolution.rdg.ac.uk/BayesTraits.html) phylogenetic comparative methods software from R. The functions in `btw` run BayesTraits on your system, import and parse the output files in R, and delete the output files from your system.
