@@ -8,6 +8,8 @@ Download [CV](https://rgriff23.github.io/assets/pdfs/CV.pdf)
 
 ___
 
+Zimmerman, A., Fox, S., **Griffin, R.**, Nelp, T., Thomaz, E.B.A.F., Mvungi, M., Mmbaga, B.T., Sakita, F., Gerardo, C.J., Vissoci, J.R.N., Staton, C.A. 2020. An analysis of emergency care delays experienced by traumatic brain injury patients presenting to a regional referral hospital in a low-income country. *PLoS ONE* 15(10): e0240528. [pdf](https://doi.org/10.1371/journal.pone.0240528)
+
 Fox, S.D., **Griffin, R.H.**, Pachankis, J.E. 2020. Minority Stress, Social Integration, and the Mental Health Needs of LGBTQ Asylum Seekers in North America. *Social Science & Medicine*, 246, 112727. [pdf](https://rgriff23.github.io/assets/pdfs/Fox_etal_2020.pdf)
 
 Schneider-Crease, I.A., **Griffin, R.H.**, Gomery, M.A., Bergman, T.J., and J.C. Beehner. 2017. High mortality associated with parasitism in geladas (Theropithecus gelada) in the Simien Mountains National Park, Ethiopia. *American Journal of Primatology*, 79(9). [pdf](https://rgriff23.github.io/assets/pdfs/Schneider-Crease_etal_2017b.pdf)
