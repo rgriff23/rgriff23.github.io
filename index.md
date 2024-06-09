@@ -34,8 +34,8 @@ I hold a PhD in Evolutionary Anthropology from Duke University and a BA in Human
 
 I played ice hockey for Team Korea in the 2018 Winter Olympics and varsity women's ice hockey at Harvard University from 2006-10.
 
-* [Duke Olympian Will Soon Defend Ph.D.](https://today.duke.edu/2018/03/duke-olympian-will-soon-defend-her-phd)
-* [Harvard Crimson: 15 minutes with Randi Griffin](https://www.thecrimson.com/article/2018/2/1/randi-griffin-15q/)
+* [Duke Olympian Will Soon Defend Ph.D.](https://today.duke.edu/2018/03/duke-olympian-will-soon-defend-her-phd): Post-Olympics interview about my experience at the Olympics
+* [Harvard Crimson: 15 minutes with Randi Griffin](https://www.thecrimson.com/article/2018/2/1/randi-griffin-15q/): Pre-Olympics interview about my ice hockey journey
 * [We Are One](https://olympics.com/en/films/watch/we-are-one): Olympic Channel documentary about our team at the PyeongChang Olympics
 
 I'm passionate about women's sports and the positive role that athletics plays in developing and empowering people of all ages and genders. I am a USA Hockey certified coach and have over a decade of experience coaching teams and providing elite skills instruction.
