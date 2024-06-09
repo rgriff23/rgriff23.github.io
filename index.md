@@ -10,7 +10,7 @@ ___
 
 **Professional role**
 
-I'm a Lead Data Scientist at [BCG X]([https://www.bcg.com/beyond-consulting/bcg-gamma/default](https://www.bcg.com/x), the tech build and design unit of the Boston Consulting Group. I develop advanced analytics solutions for public and private sector clients using machine learning, statistics, and software engineering. I'm also passionate about Responsible AI and Diversity, Equity, and Inclusion.
+I'm a Lead Data Scientist at [BCG X](https://www.bcg.com/x), the tech build and design unit of the Boston Consulting Group. I develop advanced analytics solutions for public and private sector clients using machine learning, statistics, and software engineering. I'm also passionate about Responsible AI and Diversity, Equity, and Inclusion.
 
 * [Duke University Alumni Profile Series](https://gradschool.duke.edu/professional-development/blog/alumni-profiles-series-randi-griffin/)
 
