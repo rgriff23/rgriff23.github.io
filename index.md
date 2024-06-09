@@ -10,7 +10,9 @@ ___
 
 **Professional role**
 
-I'm a Senior Data Scientist at [BCG GAMMA](https://www.bcg.com/beyond-consulting/bcg-gamma/default), the data science arm of the Boston Consulting Group. 
+I'm a Lead Data Scientist at [BCG X]([https://www.bcg.com/beyond-consulting/bcg-gamma/default](https://www.bcg.com/x)), the tech build and design unit of the Boston Consulting Group. I develop advanced analytics solutions for public and private sector clients using machine learning, statistics, and software engineering. I'm also passionate about Responsible AI and Diversity, Equity, and Inclusion.
+
+* [Duke University Alumni Profile Series](https://gradschool.duke.edu/professional-development/blog/alumni-profiles-series-randi-griffin/)
 
 *Previously*
 
@@ -28,9 +30,18 @@ I've sought to support the [progressive movement](https://www.guide.progressived
 
 I hold a PhD in Evolutionary Anthropology from Duke University and a BA in Human Evolutionary Biology from Harvard University. My research focused on using statistical methods to shed light on the ecology and evolution of primates. 
 
+**Athletics**
+
+I played ice hockey for Team Korea in the 2018 Winter Olympics and varsity women's ice hockey at Harvard University from 2006-10.
+
+* [Duke Olympian Will Soon Defend Ph.D.](https://today.duke.edu/2018/03/duke-olympian-will-soon-defend-her-phd)
+* [Harvard Crimson: 15 minutes with Randi Griffin](https://www.thecrimson.com/article/2018/2/1/randi-griffin-15q/)
+
+I'm passionate about women's sports and the positive role that athletics plays in developing and empowering people of all ages and genders. I am a USA Hockey certified coach and have over a decade of experience coaching teams and providing elite skills instruction.
+
 **Contact**
 
-[Fork me](https://github.com/rgriff23) on GitHub or [connect](https://www.linkedin.com/in/randigriffin) on LinkedIn! 
+Fork me on [GitHub](https://github.com/rgriff23) or connect on [LinkedIn](https://www.linkedin.com/in/randigriffin)! 
 
 <br>
-*Last updated: Apr 28, 2021*
+*Last updated: June 9, 2024*
