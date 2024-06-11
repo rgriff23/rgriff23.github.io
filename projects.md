@@ -8,7 +8,7 @@ active: projects
 
 **Olympic history**
 
-- [Kaggle dataset](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results) - I scraped and cleaned a complete historical dataset of Olympic athletes and medal results from www.sports-reference.com. The dataset has been downloaded from Kaggle over 66K times (as of Apr, 2021). [git](https://github.com/rgriff23/Olympic_history)
+- [Kaggle dataset](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results) - I scraped and cleaned a complete historical dataset of Olympic athletes and medal results from www.sports-reference.com. The dataset has been downloaded from Kaggle over 170K times (as of June, 2024). [git](https://github.com/rgriff23/Olympic_history)
 - [Kaggle kernel](https://www.kaggle.com/heesoo37/olympic-history-data-a-thorough-analysis) - I published an extensive analysis to accompany the dataset, focusing on exploratory analysis and visualization with R.
 
 **Twitter analytics**
