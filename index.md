@@ -28,7 +28,7 @@ I've supported the [progressive movement](https://www.guide.progressivedatajobs.
 
 **Education**
 
-I hold a PhD in Evolutionary Anthropology from Duke University and a BA in Human Evolutionary Biology from Harvard University. My research focused on using statistical methods to shed light on the ecology and evolution of primates. 
+I hold a PhD in [Evolutionary Anthropology from Duke University](https://evolutionaryanthropology.duke.edu/graduate) and a BA in [Human Evolutionary Biology from Harvard University](https://heb.fas.harvard.edu/). My research focused on using statistical methods to shed light on the ecology and evolution of primates. 
 
 **Athletics**
 
