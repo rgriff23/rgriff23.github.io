@@ -45,4 +45,4 @@ I'm passionate about women's sports and the positive role that athletics plays i
 Fork me on [GitHub](https://github.com/rgriff23) or connect on [LinkedIn](https://www.linkedin.com/in/randigriffin)! 
 
 <br>
-*Last updated: June 9, 2024*
+*Last updated: June 19, 2024*
