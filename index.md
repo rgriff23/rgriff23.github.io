@@ -12,6 +12,7 @@ ___
 
 I'm a Lead Data Scientist at [BCG X](https://www.bcg.com/x), the tech build and design unit of the Boston Consulting Group. I develop advanced analytics solutions for public and private sector clients using machine learning, statistics, and software engineering. I'm also passionate about Responsible AI and Diversity, Equity, & Inclusion.
 
+* [Scale GenAI Responsibly and Confidently with Human + Automated Testing and Evaluation](https://www.bcg.com/x/the-multiplier/scale-genai-responsibly-and-confidently-with-human-automated-testing-and-evaluation): Read about some of my Responsible AI work on the BCG X blog!
 * [Duke University Alumni Profile Series](https://gradschool.duke.edu/professional-development/blog/alumni-profiles-series-randi-griffin/): Read about my journey from a PhD in Evolutionary Anthropology to data science consulting at BCG X, and advice for PhD students interested in careers beyond academia!
 
 *Previously*
@@ -32,7 +33,7 @@ I hold a PhD in [Evolutionary Anthropology from Duke University](https://evoluti
 
 **Athletics**
 
-I played ice hockey for Team Korea in the 2018 Winter Olympics and varsity women's ice hockey at Harvard University from 2006-10.
+I played ice hockey for Team Korea in the 2018 Winter Olympics (I am half-Korean and a dual citizen of the U.S. and South Korea) and varsity women's ice hockey at Harvard University from 2006-10.
 
 * [Duke Olympian Will Soon Defend Ph.D.](https://today.duke.edu/2018/03/duke-olympian-will-soon-defend-her-phd): Post-Olympics interview about my experience at the Olympics
 * [Harvard Crimson: 15 minutes with Randi Griffin](https://www.thecrimson.com/article/2018/2/1/randi-griffin-15q/): Pre-Olympics interview about my ice hockey journey
