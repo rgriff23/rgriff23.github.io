@@ -8,7 +8,7 @@ active: about
 
 ___
 
-**Professional role**
+**Professional Role**
 
 I'm a Lead Data Scientist at [BCG X](https://www.bcg.com/x), the tech build and design unit of the Boston Consulting Group. I develop advanced analytics solutions for public and private sector clients using machine learning, statistics, software engineering, and the guiding principles of Responsible AI.
 
@@ -17,10 +17,10 @@ I'm a Lead Data Scientist at [BCG X](https://www.bcg.com/x), the tech build and 
 
 *Previous roles*
 
-* Marketing Data Scientist at [KAYAK](https://www.kayak.com/): I contributed to the full lifecycle of experimentation, machine learning, and reporting projects.
-* Lecturer at [Northeastern University](https://cps.northeastern.edu/): I taught Masters-level courses in Data Mining and team project-based Capstone Courses in the College of Professional Studies.
+* Marketing Data Scientist at [KAYAK](https://www.kayak.com/) (2018-21): I contributed to the full lifecycle of experimentation, machine learning, and reporting projects.
+* Lecturer at [Northeastern University](https://cps.northeastern.edu/) (2019-21): I taught Masters-level courses in Data Mining and team project-based Capstone Courses in the College of Professional Studies.
 
-**Progressive analytics**
+**Progressive Analytics**
 
 I've supported progressive causes through volunteer and consulting work, including:
 
