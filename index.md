@@ -22,7 +22,7 @@ I'm a Lead Data Scientist at [BCG X](https://www.bcg.com/x), the tech build and 
 
 **Progressive analytics**
 
-I've supported the [progressive movement](https://www.guide.progressivedatajobs.org/02_what_is_prog_analytics) through volunteer and consulting work, including:
+I've supported progressive causes through volunteer and consulting work, including:
 
 * Contributing to the open source Python library [Parsons](https://move-coop.github.io/parsons/html/index.html), which provides core data infrastructure for the progressive movement. 
 * Serving as a Data Consultant to [Stand Up America](https://www.standupamerica.com/) to support Get-Out-The-Vote efforts for the 2020 presidential election. My analysis of SUA's digital marketing efforts earned an Expy Award from the Analyst Institute. Members can view the [full report](https://members.analystinstitute.org/research/stand-up-america-electoral-advertising-program-11988?mc_cid=ad56434e15&mc_eid=74b6c8c8cb) on the website. 
