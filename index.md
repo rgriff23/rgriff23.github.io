@@ -17,8 +17,8 @@ I'm a Lead Data Scientist at [BCG X](https://www.bcg.com/x), the tech build and 
 
 *Previous roles*
 
-* Digital marketing at [KAYAK](https://www.kayak.com/): I contributed to the full lifecycle of experimentation, machine learning, and reporting projects.
-* Lecturer at [Northeastern University](https://cps.northeastern.edu/): I taught Masters-level courses including Data Mining and team project-based Capstone Courses in the College of Professional Studies.
+* Marketing Data Scientist at [KAYAK](https://www.kayak.com/): I contributed to the full lifecycle of experimentation, machine learning, and reporting projects.
+* Lecturer at [Northeastern University](https://cps.northeastern.edu/): I taught Masters-level courses in Data Mining and team project-based Capstone Courses in the College of Professional Studies.
 
 **Progressive analytics**
 
