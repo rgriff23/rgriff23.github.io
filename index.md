@@ -17,15 +17,15 @@ I'm a Lead Data Scientist at [BCG X](https://www.bcg.com/x), the tech build and 
 
 *Previous roles*
 
-* Marketing Data Scientist at [KAYAK](https://www.kayak.com/) (2018-21): I contributed to the full lifecycle of experimentation, machine learning, and reporting projects.
-* Lecturer at [Northeastern University](https://cps.northeastern.edu/) (2019-21): I taught Masters-level courses in Data Mining and team project-based Capstone Courses in the College of Professional Studies.
+* Marketing Data Scientist at [KAYAK](https://www.kayak.com/) (2018-21): Contributed to the full lifecycle of experimentation, machine learning, and reporting projects.
+* Lecturer at [Northeastern University](https://cps.northeastern.edu/) (2019-21): Taught Masters-level courses in Data Mining and team project-based Capstone Courses in the College of Professional Studies.
 
 **Progressive Analytics**
 
 I've supported progressive causes through volunteer and consulting work, including:
 
-* Contributing to the open source Python library [Parsons](https://move-coop.github.io/parsons/html/index.html), which provides core data infrastructure for the progressive movement. 
-* Serving as a Data Consultant to [Stand Up America](https://www.standupamerica.com/) to support Get-Out-The-Vote efforts for the 2020 presidential election. My analysis of SUA's digital marketing efforts earned an Expy Award from the Analyst Institute. Members can view the [full report](https://members.analystinstitute.org/research/stand-up-america-electoral-advertising-program-11988?mc_cid=ad56434e15&mc_eid=74b6c8c8cb) on the website. 
+* Contributing to the open source Python library [Parsons](https://move-coop.github.io/parsons/html/index.html), which provides core data infrastructure for progressive mobilization. 
+* Serving as a Data Consultant to [Stand Up America](https://www.standupamerica.com/) to support Get-Out-The-Vote efforts for the 2020 presidential election. 
 
 **Research in Evolution & Ecology**
 
@@ -48,4 +48,5 @@ I also love the grassroots sport of [ball hockey](https://usaballhockey.com/what
 Fork me on [GitHub](https://github.com/rgriff23) or connect on [LinkedIn](https://www.linkedin.com/in/randigriffin)! 
 
 <br>
+
 *Last updated: January 2025*
