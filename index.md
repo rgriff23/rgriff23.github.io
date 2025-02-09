@@ -10,7 +10,7 @@ ___
 
 **Professional Role**
 
-I'm a Lead Data Scientist at [BCG X](https://www.bcg.com/x), the tech build and design unit of the Boston Consulting Group. I develop advanced analytics solutions for public and private sector clients using machine learning, statistics, software engineering, and the guiding principles of Responsible AI.
+I'm a Lead Data Scientist at [BCG X](https://www.bcg.com/x), the tech build and design unit at Boston Consulting Group. I develop advanced analytics solutions for public and private sector clients using generative AI, machine learning, statistics, software engineering, and the guiding principles of Responsible AI.
 
 * [Scale GenAI Responsibly and Confidently with Human + Automated Testing and Evaluation](https://www.bcg.com/x/the-multiplier/scale-genai-responsibly-and-confidently-with-human-automated-testing-and-evaluation): Read about some of my Responsible AI work on the BCG X blog
 * [Duke University Alumni Profile Series](https://gradschool.duke.edu/professional-development/blog/alumni-profiles-series-randi-griffin/): Read about my journey from a PhD in Evolutionary Anthropology to data science consulting at BCG X, and advice for PhD students interested in careers beyond academia
